@@ -1,0 +1,22 @@
+body {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+}
+#pageHeader {
+	background-color:#000000;
+	background: url(../static/bg.jpg) repeat-x;
+	color:#FFFFFF;
+	height:70px;
+}
+
+/* Multi-select CSS styles */
+.x-combo-list .x-combo-list-cursor{
+	border: 1px dotted #000000 !important;
+}
+
+/* Hack - added for visual effect */
+.x-combo-list-item{
+	cursor:pointer;
+	margin: 1px;
+}
+/* End multi-select CSS styles */
