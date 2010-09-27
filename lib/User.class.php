@@ -15,7 +15,7 @@ class User {
     protected $username;
     protected $role;
     protected $vars = array();
-    public $dirty = false;
+    protected $dirty = false;
     
     // Constructors
     /** Builds the user object off a session ID
@@ -47,6 +47,9 @@ class User {
                         $user = new User();
                         $user->set_id($row['user_id']);
                         $user->load();
+                        
+                        // refresh the cookie
+                        setcookie('session',$session,strtotime('+'.Settings::get('SESSION_LENGTH')));
                     } else {
                         // clear the session
                         run_query("DELETE FROM `".DB_PREFIX."session` WHERE LOWER(`key`) LIKE LOWER('$session')");
@@ -137,6 +140,9 @@ class User {
             $user = new User();
             $user->set_id($row['id']);
             $user->load();
+            
+            // set the cookie
+            setcookie('session',$session,strtotime('+'.Settings::get('SESSION_LENGTH')));
         } else {
             new UserLoginException("Login error");
         }
@@ -160,6 +166,12 @@ class User {
     }
     function get_var($var) {
         return $this->vars[$var];
+    }
+    function get_vars() {
+        return $this->vars;
+    }
+    function is_dirty() {
+        return $this->dirty;
     }
     
     // mutators
@@ -268,6 +280,8 @@ class User {
         run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('".$this->session."')");
         // clean up
         run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
+        // clear the cookie
+        setcookie('session','',time()-3600);
     }
 }
 

@@ -124,4 +124,22 @@ function boolval($in, $strict=false) {
     }
     return $out;
 }
+
+// JSON helper functions (pre php 5.2 compatibility)
+if (!function_exists('json_encode')) {
+    // pull in the json library
+    require_once(FS_ROOT.'/inc/JSON.php');
+    
+    function json_encode($data) {
+        $JSON = new Services_JSON();
+        return $JSON->encode($data);
+    }
+    
+    if (!function_exists('json_decode')) {
+        function json_decode($data) {
+            $JSON = new Services_JSON();
+            return $JSON->decode($data);
+        }
+    }
+}
 ?>

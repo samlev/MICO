@@ -55,8 +55,8 @@ if (isset($_COOKIE['session'])) {
     try {
         $user = User::by_session($session);
         $loggedin = true;
-        define('USER_ID', $user->id);
-        define('SESSION', $user->session);
+        define('USER_ID', $user->get_id());
+        define('SESSION', $user->get_session());
     } catch (UserSessionException $e) {
         // get rid of the cookie
         setcookie('session','',time()-3600);
