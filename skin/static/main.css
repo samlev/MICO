@@ -20,3 +20,15 @@ body {
 	margin: 1px;
 }
 /* End multi-select CSS styles */
+
+.x-panel-body {
+    border:none;
+}
+
+.x-panel {
+    border:none;
+}
+
+.x-window-mc {
+    border:none;
+}

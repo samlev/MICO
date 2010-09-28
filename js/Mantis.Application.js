@@ -19,17 +19,23 @@ Mantis.Application = function () {
                 this.panel = new Ext.Panel ({
                     id: "Mantis.Application.panel", 
                     region: "center", 
-                    layout: "card"
+                    layout: "card",
+                    items: [
+                        {
+                            bodyStyle: 'background-color:#B6E0A3;'
+                        }
+                    ],
+                    activeItem:0
                 });
                 
                 // Set up the viewport!
                 this.viewport = new Ext.Viewport ({
                     id: "Mantis.Application.viewport", 
-                    layout: "border", 
+                    layout: "border",
                     items: [{
                             region: "north", 
                             layout: "fit", 
-                            contentEl: "pageHeader", 
+                            contentEl: "pageHeader",
                             height: 70
                         }, 
                         this.panel

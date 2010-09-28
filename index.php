@@ -67,18 +67,20 @@ if (isset($_COOKIE['session'])) {
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-   <title>Mantis - Simple CRM</title>
-   <link rel="SHORTCUT ICON" href="favicon.ico" />
-   <!-- Link to the CSS files -->
-   <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
-   <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Mantis - Simple CRM</title>
+    <link rel="SHORTCUT ICON" href="favicon.ico" />
+    <!-- Link to the CSS files -->
+    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
    
     <!-- Link to the Javascript library files -->
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
     <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
     <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.Ext.overrides.js"></script>
     <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.Application.js"></script>
+    <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.User.js"></script>
+    <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.Login.js"></script>
   </head>
   <body>
     <div id="pageHeader">
