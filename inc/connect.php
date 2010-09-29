@@ -22,4 +22,5 @@ include_once(FS_ROOT.'/inc/magic_quotes_gpc_off.php'); // undo any 'magic quotes
 include_once(FS_ROOT.'/lib/func_std.php'); // pull in the standard library of functions
 include_once(FS_ROOT.'/lib/Settings.class.php'); // system settings class
 include_once(FS_ROOT.'/lib/User.class.php'); // User class
+include_once(FS_ROOT.'/lib/PasswordReset.class.php'); // password reset class
 ?>

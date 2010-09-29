@@ -15,7 +15,7 @@ $username = $_POST['username'];
 // attempt to log the user in
 try {
     // create and send the password request
-    PasswordReset::get_request($user->get_username());
+    PasswordReset::get_request($username);
     
     // grab the user
     $user = User::by_username($username);

@@ -129,7 +129,7 @@ class User {
             $user->set_id($row['id']);
             $user->load();
         } else {
-            new UserNotFoundException("Cannot find user");
+            throw new UserNotFoundException("Cannot find user");
         }
         
         // return the user object
@@ -278,7 +278,7 @@ class User {
             // and mark the object as clean
             $this->dirty = false;
         } else {
-            new UserNotFoundException("Cannot find user information");
+            throw new UserNotFoundException("Cannot find user information");
         }
     }
     

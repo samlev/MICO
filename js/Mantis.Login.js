@@ -62,7 +62,7 @@ Mantis.Login = function () {
                     ], 
                     buttons: [
                         {
-                            html: '<a href="#" onclick="Mantis.Login.dlgLogin.layout.setActiveItem(\'Mantis.Login.forgottenPasswordForm\')">Forgotten Password?</a>',
+                            html: '<a href="#" onclick="Mantis.Login.dlgLogin.layout.setActiveItem(\'Mantis.Login.resetPasswordForm\')">Forgotten Password?</a>',
                             layout: 'fit',
                             region: 'south'
                         },
@@ -135,7 +135,7 @@ Mantis.Login = function () {
                     layout: "card", 
                     items: [
                         this.loginForm,
-                        this.forgottenPasswordForm
+                        this.resetPasswordForm
                     ], 
                     collapsed: false, 
                     collapsible: false, 
@@ -184,7 +184,7 @@ Mantis.Login = function () {
                         
                         // reset the forms
                         this.loginForm.reset();
-                        this.forgottenPasswordForm.reset();
+                        this.resetPasswordForm.reset();
                     },
                     failure: function (form, action) {
                         var msg = "Unknown system error";
