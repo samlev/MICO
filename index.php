@@ -68,6 +68,7 @@ if (isset($_COOKIE['session'])) {
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="pragma" content="no-cache" />
     <title>Mantis - Simple CRM</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
@@ -77,10 +78,10 @@ if (isset($_COOKIE['session'])) {
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
     <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.Ext.overrides.js"></script>
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.Application.js"></script>
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.User.js"></script>
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/Mantis.Login.js"></script>
+    <?php
+    // pull in the required javascript
+    include_once(FS_ROOT.'/inc/application_js.php');
+    ?>
   </head>
   <body>
     <div id="pageHeader">

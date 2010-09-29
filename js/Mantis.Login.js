@@ -157,7 +157,8 @@ Mantis.Login = function () {
                     success: function (form, action) {
                         // Set up the user
                         this.dlgLogin.hide();
-                        TDA.User.initSession (action.result.sessionid);
+                        // refresh the page
+                        location.reload(true);
                     },
                     failure: function (form, action) {
                         var msg = "Unknown system error";
