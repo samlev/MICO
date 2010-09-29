@@ -2,12 +2,14 @@ Mantis.Login = function () {
     var dlgLogin;
     var usernameField;
     var passwordField;
-    var loginForm
+    var resetPasswordUsernameField;
+    var loginForm;
+    var resetPasswordForm;
     
     return {
         show: function (coursecode) {
             if (this.loginForm === undefined) {
-                // Set up the fields
+                // login form 'username' field
                 this.usernameField = new Ext.form.TextField ({
                     name: "username", 
                     fieldLabel: "&nbsp;Username", 
@@ -16,6 +18,7 @@ Mantis.Login = function () {
                     blankText: "You must enter your username"
                 });
                 
+                // login form 'password' field
                 this.passwordField = new Ext.form.TextField ({
                     name: "password", 
                     fieldLabel: "&nbsp;Password", 
@@ -25,7 +28,8 @@ Mantis.Login = function () {
                     blankText: "You must enter your password"
                 });
                 
-                this.forgottenPasswordUsernameField = new Ext.form.TextField ({
+                // forgotten password 'username' field
+                this.resetPasswordUsernameField = new Ext.form.TextField ({
                     name: "username", 
                     fieldLabel: "Username", 
                     width: 135, 
@@ -33,6 +37,7 @@ Mantis.Login = function () {
                     blankText: "You must enter your username"
                 });
                 
+                // login form
                 this.loginForm = new Ext.form.FormPanel({
                     id: "Mantis.Login.loginForm", 
                     url: "api.php?f=login", 
@@ -74,15 +79,16 @@ Mantis.Login = function () {
                     buttonAlign:'right'
                 });
                 
-                this.forgottenPasswordForm = new Ext.form.FormPanel({
-                    id: "Mantis.Login.forgottenPasswordForm", 
-                    url: "api.php?f=forgottenPassword", 
+                // forgotten password form
+                this.resetPasswordForm = new Ext.form.FormPanel({
+                    id: "Mantis.Login.resetPasswordForm", 
+                    url: "api.php?f=resetPassword", 
                     method: "POST",
                     region:"center",
                     standardSubmit: false,
                     labelWidth:110,
                     items: [
-                        this.forgottenPasswordUsernameField,
+                        this.resetPasswordUsernameField,
                         {
                             html:'Enter your username and further isntructions will be emailed to you.',
                             bodyStyle:'background-color:#dfe8f6;'
@@ -121,6 +127,7 @@ Mantis.Login = function () {
                     buttonAlign:'center'
                 });
                 
+                // the actual window
                 this.dlgLogin = new Ext.Window({
                     modal:false, 
                     height:110,
@@ -167,8 +174,8 @@ Mantis.Login = function () {
         },
         doPasswordReset: function() {
             // don't even try to submit the form if it's not valid.
-            if (this.forgottenPasswordForm.getForm().isValid()) {
-                this.forgottenPasswordForm.getForm().submit({
+            if (this.resetPasswordForm.getForm().isValid()) {
+                this.resetPasswordForm.getForm().submit({
                     success: function (form, action) {
                         // go back to the login form
                         this.dlgLogin.layout.setActiveItem('Mantis.Login.loginForm');

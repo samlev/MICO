@@ -29,7 +29,7 @@ class Settings {
         if ($row = mysql_fetch_assoc($res)) {
             $val = unserialize($row['value']);
         } else {
-            new SettingsNotFoundException("Cannot find setting");
+            throw new SettingsNotFoundException("Cannot find setting");
         }
         
         return $val;
@@ -73,7 +73,7 @@ class Settings {
                                    'date'=>$row['set']);
             }
         } else {
-            new SettingsNotFoundException("Cannot find setting");
+            throw new SettingsNotFoundException("Cannot find setting");
         }
         
         return $history;

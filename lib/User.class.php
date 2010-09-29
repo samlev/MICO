@@ -28,7 +28,7 @@ class User {
         // Check that the session ID is actually plausibly valid
         if (preg_match('/^[0-9a-f]{32}$/i',$session)) {
             $query = "SELECT s.`user_id`, s.`last_action`, u.`role`
-                      FROM `".DB_PREFIX."session` s
+                      FROM `".DB_PREFIX."sessions` s
                       INNER JOIN `".DB_PREFIX."users` u ON s.`user_id` = u.`id`
                       WHERE LOWER(`key`) LIKE LOWER('$session')"; // #NB: no need sanitise this, because we already check that it's sanitary. Like a wipe or something.
             
@@ -41,7 +41,7 @@ class User {
                     // check that the user isn't disabled
                     if ($row['role'] != 'disabled') {
                         // update the session
-                        run_query("UPDATE `".DB_PREFIX."session` SET `last_action`=NOW() WHERE LOWER(`key`) LIKE LOWER('$session')");
+                        run_query("UPDATE `".DB_PREFIX."sessions` SET `last_action`=NOW() WHERE LOWER(`key`) LIKE LOWER('$session')");
                         
                         // and build the object
                         $user = new User();
@@ -52,25 +52,25 @@ class User {
                         setcookie('session',$session,strtotime('+'.Settings::get('SESSION_LENGTH')));
                     } else {
                         // clear the session
-                        run_query("DELETE FROM `".DB_PREFIX."session` WHERE LOWER(`key`) LIKE LOWER('$session')");
+                        run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('$session')");
                         // clean up
-                        run_query("OPTIMIZE TABLE `".DB_PREFIX."session`");
+                        run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
                         
-                        new UserSessionExpiredException("User disabled");
+                        throw new UserSessionExpiredException("User disabled");
                     }
                 } else {
                     // clear the session
-                    run_query("DELETE FROM `".DB_PREFIX."session` WHERE LOWER(`key`) LIKE LOWER('$session')");
+                    run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('$session')");
                     // clean up
-                    run_query("OPTIMIZE TABLE `".DB_PREFIX."session`");
+                    run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
                     
-                    new UserSessionExpiredException("Session expired");
+                    throw new UserSessionExpiredException("Session expired");
                 }
             } else {
-                new UserSessionInvalidException("Session ID not found");
+                throw new UserSessionInvalidException("Session ID not found");
             }
         } else {
-            new UserSessionInvalidException("Session ID is invalid");
+            throw new UserSessionInvalidException("Session ID is invalid");
         }
         
         // return the user object
@@ -78,7 +78,7 @@ class User {
     }
     
     /** Builds the user object off a userid
-     * @param string $userid The user ID
+     * @param int $userid The user ID
      * @return User A User object
      */
     static function by_id($userid) {
@@ -87,11 +87,38 @@ class User {
         // clean up the userid
         $u = intval($userid);
         
-        // Check that the session ID is actually plausibly valid
-        $query = "SELECT `user_id`
+        // Select the user by the ID
+        $query = "SELECT `id`
                   FROM `".DB_PREFIX."users`
-                  WHERE `user_id` = $u
-                  AND `role`!='disabled'";
+                  WHERE `id` = $u";
+        
+        $res = run_query($query);
+        
+        // check if we found a user
+        if ($row = mysql_fetch_assoc($res)) {
+            // and build the object
+            $user = new User();
+            $user->set_id($row['id']);
+            $user->load();
+        } else {
+            throw new UserNotFoundException("Cannot find user");
+        }
+        
+        // return the user object
+        return $user;
+    }
+    
+    /** Builds the user object off a username
+     * @param string $username The user ID
+     * @return User A User object
+     */
+    static function by_username($username) {
+        $user = null;
+        
+        // Get the user by the username
+        $query = "SELECT `id`
+                  FROM `".DB_PREFIX."users`
+                  WHERE `username` = '".mysql_real_escape_string($username)."'";
         
         $res = run_query($query);
         
@@ -121,11 +148,11 @@ class User {
         $p = md5(strrev(sha1($password)));
         
         // Check for a user matching the username and password (not disabled)
-        $query = "SELECT `user_id`
+        $query = "SELECT `id`
                   FROM `".DB_PREFIX."users`
-                  WHERE LOWER(`username`) = LOWER('".mysql_real_escape_string($session)."')
+                  WHERE LOWER(`username`) = LOWER('".mysql_real_escape_string($username)."')
                   AND LOWER(`password`) = LOWER('$p')
-                  WHERE `role`!='disabled'";
+                  AND `role`!='disabled'";
         
         $res = run_query($query);
         
@@ -144,7 +171,7 @@ class User {
             // set the cookie
             setcookie('session',$session,strtotime('+'.Settings::get('SESSION_LENGTH')));
         } else {
-            new UserLoginException("Login error");
+            throw new UserLoginException("Username or password incorrect");
         }
         
         // return the user object
@@ -217,13 +244,13 @@ class User {
                 
                 // check that something was updated
                 if (mysql_affected_rows() == 0) {
-                    new UserPasswordVerificationException("Old password cannot be verified");
+                    throw new UserPasswordVerificationException("Old password cannot be verified");
                 }
             } else {
-                new UserPasswordConfirmationException("Passwords do not match");
+                throw new UserPasswordConfirmationException("Passwords do not match");
             }
         } else {
-            new UserPasswordValidationException("Password cannot be blank");
+            throw new UserPasswordValidationException("Password cannot be blank");
         }
     }
     
@@ -271,7 +298,7 @@ class User {
             // mark as clean (we're in sync with the database now)
             $this->dirty = false;
         } else {
-            new UserNotFoundException("Cannot save user information");
+            throw new UserNotFoundException("Cannot save user information");
         }
     }
     

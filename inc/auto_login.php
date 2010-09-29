@@ -27,7 +27,7 @@ if (defined('USER_ID') && defined('SESSION')) {
         closable:false
     });
     // Set up the user object
-    Mantis.User.init (userid, session, name, role, vars);
+    Mantis.User.init (userid, session, role, vars);
     
     // Show the main area
     page_show();
