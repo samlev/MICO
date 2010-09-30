@@ -17,12 +17,8 @@ $password = $_POST['password'];
 try {
     $user = User::login($username,$password);
     
-    // build the return data
-    $data = array("success"=>true,
-                  "userid"=>$user->get_id(),
-                  "session"=>$user->get_session(),
-                  "role"=>$user->get_role(),
-                  "vars"=>$user->get_vars());
+    // notify the client that the login was successful.
+    $data = array("success"=>true);
 } catch (UserLoginException $e) {
     // couldn't log in - return the error message
     $data = array("success"=>false,

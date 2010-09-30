@@ -18,6 +18,9 @@ $public = array('Mantis.Application.js','Mantis.Login.js');
 $authed = array('Mantis.Application.js');
 // administrators get more
 $admin = array('Mantis.Application.js');
+// and an odd case for password reset
+$passreset = array('Mantis.Application.js','Mantis.PasswordReset.js');
+
 
 // decide on what javascript files to use
 $js_array = $public;
@@ -28,6 +31,11 @@ if ($loggedin) {
     } else {
         $js_array = $authed;
     }
+}
+
+// and check if we're on the 'password_reset' page
+if (defined('PASSWORD_RESET')) {
+    $js_array = $passreset;
 }
 
 // and now output

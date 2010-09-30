@@ -220,20 +220,20 @@ class User {
     
     /** Changes a user's password
      * @param string $oldpass The old password
-     * @param string $password The new password
-     * @param string $confirm The new password confirmation
+     * @param string $password1 The new password
+     * @param string $password2 The new password confirmation
      */
-    function change_password($oldpass, $password, $confirm) {
+    function change_password($oldpass, $password1, $password2) {
         // ensure that the password isn't blank
-        if ($password != '') {
+        if ($password1 != '') {
             // ensure that both passwords are the same
-            if ($password == $confirm) {
+            if ($password1 == $password2) {
                 // prepare the user id
                 $u = intval($this->id);
                 
                 // prepare the passwords (old and new)
                 $o = md5(strrev(sha1($oldpass)));
-                $n = md5(strrev(sha1($password)));
+                $n = md5(strrev(sha1($password1)));
                 
                 // now commit the change
                 $query = "UPDATE `".DB_PREFIX."users`
@@ -245,6 +245,41 @@ class User {
                 // check that something was updated
                 if (mysql_affected_rows() == 0) {
                     throw new UserPasswordVerificationException("Old password cannot be verified");
+                }
+            } else {
+                throw new UserPasswordConfirmationException("Passwords do not match");
+            }
+        } else {
+            throw new UserPasswordValidationException("Password cannot be blank");
+        }
+    }
+    
+    /** Allows the user to set a password with the 'PasswordReset' tool
+     * @param string $confirmation_key The password reset request confirmation
+     * @param string $password1 The new password
+     * @param string $password2 The new password confirmation
+     */
+    function reset_password($confirmation_key, $password1, $password2) {
+        // ensure that the password isn't blank
+        if ($password1 != '') {
+            // ensure that both passwords are the same
+            if ($password1 == $confirm) {
+                // confirm that the request is valid
+                if (PasswordReset::confirm($this->id, $confirmation_key)) {
+                    // prepare the user id
+                    $u = intval($this->id);
+                    
+                    // prepare the password
+                    $p = md5(strrev(sha1($password)));
+                    
+                    // now commit the change
+                    $query = "UPDATE `".DB_PREFIX."users`
+                              SET `password` = '$p'
+                              WHERE `id`=$u";
+                    run_query($query);
+                    
+                    // and clear the request
+                    PasswordReset::clear_request($confirmation_key);
                 }
             } else {
                 throw new UserPasswordConfirmationException("Passwords do not match");
