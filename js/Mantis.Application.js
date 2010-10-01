@@ -44,7 +44,11 @@ Mantis.Application = function () {
             }
             
             // now show the login page
-            Mantis.Login.show();
+            if (Mantis.Login !== undefined) {
+                Mantis.Login.show();
+            } else if (Mantis.PasswordReset !== undefined) {
+                Mantis.PasswordReset.show();
+            }
         },
         addPanel: function (panel) {
             this.panel.add (panel);

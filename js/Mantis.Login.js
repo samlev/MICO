@@ -7,7 +7,7 @@ Mantis.Login = function () {
     var resetPasswordForm;
     
     return {
-        show: function (coursecode) {
+        show: function () {
             if (this.loginForm === undefined) {
                 // login form 'username' field
                 this.usernameField = new Ext.form.TextField ({

@@ -45,7 +45,7 @@ class PasswordReset {
                 $body .= "This email has been sent to you as part of the 'forgotten password'\r\n";
                 $body .= "process for Mantis CRM.\r\n\r\n";
                 $body .= "To change your password, visit the following link:\r\n";
-                $body .= APP_ROOT."/set_password?k=$request\r\n\r\n";
+                $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
                 $body .= "This link will expire in approximately 24 hours, at ".date('h:i A',$expiry_time)."\r\n";
                 $body .= "on ".date('jS M, Y',$expiry_time).", server time*.\r\n\r\n";
                 $body .= "If you did not request this change of password, or have remembered\r\n";
@@ -104,7 +104,7 @@ class PasswordReset {
                 $body .= "This email has been sent to you as part of the user registration\r\n";
                 $body .= "process for Mantis CRM.\r\n\r\n";
                 $body .= "To set your password for the first time, visit the following link:\r\n";
-                $body .= APP_ROOT."/set_password?k=$request\r\n\r\n";
+                $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
                 $body .= "Your username for Mantis CRM is: $username\r\n\r\n";
                 $body .= "This link will expire in approximately 72 hours, at ".date('h:i A',$expiry_time)."\r\n";
                 $body .= "on ".date('jS M, Y',$expiry_time).", server time*.\r\n\r\n";
