@@ -247,7 +247,7 @@ class User {
                     throw new UserPasswordVerificationException("Old password cannot be verified");
                 }
             } else {
-                throw new UserPasswordConfirmationException("Passwords do not match");
+                throw new UserPasswordConfirmationException("Password does not match confirmation");
             }
         } else {
             throw new UserPasswordValidationException("Password cannot be blank");
@@ -259,7 +259,7 @@ class User {
      * @param string $password1 The new password
      * @param string $password2 The new password confirmation
      */
-    function reset_password($confirmation_key, $password1, $password2) {
+    function set_password($confirmation_key, $password1, $password2) {
         // ensure that the password isn't blank
         if ($password1 != '') {
             // ensure that both passwords are the same
@@ -282,7 +282,7 @@ class User {
                     PasswordReset::clear_request($confirmation_key);
                 }
             } else {
-                throw new UserPasswordConfirmationException("Passwords do not match");
+                throw new UserPasswordConfirmationException("Password does not match confirmation");
             }
         } else {
             throw new UserPasswordValidationException("Password cannot be blank");

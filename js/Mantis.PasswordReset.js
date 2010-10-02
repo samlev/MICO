@@ -19,7 +19,7 @@ Mantis.PasswordReset = function () {
                 
                 // set password form 'password' field
                 this.passwordField = new Ext.form.TextField ({
-                    name: "password", 
+                    name: "password1", 
                     fieldLabel: "Password", 
                     inputType: "password", 
                     width: 135, 
@@ -58,7 +58,7 @@ Mantis.PasswordReset = function () {
                 
                 // reset password form 'password confirmation' field
                 this.passwordConfirmField = new Ext.form.TextField ({
-                    name: "passwordconfirm", 
+                    name: "password2", 
                     fieldLabel: "Confirm Password", 
                     inputType: "password", 
                     width: 135, 
@@ -115,7 +115,7 @@ Mantis.PasswordReset = function () {
                 // the actual window
                 this.dlgSetPassword = new Ext.Window({
                     modal:false, 
-                    height:210,
+                    height:160,
                     width:275,
                     layout: "fit", 
                     items: [
@@ -141,11 +141,7 @@ Mantis.PasswordReset = function () {
                         // Set up the user
                         this.dlgSetPassword.hide();
                         // refresh the page
-                        Ext.Msg.alert('Password set','Your password has been set.<br /><br />'+
-                                                     'You will now be redirected to the login page.',
-                                      function () {
-                                          window.location('index.php');
-                                      }, this)
+                        Ext.Msg.alert('Password set','Your password has been set.<br /><br />You will now be redirected to the login page.',function () {window.location('index.php');}, this);
                     },
                     failure: function (form, action) {
                         var msg = "Unknown system error";

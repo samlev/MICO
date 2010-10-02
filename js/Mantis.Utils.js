@@ -29,6 +29,7 @@ Mantis.Utils = function () {
                 }
             }
             
+            // point come to a total out of 50
             return points;
         }
     };
