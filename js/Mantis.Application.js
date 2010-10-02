@@ -1,3 +1,12 @@
+/*******************************************************************************
+ *******************************************************************************
+ ** Author: Samuel Levy <sam@samuellevy.com>
+ ** 
+ ** File: js/Mantis.Application.js
+ ** 
+ ** Description: The main application/page framework that everything else uses
+ *******************************************************************************
+ ******************************************************************************/
 Ext.QuickTips.init ();
 
 Ext.BLANK_IMAGE_URL = "skin/custom/static/s.gif";
@@ -50,9 +59,15 @@ Mantis.Application = function () {
                 Mantis.PasswordReset.show();
             }
         },
+        /** Adds a panel to the application
+         * @param panel {Ext.Panel} A panel to add to the application
+         */
         addPanel: function (panel) {
             this.panel.add (panel);
         },
+        /** Adds a panel to the application
+         * @param id {string} The id of the panel to show
+         */
         showPanel: function (id) {
             this.panel.getLayout().setActiveItem (id);
         }

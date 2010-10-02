@@ -1,3 +1,12 @@
+/*******************************************************************************
+ *******************************************************************************
+ ** Author: Samuel Levy <sam@samuellevy.com>
+ ** 
+ ** File: js/Mantis.Login.js
+ ** 
+ ** Description: The login form for the application
+ *******************************************************************************
+ ******************************************************************************/
 Mantis.Login = function () {
     var dlgLogin;
     var usernameField;
@@ -7,6 +16,7 @@ Mantis.Login = function () {
     var resetPasswordForm;
     
     return {
+        /** Set everything up and show the login form */
         show: function () {
             if (this.loginForm === undefined) {
                 // login form 'username' field
@@ -150,6 +160,7 @@ Mantis.Login = function () {
             // show the login dialog
             this.dlgLogin.show();
         },
+        /** Check and submit the login form */
         doLogin: function() {
             // don't even try to submit the form if it's not valid.
             if (this.loginForm.getForm().isValid()) {
@@ -173,6 +184,7 @@ Mantis.Login = function () {
                 Ext.Msg.alert("Error", "Please check the marked fields");
             }
         },
+        /** Check and submit the 'reset password' form */
         doPasswordReset: function() {
             // don't even try to submit the form if it's not valid.
             if (this.resetPasswordForm.getForm().isValid()) {

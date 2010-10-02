@@ -39,7 +39,7 @@ Mantis.PasswordReset = function () {
                     if (points == 0) {
                         text = 'Enter password';
                     } else if (points > 35) {
-                        text = 'Super Strong';
+                        text = 'Very Strong';
                     } else if (points > 25) {
                         text = 'Strong';
                     } else if (points > 10) {
