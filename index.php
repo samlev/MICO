@@ -86,6 +86,7 @@ if (isset($_COOKIE['session'])) {
   <body>
     <div id="pageHeader">
       <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple CRM" style="margin:0px; float:right;" />
+      <div id="systemMenu" />
     </div>
     <?php if ($loggedin) { include_once(FS_ROOT.'/inc/auto_login.php'); } ?>
   </body>

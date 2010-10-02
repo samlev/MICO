@@ -1,4 +1,13 @@
-Mantis.PasswordReset = function () {
+/*******************************************************************************
+ *******************************************************************************
+ ** Author: Samuel Levy <sam@samuellevy.com>
+ ** 
+ ** File: js/Mantis.PasswordSet.js
+ ** 
+ ** Description: The 'password set' form for the application
+ *******************************************************************************
+ ******************************************************************************/
+Mantis.PasswordSet = function () {
     var usernameField;
     var passwordField;
     var passwordConfirmField;
@@ -28,11 +37,12 @@ Mantis.PasswordReset = function () {
                     enableKeyEvents: true
                 });
                 
+                // check the strength of the password
                 this.passwordField.on('keyup', function() {
                     var pass = this.passwordField.getValue();
-                    
                     var points = Mantis.Utils.passwordStrength(pass);
                     
+                    // password strength
                     var text = 'Weak';
                     
                     // test the strength
@@ -46,9 +56,11 @@ Mantis.PasswordReset = function () {
                         text = 'Medium';
                     }
                     
+                    // update the inidcator
                     this.passwordStrengthIndicator.updateProgress((points/50),text,true);
                 }, this);
                 
+                // Simple password strength indicator
                 this.passwordStrengthIndicator = new Ext.ProgressBar({
                     fieldLabel: 'Strength',
                     text: 'Enter password',
@@ -66,14 +78,15 @@ Mantis.PasswordReset = function () {
                     blankText: "You must enter your password"
                 });
                 
+                // confirmation key (populated off the ?k= sent to set_password.php)
                 this.requestConfirmationKeyField = new Ext.form.Hidden ({
                     name: "confirmation_key",
                     value: CONFIRMATION_KEY
                 });
                 
-                // set form
+                // set up form
                 this.setPasswordForm = new Ext.form.FormPanel({
-                    id: "Mantis.PasswordReset.setPasswordForm", 
+                    id: "Mantis.PasswordSet.setPasswordForm", 
                     url: "api.php?f=setPassword", 
                     method: "POST",
                     region:"center",
@@ -133,25 +146,31 @@ Mantis.PasswordReset = function () {
             // show the login dialog
             this.dlgSetPassword.show();
         },
+        // checks and submits the 'set password' form
         doSetPassword: function() {
             // don't even try to submit the form if it's not valid.
             if (this.setPasswordForm.getForm().isValid()) {
-                this.setPasswordForm.getForm().submit({
-                    success: function (form, action) {
-                        // Set up the user
-                        this.dlgSetPassword.hide();
-                        // refresh the page
-                        Ext.Msg.alert('Password set','Your password has been set.<br /><br />You will now be redirected to the login page.',function () {window.location('index.php');}, this);
-                    },
-                    failure: function (form, action) {
-                        var msg = "Unknown system error";
-                        if (action.result !== undefined) {
-                            msg = action.result.info;
-                        }
-                        Ext.Msg.alert("Error", msg);
-                    },
-                    scope:this
-                });
+                // check that the passwords match
+                if (this.passwordField.getValue() == this.passwordConfirmField.getvalue()) {
+                    this.setPasswordForm.getForm().submit({
+                        success: function (form, action) {
+                            // Set up the user
+                            this.dlgSetPassword.hide();
+                            // refresh the page
+                            Ext.Msg.alert('Password set','Your password has been set.<br /><br />You will now be redirected to the login page.',function () {window.location('index.php');}, this);
+                        },
+                        failure: function (form, action) {
+                            var msg = "Unknown system error";
+                            if (action.result !== undefined) {
+                                msg = action.result.info;
+                            }
+                            Ext.Msg.alert("Error", msg);
+                        },
+                        scope:this
+                    });
+                } else {
+                    this.passwordConfirmField.markInvalid('Passwords must match');
+                }
             } else {
                 Ext.Msg.alert("Error", "Please check the marked fields");
             }

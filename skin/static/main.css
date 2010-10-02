@@ -7,6 +7,15 @@ body {
 	background: url(../static/bg.jpg) repeat-x;
 	color:#FFFFFF;
 	height:70px;
+	overflow:hidden;
+}
+
+#systemMenu {
+	position:relative;
+	left:0px;
+	top:45px;
+	background-color:#none;
+	height:25px;
 }
 
 /* Multi-select CSS styles */

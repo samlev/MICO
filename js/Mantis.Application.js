@@ -52,11 +52,15 @@ Mantis.Application = function () {
                 });
             }
             
-            // now show the login page
-            if (Mantis.Login !== undefined) {
+            if (Mantis.Login !== undefined) { // if the login page is defined, show it
                 Mantis.Login.show();
-            } else if (Mantis.PasswordReset !== undefined) {
-                Mantis.PasswordReset.show();
+            } else if (Mantis.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
+                Mantis.PasswordSet.show();
+            } else {
+                // or check for normal application methods
+                if (Mantis.SystemMenu !== undefined) { // if the system menu is defined, show it
+                    Mantis.SystemMenu.show();
+                }
             }
         },
         /** Adds a panel to the application

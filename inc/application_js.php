@@ -19,7 +19,7 @@ $authed = array('Mantis.Application.js');
 // administrators get more
 $admin = array('Mantis.Application.js');
 // and an odd case for password reset
-$passreset = array('Mantis.Application.js','Mantis.PasswordReset.js','Mantis.Utils.js');
+$passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 
 
 // decide on what javascript files to use
