@@ -19,7 +19,7 @@ try {
     
     // grab the user
     $user = User::by_username($username);
-    $email = $user->get('email');
+    $email = $user->get_var('email');
     
     // build the return data
     $data = array("success"=>true,

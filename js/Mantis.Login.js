@@ -50,7 +50,7 @@ Mantis.Login = function () {
                 // login form
                 this.loginForm = new Ext.form.FormPanel({
                     id: "Mantis.Login.loginForm", 
-                    url: "api.php?f=login", 
+                    url: APP_ROOT+"/api.php?f=login", 
                     method: "POST",
                     region:"center",
                     standardSubmit: false,
@@ -92,7 +92,7 @@ Mantis.Login = function () {
                 // forgotten password form
                 this.resetPasswordForm = new Ext.form.FormPanel({
                     id: "Mantis.Login.resetPasswordForm", 
-                    url: "api.php?f=resetPassword", 
+                    url: APP_ROOT+"/api.php?f=resetPassword", 
                     method: "POST",
                     region:"center",
                     standardSubmit: false,
@@ -169,7 +169,7 @@ Mantis.Login = function () {
                         // Set up the user
                         this.dlgLogin.hide();
                         // refresh the page
-                        location.reload(true);
+                        window.location.reload(true);
                     },
                     failure: function (form, action) {
                         var msg = "Unknown system error";
@@ -196,8 +196,8 @@ Mantis.Login = function () {
                         Ext.Msg.alert("Password reset", 'Further instructions have been sent to your email address.');
                         
                         // reset the forms
-                        this.loginForm.reset();
-                        this.resetPasswordForm.reset();
+                        this.loginForm.form.reset();
+                        this.resetPasswordForm.form.reset();
                     },
                     failure: function (form, action) {
                         var msg = "Unknown system error";

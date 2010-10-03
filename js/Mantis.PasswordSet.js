@@ -87,7 +87,7 @@ Mantis.PasswordSet = function () {
                 // set up form
                 this.setPasswordForm = new Ext.form.FormPanel({
                     id: "Mantis.PasswordSet.setPasswordForm", 
-                    url: "api.php?f=setPassword", 
+                    url: APP_ROOT+"/api.php?f=setPassword", 
                     method: "POST",
                     region:"center",
                     standardSubmit: false,
@@ -151,13 +151,13 @@ Mantis.PasswordSet = function () {
             // don't even try to submit the form if it's not valid.
             if (this.setPasswordForm.getForm().isValid()) {
                 // check that the passwords match
-                if (this.passwordField.getValue() == this.passwordConfirmField.getvalue()) {
+                if (this.passwordField.getValue() == this.passwordConfirmField.getValue()) {
                     this.setPasswordForm.getForm().submit({
                         success: function (form, action) {
-                            // Set up the user
+                            // hide the 'set password' dialog
                             this.dlgSetPassword.hide();
-                            // refresh the page
-                            Ext.Msg.alert('Password set','Your password has been set.<br /><br />You will now be redirected to the login page.',function () {window.location('index.php');}, this);
+                            // Notify the user, and send them to the login page
+                            Ext.Msg.alert('Password set','Your password has been set.<br /><br />You will now be redirected to the login page.',function () {window.location=APP_ROOT;}, this);
                         },
                         failure: function (form, action) {
                             var msg = "Unknown system error";

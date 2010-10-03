@@ -17,7 +17,7 @@ if (defined('USER_ID') && defined('SESSION')) {
 <!--
     var userid = <?=USER_ID?>;
     var session = '<?=SESSION?>';
-    var name = '<?=$user->get('name')?>';
+    var name = '<?=$user->get_var('name')?>';
     var role = '<?=$user->get_role()?>';
     var vars = <?=json_encode($user->get_vars())?>;
     

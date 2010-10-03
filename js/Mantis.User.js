@@ -53,7 +53,7 @@ Mantis.User = function () {
                 
                 // send the 'save' request to the server
                 conn.request({
-                    url:'api.php?f=saveUserVars',
+                    url:APP_ROOT+'/api.php?f=saveUserVars',
                     params: {
                         session: Mantis.User.getSession(),
                         vars: Mantis.Utils.serialiseArray(this.vars)

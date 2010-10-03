@@ -40,8 +40,10 @@ class User {
                 if (strtotime($row['last_action'].' +'.Settings::get('SESSION_LENGTH')) >= time()) {
                     // check that the user isn't disabled
                     if ($row['role'] != 'disabled') {
+                        $time = date('Y-m-d H:i:s');
+                        
                         // update the session
-                        run_query("UPDATE `".DB_PREFIX."sessions` SET `last_action`=NOW() WHERE LOWER(`key`) LIKE LOWER('$session')");
+                        run_query("UPDATE `".DB_PREFIX."sessions` SET `last_action`='".mysql_real_escape_string($time)."' WHERE LOWER(`key`) LIKE LOWER('$session')");
                         
                         // and build the object
                         $user = new User();
@@ -49,7 +51,7 @@ class User {
                         $user->load();
                         
                         // refresh the cookie
-                        setcookie('session',$session,strtotime('+'.Settings::get('SESSION_LENGTH')));
+                        setcookie('session',$session,strtotime($time.' +'.Settings::get('SESSION_LENGTH')));
                     } else {
                         // clear the session
                         run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('$session')");
@@ -150,18 +152,21 @@ class User {
         // Check for a user matching the username and password (not disabled)
         $query = "SELECT `id`
                   FROM `".DB_PREFIX."users`
-                  WHERE LOWER(`username`) = LOWER('".mysql_real_escape_string($username)."')
-                  AND LOWER(`password`) = LOWER('$p')
+                  WHERE `username` = '".mysql_real_escape_string($username)."'
+                  AND `password` = '$p'
                   AND `role`!='disabled'";
         
         $res = run_query($query);
         
         // check if we found a user
         if ($row = mysql_fetch_assoc($res)) {
+            // make sure we use the 'php' time, as the mysql time may be different
+            $time = date('Y-m-d H:i:s');
+            
             // Add the session, replacing any existing sessions
             $session = md5('user'.$row['id'].'at'.time());
             run_query("REPLACE INTO `".DB_PREFIX."sessions` (`key`,`user_id`,`active_from`,`last_action`)
-                       VALUES('$session',".intval($row['id']).",NOW(),NOW())");
+                       VALUES('$session',".intval($row['id']).",'".mysql_real_escape_string($time)."','".mysql_real_escape_string($time)."')");
             
             // and build the object
             $user = new User();
@@ -169,7 +174,7 @@ class User {
             $user->load();
             
             // set the cookie
-            setcookie('session',$session,strtotime('+'.Settings::get('SESSION_LENGTH')));
+            setcookie('session',$session,strtotime($time.' +'.Settings::get('SESSION_LENGTH')));
         } else {
             throw new UserLoginException("Username or password incorrect");
         }
@@ -202,6 +207,9 @@ class User {
     }
     
     // mutators
+    function set_id($id) {
+        $this->id = intval($id);
+    }
     function set_session($session) {
         $this->session = $session;
     }
@@ -244,7 +252,7 @@ class User {
                 
                 // check that something was updated
                 if (mysql_affected_rows() == 0) {
-                    throw new UserPasswordVerificationException("Old password cannot be verified");
+                    throw new UserPasswordChangeVerificationException("Old password is incorrect");
                 }
             } else {
                 throw new UserPasswordConfirmationException("Password does not match confirmation");
@@ -263,14 +271,14 @@ class User {
         // ensure that the password isn't blank
         if ($password1 != '') {
             // ensure that both passwords are the same
-            if ($password1 == $confirm) {
+            if ($password1 == $password2) {
                 // confirm that the request is valid
                 if (PasswordReset::confirm($this->id, $confirmation_key)) {
                     // prepare the user id
                     $u = intval($this->id);
                     
                     // prepare the password
-                    $p = md5(strrev(sha1($password)));
+                    $p = md5(strrev(sha1($password1)));
                     
                     // now commit the change
                     $query = "UPDATE `".DB_PREFIX."users`
@@ -280,6 +288,8 @@ class User {
                     
                     // and clear the request
                     PasswordReset::clear_request($confirmation_key);
+                } else {
+                    throw new UserPasswordChangeVerificationException("Password set request does not exist or has expired");
                 }
             } else {
                 throw new UserPasswordConfirmationException("Password does not match confirmation");
@@ -364,5 +374,5 @@ class UserDataException extends UserException {}
 class UserPasswordException extends UserDataException {}
 class UserPasswordValidationException extends UserPasswordException {}
 class UserPasswordConfirmationException extends UserPasswordException {}
-class UserPasswordVerificationException extends UserPasswordException {}
+class UserPasswordChangeVerificationException extends UserPasswordException {}
 ?>

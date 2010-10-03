@@ -29,6 +29,9 @@ define ('PASSWORD_RESET',true);
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
     
+    <!-- set some system variables for the javascript to use -->
+    <?php include_once(FS_ROOT.'/inc/system_vars.php'); ?>
+    
     <!-- define the confirmation key in a javascript usable manner -->
     <script type="text/javascript">var CONFIRMATION_KEY = '<?=$_GET['k']?>';</script>
     

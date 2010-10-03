@@ -15,9 +15,9 @@
 // public only need the 'login' page
 $public = array('Mantis.Application.js','Mantis.Login.js');
 // standard scipts for users
-$authed = array('Mantis.Application.js');
+$authed = array('Mantis.Application.js','Mantis.User.js');
 // administrators get more
-$admin = array('Mantis.Application.js');
+$admin = array('Mantis.Application.js','Mantis.User.js');
 // and an odd case for password reset
 $passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 

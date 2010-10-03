@@ -29,7 +29,7 @@ class PasswordReset {
                 // get a random key and expiry time
                 $request = random_string(rand(7,15),2);
                 $expiry_time = strtotime('+24 hours');
-                $email = $user->get('email');
+                $email = $user->get_var('email');
                 
                 // add into the database
                 $query = "INSERT INTO `".DB_PREFIX."password_reset_requests`
@@ -41,7 +41,7 @@ class PasswordReset {
                 run_query($query);
                 
                 // now finally, email the user - a simple text email
-                $body = "Dear ".$user->get('name').",\r\n\r\n";
+                $body = "Dear ".$user->get_var('name').",\r\n\r\n";
                 $body .= "This email has been sent to you as part of the 'forgotten password'\r\n";
                 $body .= "process for Mantis CRM.\r\n\r\n";
                 $body .= "To change your password, visit the following link:\r\n";
@@ -156,7 +156,7 @@ class PasswordReset {
         // check if we have a matching request
         if ($row = mysql_fetch_assoc($res)) {
             // check if the request has expired
-            if ($row['expiry'] >= time()) {
+            if (strtotime($row['expiry']) >= time()) {
                 // we have a match, and it hasn't expired
                 $match = true;
             } else {

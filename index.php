@@ -49,9 +49,9 @@ $loggedin = false;
 // check for the cookie
 if (isset($_COOKIE['session'])) {
     // get the session id from the cookie
-    $sessionid = $_COOKIE['session'];
+    $session = $_COOKIE['session'];
     
-    // check for
+    // check if the session is valid and not expired
     try {
         $user = User::by_session($session);
         $loggedin = true;
@@ -74,6 +74,9 @@ if (isset($_COOKIE['session'])) {
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
+    
+    <!-- set some system variables for the javascript to use -->
+    <?php include_once(FS_ROOT.'/inc/system_vars.php'); ?>
    
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
