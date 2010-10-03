@@ -9,6 +9,16 @@
  ******************************************************************************/
 Mantis.Utils = function () {
     return {
+        /** Tests the strength of a password, and returns it as an integer out
+         *   of 50. In general, the following weights can be used:
+         *    0: Empty/blank password
+         *    1-10: Weak password
+         *    11-25: Medium strength password
+         *    26-35: Strong password
+         *    36-50: Very strong password
+         * @param pass {string} The password to check
+         * @returns {int} The strength rating of the password
+         */
         passwordStrength: function (pass) {
             // break the strength test up into a number of simple regexes with points
             var tests = [
@@ -40,6 +50,26 @@ Mantis.Utils = function () {
             
             // point come to a total out of 50
             return points;
+        },
+        /** Simple function to convert an array into a serialized string for
+         *   passing to php. It doesn't really handle nested types gracefully
+         * @param arr {Array} The array to convert
+         * @returns {string} A textual representation of the array
+         */
+        serialiseArray: function (arr) {
+            var text = '';
+            var total = 0;
+            for (var k in arr) {
+                // Remove some extra function keys that ExtJS adds to the array
+                if (String(k) != "remove" && String(k) != "indexOf") {
+                    // add the item
+                    text = text + "s:" + String(key).length + ":\"" + String(key) + "\";s:" + String(arr[key]).length + ":\"" + String(arr[key]) + "\";";
+                    // and incremement the total number of items
+                    total ++;
+                }
+            }
+            text = "a:" + total + ":{" + text + "}";
+            return text;
         }
     };
 } ();

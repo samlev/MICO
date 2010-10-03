@@ -56,7 +56,7 @@ Mantis.User = function () {
                     url:'api.php?f=saveUserVars',
                     params: {
                         session: Mantis.User.getSession(),
-                        vars: this.vars
+                        vars: Mantis.Utils.serialiseArray(this.vars)
                     },
                     success: function (res, opt) {
                         this.orig_vars = this.vars;
