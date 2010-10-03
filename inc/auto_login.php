@@ -26,18 +26,33 @@ if (defined('USER_ID') && defined('SESSION')) {
         buttons:false, 
         closable:false
     });
-    // Set up the user object
-    Mantis.User.init (userid, session, role, vars);
     
-    // Show the main area
-    page_show();
+    setup_user();
     
-    // This function will wait until the 'application' is ready, then log the user in
+    /** Sets up the user then shows the main panel */
+    function setup_user() {
+        // Check if the user object has been defined yet
+        if (Mantis.User !== undefined) {
+            // Set up the user object
+            Mantis.User.init (userid, session, role, vars);
+            // Show the main area
+            page_show();
+        } else {
+            // try again in 20 milliseconds
+            setTimeout('setup_user()', 20);
+        }
+    }
+    
+    /** Show the main panel */
     function page_show() {
-        if (isset(Mantis.Application.panel)) {
-            Mantis.Main.show ();
+        // Check if the application panel has been defined yet
+        if (Mantis.Application.panel !== undefined) {
+            // show the main panel
+            Mantis.Calls.show ();
+            // hide the 'you are being logged in' message
             Ext.Msg.hide();
         } else {
+            // try again in 20 milliseconds
             setTimeout('page_show()', 20);
         }
     }

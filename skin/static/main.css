@@ -10,13 +10,25 @@ body {
 	overflow:hidden;
 }
 
+/* System menu styles */
 #systemMenu {
 	position:relative;
 	left:0px;
-	top:45px;
-	background-color:#none;
-	height:25px;
+	top:50px;
+	height:20px;
 }
+#systemMenu a {
+	text-decoration:none;
+	color:#000000;
+	font-weight:normal;
+	display:block;
+	padding:3px 8px 3px 8px;
+}
+#systemMenu .menuItemSelected a {
+	font-weight:bold;
+	background:#99D37E;
+}
+/* End system menu styles */
 
 /* Multi-select CSS styles */
 .x-combo-list .x-combo-list-cursor{

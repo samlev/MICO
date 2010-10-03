@@ -61,6 +61,9 @@ Mantis.Application = function () {
                 if (Mantis.SystemMenu !== undefined) { // if the system menu is defined, show it
                     Mantis.SystemMenu.show();
                 }
+                if (Mantis.Calls !== undefined) { // if the 'calls' section is defined, initialise it
+                    Mantis.Calls.init();
+                }
             }
         },
         /** Adds a panel to the application

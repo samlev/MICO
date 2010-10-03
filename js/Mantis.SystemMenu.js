@@ -21,7 +21,8 @@ Mantis.SystemMenu = function () {
                 this.menu = new Ext.Panel ({
                     id:'Mantis.SystemMenu.menu',
                     layout:'hbox',
-                    applyTo:'systemMenu'
+                    applyTo:'systemMenu',
+                    bodyStyle:'background:none;'
                 });
             }
         },
@@ -34,9 +35,12 @@ Mantis.SystemMenu = function () {
             // get the item
             var id = this.items.length;
             // add it to the items array
-            this.items[id] = new Ext.Panel({html:'<a href="#" onclick="Mantis.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>'});
+            this.items[id] = new Ext.Panel({html:'<a href="#" onclick="Mantis.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>',bodyStyle:'background:none;'});
             // add it to the menu
             this.menu.add(this.items[id]);
+            
+            // and layout
+            this.menu.doLayout();
             
             return id;
         },
