@@ -25,10 +25,10 @@ while ($row = mysql_fetch_assoc($res)) {
         $temp_user = User::by_id($row['id']);
         
         // pull out the info we need
-        $u_data = array('id'=>$row['id'],
-                        'name'=>$temp_user->get_var('name'),
-                        'status'=>$temp_user->get_var('status'),
-                        'statustext'=>$temp_user->get_var('statustext'));
+        $u_data = array('id'=>$row['id'], // user id
+                        'name'=>$temp_user->get_var('name'), // user's name
+                        'status'=>$temp_user->get_var('status'), // user's status (available, away, busy, offline)
+                        'statustext'=>$temp_user->get_var('statustext')); // status text ('In a meeting','out to lunch', etc.)
         
         // and add it to the array
         $users[] = $u_data;

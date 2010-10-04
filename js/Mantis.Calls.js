@@ -251,7 +251,9 @@ Mantis.Calls = function () {
                 });
             }
         },
+        /** Adds a new recipient dropdown to the 'add call' form */
         addRecipient: function () {
+            // build a temporary field
             var tempUserField = new Ext.form.ComboBox({
                 id:'tempUserField_'+this.extraUserFieldCount,
                 store: this.userStore,
@@ -270,10 +272,20 @@ Mantis.Calls = function () {
                 fieldLabel:'OR'
             });
             
+            // add it to the panel
             this.userExtrasPanel.add(tempUserField);
+            // increase the counter
             this.extraUserFieldCount ++;
+            // ensure that the form is correctly laid out
             this.userExtrasPanel.doLayout();
             this.addCallPanel.doLayout();
+        },
+        /** Removes all the extra recipients from the 'add calls' form' */
+        clearRecipients: function() {
+            // remove all the fields and destroy them
+            this.userExtrasPanel.removeAll(true);
+            // reset the counter
+            this.extraUserFieldCount = 0;
         },
         buildViewCallsPanel: function () {
             if (this.viewCallsPanel == undefined) {
