@@ -40,7 +40,10 @@ if (!$error) {
         
         // Check that the requested file exists
         if ($user->get_role()=='admin' && file_exists ("api-admin/".$_GET ["f"].".php")) {
-            // admin apis can override normal apis, but only users with admin access can hit them
+            // admin apis can override normal and manager apis, but only users with admin access can hit them
+            require_once ("api-admin/".$_GET ["f"].".php");
+        } else if (($user->get_role()!='admin' || $user->get_role()!='manager') && file_exists ("api-admin/".$_GET ["f"].".php")) {
+            // manager apis can override normal apis, but only users with admin or manager access can hit them
             require_once ("api-admin/".$_GET ["f"].".php");
         } else if (file_exists ("api/".$_GET ["f"].".php")) {
             // regular API

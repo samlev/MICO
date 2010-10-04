@@ -20,9 +20,10 @@ Mantis.CallsToolbar = function () {
                     store: new Ext.data.SimpleStore ({
                         fields:['type','filter'],
                         data: [
-                            ['Most recent calls','recent'],
-                            ['Most urgent calls','urgent'],
-                            ['Calls taken by me','opened']
+                            ['Most recent calls for me','recent'],
+                            ['Most urgent calls for me','urgent'],
+                            ['Calls taken by me','opened'],
+                            ['All calls','all']
                         ]
                     }),
                     displayField:'type',
