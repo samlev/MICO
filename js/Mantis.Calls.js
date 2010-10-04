@@ -286,6 +286,9 @@ Mantis.Calls = function () {
             this.userExtrasPanel.removeAll(true);
             // reset the counter
             this.extraUserFieldCount = 0;
+            // ensure that the form is correctly laid out
+            this.userExtrasPanel.doLayout();
+            this.addCallPanel.doLayout();
         },
         buildViewCallsPanel: function () {
             if (this.viewCallsPanel == undefined) {
