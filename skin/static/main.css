@@ -42,6 +42,18 @@ body {
 }
 /* End multi-select CSS styles */
 
+/* Caller styles */
+.caller-match-1 {
+	color: #000000;
+}
+.caller-match-2 {
+	color: #666666;
+}
+.caller-match-3 {
+	color: #999999;
+}
+/* end caller styles */
+
 .x-panel-body {
     border:none;
 }

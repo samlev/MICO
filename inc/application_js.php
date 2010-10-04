@@ -15,9 +15,14 @@
 // public only need the 'login' page
 $public = array('Mantis.Application.js','Mantis.Login.js');
 // standard scipts for users
-$authed = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js','Mantis.User.js');
+$authed = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
+                'Mantis.Utils.js','Mantis.User.js','Mantis.CallsToolbar.js');
+// standard scipts for managers
+$manager = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
+                 'Mantis.Utils.js','Mantis.User.js','manager/Mantis.CallsToolbar.js');
 // administrators get more
-$admin = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js','Mantis.User.js');
+$admin = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
+               'Mantis.Utils.js','Mantis.User.js','admin/Mantis.CallsToolbar.js');
 // and an odd case for password reset
 $passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 
@@ -27,6 +32,8 @@ $js_array = $public;
 
 if ($loggedin) {
     if ($user->get_role()=='admin') {
+        $js_array = $admin;
+    } else if ($user->get_role()=='manager') {
         $js_array = $admin;
     } else {
         $js_array = $authed;
