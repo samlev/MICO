@@ -17,7 +17,7 @@ $query = "SELECT `id` FROM `".DB_PREFIX."users`
 
 $res = run_query($query);
 
-$users = array();
+$users = array(array('id'=>'1','name'=>'Sam Levy','status'=>'busy','statustext'=>'In a meeting'));
 
 while ($row = mysql_fetch_assoc($res)) {
     try {

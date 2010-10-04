@@ -54,6 +54,10 @@ body {
 }
 /* end caller styles */
 
+.user-status-icon {
+	float:right;
+}
+
 .x-panel-body {
     border:none;
 }

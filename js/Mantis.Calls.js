@@ -20,8 +20,12 @@ Mantis.Calls = function () {
     var callerNameField;
     var callerCompanyStore;
     var callerCompanyField;
-    var userField;
     var userStore;
+    var userField;
+    var userAddExtraButton;
+    // user extras
+    var userExtrasPanel;
+    var extraUserFieldCount;
     // caller contact form
     var callerContactForm;
     // Message form
@@ -92,7 +96,8 @@ Mantis.Calls = function () {
                     tpl:Mantis.Utils.callerTemplate,
                     mode:'remote',
                     enableKeyEvents: true,
-                    emptyText:"Caller's name"
+                    emptyText:"Caller's name",
+                    width:200
                 });
                 
                 // Load a search
@@ -135,7 +140,8 @@ Mantis.Calls = function () {
                     tpl:Mantis.Utils.callerTemplate,
                     mode:'remote',
                     enableKeyEvents: true,
-                    emptyText:"Caller's company"
+                    emptyText:"Caller's company",
+                    width:200
                 });
                 
                 // Load a search
@@ -160,11 +166,40 @@ Mantis.Calls = function () {
                         {name: "id", mapping: "id"}, 
                         {name: "name", mapping: "name"}, 
                         {name: "status", mapping: "status"}, 
-                        {name: "statustext", mapping: "statustext"},
-                        {name: "active", value:1}
+                        {name: "statustext", mapping: "statustext"}
                     ]), 
                     baseParams: {
                         session: Mantis.User.getSession()
+                    }
+                });
+                
+                // and the field
+                this.userField = new Ext.form.ComboBox({
+                    store: this.userStore,
+                    triggerAction: 'all',
+                    hideTrigger:false,
+                    required:true,
+                    allowBlank:false,
+                    editable:false,
+                    valueField:'id',
+                    displayField:'name',
+                    tpl:Mantis.Utils.userTemplate,
+                    mode:'local',
+                    enableKeyEvents: true,
+                    emptyText:"Select recipient",
+                    width:200
+                });
+                
+                // load the user store
+                this.userStore.load();
+                
+                this.userAddExtraButton = new Ext.Button({
+                    text:'Add',
+                    tooltip:'Add another recipient',
+                    icon: APP_ROOT+'/skin/static/icons/add.png',
+                    scope:this,
+                    handler: function() {
+                        this.addRecipient();
                     }
                 });
                 
@@ -172,16 +207,33 @@ Mantis.Calls = function () {
                 this.callerForm = new Ext.Panel({
                     id:'Mantis.Calls.callerForm',
                     layout:'form',
+                    width:350,
                     items:[
                         this.callerNameField,
                         {html:'Called from'},
                         this.callerCompanyField,
-                        {html:'For'}
+                        {html:'For'},
+                        {
+                            layout:'hbox',
+                            items:[
+                                this.userField,
+                                {html:'&nbsp;&nbsp;'},
+                                this.userAddExtraButton
+                            ]
+                        }
                     ],
                     defaults: {
                         hideLabel:true
                     }
                 });
+                
+                // the user extras panel
+                this.userExtrasPanel = new Ext.Panel({
+                    layout:'form',
+                    labelWidth: 20
+                });
+                
+                this.extraUserFieldCount = 0;
                 
                 // and build the panel
                 this.addCallPanel = new Ext.Panel ({
@@ -191,12 +243,37 @@ Mantis.Calls = function () {
                     collapsible: false,
                     layout: 'vbox',
                     items: [
-                        this.callerForm
+                        this.callerForm,
+                        this.userExtrasPanel
                     ],
                     bodyStyle: 'padding:3px;',
                     title:'Take a call'
                 });
             }
+        },
+        addRecipient: function () {
+            var tempUserField = new Ext.form.ComboBox({
+                id:'tempUserField_'+this.extraUserFieldCount,
+                store: this.userStore,
+                triggerAction: 'all',
+                hideTrigger:false,
+                required:false,
+                allowBlank:true,
+                editable:false,
+                valueField:'id',
+                displayField:'name',
+                tpl:Mantis.Utils.userTemplate,
+                mode:'local',
+                enableKeyEvents: true,
+                emptyText:"Select recipient",
+                width: 175,
+                fieldLabel:'OR'
+            });
+            
+            this.userExtrasPanel.add(tempUserField);
+            this.extraUserFieldCount ++;
+            this.userExtrasPanel.doLayout();
+            this.addCallPanel.doLayout();
         },
         buildViewCallsPanel: function () {
             if (this.viewCallsPanel == undefined) {

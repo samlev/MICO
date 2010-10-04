@@ -71,6 +71,7 @@ Mantis.Utils = function () {
             text = "a:" + total + ":{" + text + "}";
             return text;
         },
-        callerTemplate: '<tpl for="."><div class="x-combo-list-item caller-match-{match}">{name}</div></tpl>'
+        callerTemplate: '<tpl for="."><div class="x-combo-list-item caller-match-{match}">{name}</div></tpl>',
+        userTemplate:'<tpl for="."><div class="x-combo-list-item"><img class="user-status-icon" title="{statustext}" src="'+APP_ROOT+'/skin/static/status/{status}.png" />{name}</div></tpl>'
     };
 } ();
