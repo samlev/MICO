@@ -2,12 +2,12 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/manager/Mantis.CallsToolbar.js
+ ** File: js/manager/Mantis.Calls.SearchBar.js
  ** 
- ** Description: Defines the 'calls' toolbar for manager users
+ ** Description: Defines the 'calls' searchbar for manager users
  *******************************************************************************
  ******************************************************************************/
-Mantis.CallsToolbar = function () {
+Mantis.Calls.SearchBar = function () {
     var toolbar;
     var orderFilter;
     
