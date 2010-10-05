@@ -21,7 +21,7 @@ $companies = array();
 $query = "SELECT `company_name`, count(`id`) AS `frequency` 
           FROM `".DB_PREFIX."calls`
           WHERE `company_name` LIKE '".mysql_real_escape_string($search)."%'
-          $filter
+          $filter_search
           GROUP BY `company_name`
           ORDER BY `frequency` DESC, `company_name` ASC";
 $res = run_query($query);
@@ -39,7 +39,7 @@ $query = "SELECT `company_name`, count(`id`) AS `frequency`
           `company_soundex` = '".soundex($search)."'
             OR
           `company_metaphone` LIKE '".metaphone($search)."%')
-          $filter
+          $filter_search
           GROUP BY `company_name`
           ORDER BY `frequency` DESC, `caller_name` ASC";
 $res = run_query($query);
@@ -53,7 +53,7 @@ while ($row = mysql_fetch_assoc($res)) {
 $query = "SELECT `company_name`, count(`id`) AS `frequency` 
           FROM `".DB_PREFIX."calls`
           WHERE (`company_metaphone` LIKE '%".metaphone($search)."%')
-          $filter
+          $filter_search
           GROUP BY `company_name`
           ORDER BY `frequency` DESC, `caller_name` ASC";
 $res = run_query($query);
