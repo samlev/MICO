@@ -10,13 +10,13 @@
  ******************************************************************************/
 
 // get the values
-$search = $_POST['search'];
-$filter = $_POST['filter'];
+$search = trim($_POST['query']);
+$filter = trim($_POST['filter']);
 
-$filter_search = (strlen(trim($filter))?" AND `company_name` LIKE '".$filter."'":'');
+$filter_search = (strlen($filter)?" AND `company_name` LIKE '".mysql_real_escape_string($filter)."'":'');
 
 $callers = array();
-$c_filter = array();
+$c_filter = array("''");
 
 // first search for direct matches
 $query = "SELECT `caller_name`, count(`id`) AS `frequency` 

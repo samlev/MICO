@@ -58,13 +58,14 @@ Mantis.Calls.AddCall = function () {
                     ]), 
                     baseParams: {
                         session: Mantis.User.getSession()
-                    }
+                    },
+                    disableCaching:true
                 });
                 
                 // if we load, only have one 'option', and have nothing set, just assume that that option is it
                 this.callerNameStore.on('load', function (store, recs, opts) {
-                    if (recs.length == 1 && this.callerNameField.getValue() == '') {
-                        this.callerNameField.setValue(recs[0].name);
+                    if (recs.length == 1 && this.callerNameField.getEl().dom.value == '') {
+                        this.callerNameField.setValue(recs[0].get('name'));
                     }
                 }, this);
                 
@@ -78,19 +79,19 @@ Mantis.Calls.AddCall = function () {
                     editable:true,
                     valueField:'name',
                     displayField:'name',
-                    tpl:Mantis.Utils.callerTemplate,
+                    tpl:Mantis.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's name",
                     width:200
                 });
                 
-                // search for companies
-                this.callerNameField.on('select', function () {
-                    if (this.callerNameField.getValue() && this.callerCompanyField.getValue() == '') {
+                this.callerNameField.on('blur', function () {
+                    // search for companies
+                    if (this.callerNameField.getValue() != '' && this.callerCompanyField.getEl().dom.value == '') {
                         this.callerCompanyStore.load({params:{
                             filter: this.callerNameField.getValue(),
-                            search: ''
+                            query: ''
                         }});
                     }
                 }, this);
@@ -99,11 +100,11 @@ Mantis.Calls.AddCall = function () {
                 this.callerNameField.on('keyup', function() {
                     if (this.callerNameField.getValue().length >= 3) {
                         // caller name field is our search term
-                        var s = this.callerNameField.getValue();
+                        var s = this.callerNameField.getEl().dom.value;
                         // caller company field is our filter
-                        var f = this.callerNameField.getValue();
+                        var f = this.callerCompanyField.getValue();
                         // and search
-                        this.callerNameStore.load({params:{search:s,filter:f}});
+                        this.callerNameStore.load({params:{query:s,filter:f}});
                     }
                 }, this);
                 
@@ -119,13 +120,14 @@ Mantis.Calls.AddCall = function () {
                     ]), 
                     baseParams: {
                         session: Mantis.User.getSession()
-                    }
+                    },
+                    disableCaching:true
                 });
                 
                 // if we load, only have one 'option', and have nothing set, just assume that that option is it
                 this.callerCompanyStore.on('load', function (store, recs, opts) {
-                    if (recs.length == 1 && this.callerCompanyField.getValue() == '') {
-                        this.callerCompanyField.setValue(recs[0].name);
+                    if (recs.length == 1 && this.callerCompanyField.getEl().dom.value == '') {
+                        this.callerCompanyField.setValue(recs[0].get('name'));
                     }
                 }, this);
                 
@@ -139,19 +141,19 @@ Mantis.Calls.AddCall = function () {
                     editable:true,
                     valueField:'name',
                     displayField:'name',
-                    tpl:Mantis.Utils.callerTemplate,
+                    tpl:Mantis.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's company",
                     width:200
                 });
                 
-                // search for caller names
-                this.callerCompanyField.on('select', function () {
-                    if (this.callerCompanyField.getValue() && this.callerNameField.getValue() == '') {
+                this.callerCompanyField.on('blur', function () {
+                    // search for caller names
+                    if (this.callerCompanyField.getValue() != '' && this.callerNameField.getEl().dom.value == '') {
                         this.callerNameStore.load({params:{
                             filter: this.callerCompanyField.getValue(),
-                            search: ''
+                            query: ''
                         }});
                     }
                 }, this);
@@ -162,9 +164,9 @@ Mantis.Calls.AddCall = function () {
                         // caller name field is our filter
                         var f = this.callerNameField.getValue();
                         // caller company field is our search term
-                        var s = this.callerNameField.getValue();
+                        var s = this.callerCompanyField.getEl().dom.value;
                         // and search
-                        this.callerCompanyStore.load({params:{search:s,filter:f}});
+                        this.callerCompanyStore.load({params:{query:s,filter:f}});
                     }
                 }, this);
                 
@@ -182,7 +184,8 @@ Mantis.Calls.AddCall = function () {
                     ]), 
                     baseParams: {
                         session: Mantis.User.getSession()
-                    }
+                    },
+                    disableCaching:true
                 });
                 
                 // and the field
@@ -196,14 +199,16 @@ Mantis.Calls.AddCall = function () {
                     valueField:'id',
                     displayField:'name',
                     tpl:Mantis.Utils.userTemplate,
-                    mode:'local',
+                    mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Select recipient",
                     width:200
                 });
                 
-                // load the user store
-                this.userStore.load();
+                // force the store to re-load when we expand the field (in case any statuses have changed, etc)
+                this.userField.on('expand',function () {
+                    this.userStore.reload();
+                }, this);
                 
                 this.userAddExtraButton = new Ext.Button({
                     text:'Add',
@@ -268,7 +273,8 @@ Mantis.Calls.AddCall = function () {
                     ]), 
                     baseParams: {
                         session: Mantis.User.getSession()
-                    }
+                    },
+                    disableCaching:true
                 });
                 
                 // and the field
@@ -281,12 +287,19 @@ Mantis.Calls.AddCall = function () {
                     editable:true,
                     valueField:'contact',
                     displayField:'contact',
-                    tpl:Mantis.Utils.callerTemplate,
-                    mode:'local',
+                    tpl:Mantis.Utils.callerTemplate('contact'),
+                    mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's Phone Number/Email",
                     width:200
                 });
+                
+                this.callerContactField.on('expand',function () {
+                    this.callerContactStore.load({params:{
+                        caller: this.callerNameField.getValue(),
+                        company: this.callerCompanyField.getValue()
+                    }}, this);
+                }, this);
                 
                 this.callerContactAddExtraButton = new Ext.Button({
                     text:'Add',
@@ -450,12 +463,16 @@ Mantis.Calls.AddCall = function () {
                 valueField:'id',
                 displayField:'name',
                 tpl:Mantis.Utils.userTemplate,
-                mode:'local',
+                mode:'remote',
                 enableKeyEvents: true,
                 emptyText:"Select recipient",
                 width: 175,
                 fieldLabel:'OR'
             });
+            
+            tempUserField.on('expand',function () {
+                this.userStore.reload();
+            }, this);
             
             // add it to the panel
             this.userExtrasForm.add(tempUserField);
@@ -488,12 +505,19 @@ Mantis.Calls.AddCall = function () {
                 editable:true,
                 valueField:'contact',
                 displayField:'contact',
-                tpl:Mantis.Utils.callerTemplate,
-                mode:'local',
+                tpl:Mantis.Utils.callerTemplate('contact'),
+                mode:'remote',
                 emptyText:"Caller's Phone Number/Email",
                 width: 175,
                 fieldLabel:'OR'
             });
+            
+            tempContactField.on('expand',function () {
+                this.callerContactStore.load({params:{
+                    caller: this.callerNameField.getValue(),
+                    company: this.callerCompanyField.getValue()
+                }}, this);
+            }, this);
             
             // add it to the panel
             this.callerContactExtraForm.add(tempContactField);
