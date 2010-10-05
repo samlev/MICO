@@ -19,7 +19,7 @@ Mantis.Calls.AddCall = function () {
     var userField;
     var userAddExtraButton;
     // user extras
-    var userExtrasPanel;
+    var userExtrasForm;
     var extraUserFieldCount;
     // Message form
     var callerMessageBox;
@@ -240,7 +240,7 @@ Mantis.Calls.AddCall = function () {
                 });
                 
                 // the user extras panel
-                this.userExtrasPanel = new Ext.Panel({
+                this.userExtrasForm = new Ext.Panel({
                     layout:'form',
                     labelWidth: 20,
                     bodyStyle:'padding-top:3px;'
@@ -419,7 +419,7 @@ Mantis.Calls.AddCall = function () {
                     layout: 'vbox',
                     items: [
                         this.callerForm,
-                        this.userExtrasPanel,
+                        this.userExtrasForm,
                         this.callerMessageForm,
                         this.callerContactExtraForm,
                         this.priorityForm
@@ -458,21 +458,21 @@ Mantis.Calls.AddCall = function () {
             });
             
             // add it to the panel
-            this.userExtrasPanel.add(tempUserField);
+            this.userExtrasForm.add(tempUserField);
             // increase the counter
             this.extraUserFieldCount ++;
             // ensure that the form is correctly laid out
-            this.userExtrasPanel.doLayout();
+            this.userExtrasForm.doLayout();
             this.panel.doLayout();
         },
         /** Removes all the extra recipients from the 'add calls' form' */
         clearRecipients: function() {
             // remove all the fields and destroy them
-            this.userExtrasPanel.removeAll(true);
+            this.userExtrasForm.removeAll(true);
             // reset the counter
             this.extraUserFieldCount = 0;
             // ensure that the form is correctly laid out
-            this.userExtrasPanel.doLayout();
+            this.userExtrasForm.doLayout();
             this.panel.doLayout();
         },
         /** Adds a new recipient dropdown to the 'add call' form */
@@ -516,17 +516,95 @@ Mantis.Calls.AddCall = function () {
         /** Clears all the form elements, resets everything */
         clear: function () {
             this.callerNameField.reset();
-            this.callerContactField.reset();
+            this.callerCompanyField.reset();
             this.userField.reset();
             this.clearRecipients();
             this.callerMessageBox.reset();
-            this.callerCompanyField.reset();
+            this.callerContactField.reset();
             this.clearContacts();
             this.callPriorityField.reset();
             this.callActionField.reset();
         },
         addCall: function () {
+            // collect the data
+            var caller = this.callerNameField.getValue().trim();
+            var company = this.callerCompanyField.getValue().trim();
             
+            // collate the list of users
+            var users = [];
+            // check the first user field
+            var u_id = this.userField.getValue();
+            if (u_id > 0) {
+                users[users.length] = u_id;
+            }
+            // now check for extra users
+            for (var i = 0; i < this.extraUserFieldCount; i++) {
+                u_id = this.userExtrasForm.findById('tempUserField_'+i).getValue();
+                if (u_id > 0) {
+                    users[users.length] = u_id;
+                }
+            }
+            
+            // get more variables
+            var message = this.callerMessageBox.getValue().trim();
+            
+            // collate the list of contacts
+            var contacts = [];
+            // check the first contact field
+            var contact = this.callerContactField.getValue().trim();
+            if (contact.length > 0) {
+                contacts[contacts.length] = contact;
+            }
+            // now check for extra contacts
+            for (var i = 0; i < this.extraContactFieldCount; i++) {
+                contact = this.callerContactExtraForm.findById('tempContactField_'+i).getValue().trim();
+                if (contact.length > 0) {
+                    contacts[contacts.length] = contact;
+                }
+            }
+            
+            // get the final fields
+            var priority = this.callPriorityField.getValue();
+            var action = this.callActionField.getValue().trim();
+            
+            // now check that we have everything we need
+            if (users.length == 0) {
+                // Ensure we have at least one user selected
+                this.userField.focus(false,10);
+                Ext.Msg.alert('Error','Please select a recipient for this call');
+            } else if (caller == '' && company == '' && contacts.length == 0 && message == '') {
+                // Ensure we have at least one piece of useful information
+                this.callerNameField.focus(false,10);
+                Ext.Msg.alert('Error','Please enter either a caller name, company name, message, or contact details');
+            } else {
+                // passed our basic validation - add the call
+                var conn = new Ext.data.Connection();
+                
+                conn.request({
+                    url:APP_ROOT+'/api.php?f=addCall',
+                    params: {
+                        session: Mantis.User.getSession(),
+                        caller: caller,
+                        company: company,
+                        users: Mantis.Utils.serialiseArray(users),
+                        message: message,
+                        contacts: Mantis.Utils.serialiseArray(contacts),
+                        priority:priority,
+                        action:action
+                    },
+                    success: function (res, opt) {
+                        this.clear();
+                    },
+                    failure: function (res, opt) {
+                        var msg = "Unknown system error";
+                        if (res.result !== undefined) {
+                            msg = res.result.info;
+                        }
+                        Ext.Msg.alert("Error", msg);
+                    },
+                    scope: this
+                });
+            }
         }
     };
 } ();
