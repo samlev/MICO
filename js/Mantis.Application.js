@@ -9,7 +9,7 @@
  ******************************************************************************/
 Ext.QuickTips.init ();
 
-Ext.BLANK_IMAGE_URL = "skin/custom/static/s.gif";
+Ext.BLANK_IMAGE_URL = "skin/static/s.gif";
 
 Ext.namespace ("Mantis");
 
