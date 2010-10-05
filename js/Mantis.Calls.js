@@ -247,7 +247,7 @@ Mantis.Calls = function () {
                 
                 // The message box
                 this.callerMessageBox = new Ext.form.TextArea({
-                    width:290,
+                    width:270,
                     height:120,
                     emptyText:'Message for recipient(s)...',
                     allowBlank:false,
