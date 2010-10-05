@@ -35,6 +35,10 @@ Mantis.Calls.AddCall = function () {
     var actionField;
     var priorityForm;
     
+    // buttons
+    var addCallButton;
+    var clearFormButton;
+    
     // main panel
     var panel;
     
@@ -57,6 +61,13 @@ Mantis.Calls.AddCall = function () {
                     }
                 });
                 
+                // if we load, only have one 'option', and have nothing set, just assume that that option is it
+                this.callerNameStore.on('load', function (store, recs, opts) {
+                    if (recs.length == 1 && this.callerNameField.getValue() == '') {
+                        this.callerNameField.setValue(recs[0].name);
+                    }
+                }, this);
+                
                 // and the field
                 this.callerNameField = new Ext.form.ComboBox({
                     store: this.callerNameStore,
@@ -73,6 +84,16 @@ Mantis.Calls.AddCall = function () {
                     emptyText:"Caller's name",
                     width:200
                 });
+                
+                // search for companies
+                this.callerNameField.on('blur', function () {
+                    if (this.callerNameField.getValue() && this.callerCompanyField.getValue() == '') {
+                        this.callerCompanyStore.load({params:{
+                            filter: this.callerNameField.getValue(),
+                            search: ''
+                        }});
+                    }
+                }, this);
                 
                 // Load a search
                 this.callerNameField.on('keyup', function() {
@@ -101,6 +122,13 @@ Mantis.Calls.AddCall = function () {
                     }
                 });
                 
+                // if we load, only have one 'option', and have nothing set, just assume that that option is it
+                this.callerCompanyStore.on('load', function (store, recs, opts) {
+                    if (recs.length == 1 && this.callerCompanyField.getValue() == '') {
+                        this.callerCompanyField.setValue(recs[0].name);
+                    }
+                }, this);
+                
                 // and the field
                 this.callerCompanyField = new Ext.form.ComboBox({
                     store: this.callerCompanyStore,
@@ -117,6 +145,16 @@ Mantis.Calls.AddCall = function () {
                     emptyText:"Caller's company",
                     width:200
                 });
+                
+                // search for caller names
+                this.callerCompanyField.on('blur', function () {
+                    if (this.callerCompanyField.getValue() && this.callerNameField.getValue() == '') {
+                        this.callerNameStore.load({params:{
+                            filter: this.callerCompanyField.getValue(),
+                            search: ''
+                        }});
+                    }
+                }, this);
                 
                 // Load a search
                 this.callerCompanyField.on('keyup', function() {
@@ -354,6 +392,24 @@ Mantis.Calls.AddCall = function () {
                     }
                 });
                 
+                // add call button
+                this.addCallButton = new Ext.Button({
+                    text:'Add Call',
+                    scope:this,
+                    handler: function() {
+                        this.addCall();
+                    }
+                });
+                
+                // clear form button
+                this.clearFormButton = new Ext.Button({
+                    text:'Clear',
+                    scope:this,
+                    handler: function() {
+                        this.clear();
+                    }
+                });
+                
                 // and build the panel
                 this.panel = new Ext.Panel ({
                     id: "Mantis.Calls.addCallPanel", 
@@ -367,6 +423,10 @@ Mantis.Calls.AddCall = function () {
                         this.callerMessageForm,
                         this.callerContactExtraForm,
                         this.priorityForm
+                    ],
+                    buttons: [
+                        this.addCallButton,
+                        this.clearFormButton
                     ],
                     bodyStyle: 'padding:3px;',
                     title:'Take a call'
@@ -452,6 +512,21 @@ Mantis.Calls.AddCall = function () {
             // ensure that the form is correctly laid out
             this.callerContactExtraForm.doLayout();
             this.panel.doLayout();
+        },
+        /** Clears all the form elements, resets everything */
+        clear: function () {
+            this.callerNameField.reset();
+            this.callerContactField.reset();
+            this.userField.reset();
+            this.clearRecipients();
+            this.callerMessageBox.reset();
+            this.callerCompanyField.reset();
+            this.clearContacts();
+            this.callPriorityField.reset();
+            this.callActionField.reset();
+        },
+        addCall: function () {
+            
         }
     };
 } ();
