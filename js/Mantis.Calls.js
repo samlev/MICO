@@ -10,40 +10,11 @@
 Ext.namespace('Mantis.Calls');
 
 Mantis.Calls = function () {
+    // menu id
     var menuId;
     
     // main panel
     var panel;
-    
-    // add call panel - break it up into a number of smaller forms
-    // caller form
-    var callerForm;
-    var callerNameStore;
-    var callerNameField;
-    var callerCompanyStore;
-    var callerCompanyField;
-    var userStore;
-    var userField;
-    var userAddExtraButton;
-    // user extras
-    var userExtrasPanel;
-    var extraUserFieldCount;
-    // Message form
-    var callerMessageBox;
-    var callerMessageForm;
-    var callerContactStore;
-    var callerContactField;
-    var callerContactAddExtraButton;
-    // caller contact form
-    var callerContactExtraForm;
-    var extraContactFieldCount;
-    // priority/actions form
-    var callPriorityField;
-    var actionField;
-    var priorityForm;
-    
-    // main panel
-    var addCallPanel;
     
     return {
         /** Adds the link to the menu */
@@ -55,15 +26,15 @@ Mantis.Calls = function () {
         /** Shows the panel */
         show: function () {
             if (this.panel == undefined) {
-                
                 // set up the panel
                 this.panel = new Ext.Panel({
                     id:'Mantis.Calls.panel',
                     layout:'border'
                 });
                 
+                // Build the panels
                 Mantis.Calls.AddCall.show();
-                this.buildViewCallsPanel();
+                Mantis.Calls.ViewCalls.show();
                 
                 // Add to the main panel
                 Mantis.Application.addPanel(this.panel);
@@ -74,18 +45,6 @@ Mantis.Calls = function () {
             
             Mantis.Application.showPanel('Mantis.Calls.panel');
         },
-        /** Builds the 'view calls' panel */
-        buildViewCallsPanel: function () {
-            if (this.viewCallsPanel == undefined) {
-                this.viewCallsPanel = new Ext.Panel({
-                    html:"<p>Calls and stuff go here</p>",
-                    region:'center',
-                    tbar:Mantis.Calls.SearchBar.getToolbar()
-                });
-                
-                this.addPanel(this.viewCallsPanel);
-            }
-        },
         /** Adds a panel to this panel
          * @param panel {Ext.Panel} The panel to add
          */
@@ -94,7 +53,3 @@ Mantis.Calls = function () {
         }
     };
 } ();
-
-Ext.onReady (function () {
-    Mantis.Application.init ();
-});
