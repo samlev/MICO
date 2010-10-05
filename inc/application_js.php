@@ -16,13 +16,13 @@
 $public = array('Mantis.Application.js','Mantis.Login.js');
 // standard scipts for users
 $authed = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
-                'Mantis.Utils.js','Mantis.User.js','Mantis.CallsToolbar.js');
+                'Mantis.Utils.js','Mantis.User.js','Mantis.Calls.SearchBar.js');
 // standard scipts for managers
 $manager = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
-                 'Mantis.Utils.js','Mantis.User.js','manager/Mantis.CallsToolbar.js');
+                 'Mantis.Utils.js','Mantis.User.js','manager/Mantis.Calls.SearchBar.js');
 // administrators get more
 $admin = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
-               'Mantis.Utils.js','Mantis.User.js','admin/Mantis.CallsToolbar.js');
+               'Mantis.Utils.js','Mantis.User.js','manager/Mantis.Calls.SearchBar.js');
 // and an odd case for password reset
 $passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 

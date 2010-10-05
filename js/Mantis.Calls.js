@@ -7,6 +7,8 @@
  ** Description: The main 'calls' section of the system
  *******************************************************************************
  ******************************************************************************/
+Ext.namespace('Mantis.Calls');
+
 Mantis.Calls = function () {
     var menuId;
     
