@@ -72,6 +72,7 @@ Mantis.Utils = function () {
             return text;
         },
         callerTemplate: '<tpl for="."><div class="x-combo-list-item caller-match-{match}">{name}</div></tpl>',
-        userTemplate:'<tpl for="."><div class="x-combo-list-item"><img class="user-status-icon" title="{statustext}" src="'+APP_ROOT+'/skin/static/status/{status}.png" />{name}</div></tpl>'
+        userTemplate:'<tpl for="."><div class="x-combo-list-item"><img class="user-status-icon" title="{statustext}" src="'+APP_ROOT+'/skin/static/status/{status}.png" />{name}</div></tpl>',
+        priorityTemplate:'<tpl for="."><div class="x-combo-list-item priority-{priority}">{view}</div></tpl>'
     };
 } ();

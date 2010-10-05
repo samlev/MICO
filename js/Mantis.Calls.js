@@ -26,11 +26,21 @@ Mantis.Calls = function () {
     // user extras
     var userExtrasPanel;
     var extraUserFieldCount;
-    // caller contact form
-    var callerContactForm;
     // Message form
-    var callerMessageForm;
     var callerMessageBox;
+    var callerMessageForm;
+    var callerContactStore;
+    var callerContactField;
+    var callerContactAddExtraButton;
+    // caller contact form
+    var callerContactExtraForm;
+    var extraContactFieldCount;
+    // priority/actions form
+    var callPriorityField;
+    var actionField;
+    var priorityForm;
+    
+    // main panel
     var addCallPanel;
     
     return {
@@ -207,12 +217,12 @@ Mantis.Calls = function () {
                 this.callerForm = new Ext.Panel({
                     id:'Mantis.Calls.callerForm',
                     layout:'form',
-                    width:350,
+                    width:300,
                     items:[
                         this.callerNameField,
-                        {html:'Called from'},
+                        {html:'From'},
                         this.callerCompanyField,
-                        {html:'For'},
+                        {html:'Called for'},
                         {
                             layout:'hbox',
                             items:[
@@ -230,10 +240,155 @@ Mantis.Calls = function () {
                 // the user extras panel
                 this.userExtrasPanel = new Ext.Panel({
                     layout:'form',
-                    labelWidth: 20
+                    labelWidth: 20,
+                    bodyStyle:'padding-top:3px;'
+                });
+                this.extraUserFieldCount = 0;
+                
+                // The message box
+                this.callerMessageBox = new Ext.form.TextArea({
+                    width:290,
+                    height:120,
+                    emptyText:'Message for recipient(s)...',
+                    allowBlank:false,
+                    required:true
                 });
                 
-                this.extraUserFieldCount = 0;
+                // caller contact store
+                this.callerContactStore = new Ext.data.Store({
+                    url: APP_ROOT+"/api.php?f=getCallerContacts",
+                    reader: new Ext.data.JsonReader ({
+                        root: "contacts", 
+                        id: "contact"
+                    }, [
+                        {name: "contact", mapping: "contact"}, 
+                        {name: "match", mapping: "match"}
+                    ]), 
+                    baseParams: {
+                        session: Mantis.User.getSession()
+                    }
+                });
+                
+                // and the field
+                this.callerContactField = new Ext.form.ComboBox({
+                    store: this.callerContactStore,
+                    triggerAction: 'all',
+                    hideTrigger:true,
+                    required:false,
+                    allowBlank:true,
+                    editable:true,
+                    valueField:'contact',
+                    displayField:'contact',
+                    tpl:Mantis.Utils.callerTemplate,
+                    mode:'local',
+                    enableKeyEvents: true,
+                    emptyText:"Caller's Phone Number/Email",
+                    width:200
+                });
+                
+                this.callerContactAddExtraButton = new Ext.Button({
+                    text:'Add',
+                    tooltip:'Add another contact method',
+                    icon: APP_ROOT+'/skin/static/icons/add.png',
+                    scope:this,
+                    handler: function() {
+                        this.addcallerContact();
+                    }
+                });
+                
+                // and the form to hold it
+                this.callerMessageForm = new Ext.Panel({
+                    id:'Mantis.Calls.callerMessageForm',
+                    layout:'form',
+                    width:300,
+                    items:[
+                        {html:'About'},
+                        this.callerMessageBox,
+                        {html:'Contact them at'},
+                        {
+                            layout:'hbox',
+                            items:[
+                                this.callerContactField,
+                                {html:'&nbsp;&nbsp;'},
+                                this.callerContactAddExtraButton
+                            ]
+                        }
+                    ],
+                    defaults: {
+                        hideLabel:true
+                    }
+                });
+                
+                // the contact extras panel
+                this.callerContactExtraForm = new Ext.Panel({
+                    layout:'form',
+                    labelWidth: 20,
+                    bodyStyle:'padding-top:3px;'
+                });
+                this.extraContactFieldCount = 0;
+                
+                // priotiy and action form
+                this.callPriorityField = new Ext.form.ComboBox({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['priority','view'],
+                        data: [
+                            ['critical','Critical'],
+                            ['urgent','Urgent'],
+                            ['moderate','Moderate'],
+                            ['minor','Minor'],
+                            ['negligible','Negligible']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'priority',
+                    value:'recent',
+                    mode:'local',
+                    triggerAction:'all',
+                    value:'moderate',
+                    tpl:Mantis.Utils.priorityTemplate
+                });
+                
+                // action field
+                this.callActionField = new Ext.form.ComboBox({
+                    allowBlank:true,
+                    editable:true,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['action'],
+                        data: [
+                            ['Call back ASAP'],
+                            ['Call back by Close Of Business'],
+                            ['Call back whenever you can'],
+                            ['Caller will email/call again later'],
+                            ['No need to call back']
+                        ]
+                    }),
+                    displayField:'action',
+                    valueField:'action',
+                    value:'Call back ASAP',
+                    mode:'local',
+                    triggerAction:'all',
+                    hideTrigger:true,
+                    maxLength:200
+                });
+                
+                // and the form to hold the action and priority
+                this.priorityForm = new Ext.Panel({
+                    id:'Mantis.Calls.priorityForm',
+                    layout:'form',
+                    width:300,
+                    items:[
+                        {html:'This call is'},
+                        this.callPriorityField,
+                        {html:'Action required'},
+                        this.callActionField
+                    ],
+                    defaults: {
+                        hideLabel:true
+                    }
+                });
                 
                 // and build the panel
                 this.addCallPanel = new Ext.Panel ({
@@ -244,7 +399,10 @@ Mantis.Calls = function () {
                     layout: 'vbox',
                     items: [
                         this.callerForm,
-                        this.userExtrasPanel
+                        this.userExtrasPanel,
+                        this.callerMessageForm,
+                        this.callerContactExtraForm,
+                        this.priorityForm
                     ],
                     bodyStyle: 'padding:3px;',
                     title:'Take a call'
@@ -290,6 +448,45 @@ Mantis.Calls = function () {
             this.userExtrasPanel.doLayout();
             this.addCallPanel.doLayout();
         },
+        /** Adds a new recipient dropdown to the 'add call' form */
+        addcallerContact: function () {
+            // build a temporary field
+            var tempContactField = new Ext.form.ComboBox({
+                id:'tempContactField_'+this.extraContactFieldCount,
+                store: this.callerContactStore,
+                triggerAction: 'all',
+                hideTrigger:true,
+                required:false,
+                allowBlank:true,
+                editable:true,
+                valueField:'contact',
+                displayField:'contact',
+                tpl:Mantis.Utils.callerTemplate,
+                mode:'local',
+                emptyText:"Caller's Phone Number/Email",
+                width: 175,
+                fieldLabel:'OR'
+            });
+            
+            // add it to the panel
+            this.callerContactExtraForm.add(tempContactField);
+            // increase the counter
+            this.extraContactFieldCount ++;
+            // ensure that the form is correctly laid out
+            this.callerContactExtraForm.doLayout();
+            this.addCallPanel.doLayout();
+        },
+        /** Removes all the extra recipients from the 'add calls' form' */
+        clearContacts: function() {
+            // remove all the fields and destroy them
+            this.callerContactExtraForm.removeAll(true);
+            // reset the counter
+            this.extraContactFieldCount = 0;
+            // ensure that the form is correctly laid out
+            this.callerContactExtraForm.doLayout();
+            this.addCallPanel.doLayout();
+        },
+        /** Builds the 'view calls' panel */
         buildViewCallsPanel: function () {
             if (this.viewCallsPanel == undefined) {
                 this.viewCallsPanel = new Ext.Panel({

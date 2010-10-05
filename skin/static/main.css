@@ -54,18 +54,43 @@ body {
 }
 /* end caller styles */
 
+/* User status */
 .user-status-icon {
 	float:right;
 }
+/* end user status */
 
+/* priority */
+.priority-critical {
+	font-weight:bold;
+	color:#CC0000;
+}
+.priority-urgent {
+	font-weight:bold;
+	color:#000000;
+}
+.priority-moderate {
+	font-weight:normal;
+	color:#000000;
+}
+.priority-minor {
+	font-weight:normal;
+	color:#666666;
+}
+.priority-negligible {
+	font-weight:normal;
+	color:#666666;
+	font-style: italic;
+}
+/* end priority */
+
+/* Basic skinning niceties */
 .x-panel-body {
     border:none;
 }
-
 .x-panel {
     border:none;
 }
-
 .x-window-mc {
     border:none;
 }
