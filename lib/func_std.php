@@ -125,6 +125,19 @@ function boolval($in, $strict=false) {
     return $out;
 }
 
+/** Cleans any HTML and potential XSS out of a string
+ * @param string $in The string to scrub
+ * @return string The cleaned string
+ */
+function html_scrub($in) {
+    // quick HTML removal
+    $out = strip_tags($in);
+    // more indepth XSS removal
+    $purifier = new HTMLPurifier();
+    $out = $purifier->purify( $out );
+    return $out;
+}
+
 // JSON helper functions (pre php 5.2 compatibility)
 if (!function_exists('json_encode')) {
     // pull in the json library

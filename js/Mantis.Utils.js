@@ -63,12 +63,13 @@ Mantis.Utils = function () {
                 // Remove some extra function keys that ExtJS adds to the array
                 if (String(k) != "remove" && String(k) != "indexOf") {
                     // add the item
-                    text = text + "s:" + String(key).length + ":\"" + String(key) + "\";s:" + String(arr[key]).length + ":\"" + String(arr[key]) + "\";";
+                    text = text + 's:' + String(k).length + ':"' + String(k) + '";s:' + String(arr[k]).length + ':"' + String(arr[k]) + '";';
                     // and incremement the total number of items
                     total ++;
                 }
             }
-            text = "a:" + total + ":{" + text + "}";
+            // and wrap it like an array
+            text = 'a:' + total + ':{' + text + '}';
             return text;
         },
         callerTemplate: '<tpl for="."><div class="x-combo-list-item caller-match-{match}">{name}</div></tpl>',

@@ -19,6 +19,7 @@ mysql_select_db($DB_NAME);
 
 // include the library of functions and classes
 include_once(FS_ROOT.'/inc/magic_quotes_gpc_off.php'); // undo any 'magic quotes' damage
+include_once(FS_ROOT.'/lib/htmlpurifier/HTMLPurifier.standalone.php'); // HTML purifier
 include_once(FS_ROOT.'/lib/func_std.php'); // pull in the standard library of functions
 include_once(FS_ROOT.'/lib/Settings.class.php'); // system settings class
 include_once(FS_ROOT.'/lib/User.class.php'); // User class

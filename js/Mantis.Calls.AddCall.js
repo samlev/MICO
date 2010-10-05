@@ -86,7 +86,7 @@ Mantis.Calls.AddCall = function () {
                 });
                 
                 // search for companies
-                this.callerNameField.on('blur', function () {
+                this.callerNameField.on('select', function () {
                     if (this.callerNameField.getValue() && this.callerCompanyField.getValue() == '') {
                         this.callerCompanyStore.load({params:{
                             filter: this.callerNameField.getValue(),
@@ -147,7 +147,7 @@ Mantis.Calls.AddCall = function () {
                 });
                 
                 // search for caller names
-                this.callerCompanyField.on('blur', function () {
+                this.callerCompanyField.on('select', function () {
                     if (this.callerCompanyField.getValue() && this.callerNameField.getValue() == '') {
                         this.callerNameStore.load({params:{
                             filter: this.callerCompanyField.getValue(),
@@ -164,7 +164,7 @@ Mantis.Calls.AddCall = function () {
                         // caller company field is our search term
                         var s = this.callerNameField.getValue();
                         // and search
-                        this.callerCompanyField.load({params:{search:s,filter:f}});
+                        this.callerCompanyStore.load({params:{search:s,filter:f}});
                     }
                 }, this);
                 
@@ -592,15 +592,17 @@ Mantis.Calls.AddCall = function () {
                         priority:priority,
                         action:action
                     },
-                    success: function (res, opt) {
-                        this.clear();
-                    },
-                    failure: function (res, opt) {
-                        var msg = "Unknown system error";
-                        if (res.result !== undefined) {
-                            msg = res.result.info;
+                    callback: function (options, success, response) {
+                        var res = Ext.decode(response.responseText);
+                        if (success && res.success) {
+                            this.clear();
+                        } else {
+                            var msg = "Unknown system error";
+                            if (res.info !== undefined) {
+                                msg = res.info;
+                            }
+                            Ext.Msg.alert("Error", msg);
                         }
-                        Ext.Msg.alert("Error", msg);
                     },
                     scope: this
                 });
