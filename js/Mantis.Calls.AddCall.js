@@ -38,6 +38,7 @@ Mantis.Calls.AddCall = function () {
     // buttons
     var addCallButton;
     var clearFormButton;
+    var buttonPanel;
     
     // main panel
     var panel;
@@ -64,7 +65,7 @@ Mantis.Calls.AddCall = function () {
                 
                 // if we load, only have one 'option', and have nothing set, just assume that that option is it
                 this.callerNameStore.on('load', function (store, recs, opts) {
-                    if (recs.length == 1 && this.callerNameField.getEl().dom.value == '') {
+                    if (recs.length == 1 && (this.callerNameField.getEl().dom.value == '' && this.callerNameField.getRawValue() == '')) {
                         this.callerNameField.setValue(recs[0].get('name'));
                     }
                 }, this);
@@ -88,9 +89,9 @@ Mantis.Calls.AddCall = function () {
                 
                 this.callerNameField.on('blur', function () {
                     // search for companies
-                    if (this.callerNameField.getValue() != '' && this.callerCompanyField.getEl().dom.value == '') {
+                    if (this.callerNameField.getEl().dom.value != '' && this.callerCompanyField.getRawValue() == '') {
                         this.callerCompanyStore.load({params:{
-                            filter: this.callerNameField.getValue(),
+                            filter: this.callerNameField.getEl().dom.value,
                             query: ''
                         }});
                     }
@@ -126,7 +127,7 @@ Mantis.Calls.AddCall = function () {
                 
                 // if we load, only have one 'option', and have nothing set, just assume that that option is it
                 this.callerCompanyStore.on('load', function (store, recs, opts) {
-                    if (recs.length == 1 && this.callerCompanyField.getEl().dom.value == '') {
+                    if (recs.length == 1 && (this.callerCompanyField.getEl().dom.value == '' && this.callerCompanyField.getRawValue() == '')) {
                         this.callerCompanyField.setValue(recs[0].get('name'));
                     }
                 }, this);
@@ -150,9 +151,9 @@ Mantis.Calls.AddCall = function () {
                 
                 this.callerCompanyField.on('blur', function () {
                     // search for caller names
-                    if (this.callerCompanyField.getValue() != '' && this.callerNameField.getEl().dom.value == '') {
+                    if (this.callerCompanyField.getEl().dom.value != '' && this.callerNameField.getRawValue() == '') {
                         this.callerNameStore.load({params:{
-                            filter: this.callerCompanyField.getValue(),
+                            filter: this.callerCompanyField.getEl().dom.value,
                             query: ''
                         }});
                     }
@@ -423,9 +424,17 @@ Mantis.Calls.AddCall = function () {
                     }
                 });
                 
+                this.buttonsForm = new Ext.Panel({
+                    layout:'fit',
+                    buttons: [
+                        this.addCallButton,
+                        this.clearFormButton
+                    ]
+                });
+                
                 // and build the panel
                 this.panel = new Ext.Panel ({
-                    id: "Mantis.Calls.addCallPanel", 
+                    id: "Mantis.Calls.AddCall.panel", 
                     region:'west',
                     width: 300,
                     collapsible: false,
@@ -435,11 +444,8 @@ Mantis.Calls.AddCall = function () {
                         this.userExtrasForm,
                         this.callerMessageForm,
                         this.callerContactExtraForm,
-                        this.priorityForm
-                    ],
-                    buttons: [
-                        this.addCallButton,
-                        this.clearFormButton
+                        this.priorityForm,
+                        this.buttonsForm
                     ],
                     bodyStyle: 'padding:3px;',
                     title:'Take a call'
@@ -548,6 +554,11 @@ Mantis.Calls.AddCall = function () {
             this.clearContacts();
             this.callPriorityField.reset();
             this.callActionField.reset();
+            // clear the stores
+            this.callerNameStore.removeAll();
+            this.callerCompanyStore.removeAll();
+            this.userStore.removeAll();
+            this.callerContactStore.removeAll();
         },
         addCall: function () {
             // collect the data
