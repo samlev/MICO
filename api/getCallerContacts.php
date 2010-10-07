@@ -3,9 +3,9 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: api/getCallerName.php
+ ** File: api/getCallerContacts.php
  ** 
- ** Description: Searches for a caller name
+ ** Description: Searches for a caller contacts
  *******************************************************************************
  ******************************************************************************/
 
