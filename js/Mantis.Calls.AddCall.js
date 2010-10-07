@@ -247,8 +247,8 @@ Mantis.Calls.AddCall = function () {
                 });
                 
                 // force the store to re-load when we expand the field (in case any statuses have changed, etc)
-                this.userField.on('expand',function () {
-                    this.userStore.reload();
+                this.userField.on('focus',function () {
+                    this.userStore.load();
                 }, this);
                 
                 this.userAddExtraButton = new Ext.Button({
@@ -517,8 +517,8 @@ Mantis.Calls.AddCall = function () {
                 fieldLabel:'OR'
             });
             
-            tempUserField.on('expand',function () {
-                this.userStore.reload();
+            tempUserField.on('focus',function () {
+                this.userStore.load();
             }, this);
             
             // add it to the panel
