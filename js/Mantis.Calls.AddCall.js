@@ -271,7 +271,7 @@ Mantis.Calls.AddCall = function () {
                             layout:'hbox',
                             items:[
                                 this.callerNameField,
-                                {html:'&nbsp;&nbsp;(caller)',bodyStyle:'color:#CCCCCC;font-size:8pt;padding-top:5px;'}
+                                {html:'&nbsp;&nbsp;(caller)',cls:'field-helper'}
                             ]
                         },
                         {html:'From'},
@@ -279,7 +279,7 @@ Mantis.Calls.AddCall = function () {
                             layout:'hbox',
                             items:[
                                 this.callerCompanyField,
-                                {html:'&nbsp;&nbsp;(company)',bodyStyle:'color:#CCCCCC;font-size:8pt;padding-top:5px;'}
+                                {html:'&nbsp;&nbsp;(company)',cls:'field-helper'}
                             ]
                         },
                         {html:'Called for'},

@@ -30,18 +30,12 @@ body {
 }
 /* End system menu styles */
 
-/* Multi-select CSS styles */
-.x-combo-list .x-combo-list-cursor{
-	border: 1px dotted #000000 !important;
+/* Add call panel styles */
+.field-helper {
+	color:#CCCCCC;
+	font-size:8pt;
+	padding-top:5px;
 }
-
-/* Hack - added for visual effect */
-.x-combo-list-item{
-	cursor:pointer;
-	margin: 1px;
-}
-/* End multi-select CSS styles */
-
 /* Caller styles */
 .caller-match-1 {
 	color: #000000;
@@ -52,14 +46,10 @@ body {
 .caller-match-3 {
 	color: #999999;
 }
-/* end caller styles */
-
 /* User status */
 .user-status-icon {
 	float:right;
 }
-/* end user status */
-
 /* priority */
 .priority-critical {
 	font-weight:bold;
