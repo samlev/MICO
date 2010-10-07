@@ -23,6 +23,10 @@ body {
 	font-weight:normal;
 	display:block;
 	padding:3px 8px 3px 8px;
+	-moz-border-radius-topleft: 3px;
+	border-top-left-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-right-radius: 3px;
 }
 #systemMenu .menuItemSelected a {
 	font-weight:bold;
