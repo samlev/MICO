@@ -16,7 +16,7 @@ Mantis.SystemMenu = function () {
     return {
         /** Build and show the system and user menus */
         show: function () {
-            if (this.menu == undefined) {
+            if (this.menuSystem == undefined) {
                 this.items = [];
                 
                 // system menu is the left side - it is for tabs which are system related
@@ -77,6 +77,7 @@ Mantis.SystemMenu = function () {
                 if (this.selected != undefined) {
                     this.items[this.selected].removeClass('menu-item-selected');
                 }
+                
                 // select this item
                 this.items[id].addClass('menu-item-selected');
                 this.selected = id;

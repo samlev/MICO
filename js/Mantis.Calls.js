@@ -20,7 +20,7 @@ Mantis.Calls = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('Calls', 'Mantis.Calls.show()');
+                this.menuId = Mantis.SystemMenu.addItem('Calls', 'Mantis.Calls.show()','system');
             }
         },
         /** Shows the panel */

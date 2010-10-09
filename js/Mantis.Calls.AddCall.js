@@ -700,7 +700,3 @@ Mantis.Calls.AddCall = function () {
         }
     };
 } ();
-
-Ext.onReady (function () {
-    Mantis.Application.init ();
-});

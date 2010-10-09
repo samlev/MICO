@@ -77,6 +77,40 @@ Mantis.User = function () {
         revert: function () {
             this.vars = this.orig_vars;
             this.dirty = false;
+        },
+        logout: function () {
+            Ext.Msg.wait('Log out','Logging you out',{
+                closable:false,
+                modal:true
+            });
+            
+            var conn = new Ext.data.Connection();
+            
+            // send the logout request
+            conn.request({
+                url:APP_ROOT+'/api.php?f=logout',
+                params: {
+                    session: Mantis.User.getSession()
+                },
+                callback: function (options, success, response) {
+                    var res = Ext.decode(response.responseText);
+                    if (success && res.success) {
+                        // notify the user that the action was successful
+                        Ext.Msg.updateProgress(1,'Logged Out','You have been logged out. Please wait while you are redirected.')
+                        
+                        // reload the interface
+                        window.location.reload(true);
+                    } else {
+                        Ext.Msg.hide();
+                        var msg = "Unknown system error";
+                        if (res.result !== undefined) {
+                            msg = res.result.info;
+                        }
+                        Ext.Msg.alert("Error", msg);
+                    }
+                },
+                scope: this
+            })
         }
     };
 } ();

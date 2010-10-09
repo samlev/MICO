@@ -27,8 +27,8 @@ body {
 .menu-item {
 	cursor:pointer;
 	text-decoration:none;
-	color:#000000;
-	font-weight:normal;
+	color:#FFFFFF;
+	font-weight:bold;
 	display:block;
 	padding:3px 8px 3px 8px;
 	-moz-border-radius-topleft: 3px;
@@ -47,7 +47,7 @@ body {
 	width:40%;
 }
 .menu-item-selected .menu-item{
-	font-weight:bold;
+	color:#000000;
 	background:#99D37E;
 }
 /* End system menu styles */

@@ -50,19 +50,21 @@ Mantis.Application = function () {
                         this.panel
                     ]
                 });
-            }
-            
-            if (Mantis.Login !== undefined) { // if the login page is defined, show it
-                Mantis.Login.show();
-            } else if (Mantis.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
-                Mantis.PasswordSet.show();
-            } else {
-                // or check for normal application methods
-                if (Mantis.SystemMenu !== undefined) { // if the system menu is defined, show it
-                    Mantis.SystemMenu.show();
-                }
-                if (Mantis.Calls !== undefined) { // if the 'calls' section is defined, initialise it
-                    Mantis.Calls.init();
+                
+                if (Mantis.Login !== undefined) { // if the login page is defined, show it
+                    Mantis.Login.show();
+                } else if (Mantis.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
+                    Mantis.PasswordSet.show();
+                } else {
+                    // or check for normal application methods
+                    if (Mantis.SystemMenu !== undefined) { // if the system menu is defined, show it
+                        Mantis.SystemMenu.show();
+                    }
+                    if (Mantis.Calls !== undefined) { // if the 'calls' section is defined, initialise it
+                        Mantis.Calls.init();
+                    }
+                    
+                    Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');
                 }
             }
         },
