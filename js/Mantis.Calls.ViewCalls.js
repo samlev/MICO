@@ -29,7 +29,7 @@ Mantis.Calls.ViewCalls = function () {
                     }, [
                         {name: "id", mapping: "id"}, 
                         {name: "taker", mapping: "taker"}, 
-                        {name: "date", mapping: "date"}, 
+                        {name: "date", mapping: "date", type: 'date', dateFormat:'Y-m-d H:i:s'}, 
                         {name: "caller", mapping: "caller"}, 
                         {name: "company", mapping: "company"}, 
                         {name: "message", mapping: "message"}, 
@@ -49,8 +49,7 @@ Mantis.Calls.ViewCalls = function () {
                     id:'Mantis.Calls.ViewCalls.grid',
                     region:'center',
                     cm: new Ext.grid.ColumnModel ([
-                        {header: "Taken by", dataIndex: "taker", id: "taker", width: 100, sortable: false},
-                        {header: "At", dataIndex: "date", id: "date", width: 80, sortable: false},
+                        {header: "At", dataIndex: "date", id: "date", width: 120, sortable: false, renderer: renderDate},
                         {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false},
                         {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false},
                         {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false},
@@ -58,6 +57,7 @@ Mantis.Calls.ViewCalls = function () {
                         {header: "Priority", dataIndex: "priority", id: "priority", width: 150, sortable: false},
                         {header: "Action", dataIndex: "action", id: "action", width: 100, sortable: false}
                     ]),
+                    sm:new Ext.grid.RowSelectionModel(),
                     store:this.gridStore,
                     autoSizeColumns: false, 
                     autoExpandColumn: "message", 
@@ -83,4 +83,28 @@ Mantis.Calls.ViewCalls = function () {
             }
         }
     };
+    
+    function renderDate(val, meta, rec, row, col, store) {
+        var value = '';
+        
+        // check that we have a date object
+        if (typeof(val)=='object') {
+            value += val.format('g:ia');
+            
+            var today = new Date();
+            
+            if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
+                value += ' Today';
+            } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
+                       (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
+                                                     (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
+                value += ' Yesterday';
+            } else {
+                // just show the date
+                value += ' ' + val.format('jS M, Y');
+            }
+        }
+        // and return our formatted value
+        return value;
+    }
 } ();

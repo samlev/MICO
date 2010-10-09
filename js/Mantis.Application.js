@@ -56,14 +56,11 @@ Mantis.Application = function () {
                 } else if (Mantis.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
                     Mantis.PasswordSet.show();
                 } else {
-                    // or check for normal application methods
-                    if (Mantis.SystemMenu !== undefined) { // if the system menu is defined, show it
-                        Mantis.SystemMenu.show();
-                    }
-                    if (Mantis.Calls !== undefined) { // if the 'calls' section is defined, initialise it
-                        Mantis.Calls.init();
-                    }
+                    // show standard application components
+                    Mantis.SystemMenu.show(); // system and user menus
+                    Mantis.Calls.init(); // initialize calls panel
                     
+                    // add the user logout menu
                     Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');
                 }
             }
