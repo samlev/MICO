@@ -3,21 +3,29 @@ body {
 	font-size: 12px;
 }
 #pageHeader {
-	background-color:#000000;
-	background: url(../static/bg.jpg) repeat-x;
+	background: #569F34 url(../static/bg.jpg) repeat-x;
 	color:#FFFFFF;
-	height:70px;
+	height:90px;
 	overflow:hidden;
 }
 
-/* System menu styles */
-#systemMenu {
-	position:relative;
-	left:0px;
-	top:50px;
-	height:20px;
+#mantisLogo {
+	margin:0px;
+	float:right;
+	height:70px;
 }
-#systemMenu a {
+
+.visual-clear {
+	margin:0px;
+	padding:0px;
+	height:0px;
+	line-height:0px;
+	clear:both;
+}
+
+/* System menu styles */
+.menu-item {
+	cursor:pointer;
 	text-decoration:none;
 	color:#000000;
 	font-weight:normal;
@@ -28,7 +36,17 @@ body {
 	-moz-border-radius-topright: 3px;
 	border-top-right-radius: 3px;
 }
-#systemMenu .menuItemSelected a {
+#systemMenu {
+	float:left;
+	height:20px;
+	width:40%;
+}
+#userMenu {
+	float:right;
+	height:20px;
+	width:40%;
+}
+.menu-item-selected .menu-item{
 	font-weight:bold;
 	background:#99D37E;
 }

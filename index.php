@@ -19,7 +19,7 @@ if (!defined('CONFIGURED')) {
 <html>
   <head>
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-   <title>Mantis - Simple CRM</title>
+   <title>Mantis - Simple Call Centre</title>
    <link rel="SHORTCUT ICON" href="favicon.ico" />
    <!-- Link to the CSS files -->
    <link type="text/css" rel="stylesheet" href="js/ext/resources/css/ext-all.css" />
@@ -27,7 +27,7 @@ if (!defined('CONFIGURED')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="skin/static/mantis.png" alt="Mantis" style="margin:0px; float:right;" />
+      <img src="skin/static/mantis.png" alt="Mantis" id="mantisLogo" />
     </div>
     <div>
       <h2>Installation Instructions</h2>
@@ -69,7 +69,7 @@ if (isset($_COOKIE['session'])) {
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title>Mantis - Simple CRM</title>
+    <title>Mantis - Simple Call Centre</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
@@ -88,8 +88,10 @@ if (isset($_COOKIE['session'])) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple CRM" style="margin:0px; float:right;" />
-      <div id="systemMenu" />
+      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple CRM" id="mantisLogo" />
+      <div class="visual-clear"></div>
+      <div id="userMenu"></div>
+      <div id="systemMenu"></div>
     </div>
     <?php if ($loggedin) { include_once(FS_ROOT.'/inc/auto_login.php'); } ?>
   </body>

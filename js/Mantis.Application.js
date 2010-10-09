@@ -45,7 +45,7 @@ Mantis.Application = function () {
                             region: "north", 
                             layout: "fit", 
                             contentEl: "pageHeader",
-                            height: 70
+                            height: 90
                         }, 
                         this.panel
                     ]

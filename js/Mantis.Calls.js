@@ -26,6 +26,11 @@ Mantis.Calls = function () {
         /** Shows the panel */
         show: function () {
             if (this.panel == undefined) {
+                // ensure that the menu item is initialised
+                if (this.menuId == undefined) {
+                    this.init();
+                }
+                
                 // set up the panel
                 this.panel = new Ext.Panel({
                     id:'Mantis.Calls.panel',
