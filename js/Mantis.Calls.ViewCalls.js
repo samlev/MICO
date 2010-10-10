@@ -44,20 +44,24 @@ Mantis.Calls.ViewCalls = function () {
                     }
                 });
                 
+                var sm = new Ext.grid.CheckboxSelectionModel();
+                
                 // build the grid
-                this.grid = new Ext.grid.EditorGridPanel({
+                this.grid = new Ext.grid.GridPanel({
                     id:'Mantis.Calls.ViewCalls.grid',
                     region:'center',
                     cm: new Ext.grid.ColumnModel ([
+                        sm,
                         {header: "At", dataIndex: "date", id: "date", width: 120, sortable: false, renderer: renderDate},
                         {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false},
                         {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false},
                         {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false},
                         {header: "Contact", dataIndex: "contact", id: "contact", width: 150, sortable: false},
                         {header: "Priority", dataIndex: "priority", id: "priority", width: 150, sortable: false},
-                        {header: "Action", dataIndex: "action", id: "action", width: 100, sortable: false}
+                        {header: "Action", dataIndex: "action", id: "action", width: 100, sortable: false},
+                        {header: "Mark as closed", id: "close", width: 100, renderer: renderClose}
                     ]),
-                    sm:new Ext.grid.RowSelectionModel(),
+                    sm:sm,
                     store:this.gridStore,
                     autoSizeColumns: false, 
                     autoExpandColumn: "message", 
@@ -104,6 +108,13 @@ Mantis.Calls.ViewCalls = function () {
                 value += ' ' + val.format('jS M, Y');
             }
         }
+        // and return our formatted value
+        return value;
+    }
+    
+    function renderClose(val, meta, rec, row, col, store) {
+        var value = '<a href="#" onclick="Mantis.Calls.closeCall('+rec.get('id')+')">Close call</a>';
+        
         // and return our formatted value
         return value;
     }

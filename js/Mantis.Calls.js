@@ -55,6 +55,9 @@ Mantis.Calls = function () {
          */
         addPanel: function (panel) {
             this.panel.add(panel);
+        },
+        closeCall: function (id) {
+            alert ('TODO: Close call '+id);
         }
     };
 } ();

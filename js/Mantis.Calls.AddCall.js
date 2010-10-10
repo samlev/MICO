@@ -117,8 +117,6 @@ Mantis.Calls.AddCall = function () {
                 this.callerNameField.on('keyup', function() {
                     if (String(this.callerNameField.getEl().dom.value).trim().length >= 3) {
                         if (this.callerNameField.getEl().dom.value != this.callerNameVal) {
-                            // set the caller name val
-                            this.callerNameVal = this.callerNameField.getEl().dom.value;
                             // caller name field is our search term
                             var s = this.callerNameField.getEl().dom.value;
                             // caller company field is our filter
@@ -127,6 +125,8 @@ Mantis.Calls.AddCall = function () {
                             this.callerNameStore.load({params:{query:s,filter:f}});
                         }
                     }
+                    // set the caller name val
+                    this.callerNameVal = this.callerNameField.getEl().dom.value;
                 }, this);
                 
                 // caller company
@@ -199,8 +199,6 @@ Mantis.Calls.AddCall = function () {
                 this.callerCompanyField.on('keyup', function() {
                     if (String(this.callerCompanyField.getEl().dom.value).trim().length >= 3) {
                         if (this.callerCompanyField.getEl().dom.value != this.callerCompanyVal) {
-                            // set the value
-                            this.callerCompanyVal = this.callerCompanyField.getEl().dom.value;
                             // caller name field is our filter
                             var f = this.callerNameField.getValue();
                             // caller company field is our search term
@@ -209,6 +207,8 @@ Mantis.Calls.AddCall = function () {
                             this.callerCompanyStore.load({params:{query:s,filter:f}});
                         }
                     }
+                    // set the value
+                    this.callerCompanyVal = this.callerCompanyField.getEl().dom.value;
                 }, this);
                 
                 // get the list of users
@@ -413,7 +413,7 @@ Mantis.Calls.AddCall = function () {
                     }),
                     displayField:'view',
                     valueField:'priority',
-                    value:'recent',
+                    value:'moderate',
                     mode:'local',
                     triggerAction:'all',
                     value:'moderate',
