@@ -116,21 +116,25 @@ Mantis.Calls.ViewCalls = function () {
     
     function renderContact(val, meta, rec, row, col, store) {
         var value = '';
+        var title = '';
         
         // check that we have a date object
         if (typeof(val)=='object') {
+            value = '<span title="';
+            
             for (var i = 0; i < val.length; i++) {
-                if (value != '') {
+                if (i != 0) {
                     value += '<br />';
                 }
-                
                 value += val[i];
             }
+            
+            value += '">'+val+'</span>';
         } else {
             value = val;
         }
         // and return our formatted value
-        return value;
+        return '<span title="'+title+'">'+val+'</span>';
     }
     
     function renderClose(val, meta, rec, row, col, store) {

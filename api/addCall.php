@@ -16,9 +16,8 @@ $company = trim(html_scrub($_POST['company'])); // clear any/all HTML from the c
 // clean up the users array
 $users = array_map('intval',unserialize(trim($_POST['users'])));
 // ensure that any HTML in the message is safe for viewing (the message may
-// include legitimate things which would get taken out by the html scrub.) Also
-// format it with basic nl2br
-$message = trim(nl2br(htmlspecialchars($_POST['message'])));
+// include legitimate things which would get taken out by the html scrub.)
+$message = trim(htmlspecialchars($_POST['message']));
 // get the contact details, making sure to clean up any special HTML characters
 $contacts = array_map('htmlspecialchars',unserialize(trim($_POST['contacts'])));
 // ensure we have a valid 'priority' value
