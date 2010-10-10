@@ -56,9 +56,9 @@ Mantis.Calls.ViewCalls = function () {
                         {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false},
                         {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false},
                         {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false},
-                        {header: "Contact", dataIndex: "contact", id: "contact", width: 150, sortable: false},
-                        {header: "Priority", dataIndex: "priority", id: "priority", width: 150, sortable: false},
-                        {header: "Action", dataIndex: "action", id: "action", width: 100, sortable: false},
+                        {header: "Contact", dataIndex: "contact", id: "contact", width: 150, sortable: false, renderer: renderContact},
+                        {header: "Priority", dataIndex: "priority", id: "priority", width: 80, sortable: false},
+                        {header: "Action", dataIndex: "action", id: "action", width: 120, sortable: false},
                         {header: "Mark as closed", id: "close", width: 100, renderer: renderClose}
                     ]),
                     sm:sm,
@@ -107,6 +107,27 @@ Mantis.Calls.ViewCalls = function () {
                 // just show the date
                 value += ' ' + val.format('jS M, Y');
             }
+        } else {
+            value = val;
+        }
+        // and return our formatted value
+        return value;
+    }
+    
+    function renderContact(val, meta, rec, row, col, store) {
+        var value = '';
+        
+        // check that we have a date object
+        if (typeof(val)=='object') {
+            for (var i = 0; i < val.length; i++) {
+                if (value != '') {
+                    value += '<br />';
+                }
+                
+                value += val[i];
+            }
+        } else {
+            value = val;
         }
         // and return our formatted value
         return value;

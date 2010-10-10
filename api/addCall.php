@@ -22,7 +22,7 @@ $message = trim(nl2br(htmlspecialchars($_POST['message'])));
 // get the contact details, making sure to clean up any special HTML characters
 $contacts = array_map('htmlspecialchars',unserialize(trim($_POST['contacts'])));
 // ensure we have a valid 'priority' value
-$priority = (inarray(trim($_POST['priority']),array('critical','urgent','moderate','minor','negligible')) // check if the priority is in the list of acceptable priorities
+$priority = (in_array(trim($_POST['priority']),array('critical','urgent','moderate','minor','negligible')) // check if the priority is in the list of acceptable priorities
              ?trim($_POST['priority'])  // if so, use it
              :'moderate');              // if not, default to 'moderate'
 $action = trim(html_scrub($_POST['action'])); // clear any/all HTML from the action
