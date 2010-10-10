@@ -417,7 +417,12 @@ Mantis.Calls.AddCall = function () {
                     mode:'local',
                     triggerAction:'all',
                     value:'moderate',
-                    tpl:Mantis.Utils.priorityTemplate
+                    tpl:Mantis.Utils.priorityTemplate,
+                    lazyInit:false,
+                    listeners: {
+                        scope:this,
+                        'focus': function () { this.callPriorityField.doQuery('',true); }
+                    }
                 });
                 
                 // action field
@@ -440,7 +445,12 @@ Mantis.Calls.AddCall = function () {
                     mode:'local',
                     triggerAction:'all',
                     hideTrigger:true,
-                    maxLength:200
+                    maxLength:200,
+                    lazyInit:false,
+                    listeners: {
+                        scope:this,
+                        'focus': function () { this.callActionField.doQuery('',true); }
+                    }
                 });
                 
                 // and the form to hold the action and priority

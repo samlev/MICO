@@ -13,10 +13,18 @@
 $u = intval($user->get_id());
 $caller = trim(html_scrub($_POST['caller'])); // clear any/all HTML from the caller name
 $company = trim(html_scrub($_POST['company'])); // clear any/all HTML from the company name
-$users = unserialize(trim($_POST['users']));
-$message = trim($_POST['message']);
-$contacts = unserialize(trim($_POST['contacts']));
-$priority = trim($_POST['priority']);
+// clean up the users array
+$users = array_map('intval',unserialize(trim($_POST['users'])));
+// ensure that any HTML in the message is safe for viewing (the message may
+// include legitimate things which would get taken out by the html scrub.) Also
+// format it with basic nl2br
+$message = trim(nl2br(htmlspecialchars($_POST['message'])));
+// get the contact details, making sure to clean up any special HTML characters
+$contacts = array_map('htmlspecialchars',unserialize(trim($_POST['contacts'])));
+// ensure we have a valid 'priority' value
+$priority = (inarray(trim($_POST['priority']),array('critical','urgent','moderate','minor','negligible')) // check if the priority is in the list of acceptable priorities
+             ?trim($_POST['priority'])  // if so, use it
+             :'moderate');              // if not, default to 'moderate'
 $action = trim(html_scrub($_POST['action'])); // clear any/all HTML from the action
 
 // check the passed variables
@@ -60,13 +68,14 @@ if (is_array($users) && count($users) == 0) {
         // make a list of all valid user links
         $user_links = array();
         foreach ($users as $u_id) {
-            //clean up the user if
+            //clean up the user id (this has been done earlier, but better to be safe than sorry)
             $u_id = intval($u_id);
             
             // check if the user is a valid, active user
             $query = "SELECT * FROM `".DB_PREFIX."users` WHERE `id`=$u_id AND `role`!='disabled'";
             $res = run_query($query);
             
+            // add to the 'user links' array
             if (mysql_num_rows($res)) {
                 $user_links[] = "($u_id,$c_id)";
             }
