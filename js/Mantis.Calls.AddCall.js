@@ -421,7 +421,7 @@ Mantis.Calls.AddCall = function () {
                     lazyInit:false,
                     listeners: {
                         scope:this,
-                        'focus': function () { this.callPriorityField.doQuery('',true); }
+                        'focus': function () { this.callPriorityField.doQuery('',true); } // display the dropdown on focus
                     }
                 });
                 
@@ -449,7 +449,7 @@ Mantis.Calls.AddCall = function () {
                     lazyInit:false,
                     listeners: {
                         scope:this,
-                        'focus': function () { this.callActionField.doQuery('',true); }
+                        'focus': function () { this.callActionField.doQuery('',true); } // display the dropdown on focus
                     }
                 });
                 
