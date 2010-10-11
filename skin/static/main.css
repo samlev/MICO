@@ -96,6 +96,14 @@ body {
 }
 /* end priority */
 
+/* view call styles */
+.call-new {}
+.call-closed {
+	color:#666666;
+	text-decoration: line-through;
+}
+/* end view call styles */
+
 /* Basic skinning niceties */
 .x-panel-body {
     border:none;

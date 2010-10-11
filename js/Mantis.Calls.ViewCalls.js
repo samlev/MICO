@@ -53,12 +53,12 @@ Mantis.Calls.ViewCalls = function () {
                     cm: new Ext.grid.ColumnModel ([
                         sm,
                         {header: "At", dataIndex: "date", id: "date", width: 120, sortable: false, renderer: renderDate},
-                        {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false},
-                        {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false},
+                        {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false, renderer: renderGeneric},
+                        {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false, renderer: renderGeneric},
                         {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false, renderer:renderMessage},
                         {header: "Contact", dataIndex: "contact", id: "contact", width: 150, sortable: false, renderer: renderContact},
-                        {header: "Priority", dataIndex: "priority", id: "priority", width: 80, sortable: false},
-                        {header: "Action", dataIndex: "action", id: "action", width: 120, sortable: false},
+                        {header: "Priority", dataIndex: "priority", id: "priority", width: 80, sortable: false, renderer: renderPriority},
+                        {header: "Action", dataIndex: "action", id: "action", width: 120, sortable: false, renderer: renderGeneric},
                         {header: "Mark as closed", id: "close", width: 100, renderer: renderClose}
                     ]),
                     sm:sm,
@@ -110,6 +110,10 @@ Mantis.Calls.ViewCalls = function () {
         } else {
             value = val;
         }
+        
+        // set the CSS class
+        meta.css = 'call-'+rec.get('status');
+        
         // and return our formatted value
         return value;
     }
@@ -134,6 +138,9 @@ Mantis.Calls.ViewCalls = function () {
         }
         value = val;
         
+        // set the CSS class
+        meta.css = 'call-'+rec.get('status');
+        
         // and return our formatted value
         return value;
     }
@@ -153,14 +160,45 @@ Mantis.Calls.ViewCalls = function () {
         // get the value
         value = val;
         
+        // set the CSS class
+        meta.css = 'call-'+rec.get('status');
+        
         // and return our formatted value
         return value;
     }
     
+    function renderPriority(val, meta, rec, row, col, store) {
+        var value = '';
+        
+        // set the CSS class
+        meta.css = 'call-'+rec.get('status');
+        
+        // add the class
+        value = '<span class="priority-'+val+'">'+val+'</span>';
+        
+        return value;
+    }
+    
     function renderClose(val, meta, rec, row, col, store) {
-        var value = '<a href="#" onclick="Mantis.Calls.closeCall('+rec.get('id')+')">Close call</a>';
+        var value = '';
+        
+        if (rec.get('status')=='new') {
+            value = '<a href="#" onclick="Mantis.Calls.closeCall('+rec.get('id')+')">Close call</a>';
+        } else {
+            value = 'Call closed';
+        }
+        
+        // set the CSS class
+        meta.css = 'call-'+rec.get('status');
         
         // and return our formatted value
         return value;
+    }
+    
+    function renderGeneric(val, meta, rec, row, col, store) {
+        // set the CSS class
+        meta.css = 'call-'+rec.get('status');
+        
+        return val;
     }
 } ();
