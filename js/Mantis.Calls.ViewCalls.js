@@ -55,7 +55,7 @@ Mantis.Calls.ViewCalls = function () {
                         {header: "At", dataIndex: "date", id: "date", width: 120, sortable: false, renderer: renderDate},
                         {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false},
                         {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false},
-                        {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false},
+                        {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false, renderer:renderMessage},
                         {header: "Contact", dataIndex: "contact", id: "contact", width: 150, sortable: false, renderer: renderContact},
                         {header: "Priority", dataIndex: "priority", id: "priority", width: 80, sortable: false},
                         {header: "Action", dataIndex: "action", id: "action", width: 120, sortable: false},
@@ -116,25 +116,44 @@ Mantis.Calls.ViewCalls = function () {
     
     function renderContact(val, meta, rec, row, col, store) {
         var value = '';
-        var title = '';
         
         // check that we have a date object
         if (typeof(val)=='object') {
-            value = '<span title="';
+            var title = '';
             
+            // build the qtip
             for (var i = 0; i < val.length; i++) {
                 if (i != 0) {
-                    value += '<br />';
+                    title += "<br />";
                 }
-                value += val[i];
+                title += val[i];
             }
             
-            value += '">'+val+'</span>';
-        } else {
-            value = val;
+            meta.attr = 'ext:qtip="'+title+'"';
         }
+        value = val;
+        
         // and return our formatted value
-        return '<span title="'+title+'">'+val+'</span>';
+        return value;
+    }
+    
+    function renderMessage(val, meta, rec, row, col, store) {
+        var value = '';
+        var title = '';
+        // split out the title
+        title = val.split("\n").join("<br />");
+        // ensure that no HTML is rendered
+        title = title.split("&").join("&amp;");
+        
+        // check that we have a date object
+        if (title.length > 0) {
+            meta.attr = 'ext:qtip="'+title+'"';
+        }
+        // get the value
+        value = val;
+        
+        // and return our formatted value
+        return value;
     }
     
     function renderClose(val, meta, rec, row, col, store) {
