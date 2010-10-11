@@ -93,20 +93,22 @@ Mantis.Calls.ViewCalls = function () {
         
         // check that we have a date object
         if (typeof(val)=='object') {
-            value += val.format('g:ia');
+            value += ''; val.format('g:ia');
             
             var today = new Date();
             
             if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                value += ' Today';
+                value = val.format('g:ia')+' Today';
             } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                        (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
                                                      (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                value += ' Yesterday';
+                value = val.format('g:ia')+' Yesterday';
             } else {
                 // just show the date
-                value += ' ' + val.format('jS M, Y');
+                value = ' ' + val.format('jS M, Y');
             }
+            
+            meta.attr = 'ext:qtip="'+val.format('jS M, Y')+' at '+val.format('g:ia')+'"';
         } else {
             value = val;
         }
