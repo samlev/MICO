@@ -98,7 +98,7 @@ Mantis.Calls.ViewCalls = function () {
             var today = new Date();
             
             if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                value = val.format('g:ia')+' Today';
+                value = val.format('g:ia');
             } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                        (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
                                                      (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
