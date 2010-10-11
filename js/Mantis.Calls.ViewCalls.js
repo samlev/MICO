@@ -128,7 +128,8 @@ Mantis.Calls.ViewCalls = function () {
                 }
                 title += val[i];
             }
-            
+            //  ensure that no HTML is rendered
+            title = title.split("&").join("&amp;");
             meta.attr = 'ext:qtip="'+title+'"';
         }
         value = val;
