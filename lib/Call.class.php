@@ -17,7 +17,7 @@ class Call {
     protected $company_name;
     protected $message;
     protected $users;
-    protected $contacts;
+    protected $contact;
     protected $priority;
     protected $status;
     protected $action;
@@ -103,7 +103,7 @@ class Call {
                      "company"  =>$this->company_name,
                      "message"  =>$this->message,
                      "users"    =>array(),  // a blank array for users - we'll fill this shortly
-                     "contacts" =>$this->contacts,
+                     "contact"  =>$this->contact,
                      "priority" =>$this->priority,
                      "status"   =>$this->status,
                      "action"   =>$this->action,
@@ -221,7 +221,7 @@ class Call {
             $this->caller_name = $row['caller_name'];
             $this->company_name = $row['company_name'];
             $this->message = $row['message'];
-            $this->contacts = unserialize($row['contacts']);
+            $this->contact = unserialize($row['contact']);
             $this->priority = $row['priority'];
             $this->status = $row['status'];
             $this->action = $row['action'];
