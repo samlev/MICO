@@ -246,8 +246,12 @@ class Call {
             $this->comments = array();
             while($row = mysql_fetch_assoc($res)) {
                 // get the commenter's name
-                $commenter = User::by_id($row['user_id']);
-                $row['commenter'] = $commenter->get_var('name');
+                if ($row['user_id'] !== null) {
+                    $commenter = User::by_id($row['user_id']);
+                    $row['commenter'] = $commenter->get_var('name');
+                } else {
+                    $row['commenter'] = 'system';
+                }
                 
                 // add the comment to the array
                 $this->comments[] = $row;
