@@ -57,7 +57,29 @@ Mantis.Calls = function () {
             this.panel.add(panel);
         },
         closeCall: function (id) {
-            alert ('TODO: Close call '+id);
+            var conn = new Ext.data.Connection();
+            
+            conn.request({
+                url:APP_ROOT+'/api.php?f=updateCall',
+                params: {
+                    session: Mantis.User.getSession(),
+                    id:id,
+                    status:'closed'
+                },
+                callback: function (options, success, response) {
+                    var res = Ext.decode(response.responseText);
+                    if (success && res.success) {
+                        Mantis.Calls.ViewCalls.gridStore.reload();
+                    } else {
+                        var msg = "Unknown system error";
+                        if (res.info !== undefined) {
+                            msg = res.info;
+                        }
+                        Ext.Msg.alert("Error", msg);
+                    }
+                },
+                scope: this
+            });
         }
     };
 } ();

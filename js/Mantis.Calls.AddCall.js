@@ -696,6 +696,7 @@ Mantis.Calls.AddCall = function () {
                         var res = Ext.decode(response.responseText);
                         if (success && res.success) {
                             this.clear();
+                            Mantis.Calls.ViewCalls.gridStore.reload();
                         } else {
                             var msg = "Unknown system error";
                             if (res.info !== undefined) {
