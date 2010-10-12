@@ -3,9 +3,10 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: api/getCalls.php
+ ** File: api-manager/getCalls.php
  ** 
- ** Description: Gets a list of calls by the current user
+ ** Description: Overrides the default 'get calls' method to allow extra filter
+ **              options
  *******************************************************************************
  ******************************************************************************/
 
@@ -23,6 +24,9 @@ $query = "SELECT c.`id`
 
 // now filter
 switch ($filter) {
+    case 'all':
+        $query .= "WHERE 1 ";
+        break;
     case 'opened':
         $query .= "WHERE c.`user_id` = $u ";
         break;

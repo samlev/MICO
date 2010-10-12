@@ -44,6 +44,23 @@ Mantis.Calls.ViewCalls = function () {
                     }
                 });
                 
+                // get the filter parameters
+                this.gridStore.on('beforeload',function () {
+                    var filters = Mantis.Calls.SearchBar.getFilter();
+                    
+                    // rebuild the base parameters
+                    var bp = {
+                        session: Mantis.User.getSession()
+                    }
+                    
+                    // add the new parameters
+                    for (var i=0; i < filters.length; i++) {
+                        bp[filters[i].name] = filters[i].value
+                    }
+                    
+                    this.gridStore.baseParams = bp;
+                }, this);
+                
                 var sm = new Ext.grid.CheckboxSelectionModel();
                 
                 // build the grid
