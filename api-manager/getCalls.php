@@ -79,8 +79,7 @@ while ($row = mysql_fetch_assoc($res)) {
 // Build the total query
 $query = "SELECT COUNT(c.`id`) as total
           FROM `".DB_PREFIX."calls` c
-          $filter_query
-          GROUP BY c.`id` ";
+          $filter_query ";
 $res = run_query($query);
 
 // get the total
