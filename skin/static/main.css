@@ -104,6 +104,17 @@ body {
 }
 /* end view call styles */
 
+/* Helper styles for dynamic scrolling for vbox panels */
+.dynamic-panel-scroll-y .x-box-inner {
+	overflow-y:auto;
+}
+.dynamic-panel-scroll-x .x-box-inner {
+	overflow-x:auto;
+}
+.dynamic-panel-scroll .x-box-inner {
+	overflow:auto;
+}
+
 /* Basic skinning niceties */
 .x-panel-body {
     border:none;

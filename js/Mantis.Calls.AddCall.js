@@ -265,7 +265,7 @@ Mantis.Calls.AddCall = function () {
                 this.callerForm = new Ext.Panel({
                     id:'Mantis.Calls.callerForm',
                     layout:'form',
-                    width:300,
+                    width:297,
                     items:[
                         {
                             layout:'hbox',
@@ -369,7 +369,7 @@ Mantis.Calls.AddCall = function () {
                 this.callerMessageForm = new Ext.Panel({
                     id:'Mantis.Calls.callerMessageForm',
                     layout:'form',
-                    width:300,
+                    width:297,
                     items:[
                         {html:'About'},
                         this.callerMessageBox,
@@ -457,7 +457,7 @@ Mantis.Calls.AddCall = function () {
                 this.priorityForm = new Ext.Panel({
                     id:'Mantis.Calls.priorityForm',
                     layout:'form',
-                    width:300,
+                    width:297,
                     items:[
                         {html:'This call is'},
                         this.callPriorityField,
@@ -502,6 +502,7 @@ Mantis.Calls.AddCall = function () {
                     width: 300,
                     collapsible: false,
                     layout: 'vbox',
+                    cls:'dynamic-panel-scroll-y',
                     items: [
                         this.callerForm,
                         this.userExtrasForm,

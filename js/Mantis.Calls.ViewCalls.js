@@ -12,6 +12,7 @@ Mantis.Calls.ViewCalls = function () {
     // view calls grid
     var gridStore;
     var grid;
+    var pager;
     
     // main panel
     var panel;
@@ -25,7 +26,8 @@ Mantis.Calls.ViewCalls = function () {
                     url: APP_ROOT+"/api.php?f=getCalls", 
                     reader: new Ext.data.JsonReader ({
                         root: "calls", 
-                        id: "id"
+                        id: "id",
+                        totalProperty: 'total'
                     }, [
                         {name: "id", mapping: "id"}, 
                         {name: "taker", mapping: "taker"}, 
@@ -42,6 +44,12 @@ Mantis.Calls.ViewCalls = function () {
                     baseParams: {
                         session: Mantis.User.getSession()
                     }
+                });
+                
+                // the pager
+                this.pager = new Ext.PagingToolbar({
+                    store: this.gridStore,
+                    pageSize:30
                 });
                 
                 // get the filter parameters
@@ -83,7 +91,8 @@ Mantis.Calls.ViewCalls = function () {
                     autoSizeColumns: false, 
                     autoExpandColumn: "message", 
                     autoExpandMin: 100, 
-                    autoExpandMax: 5000
+                    autoExpandMax: 5000,
+                    bbar:this.pager
                 });
                 
                 this.gridStore.load();

@@ -41,6 +41,7 @@ Mantis.Application = function () {
                 this.viewport = new Ext.Viewport ({
                     id: "Mantis.Application.viewport", 
                     layout: "border",
+                    enableTabScroll:true,
                     items: [{
                             region: "north", 
                             layout: "fit", 

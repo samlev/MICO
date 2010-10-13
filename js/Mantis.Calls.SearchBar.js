@@ -87,12 +87,12 @@ Mantis.Calls.SearchBar = function () {
                 // and build the toolbar
                 this.toolbar = new Ext.Toolbar ({
                     items: [
-                        { text:'Show:' },
+                        'Show: ',
                         this.filterField,
-                        { text:'ordered by:' },
+                        ' ordered by: ',
                         this.orderField,
                         '-',
-                        { text:'Show closed?' },
+                        ' Show closed? ',
                         this.showClosedField,
                         '->',
                         this.refreshButton
