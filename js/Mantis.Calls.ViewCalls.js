@@ -160,7 +160,7 @@ Mantis.Calls.ViewCalls = function () {
             if (rec.get('taker').id == Mantis.User.user_id) {
                 callInfoHTML += "<br />Call taken by you";
             } else {
-                callInfoHTML += "<br />Call taken by "+rec.taker.name;
+                callInfoHTML += "<br />Call taken by "+rec.get('taker').name;
             }
             
             // caller name
