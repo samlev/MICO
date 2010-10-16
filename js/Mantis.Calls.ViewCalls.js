@@ -16,6 +16,9 @@ Mantis.Calls.ViewCalls = function () {
     
     // call detail panel
     var callDetailPanel;
+    var callInfoPanel;
+    var callCommentPanel;
+    var callUpdatePanel;
     
     // main panel
     var panel;
@@ -142,9 +145,6 @@ Mantis.Calls.ViewCalls = function () {
          * @param rec {Ext.data.Record} The call to use to populate the panel
          */
         showCallDetail: function(rec) {
-            // clear the panel (if anything is selected)
-            this.callDetailPanel.removeAll(true);
-            
             // Build the call HTML
             var callInfoHTML = "";
             // time
@@ -225,27 +225,36 @@ Mantis.Calls.ViewCalls = function () {
                 callInfoHTML += "<br /><br />Action required: <b>"+rec.get('action')+"</b>";
             }
             
-            // build the call info panel
-            var callInfo = new Ext.Panel({
-                width:250,
-                height:200,
-                autoScroll:true,
-                html:callInfoHTML,
-                bodyStyle:'padding:3px;'
-            });
-            
-            // add it to the main panel
-            this.callDetailPanel.add(callInfo);
+            if (this.callInfoPanel === undefined) {
+                // build the call info panel
+                this.callInfoPanel = new Ext.Panel({
+                    width:250,
+                    height:200,
+                    autoScroll:true,
+                    html:callInfoHTML,
+                    bodyStyle:'padding:3px;'
+                });
+                
+                // add it to the main panel
+                this.callDetailPanel.add(this.callInfoPanel);
+            } else {
+                this.callInfoPanel.update(callInfoHTML);
+            }
             
             // now the call comments panel
             var comments = rec.get('comments');
-            var callComments = new Ext.Panel ({
-                width:250,
-                height:200,
-                autoScroll:true,
-                layout:'vbox',
-                bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;'
-            });
+            if (this.callCommentPanel === undefined) {
+                this.callCommentPanel = new Ext.Panel ({
+                    width:250,
+                    height:200,
+                    autoScroll:true,
+                    layout:'vbox',
+                    bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;'
+                });
+                this.callDetailPanel.add(this.callCommentPanel);
+            } else {
+                this.callCommentPanel.removeAll(true);
+            }
             
             // Check if we have any comments
             if (comments.length) {
@@ -294,15 +303,12 @@ Mantis.Calls.ViewCalls = function () {
                         bstyle += 'border-top:1px dashed #DDDDDD;';
                     }
                     
-                    callComments.add(new Ext.Panel({html:commentHTML,bodyStyle:bstyle,width:244}));
+                    this.callCommentPanel.add(new Ext.Panel({html:commentHTML,bodyStyle:bstyle,width:244}));
                 }
             } else {
                 // no comments
-                callComments.add({html:'<i>No comments</i>'});
+                this.callCommentPanel.add({html:'<i>No comments</i>'});
             }
-            
-            // add the comments section
-            this.callDetailPanel.add(callComments);
             
             // and show the panel
             this.callDetailPanel.show();
