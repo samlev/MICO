@@ -475,7 +475,7 @@ Mantis.Calls.ViewCalls = function () {
                                     updates.comment = com;
                                 }
                             } else if (this.escalateCallRadio.getValue()) {
-                                if (this.priorityCombo.getValue() != rec.get('priority')) {
+                                if (this.priorityCombo.getValue()) {
                                     updates.priority = this.priorityCombo.getValue();
                                 }
                                 if (this.userCombo.getValue()) {

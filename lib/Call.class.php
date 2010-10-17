@@ -275,7 +275,7 @@ class Call {
                 // only save the changes if the call isn't closed (and we're not re-opening it)
                 if ($this->status == "new" || isset($this->changes['status'])) {
                     // check for updates to status or priority
-                    if (isset($this->changes['status']) || $this->changes['prioity']) {
+                    if (isset($this->changes['status']) || $this->changes['priority']) {
                         // simple way of collating the changes
                         $call_changes = array();
                         // No need to be too defensive here. The only way to set these
@@ -284,7 +284,7 @@ class Call {
                             $call_changes[] = "`status`='".$this->changes['status']."'";
                         }
                         if (isset($this->changes['priority'])) {
-                            $call_changes[] = "`priority`='".$this->changes['prioity']."'";
+                            $call_changes[] = "`priority`='".$this->changes['priority']."'";
                         }
                         
                         // and make the updates
