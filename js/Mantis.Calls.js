@@ -56,16 +56,32 @@ Mantis.Calls = function () {
         addPanel: function (panel) {
             this.panel.add(panel);
         },
-        closeCall: function (id) {
+        /** Updates a call
+         * @param id {int} The call ID to update
+         * @param updates {object} The updates to make. Options are:
+         *          status {string} new|closed
+         *          priority {string} critical|urgent|moderate|minor|negligible
+         *          users {int|array} A user ID to add to the call, or an array of user IDs
+         *          comment {string} A comment for the update
+         */
+        updateCall: function (id,updates) {
             var conn = new Ext.data.Connection();
+            
+            // build the base paramaters object
+            var params = {
+                session: Mantis.User.getSession(),
+                id:id
+            }
+            
+            // add the extra parameters (if they exist)
+            if (updates.status !== undefined) { params.status = updates.status; }
+            if (updates.priority !== undefined) { params.priority = updates.priority; }
+            if (updates.users !== undefined) { params.users = (typeof(updates.users)=='int'?updates.users:Mantis.Utils.serialiseArray(updates.users)); }
+            if (updates.comment !== undefined) { params.comment = updates.comment; }
             
             conn.request({
                 url:APP_ROOT+'/api.php?f=updateCall',
-                params: {
-                    session: Mantis.User.getSession(),
-                    id:id,
-                    status:'closed'
-                },
+                params: params,
                 callback: function (options, success, response) {
                     var res = Ext.decode(response.responseText);
                     if (success && res.success) {

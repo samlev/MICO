@@ -283,8 +283,8 @@ class Call {
                         if (isset($this->changes['status'])) {
                             $call_changes[] = "`status`='".$this->changes['status']."'";
                         }
-                        if (isset($this->changes['prioity'])) {
-                            $call_changes[] = "`prioity`='".$this->changes['prioity']."'";
+                        if (isset($this->changes['priority'])) {
+                            $call_changes[] = "`priority`='".$this->changes['prioity']."'";
                         }
                         
                         // and make the updates
@@ -310,20 +310,20 @@ class Call {
                     
                     // get the comment 'action' for context
                     $comment_text = "";
-                    if (isset($this->changes['status']) && $this->changes['status'] = "closed") {
+                    if (isset($this->changes['status']) && $this->changes['status'] == "closed") {
                         $comment_text = "Call closed";
-                    } else if (isset($this->changes['status']) && isset($this->changes['prioity']) && isset($this->changes['user'])) {
+                    } else if (isset($this->changes['status']) && isset($this->changes['priority']) && isset($this->changes['user'])) {
                         $comment_text = "Call reopened and escalated to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
-                    } else if (isset($this->changes['status']) && isset($this->changes['prioity'])) {
+                    } else if (isset($this->changes['status']) && isset($this->changes['priority'])) {
                         $comment_text = "Call reopened and escalated";
                     } else if (isset($this->changes['status'])) {
                         $comment_text = "Call reopened";
-                    } else if (isset($this->changes['prioity']) && isset($this->changes['user'])) {
+                    } else if (isset($this->changes['priority']) && isset($this->changes['user'])) {
                         $comment_text = "Call escalated to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
-                    } else if (isset($this->changes['prioity'])) {
+                    } else if (isset($this->changes['priority'])) {
                         $comment_text = "Call escalated";
                     } else if (isset($this->changes['comment'])) {
-                        $comment_text = "Commented";
+                        $comment_text = "Comment";
                     } else {
                         // set a blank comment for the query
                         $this->changes['comment'] = '';

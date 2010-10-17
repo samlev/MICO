@@ -28,6 +28,8 @@ Mantis.Calls.ViewCalls = function () {
     var justCommentRadio;
     var commentText;
     var callUpdatePanel;
+    var updateButton;
+    var clearButton;
     
     // main panel
     var panel;
@@ -131,7 +133,7 @@ Mantis.Calls.ViewCalls = function () {
                     hideMode:'display',
                     hidden:true,
                     layout:'column',
-                    height:200
+                    height:250
                 });
                 
                 // build the panel
@@ -238,7 +240,7 @@ Mantis.Calls.ViewCalls = function () {
                 // build the call info panel
                 this.callInfoPanel = new Ext.Panel({
                     width:250,
-                    height:200,
+                    height:250,
                     autoScroll:true,
                     html:callInfoHTML,
                     bodyStyle:'padding:3px;'
@@ -255,9 +257,10 @@ Mantis.Calls.ViewCalls = function () {
             if (this.callCommentPanel === undefined) {
                 this.callCommentPanel = new Ext.Panel ({
                     width:250,
-                    height:200,
+                    height:250,
                     autoScroll:true,
                     layout:'vbox',
+                    cls:'dynamic-panel-scroll-y',
                     bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;'
                 });
                 this.callDetailPanel.add(this.callCommentPanel);
@@ -272,7 +275,7 @@ Mantis.Calls.ViewCalls = function () {
                     var comment = comments[i];
                     
                     // build the comment HTML - cheat using a table
-                    var commentHTML = '<table style="width:100%">';
+                    var commentHTML = '<table style="width:230px">';
                     // build a date object
                     var date = Date.parseDate(comment.date,'Y-m-d H:i:s');
                     var today = new Date();
@@ -312,7 +315,7 @@ Mantis.Calls.ViewCalls = function () {
                         bstyle += 'border-top:1px dashed #DDDDDD;';
                     }
                     
-                    this.callCommentPanel.add(new Ext.Panel({html:commentHTML,bodyStyle:bstyle,width:244}));
+                    this.callCommentPanel.add(new Ext.Panel({html:commentHTML,bodyStyle:bstyle,width:245}));
                 }
             } else {
                 // no comments
@@ -325,8 +328,7 @@ Mantis.Calls.ViewCalls = function () {
                 this.closeCallRadio = new Ext.form.Radio({
                     boxLabel:'Close call',
                     checked:true,
-                    name:'action',
-                    hideLabel:true
+                    name:'action'
                 }); // when selected, closes the call
                 this.escalateCallRadio = new Ext.form.Radio({
                     boxLabel:'Escalate call',
@@ -343,14 +345,12 @@ Mantis.Calls.ViewCalls = function () {
                                 this.userCombo.disable();
                             }
                         }
-                    },
-                    hideLabel:true
+                    }
                 }); // when selected adds a user to the call (if selected), and changes the priority
                 this.justCommentRadio = new Ext.form.Radio({
                     boxLabel:'Just Comment',
                     checked:false,
-                    name:'action',
-                    hideLabel:true
+                    name:'action'
                 }); // when selected, dows nothing
                 
                 // re-open call checkbox
@@ -362,12 +362,15 @@ Mantis.Calls.ViewCalls = function () {
                         'check': function () {
                             if (this.reopenCallCheck.getValue()) {
                                 this.commentText.enable();
+                                this.addCallButton.enable();
+                                this.clearFormButton.enable();
                             } else {
                                 this.commentText.disable();
+                                this.addCallButton.disable();
+                                this.clearFormButton.disable();
                             }
                         }
-                    },
-                    hideLabel:true
+                    }
                 });
                 
                 // priority combo box
@@ -391,9 +394,7 @@ Mantis.Calls.ViewCalls = function () {
                     mode:'local',
                     triggerAction:'all',
                     width:120,
-                    tpl:Mantis.Utils.priorityTemplate,
-                    hideLabel:false,
-                    fieldLabel:'Priority'
+                    tpl:Mantis.Utils.priorityTemplate
                 });
                 
                 // user store
@@ -431,9 +432,7 @@ Mantis.Calls.ViewCalls = function () {
                     listeners:{
                         scope:this,
                         'focus': function () { this.userStore.load(); } // display the dropdown on focus
-                    },
-                    hideLabel:false,
-                    fieldLabel:'User'
+                    }
                 });
                 
                 // comment text
@@ -442,13 +441,76 @@ Mantis.Calls.ViewCalls = function () {
                     height:70,
                     emptyText:'Comment',
                     allowBlank:true,
-                    required:false,
-                    hideLabel:true
+                    required:false
+                });
+                
+                // buttons
+                this.addCallButton = new Ext.Button({
+                    text:'Update Call',
+                    scope:this,
+                    handler: function() {
+                        var rec = this.grid.getSelectionModel().getSelected();
+                        
+                        // get the updates
+                        var updates = {};
+                        // Check if the call is open or closed
+                        if (rec.get('status')=='closed') {
+                            // if the call is closed, check the 'open call' value
+                            if (this.reopenCallCheck.getValue()) {
+                                updates.status = 'new';
+                                
+                                var com = String(this.commentText.getValue()).trim();
+                                if (com.length > 0) {
+                                    updates.comment = com;
+                                }
+                            }
+                        } else {
+                            var com = String(this.commentText.getValue()).trim();
+                            
+                            if (this.closeCallRadio.getValue()) {
+                                updates.status = 'closed';
+                                
+                                // add the comment (if there is one)
+                                if (com.length > 0) {
+                                    updates.comment = com;
+                                }
+                            } else if (this.escalateCallRadio.getValue()) {
+                                if (this.priorityCombo.getValue() != rec.get('priority')) {
+                                    updates.priority = this.priorityCombo.getValue();
+                                }
+                                if (this.userCombo.getValue()) {
+                                    updates.users = this.userCombo.getValue();
+                                }
+                                
+                                // add the comment (if there is one)
+                                if (com.length > 0) {
+                                    updates.comment = com;
+                                }
+                            } else {
+                                // add the comment
+                                if (com.length > 0) {
+                                    updates.comment = com;
+                                }
+                            }
+                        }
+                        
+                        Mantis.Calls.updateCall(rec.get('id'), updates);
+                    }
+                });
+                
+                // clear form button
+                this.clearFormButton = new Ext.Button({
+                    text:'Clear',
+                    scope:this,
+                    handler: function() {
+                        // just reload this view
+                        this.showCallDetail(this.grid.getSelectionModel().getSelected());
+                    }
                 });
                 
                 this.callUpdatePanel = new Ext.Panel ({
                     width:250,
-                    height:200,
+                    height:250,
                     autoScroll:true,
                     layout:'form',
                     bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;',
@@ -460,9 +522,19 @@ Mantis.Calls.ViewCalls = function () {
                         this.userCombo,
                         this.justCommentRadio,
                         {html:'<hr />',width:230},
-                        this.commentText
+                        this.commentText,
+                        {
+                            layout:'hbox',
+                            items: [
+                                this.addCallButton,
+                                {html:'&nbsp;'},
+                                this.clearFormButton
+                            ]
+                        }
                     ],
-                    labelWidth:60
+                    defaults: {
+                        hideLabel:true
+                    }
                 });
                 
                 // and add to the panel
@@ -478,9 +550,16 @@ Mantis.Calls.ViewCalls = function () {
                 this.justCommentRadio.hide();
                 // show the 're-open call' field
                 this.reopenCallCheck.show();
+                this.reopenCallCheck.setValue(false);
                 // disable the comment text
                 this.commentText.setValue('');
                 this.commentText.disable();
+                // disable the buttons
+                this.addCallButton.disable();
+                this.clearFormButton.disable();
+                
+                // layout the panel
+                this.callUpdatePanel.doLayout();
             } else {
                 // hide the 're-open call' field
                 this.reopenCallCheck.hide();
@@ -491,13 +570,21 @@ Mantis.Calls.ViewCalls = function () {
                 this.priorityCombo.show();
                 this.userCombo.show();
                 this.justCommentRadio.show();
-                // disable the comment text
+                // enable the comment text
                 this.commentText.setValue('');
                 this.commentText.enable();
+                // disable the escalate fields
                 this.priorityCombo.disable();
                 this.userCombo.disable();
+                this.userCombo.reset();
                 // set the priority field
                 this.priorityCombo.setValue(rec.get('priority'));
+                // enable the buttons
+                this.addCallButton.enable();
+                this.clearFormButton.enable();
+                
+                // layout the panel
+                this.callUpdatePanel.doLayout();
             }
             
             // and show the panel
@@ -603,7 +690,7 @@ Mantis.Calls.ViewCalls = function () {
         var value = '';
         
         if (rec.get('status')=='new') {
-            value = '<a href="#" onclick="Mantis.Calls.closeCall('+rec.get('id')+')">Close call</a>';
+            value = '<a href="#" onclick="Mantis.Calls.updateCall('+rec.get('id')+',{status:\'closed\'})">Close call</a>';
         } else {
             value = 'Call closed';
         }
