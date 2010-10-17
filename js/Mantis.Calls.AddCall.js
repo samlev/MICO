@@ -416,7 +416,6 @@ Mantis.Calls.AddCall = function () {
                     value:'moderate',
                     mode:'local',
                     triggerAction:'all',
-                    value:'moderate',
                     tpl:Mantis.Utils.priorityTemplate,
                     lazyInit:false,
                     listeners: {

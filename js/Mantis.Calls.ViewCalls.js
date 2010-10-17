@@ -18,6 +18,15 @@ Mantis.Calls.ViewCalls = function () {
     var callDetailPanel;
     var callInfoPanel;
     var callCommentPanel;
+    
+    // the call update panel and form
+    var updateOptionsRadioGroup;
+    var updateStatusRadio;
+    var escalateCallRadio;
+    var priorityCombo;
+    var userCombo;
+    var justCommentRadio;
+    var commentText;
     var callUpdatePanel;
     
     // main panel
@@ -308,6 +317,187 @@ Mantis.Calls.ViewCalls = function () {
             } else {
                 // no comments
                 this.callCommentPanel.add({html:'<i>No comments</i>'});
+            }
+            
+            // finally the call update panel
+            if (this.callUpdatePanel === undefined) {
+                // radio options ('new' or open call)
+                this.closeCallRadio = new Ext.form.Radio({
+                    boxLabel:'Close call',
+                    checked:true,
+                    name:'action',
+                    hideLabel:true
+                }); // when selected, closes the call
+                this.escalateCallRadio = new Ext.form.Radio({
+                    boxLabel:'Escalate call',
+                    checked:false,
+                    name:'action',
+                    listeners: {
+                        scope:this,
+                        'check': function () {
+                            if (this.escalateCallRadio.getValue()) {
+                                this.priorityCombo.enable();
+                                this.userCombo.enable();
+                            } else {
+                                this.priorityCombo.disable();
+                                this.userCombo.disable();
+                            }
+                        }
+                    },
+                    hideLabel:true
+                }); // when selected adds a user to the call (if selected), and changes the priority
+                this.justCommentRadio = new Ext.form.Radio({
+                    boxLabel:'Just Comment',
+                    checked:false,
+                    name:'action',
+                    hideLabel:true
+                }); // when selected, dows nothing
+                
+                // re-open call checkbox
+                this.reopenCallCheck = new Ext.form.Checkbox({
+                    boxLabel:'Re-open call',
+                    checked:false,
+                    listeners: {
+                        scope:this,
+                        'check': function () {
+                            if (this.reopenCallCheck.getValue()) {
+                                this.commentText.enable();
+                            } else {
+                                this.commentText.disable();
+                            }
+                        }
+                    },
+                    hideLabel:true
+                });
+                
+                // priority combo box
+                this.priorityCombo = new Ext.form.ComboBox({
+                    allowBlank:false,
+                    required:false,
+                    editable:false,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['priority','view'],
+                        data: [
+                            ['critical','Critical'],
+                            ['urgent','Urgent'],
+                            ['moderate','Moderate'],
+                            ['minor','Minor'],
+                            ['negligible','Negligible']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'priority',
+                    value:'moderate',
+                    mode:'local',
+                    triggerAction:'all',
+                    width:120,
+                    tpl:Mantis.Utils.priorityTemplate,
+                    hideLabel:false,
+                    fieldLabel:'Priority'
+                });
+                
+                // user store
+                this.userStore = new Ext.data.Store({
+                    url: APP_ROOT+"/api.php?f=getUsers", 
+                    reader: new Ext.data.JsonReader ({
+                        root: "users", 
+                        id: "id"
+                    }, [
+                        {name: "id", mapping: "id"}, 
+                        {name: "name", mapping: "name"}, 
+                        {name: "status", mapping: "status"}, 
+                        {name: "statustext", mapping: "statustext"}
+                    ]), 
+                    baseParams: {
+                        session: Mantis.User.getSession()
+                    },
+                    disableCaching:true
+                });
+                
+                // user combo box
+                this.userCombo = new Ext.form.ComboBox({
+                    store: this.userStore,
+                    triggerAction: 'all',
+                    required:false,
+                    allowBlank:true,
+                    editable:false,
+                    valueField:'id',
+                    displayField:'name',
+                    tpl:Mantis.Utils.userTemplate,
+                    mode:'remote',
+                    enableKeyEvents: true,
+                    emptyText:"Escalate to",
+                    width:120,
+                    listeners:{
+                        scope:this,
+                        'focus': function () { this.userStore.load(); } // display the dropdown on focus
+                    },
+                    hideLabel:false,
+                    fieldLabel:'User'
+                });
+                
+                // comment text
+                this.commentText = new Ext.form.TextArea({
+                    width:200,
+                    height:70,
+                    emptyText:'Comment',
+                    allowBlank:true,
+                    required:false,
+                    hideLabel:true
+                });
+                
+                this.callUpdatePanel = new Ext.Panel ({
+                    width:250,
+                    height:200,
+                    autoScroll:true,
+                    layout:'form',
+                    bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;',
+                    items: [
+                        this.reopenCallCheck,
+                        this.closeCallRadio,
+                        this.escalateCallRadio,
+                        this.priorityCombo,
+                        this.userCombo,
+                        this.justCommentRadio,
+                        {html:'<hr />',width:230},
+                        this.commentText
+                    ],
+                    labelWidth:60
+                });
+                
+                // and add to the panel
+                this.callDetailPanel.add(this.callUpdatePanel);
+            }
+            
+            if (rec.get('status') == 'closed') {
+                // hide some fields
+                this.closeCallRadio.hide();
+                this.escalateCallRadio.hide();
+                this.priorityCombo.hide();
+                this.userCombo.hide();
+                this.justCommentRadio.hide();
+                // show the 're-open call' field
+                this.reopenCallCheck.show();
+                // disable the comment text
+                this.commentText.setValue('');
+                this.commentText.disable();
+            } else {
+                // hide the 're-open call' field
+                this.reopenCallCheck.hide();
+                // show the fields for open calls
+                this.closeCallRadio.show();
+                this.closeCallRadio.setValue(true);
+                this.escalateCallRadio.show();
+                this.priorityCombo.show();
+                this.userCombo.show();
+                this.justCommentRadio.show();
+                // disable the comment text
+                this.commentText.setValue('');
+                this.commentText.enable();
+                this.priorityCombo.disable();
+                this.userCombo.disable();
+                // set the priority field
+                this.priorityCombo.setValue(rec.get('priority'));
             }
             
             // and show the panel
