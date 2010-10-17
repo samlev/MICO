@@ -196,8 +196,8 @@ Mantis.Login = function () {
                         Ext.Msg.alert("Password reset", 'Further instructions have been sent to your email address.');
                         
                         // reset the forms
-                        this.loginForm.form.reset();
-                        this.resetPasswordForm.form.reset();
+                        this.loginForm.getForm().reset();
+                        this.resetPasswordForm.getForm().reset();
                     },
                     failure: function (form, action) {
                         var msg = "Unknown system error";

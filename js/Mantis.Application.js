@@ -60,6 +60,7 @@ Mantis.Application = function () {
                     // show standard application components
                     Mantis.SystemMenu.show(); // system and user menus
                     Mantis.Calls.init(); // initialize calls panel
+                    Mantis.User.Preferences.init(); // initialize the user preferences panel
                     
                     // add the user logout menu
                     Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');

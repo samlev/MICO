@@ -7,6 +7,8 @@
  ** Description: Defines a simple user object
  *******************************************************************************
  ******************************************************************************/
+Ext.namespace('Mantis.User');
+
 Mantis.User = function () {
     var user_id;
     var session;
@@ -59,8 +61,12 @@ Mantis.User = function () {
                         vars: Mantis.Utils.serialiseArray(this.vars)
                     },
                     success: function (res, opt) {
+                        // hide any message box
+                        Ext.Msg.hide();
+                        // set the variables
                         this.orig_vars = this.vars;
                         this.dirty = false;
+                        // notify the user that this has been completed
                     },
                     failure: function (res, opt) {
                         var msg = "Unknown system error";
@@ -110,7 +116,7 @@ Mantis.User = function () {
                     }
                 },
                 scope: this
-            })
+            });
         }
     };
 } ();

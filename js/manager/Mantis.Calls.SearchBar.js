@@ -34,14 +34,14 @@ Mantis.Calls.SearchBar = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:'assigned',
+                    value:Mantis.User.getVar('showcalls'),
                     mode:'local',
                     triggerAction:'all',
                     width:130
                 });
                 
                 this.filterField.on('select', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load();
+                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
                 }, this);
                 
                 // the order
@@ -57,33 +57,25 @@ Mantis.Calls.SearchBar = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:'recent',
+                    value:Mantis.User.getVar('ordercalls'),
                     mode:'local',
                     triggerAction:'all',
                     width:100
                 });
                 
                 this.orderField.on('select', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load();
+                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
                 }, this);
                 
                 // whether to show closed or not
                 this.showClosedField = new Ext.form.Checkbox({
                     checked:false
                 });
+                this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
                 
                 this.showClosedField.on('check', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load();
+                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
                 }, this);
-                
-                // a simple refresh button
-                this.refreshButton = new Ext.Button({
-                    text:'Refresh',
-                    scope:this,
-                    handler: function() {
-                        Mantis.Calls.ViewCalls.gridStore.load();
-                    }
-                });
                 
                 // and build the toolbar
                 this.toolbar = new Ext.Toolbar ({
@@ -94,9 +86,7 @@ Mantis.Calls.SearchBar = function () {
                         this.orderField,
                         '-',
                         ' Show closed? ',
-                        this.showClosedField,
-                        '->',
-                        this.refreshButton
+                        this.showClosedField
                     ]
                 });
             }

@@ -76,9 +76,11 @@ Mantis.Calls = function () {
             // add the extra parameters (if they exist)
             if (updates.status !== undefined) { params.status = updates.status; }
             if (updates.priority !== undefined) { params.priority = updates.priority; }
+            // users can be either an integer or an array
             if (updates.users !== undefined) { params.users = (typeof(updates.users)=='int'?updates.users:Mantis.Utils.serialiseArray(updates.users)); }
             if (updates.comment !== undefined) { params.comment = updates.comment; }
             
+            // make the call
             conn.request({
                 url:APP_ROOT+'/api.php?f=updateCall',
                 params: params,

@@ -10,6 +10,7 @@
 Mantis.PasswordSet = function () {
     var usernameField;
     var passwordField;
+    var passwordStrengthIndicator;
     var passwordConfirmField;
     var confirmationKeyField;
     var setPasswordForm;

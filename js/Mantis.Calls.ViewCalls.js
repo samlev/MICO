@@ -68,7 +68,7 @@ Mantis.Calls.ViewCalls = function () {
                 // the pager
                 this.pager = new Ext.PagingToolbar({
                     store: this.gridStore,
-                    pageSize:30
+                    pageSize:Mantis.User.getVar('callsperpage')
                 });
                 
                 // get the filter parameters
@@ -124,9 +124,6 @@ Mantis.Calls.ViewCalls = function () {
                     }
                 }, this);
                 
-                // load the store
-                this.gridStore.load({params:{start:0,limit:30}});
-                
                 // Build the lower panel
                 this.callDetailPanel = new Ext.Panel({
                     region:'south',
@@ -151,6 +148,9 @@ Mantis.Calls.ViewCalls = function () {
                 // and add the panel to the calls section
                 Mantis.Calls.addPanel(this.panel);
             }
+            
+            // load the store
+            this.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
         },
         /** Show the call detail panel
          * @param rec {Ext.data.Record} The call to use to populate the panel
@@ -159,7 +159,7 @@ Mantis.Calls.ViewCalls = function () {
             // Build the call HTML
             var callInfoHTML = "";
             // time
-            callInfoHTML += "<b>"+rec.get('date').format("jS M, Y")+"</b>"+" at "+"<b>"+rec.get('date').format("g:ia")+"</b>";
+            callInfoHTML += "<b>"+rec.get('date').format(Mantis.User.getVar('dateformat'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mantis.User.getVar('timeformat'))+"</b>";
             // priority
             if (rec.get('status') == 'new') {
                 callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+rec.get('priority')+'</span>';
@@ -280,7 +280,7 @@ Mantis.Calls.ViewCalls = function () {
                     var date = Date.parseDate(comment.date,'Y-m-d H:i:s');
                     var today = new Date();
                     // and show the date
-                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format('g:ia')+'</b></td>';
+                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Mantis.User.getVar('timeformat'))+'</b></td>';
                     
                     // get the day
                     var day = '';
@@ -292,7 +292,7 @@ Mantis.Calls.ViewCalls = function () {
                         day = 'Yesterday';
                     } else {
                         // just show the date
-                        day = date.format('jS M, Y');
+                        day = date.format(Mantis.User.getVar('dateformat'));
                     }
                     // add the day to the HTML
                     commentHTML += '<td style="vertical-align:top;text-align:right;">'+day+'</td><tr/>';
@@ -459,6 +459,7 @@ Mantis.Calls.ViewCalls = function () {
                             if (this.reopenCallCheck.getValue()) {
                                 updates.status = 'new';
                                 
+                                // add the comment
                                 var com = String(this.commentText.getValue()).trim();
                                 if (com.length > 0) {
                                     updates.comment = com;
@@ -467,6 +468,7 @@ Mantis.Calls.ViewCalls = function () {
                         } else {
                             var com = String(this.commentText.getValue()).trim();
                             
+                            // check if we're closing the call
                             if (this.closeCallRadio.getValue()) {
                                 updates.status = 'closed';
                                 
@@ -474,6 +476,7 @@ Mantis.Calls.ViewCalls = function () {
                                 if (com.length > 0) {
                                     updates.comment = com;
                                 }
+                            // or escalating the call
                             } else if (this.escalateCallRadio.getValue()) {
                                 if (this.priorityCombo.getValue()) {
                                     updates.priority = this.priorityCombo.getValue();
@@ -486,6 +489,7 @@ Mantis.Calls.ViewCalls = function () {
                                 if (com.length > 0) {
                                     updates.comment = com;
                                 }
+                            // or just commenting
                             } else {
                                 // add the comment
                                 if (com.length > 0) {
@@ -598,22 +602,20 @@ Mantis.Calls.ViewCalls = function () {
         
         // check that we have a date object
         if (typeof(val)=='object') {
-            value += ''; val.format('g:ia');
-            
             var today = new Date();
             
             if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                value = val.format('g:ia');
+                value = val.format(Mantis.User.getVar('timeformat'));
             } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                        (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
                                                      (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                value = val.format('g:ia')+' Yesterday';
+                value = val.format(Mantis.User.getVar('timeformat'))+' Yesterday';
             } else {
                 // just show the date
-                value = ' ' + val.format('jS M, Y');
+                value = ' ' + val.format(Mantis.User.getVar('dateformat'));
             }
             
-            meta.attr = 'ext:qtip="'+val.format('jS M, Y')+' at '+val.format('g:ia')+'"';
+            meta.attr = 'ext:qtip="'+val.format(Mantis.User.getVar('dateformat'))+' at '+val.format(Mantis.User.getVar('timeformat'))+'"';
         } else {
             value = val;
         }
