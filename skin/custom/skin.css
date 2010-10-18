@@ -3,3 +3,7 @@
 #pageHeader {
 	background: #569F34 url(../static/bg.jpg) repeat-x;
 }
+
+.main-form-panel .x-panel-body {
+    background:#f0fff0;
+}

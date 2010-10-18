@@ -133,7 +133,7 @@ Mantis.Login = function () {
                             width:120
                         }
                     ], 
-                    bodyStyle: "padding:5px;background-color:#dfe8f6;",
+                    bodyStyle: "padding:5px;",
                     buttonAlign:'center'
                 });
                 

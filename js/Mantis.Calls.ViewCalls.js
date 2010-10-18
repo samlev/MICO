@@ -68,7 +68,7 @@ Mantis.Calls.ViewCalls = function () {
                 // the pager
                 this.pager = new Ext.PagingToolbar({
                     store: this.gridStore,
-                    pageSize:Mantis.User.getVar('callsperpage')
+                    pageSize:parseInt(Mantis.User.getVar('callsperpage'),10)
                 });
                 
                 // get the filter parameters
@@ -126,6 +126,7 @@ Mantis.Calls.ViewCalls = function () {
                 
                 // Build the lower panel
                 this.callDetailPanel = new Ext.Panel({
+                    id:'Mantis.Calls.ViewCalls.callDetailPanel',
                     region:'south',
                     hideMode:'display',
                     hidden:true,
@@ -254,24 +255,70 @@ Mantis.Calls.ViewCalls = function () {
             
             // now the call comments panel
             var comments = rec.get('comments');
+            // build the panel (if it's not defined)
             if (this.callCommentPanel === undefined) {
+                // build the ability to pick the ocmment order
+                this.commentOrder = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    editable:false,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['type','filter'],
+                        data: [
+                            ['Oldest First','oldest'],
+                            ['Newest First','newest']
+                        ]
+                    }),
+                    displayField:'type',
+                    valueField:'filter',
+                    value:Mantis.User.getVar('commentorder'),
+                    mode:'local',
+                    triggerAction:'all',
+                    width:100
+                });
+                
+                // Refresh the comments if it's changed
+                this.commentOrder.on('select', function () {
+                    var rec = this.grid.getSelectionModel().getSelected();
+                    this.showCallDetail(rec);
+                }, this);
+                
+                // build the comment panel
                 this.callCommentPanel = new Ext.Panel ({
+                    id:'Mantis.Calls.ViewCalls.callCommentPanel',
                     width:250,
                     height:250,
                     autoScroll:true,
                     layout:'vbox',
                     cls:'dynamic-panel-scroll-y',
-                    bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;'
+                    bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;',
+                    tbar:[
+                        '->',
+                        'View Comments:',
+                        this.commentOrder
+                    ]
                 });
+                // add it to the call detail panel
                 this.callDetailPanel.add(this.callCommentPanel);
             } else {
+                // clear previos comments
                 this.callCommentPanel.removeAll(true);
             }
             
             // Check if we have any comments
             if (comments.length) {
+                // check if we're ordering oldest first or newest first (newest is default)
+                if (this.commentOrder.getValue() == 'oldest') {
+                    var i = 0; // the counter
+                    var l = comments.length; // the length of the comments array
+                    var m = 1; // the direction to move
+                } else {
+                    var i = comments.length - 1; // the counter as the length of the comments array
+                    var l = -1; // the target
+                    var m = -1;
+                }
+                
                 // display each of the comments
-                for (var i = 0; i < comments.length; i++) {
+                for (i; i != l; i+=m) {
                     var comment = comments[i];
                     
                     // build the comment HTML - cheat using a table
@@ -513,6 +560,7 @@ Mantis.Calls.ViewCalls = function () {
                 });
                 
                 this.callUpdatePanel = new Ext.Panel ({
+                    id:'Mantis.Calls.ViewCalls.callUpdatePanel',
                     width:250,
                     height:250,
                     autoScroll:true,

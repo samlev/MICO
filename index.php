@@ -18,12 +18,13 @@ if (!defined('CONFIGURED')) {
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-   <title>Mantis - Simple Call Centre</title>
-   <link rel="SHORTCUT ICON" href="favicon.ico" />
-   <!-- Link to the CSS files -->
-   <link type="text/css" rel="stylesheet" href="js/ext/resources/css/ext-all.css" />
-   <link type="text/css" rel="stylesheet" href="skin/static/main.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Mantis - Simple Call Centre</title>
+    <link rel="SHORTCUT ICON" href="favicon.ico" />
+    <!-- Link to the CSS files -->
+    <link type="text/css" rel="stylesheet" href="js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="skin/custom/skin.css" />
   </head>
   <body>
     <div id="pageHeader">
@@ -74,6 +75,7 @@ if (isset($_COOKIE['session'])) {
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
     <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/custom/skin.css" />
     
     <!-- set some system variables for the javascript to use -->
     <?php include_once(FS_ROOT.'/inc/system_vars.php'); ?>

@@ -23,6 +23,7 @@ Mantis.User.Preferences = function () {
     var showCallsField;
     var orderCallsField;
     var showClosedField;
+    var commentOrderField;
     var preferencesFieldset;
     // buttons and panel
     var saveSettingsButton;
@@ -190,6 +191,26 @@ Mantis.User.Preferences = function () {
                     checked: Mantis.User.getVar('showclosed')
                 });
                 
+                // comment order field
+                this.commentOrderField = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    fieldLabel:'Call Comment Order',
+                    store: new Ext.data.SimpleStore ({
+                        fields:['type','filter'],
+                        data: [
+                            ['Oldest First','oldest'],
+                            ['Newest First','newest']
+                        ]
+                    }),
+                    displayField:'type',
+                    valueField:'filter',
+                    value:Mantis.User.getVar('commentorder'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                
                 // preferences fieldset
                 this.preferencesFieldset = new Ext.form.FieldSet({
                     title: 'Display preferences',
@@ -199,7 +220,8 @@ Mantis.User.Preferences = function () {
                         this.callsPerPageField,
                         this.showCallsField,
                         this.orderCallsField,
-                        this.showClosedField
+                        this.showClosedField,
+                        this.commentOrderField
                     ]
                 });
                 
@@ -222,6 +244,7 @@ Mantis.User.Preferences = function () {
                             var showcalls = String(this.showCallsField.getValue()).trim();
                             var ordercalls = String(this.orderCallsField.getValue()).trim();
                             var showclosed = this.showClosedField.getValue();
+                            var commentorder = String(this.commentOrderField.getValue()).trim();
                             
                             // set the values that we can
                             if (name.length) { Mantis.User.setVar('name',name); }
@@ -232,6 +255,7 @@ Mantis.User.Preferences = function () {
                             if (showcalls.length) { Mantis.User.setVar('showcalls',showcalls); }
                             if (ordercalls.length) { Mantis.User.setVar('ordercalls',ordercalls); }
                             Mantis.User.setVar('showclosed',showclosed);
+                            if (commentorder.length) { Mantis.User.setVar('commentorder',commentorder); }
                             
                             // and commit the changes
                             Mantis.User.commit();
@@ -253,6 +277,7 @@ Mantis.User.Preferences = function () {
                         this.showCallsField.setValue(Mantis.User.getVar('showcalls'));
                         this.orderCallsField.setValue(Mantis.User.getVar('ordercalls'));
                         this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
+                        this.commentOrderField.setValue(Mantis.User.getVar('commentorder'));
                     }, 
                     scope: this
                 });
@@ -272,11 +297,11 @@ Mantis.User.Preferences = function () {
                                 this.saveSettingsButton,
                                 { html: '&nbsp;',bodyStyle: "background-color:#dfe8f6;" },
                                 this.clearSettingsButton
-                            ],
-                            bodyStyle: "background-color:#dfe8f6;"
+                            ]
                         }
-                    ], 
-                    bodyStyle: "padding:5px;background-color:#dfe8f6;"
+                    ],
+                    cls: 'main-form-panel',
+                    bodyStyle: "padding:5px;"
                 });
                 
                 // The old password
@@ -411,11 +436,11 @@ Mantis.User.Preferences = function () {
                                 this.passwordChangeButton,
                                 { html: '&nbsp;',bodyStyle: "background-color:#dfe8f6;" },
                                 this.clearPasswordFormButton
-                            ],
-                            bodyStyle: "background-color:#dfe8f6;"
+                            ]
                         }
                     ], 
-                    bodyStyle: "padding:5px;background-color:#dfe8f6;"
+                    cls: 'main-form-panel',
+                    bodyStyle: "padding:5px;"
                 });
                 
                 // set up the main panel

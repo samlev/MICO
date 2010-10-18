@@ -57,6 +57,21 @@ body {
 	color:#CCCCCC;
 	font-size:8pt;
 	padding-top:5px;
+	background:transparent;
+}
+.field-label {
+	padding-top:8px;
+	padding-bottom:2px;
+	background:transparent;
+}
+.sub-form {
+	padding-left:8px;
+	background:transparent;
+}
+.dynamic-sub-form {
+	padding-left:8px;
+	padding-top:3px;
+	background:transparent;
 }
 /* Caller styles */
 .caller-match-1 {
@@ -124,4 +139,10 @@ body {
 }
 .x-window-mc {
     border:none;
+}
+.x-panel-header {
+    border:none;
+}
+.x-toolbar {
+    border:none !important;
 }
