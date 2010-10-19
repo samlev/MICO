@@ -371,9 +371,8 @@ Mantis.Calls.ViewCalls = function () {
                     id:'Mantis.Calls.ViewCalls.callUpdatePanel',
                     width:250,
                     height:250,
-                    autoScroll:true,
                     layout:'form',
-                    bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;',
+                    bodyStyle:'padding-left:8px;border-left:2px solid #BBBBBB;',
                     items: [
                         this.reopenCallCheck,
                         this.closeCallRadio,
@@ -381,7 +380,7 @@ Mantis.Calls.ViewCalls = function () {
                         this.priorityCombo,
                         this.userCombo,
                         this.justCommentRadio,
-                        {html:'<hr />',width:230},
+                        {html:'<hr />',width:180,bodyStyle:'padding-left:10px;'},
                         this.commentText,
                         {
                             layout:'hbox',
@@ -401,13 +400,14 @@ Mantis.Calls.ViewCalls = function () {
                 this.callDetailPanel = new Ext.Panel({
                     id:'Mantis.Calls.ViewCalls.callDetailPanel',
                     region:'south',
-                    layout:'column',
+                    layout:'hbox',
                     items:[
                         this.callInfoPanel,
                         this.callCommentPanel,
                         this.callUpdatePanel
                     ],
-                    height:250
+                    height:250,
+                    width:750
                 });
                 
                 // build the panel

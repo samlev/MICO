@@ -238,10 +238,11 @@ class Call {
                 $this->users[] = intval($row['user_id']);
             }
             
-            // and the comments (if there are any)
+            // and the comments (if there are any) sorted oldest first
             $query = "SELECT `id`,`user_id`,`date`,`action`,`comment`
                       FROM `".DB_PREFIX."call_comments`
-                      WHERE `call_id`=$id";
+                      WHERE `call_id`=$id
+                      ORDER BY `date` ASC";
             $res = run_query($query);
             $this->comments = array();
             while($row = mysql_fetch_assoc($res)) {
