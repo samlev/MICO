@@ -71,11 +71,12 @@ Mantis.Login = function () {
                         }
                     ], 
                     buttons: [
-                        {
+                        new Ext.Panel({
                             html: '<a href="#" onclick="Mantis.Login.dlgLogin.layout.setActiveItem(\'Mantis.Login.resetPasswordForm\')">Forgotten Password?</a>',
                             layout: 'fit',
+                            bodyStyle: "background-color:#dfe8f6;",
                             region: 'south'
-                        },
+                        }),
                         {
                             text: "Login", 
                             handler: function () {
@@ -133,7 +134,7 @@ Mantis.Login = function () {
                             width:120
                         }
                     ], 
-                    bodyStyle: "padding:5px;",
+                    bodyStyle: "padding:5px;background-color:#dfe8f6;",
                     buttonAlign:'center'
                 });
                 
@@ -154,7 +155,7 @@ Mantis.Login = function () {
                     autoScroll: false, 
                     closable: false,
                     draggable: false,
-                    activeItem: 'Mantis.Login.loginForm'
+                    activeItem: 0
                 });
             }
             // show the login dialog
