@@ -107,7 +107,7 @@ Mantis.User.Preferences = function () {
                     displayField:'dispaly',
                     valueField:'format',
                     mode:'local',
-                    value: Mantis.User.getVar('timeformat'),
+                    value: Mantis.User.getVarDefault('timeformat','g:ia'),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -130,7 +130,7 @@ Mantis.User.Preferences = function () {
                     displayField:'dispaly',
                     valueField:'format',
                     mode:'local',
-                    value: Mantis.User.getVar('dateformat'),
+                    value: Mantis.User.getVarDefault('dateformat','jS M, Y'),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -153,7 +153,7 @@ Mantis.User.Preferences = function () {
                     displayField:'calls',
                     valueField:'calls',
                     mode:'local',
-                    value: Mantis.User.getVar('callsperpage'),
+                    value: Mantis.User.getVarDefault('callsperpage','30'),
                     triggerAction:'all'
                 });
                 
@@ -167,7 +167,7 @@ Mantis.User.Preferences = function () {
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
-                    value: Mantis.User.getVar('showcalls'),
+                    value: Mantis.User.getVarDefault('showcalls','assigned'),
                     triggerAction:'all'
                 });
                 
@@ -181,7 +181,7 @@ Mantis.User.Preferences = function () {
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
-                    value: Mantis.User.getVar('ordercalls'),
+                    value: Mantis.User.getVarDefault('ordercalls','recent'),
                     triggerAction:'all'
                 });
                 
@@ -206,7 +206,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVar('commentorder'),
+                    value:Mantis.User.getVarDefault('commentorder','newest'),
                     mode:'local',
                     triggerAction:'all'
                 });

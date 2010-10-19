@@ -68,7 +68,7 @@ Mantis.Calls.ViewCalls = function () {
                 // the pager
                 this.pager = new Ext.PagingToolbar({
                     store: this.gridStore,
-                    pageSize:parseInt(Mantis.User.getVar('callsperpage'),10)
+                    pageSize:parseInt(Mantis.User.getVarDefault('callsperpage',30),10)
                 });
                 
                 // get the filter parameters
@@ -148,7 +148,7 @@ Mantis.Calls.ViewCalls = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVar('commentorder'),
+                    value:Mantis.User.getVarDefault('commentorder','newest'),
                     mode:'local',
                     triggerAction:'all',
                     width:100
@@ -427,7 +427,7 @@ Mantis.Calls.ViewCalls = function () {
             }
             
             // load the store
-            this.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
+            this.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
             if (this.grid.getSelectionModel().hasSelection()) {
                 this.grid.getSelectionModel().clearSelections();
             }
@@ -444,7 +444,7 @@ Mantis.Calls.ViewCalls = function () {
             // Build the call HTML
             var callInfoHTML = "";
             // time
-            callInfoHTML += "<b>"+rec.get('date').format(Mantis.User.getVar('dateformat'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mantis.User.getVar('timeformat'))+"</b>";
+            callInfoHTML += "<b>"+rec.get('date').format(Mantis.User.getVarDefault('dateformat','jS M, Y'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mantis.User.getVarDefault('timeformat','g:ia'))+"</b>";
             // priority
             if (rec.get('status') == 'new') {
                 callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+rec.get('priority')+'</span>';
@@ -601,7 +601,7 @@ Mantis.Calls.ViewCalls = function () {
                     var date = Date.parseDate(comment.date,'Y-m-d H:i:s');
                     var today = new Date();
                     // and show the date
-                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Mantis.User.getVar('timeformat'))+'</b></td>';
+                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Mantis.User.getVarDefault('timeformat','g:ia'))+'</b></td>';
                     
                     // get the day
                     var day = '';
@@ -613,7 +613,7 @@ Mantis.Calls.ViewCalls = function () {
                         day = 'Yesterday';
                     } else {
                         // just show the date
-                        day = date.format(Mantis.User.getVar('dateformat'));
+                        day = date.format(Mantis.User.getVarDefault('dateformat','jS M, Y'));
                     }
                     // add the day to the HTML
                     commentHTML += '<td style="vertical-align:top;text-align:right;">'+day+'</td><tr/>';
@@ -656,17 +656,17 @@ Mantis.Calls.ViewCalls = function () {
             var today = new Date();
             
             if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                value = val.format(Mantis.User.getVar('timeformat'));
+                value = val.format(Mantis.User.getVarDefault('timeformat','g:ia'));
             } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                        (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
                                                      (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                value = val.format(Mantis.User.getVar('timeformat'))+' Yesterday';
+                value = val.format(Mantis.User.getVarDefault('timeformat','g:ia'))+' Yesterday';
             } else {
                 // just show the date
-                value = ' ' + val.format(Mantis.User.getVar('dateformat'));
+                value = ' ' + val.format(Mantis.User.getVarDefault('dateformat','jS M, Y'));
             }
             
-            meta.attr = 'ext:qtip="'+val.format(Mantis.User.getVar('dateformat'))+' at '+val.format(Mantis.User.getVar('timeformat'))+'"';
+            meta.attr = 'ext:qtip="'+val.format(Mantis.User.getVarDefault('dateformat','jS M, Y'))+' at '+val.format(Mantis.User.getVarDefault('timeformat','g:ia'))+'"';
         } else {
             value = val;
         }

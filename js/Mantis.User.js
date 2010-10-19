@@ -33,11 +33,18 @@ Mantis.User = function () {
         getSession: function () {
             return this.session;
         },
-        /** Sets a variable (if it exists)
+        /** Gets a variable (if it exists)
          * @param key {string} The variable key
          */
         getVar: function (key) {
             return this.vars[key];
+        },
+        /** Gets a variable (if it exists), or returns the passed default
+         * @param key {string} The variable key
+         * @param def {mixed} The default to use of the key doesn't exist
+         */
+        getVarDefault: function (key, def) {
+            return (this.vars[key]===undefined?def:this.vars[key]);
         },
         /** Sets a variable
          * @param key {string} The variable key

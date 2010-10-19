@@ -34,14 +34,14 @@ Mantis.Calls.SearchBar = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVar('showcalls'),
+                    value:Mantis.User.getVarDefault('showcalls','assigned'),
                     mode:'local',
                     triggerAction:'all',
                     width:130
                 });
                 
                 this.filterField.on('select', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
+                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // the order
@@ -57,14 +57,14 @@ Mantis.Calls.SearchBar = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVar('ordercalls'),
+                    value:Mantis.User.getVarDefault('ordercalls','recent'),
                     mode:'local',
                     triggerAction:'all',
                     width:100
                 });
                 
                 this.orderField.on('select', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
+                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // whether to show closed or not
@@ -74,7 +74,7 @@ Mantis.Calls.SearchBar = function () {
                 this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
                 
                 this.showClosedField.on('check', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
+                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // and build the toolbar
@@ -101,9 +101,9 @@ Mantis.Calls.SearchBar = function () {
             
             if (this.toolbar == undefined) {
                 filter = [
-                    {name:'filter',value:'assigned'},
-                    {name:'order',value:'recent'},
-                    {name:'closed',value:false}
+                    {name:'filter',value:Mantis.User.getVarDefault('showcalls','assigned')},
+                    {name:'order',value:Mantis.User.getVarDefault('ordercalls','recent')},
+                    {name:'closed',value:Mantis.User.getVarDefault('showclosed',false)}
                 ];
             } else {
                 filter = [
