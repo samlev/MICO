@@ -37,7 +37,7 @@ Mantis.Calls.ViewCalls = function () {
     return {
         /** Shows the panel */
         show: function () {
-            if (this.panel == undefined) {
+            if (this.panel === undefined) {
                 // build the store
                 this.gridStore = new Ext.data.Store({
                     url: APP_ROOT+"/api.php?f=getCalls", 
@@ -125,138 +125,16 @@ Mantis.Calls.ViewCalls = function () {
                 }, this);
                 
                 // Build the lower panel
-                this.callDetailPanel = new Ext.Panel({
-                    id:'Mantis.Calls.ViewCalls.callDetailPanel',
-                    region:'south',
-                    hideMode:'display',
-                    hidden:true,
-                    layout:'column',
-                    height:250
-                });
-                
-                // build the panel
-                this.panel = new Ext.Panel({
-                    id:'Mantis.Calls.ViewCalls.panel',
-                    layout:'border',
-                    region:'center',
-                    tbar:Mantis.Calls.SearchBar.getToolbar(),
-                    items:[
-                        this.grid,
-                        this.callDetailPanel
-                    ]
-                });
-                
-                // and add the panel to the calls section
-                Mantis.Calls.addPanel(this.panel);
-            }
-            
-            // load the store
-            this.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
-        },
-        /** Show the call detail panel
-         * @param rec {Ext.data.Record} The call to use to populate the panel
-         */
-        showCallDetail: function(rec) {
-            // Build the call HTML
-            var callInfoHTML = "";
-            // time
-            callInfoHTML += "<b>"+rec.get('date').format(Mantis.User.getVar('dateformat'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mantis.User.getVar('timeformat'))+"</b>";
-            // priority
-            if (rec.get('status') == 'new') {
-                callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+rec.get('priority')+'</span>';
-            } else {
-                callInfoHTML += ' - <span class="call-closed">Closed</span>';
-            }
-            
-            // taker
-            if (rec.get('taker').id == Mantis.User.user_id) {
-                callInfoHTML += "<br />Call taken by you";
-            } else {
-                callInfoHTML += "<br />Call taken by "+rec.get('taker').name;
-            }
-            
-            // caller name
-            if (rec.get('caller').length) {
-                callInfoHTML += "<br /><br />"+rec.get('caller');
-            } else {
-                callInfoHTML += "<br /><br />Someone"
-            }
-            
-            // company name
-            if (rec.get('company').length) {
-                callInfoHTML += " from "+rec.get('company');
-            }
-            
-            // recipients
-            callInfoHTML += " called for";
-            if (rec.get('users').length>1) {
-                callInfoHTML += ":"
-                // get the users
-                var users = rec.get('users');
-                
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].id == Mantis.User.user_id) {
-                        callInfoHTML += "<br /> - <b>You</b>";
-                    } else {
-                        callInfoHTML += "<br /> - "+users[i].name;
-                    }
-                }
-            } else {
-                if (rec.get('users')[0].id == Mantis.User.user_id) {
-                    callInfoHTML += " <b>You</b>";
-                } else {
-                    callInfoHTML += rec.get('users')[0].name;
-                }
-            }
-            
-            // message
-            if (rec.get('message').length) {
-                callInfoHTML += "<br /><br /><b>Message:</b><br />"+String(rec.get('message')).split("\n").join("<br />");
-            } else {
-                callInfoHTML += "<br /><br /><b>No message was left.</b>";
-            }
-            
-            callInfoHTML += "<hr />";
-            
-            // contact details
-            if (rec.get('contact').length>1) {
-                callInfoHTML += "Contact them via:";
-                
-                var contact = rec.get('contact');
-                for (var i = 0; i < contact.length; i++) {
-                    callInfoHTML += "<br /> - "+contact[i];
-                }
-            } else if (rec.get('contact').length == 1) {
-                callInfoHTML += "Contact them via <b>"+rec.get('contact')[0]+"</b>";
-            } else {
-                callInfoHTML += "<b>No contact details were left.</b>";
-            }
-            
-            // action
-            if (rec.get('action').length) {
-                callInfoHTML += "<br /><br />Action required: <b>"+rec.get('action')+"</b>";
-            }
-            
-            if (this.callInfoPanel === undefined) {
                 // build the call info panel
                 this.callInfoPanel = new Ext.Panel({
+                    id:'Mantis.Calls.ViewCalls.callInfoPanel',
                     width:250,
                     height:250,
                     autoScroll:true,
-                    html:callInfoHTML,
+                    html:'&nbsp;',
                     bodyStyle:'padding:3px;'
                 });
                 
-                // add it to the main panel
-                this.callDetailPanel.add(this.callInfoPanel);
-            } else {
-                this.callInfoPanel.update(callInfoHTML);
-            }
-            
-            // now the call comments panel
-            var comments = rec.get('comments');
-            // build the panel (if it's not defined)
-            if (this.callCommentPanel === undefined) {
                 // build the ability to pick the ocmment order
                 this.commentOrder = new Ext.form.ComboBox ({
                     allowBlank:false,
@@ -279,7 +157,7 @@ Mantis.Calls.ViewCalls = function () {
                 // Refresh the comments if it's changed
                 this.commentOrder.on('select', function () {
                     var rec = this.grid.getSelectionModel().getSelected();
-                    this.showCallDetail(rec);
+                    this.showComments(rec.get('comments'));
                 }, this);
                 
                 // build the comment panel
@@ -291,86 +169,16 @@ Mantis.Calls.ViewCalls = function () {
                     layout:'vbox',
                     cls:'dynamic-panel-scroll-y',
                     bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;',
+                    items: [
+                        {html:'<i>No comments</i>'}
+                    ],
                     tbar:[
                         '->',
                         'View Comments:',
                         this.commentOrder
                     ]
                 });
-                // add it to the call detail panel
-                this.callDetailPanel.add(this.callCommentPanel);
-            } else {
-                // clear previos comments
-                this.callCommentPanel.removeAll(true);
-            }
-            
-            // Check if we have any comments
-            if (comments.length) {
-                // check if we're ordering oldest first or newest first (newest is default)
-                if (this.commentOrder.getValue() == 'oldest') {
-                    var i = 0; // the counter
-                    var l = comments.length; // the length of the comments array
-                    var m = 1; // the direction to move
-                } else {
-                    var i = comments.length - 1; // the counter as the length of the comments array
-                    var l = -1; // the target
-                    var m = -1;
-                }
                 
-                // display each of the comments
-                for (i; i != l; i+=m) {
-                    var comment = comments[i];
-                    
-                    // build the comment HTML - cheat using a table
-                    var commentHTML = '<table style="width:230px">';
-                    // build a date object
-                    var date = Date.parseDate(comment.date,'Y-m-d H:i:s');
-                    var today = new Date();
-                    // and show the date
-                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Mantis.User.getVar('timeformat'))+'</b></td>';
-                    
-                    // get the day
-                    var day = '';
-                    if (date.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                        day = 'Today';
-                    } else if (date.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
-                               (today.getDayOfYear() == 0 && (date.format('m-d') == '12-31' && // check if we're on the border of a year
-                                                             (parseInt(date.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                        day = 'Yesterday';
-                    } else {
-                        // just show the date
-                        day = date.format(Mantis.User.getVar('dateformat'));
-                    }
-                    // add the day to the HTML
-                    commentHTML += '<td style="vertical-align:top;text-align:right;">'+day+'</td><tr/>';
-                    
-                    // add the action
-                    commentHTML += '<tr><td colspan="2"><b>'+comment.action+'</b> by <b>'+(comment.user_id == Mantis.User.user_id?'You':comment.commenter)+'</b></td></tr>';
-                    
-                    // and add the comment (if there is one)
-                    if (comment.comment.length) {
-                        commentHTML += '<tr><td colspan="2">'+comment.comment.split("\n").join("<br />")+'</td></tr>';
-                    }
-                    
-                    // and close the table.
-                    commentHTML += '</table>';
-                    
-                    // and the style
-                    var bstyle = 'padding-top:3px;padding-bottom:3px;';
-                    // add a separator
-                    if (i > 0) {
-                        bstyle += 'border-top:1px dashed #DDDDDD;';
-                    }
-                    
-                    this.callCommentPanel.add(new Ext.Panel({html:commentHTML,bodyStyle:bstyle,width:245}));
-                }
-            } else {
-                // no comments
-                this.callCommentPanel.add({html:'<i>No comments</i>'});
-            }
-            
-            // finally the call update panel
-            if (this.callUpdatePanel === undefined) {
                 // radio options ('new' or open call)
                 this.closeCallRadio = new Ext.form.Radio({
                     boxLabel:'Close call',
@@ -589,10 +397,137 @@ Mantis.Calls.ViewCalls = function () {
                     }
                 });
                 
-                // and add to the panel
-                this.callDetailPanel.add(this.callUpdatePanel);
+                // and the wrapper panel
+                this.callDetailPanel = new Ext.Panel({
+                    id:'Mantis.Calls.ViewCalls.callDetailPanel',
+                    region:'south',
+                    layout:'column',
+                    items:[
+                        this.callInfoPanel,
+                        this.callCommentPanel,
+                        this.callUpdatePanel
+                    ],
+                    height:250
+                });
+                
+                // build the panel
+                this.panel = new Ext.Panel({
+                    id:'Mantis.Calls.ViewCalls.panel',
+                    layout:'border',
+                    region:'center',
+                    tbar:Mantis.Calls.SearchBar.getToolbar(),
+                    items:[
+                        this.grid,
+                        this.callDetailPanel
+                    ]
+                });
+                
+                // and add the panel to the calls section
+                Mantis.Calls.addPanel(this.panel);
             }
             
+            // load the store
+            this.gridStore.load({params:{start:0,limit:Mantis.User.getVar('callsperpage')}});
+            if (this.grid.getSelectionModel().hasSelection()) {
+                this.grid.getSelectionModel().clearSelections();
+            }
+            this.callDetailPanel.hide();
+        },
+        /** Show the call detail panel
+         * @param rec {Ext.data.Record} The call to use to populate the panel
+         */
+        showCallDetail: function(rec) {
+            // show the panel
+            this.callDetailPanel.show();
+            this.panel.doLayout();
+            
+            // Build the call HTML
+            var callInfoHTML = "";
+            // time
+            callInfoHTML += "<b>"+rec.get('date').format(Mantis.User.getVar('dateformat'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mantis.User.getVar('timeformat'))+"</b>";
+            // priority
+            if (rec.get('status') == 'new') {
+                callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+rec.get('priority')+'</span>';
+            } else {
+                callInfoHTML += ' - <span class="call-closed">Closed</span>';
+            }
+            
+            // taker
+            if (rec.get('taker').id == Mantis.User.user_id) {
+                callInfoHTML += "<br />Call taken by you";
+            } else {
+                callInfoHTML += "<br />Call taken by "+rec.get('taker').name;
+            }
+            
+            // caller name
+            if (rec.get('caller').length) {
+                callInfoHTML += "<br /><br />"+rec.get('caller');
+            } else {
+                callInfoHTML += "<br /><br />Someone"
+            }
+            
+            // company name
+            if (rec.get('company').length) {
+                callInfoHTML += " from "+rec.get('company');
+            }
+            
+            // recipients
+            callInfoHTML += " called for";
+            if (rec.get('users').length>1) {
+                callInfoHTML += ":"
+                // get the users
+                var users = rec.get('users');
+                
+                for (var i = 0; i < users.length; i++) {
+                    if (users[i].id == Mantis.User.user_id) {
+                        callInfoHTML += "<br /> - <b>You</b>";
+                    } else {
+                        callInfoHTML += "<br /> - "+users[i].name;
+                    }
+                }
+            } else {
+                if (rec.get('users')[0].id == Mantis.User.user_id) {
+                    callInfoHTML += " <b>You</b>";
+                } else {
+                    callInfoHTML += rec.get('users')[0].name;
+                }
+            }
+            
+            // message
+            if (rec.get('message').length) {
+                callInfoHTML += "<br /><br /><b>Message:</b><br />"+String(rec.get('message')).split("\n").join("<br />");
+            } else {
+                callInfoHTML += "<br /><br /><b>No message was left.</b>";
+            }
+            
+            callInfoHTML += "<hr />";
+            
+            // contact details
+            if (rec.get('contact').length>1) {
+                callInfoHTML += "Contact them via:";
+                
+                var contact = rec.get('contact');
+                for (var i = 0; i < contact.length; i++) {
+                    callInfoHTML += "<br /> - "+contact[i];
+                }
+            } else if (rec.get('contact').length == 1) {
+                callInfoHTML += "Contact them via <b>"+rec.get('contact')[0]+"</b>";
+            } else {
+                callInfoHTML += "<b>No contact details were left.</b>";
+            }
+            
+            // action
+            if (rec.get('action').length) {
+                callInfoHTML += "<br /><br />Action required: <b>"+rec.get('action')+"</b>";
+            }
+            
+            this.callInfoPanel.update(callInfoHTML);
+            
+            // now the call comments panel
+            var comments = rec.get('comments');
+            this.showComments(comments);
+            
+            // set up the call update panel
             if (rec.get('status') == 'closed') {
                 // hide some fields
                 this.closeCallRadio.hide();
@@ -638,10 +573,78 @@ Mantis.Calls.ViewCalls = function () {
                 // layout the panel
                 this.callUpdatePanel.doLayout();
             }
+        },
+        showComments: function (comments) {
+            // clear previous comments
+            this.callCommentPanel.removeAll(true);
             
-            // and show the panel
-            this.callDetailPanel.show();
-            this.panel.doLayout();
+            // Check if we have any comments
+            if (comments.length) {
+                // check if we're ordering oldest first or newest first (newest is default)
+                if (this.commentOrder.getValue() == 'oldest') {
+                    var i = 0; // the counter
+                    var l = comments.length; // the length of the comments array
+                    var m = 1; // the direction to move
+                } else {
+                    var i = comments.length - 1; // the counter as the length of the comments array
+                    var l = -1; // the target
+                    var m = -1;
+                }
+                
+                // display each of the comments
+                for (i; i != l; i+=m) {
+                    var comment = comments[i];
+                    
+                    // build the comment HTML - cheat using a table
+                    var commentHTML = '<table style="width:230px">';
+                    // build a date object
+                    var date = Date.parseDate(comment.date,'Y-m-d H:i:s');
+                    var today = new Date();
+                    // and show the date
+                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Mantis.User.getVar('timeformat'))+'</b></td>';
+                    
+                    // get the day
+                    var day = '';
+                    if (date.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
+                        day = 'Today';
+                    } else if (date.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
+                               (today.getDayOfYear() == 0 && (date.format('m-d') == '12-31' && // check if we're on the border of a year
+                                                             (parseInt(date.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
+                        day = 'Yesterday';
+                    } else {
+                        // just show the date
+                        day = date.format(Mantis.User.getVar('dateformat'));
+                    }
+                    // add the day to the HTML
+                    commentHTML += '<td style="vertical-align:top;text-align:right;">'+day+'</td><tr/>';
+                    
+                    // add the action
+                    commentHTML += '<tr><td colspan="2"><b>'+comment.action+'</b> by <b>'+(comment.user_id == Mantis.User.user_id?'You':comment.commenter)+'</b></td></tr>';
+                    
+                    // and add the comment (if there is one)
+                    if (comment.comment.length) {
+                        commentHTML += '<tr><td colspan="2">'+comment.comment.split("\n").join("<br />")+'</td></tr>';
+                    }
+                    
+                    // and close the table.
+                    commentHTML += '</table>';
+                    
+                    // and the style
+                    var bstyle = 'padding-top:3px;padding-bottom:3px;';
+                    // add a separator
+                    if (i > 0) {
+                        bstyle += 'border-top:1px dashed #DDDDDD;';
+                    }
+                    
+                    this.callCommentPanel.add(new Ext.Panel({html:commentHTML,bodyStyle:bstyle,width:245}));
+                }
+            } else {
+                // no comments
+                this.callCommentPanel.add({html:'<i>No comments</i>'});
+            }
+            
+            // make sure the panel is displayed properly
+            this.callCommentPanel.doLayout();
         }
     };
     
