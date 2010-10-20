@@ -235,7 +235,7 @@ Mantis.User.Preferences = function () {
                     ]
                 });
                 
-                // The button for changing the user's password
+                // The button for saving the user's settings
                 this.saveSettingsButton = new Ext.Button({
                     text: "Save Settings", 
                     handler: function () {
@@ -260,13 +260,13 @@ Mantis.User.Preferences = function () {
                             // set the values that we can
                             if (name.length) { Mantis.User.setVar('name',name); }
                             if (email.length) { Mantis.User.setVar('email',email); }
-                            if (timeformat.length) { Mantis.User.setVar('timeformat',timeformat); }
-                            if (dateformat.length) { Mantis.User.setVar('dateformat',dateformat); }
-                            if (callsperpage.length) { Mantis.User.setVar('callsperpage',callsperpage); }
-                            if (showcalls.length) { Mantis.User.setVar('showcalls',showcalls); }
-                            if (ordercalls.length) { Mantis.User.setVar('ordercalls',ordercalls); }
+                            Mantis.User.setVar('timeformat',timeformat);
+                            Mantis.User.setVar('dateformat',dateformat);
+                            Mantis.User.setVar('callsperpage',callsperpage);
+                            Mantis.User.setVar('showcalls',showcalls);
+                            Mantis.User.setVar('ordercalls',ordercalls);
                             Mantis.User.setVar('showclosed',showclosed);
-                            if (commentorder.length) { Mantis.User.setVar('commentorder',commentorder); }
+                            Mantis.User.setVar('commentorder',commentorder);
                             
                             // and commit the changes
                             Mantis.User.commit();
@@ -717,7 +717,7 @@ Mantis.User.Preferences = function () {
                     bodyStyle:'padding-top:2px;'
                 };
                 
-                // notification settings panel
+                // notification settings fieldset
                 this.notificationFieldset = new Ext.form.FieldSet({
                     title: 'Email notification options',
                     items: [
@@ -730,40 +730,42 @@ Mantis.User.Preferences = function () {
                     ]
                 });
                 
-                
-                
-                // The button for changing the user's password
-                this.saveSettingsButton = new Ext.Button({
+                // The button for saving notification settings
+                this.saveNotificationsButton = new Ext.Button({
                     text: "Save Settings", 
                     handler: function () {
-                        if (this.settingsPanel.getForm().isValid()) {
+                        if (this.notificationsForm.getForm().isValid()) {
                             // notify the user that we're saving their settings
-                            Ext.Msg.wait('Save Settings','Saving your settings',{
+                            Ext.Msg.wait('Save Settings','Saving your notification settings',{
                                 closable:false,
                                 modal:true
                             });
                             
                             // get the settings
-                            var name = String(this.nameField.getValue()).trim();
-                            var email = String(this.emailField.getValue()).trim();
-                            var timeformat = String(this.timeFormatField.getValue()).trim();
-                            var dateformat = String(this.dateFormatField.getValue()).trim();
-                            var callsperpage = String(this.callsPerPageField.getValue()).trim();
-                            var showcalls = String(this.showCallsField.getValue()).trim();
-                            var ordercalls = String(this.orderCallsField.getValue()).trim();
-                            var showclosed = this.showClosedField.getValue();
-                            var commentorder = String(this.commentOrderField.getValue()).trim();
+                            var sendnotifications = this.sendNotificationsField.getValue();
+                            var criticalnotifytime = String(this.criticalNotifyTime.getValue()).trim();
+                            var criticalnotifyreason = String(this.criticalNotifyReason.getValue()).trim();
+                            var urgentnotifytime = String(this.urgentNotifyTime.getValue()).trim();
+                            var urgentnotifyreason = String(this.urgentNotifyReason.getValue()).trim();
+                            var moderatenotifytime = String(this.moderateNotifyTime.getValue()).trim();
+                            var moderatenotifyreason = String(this.moderateNotifyReason.getValue()).trim();
+                            var minornotifytime = String(this.minorNotifyTime.getValue()).trim();
+                            var minornotifyreason = String(this.minorNotifyReason.getValue()).trim();
+                            var negligiblenotifytime = String(this.negligibleNotifyTime.getValue()).trim();
+                            var negligiblenotifyreason = String(this.negligibleNotifyReason.getValue()).trim();
                             
                             // set the values that we can
-                            if (name.length) { Mantis.User.setVar('name',name); }
-                            if (email.length) { Mantis.User.setVar('email',email); }
-                            if (timeformat.length) { Mantis.User.setVar('timeformat',timeformat); }
-                            if (dateformat.length) { Mantis.User.setVar('dateformat',dateformat); }
-                            if (callsperpage.length) { Mantis.User.setVar('callsperpage',callsperpage); }
-                            if (showcalls.length) { Mantis.User.setVar('showcalls',showcalls); }
-                            if (ordercalls.length) { Mantis.User.setVar('ordercalls',ordercalls); }
-                            Mantis.User.setVar('showclosed',showclosed);
-                            if (commentorder.length) { Mantis.User.setVar('commentorder',commentorder); }
+                            Mantis.User.setVar('sendnotifications',sendnotifications);
+                            Mantis.User.setVar('criticalnotifytime',criticalnotifytime);
+                            Mantis.User.setVar('criticalnotifyreason',criticalnotifyreason);
+                            Mantis.User.setVar('urgentnotifytime',urgentnotifytime);
+                            Mantis.User.setVar('urgentnotifyreason',urgentnotifyreason);
+                            Mantis.User.setVar('moderatenotifytime',moderatenotifytime);
+                            Mantis.User.setVar('moderatenotifyreason',moderatenotifyreason);
+                            Mantis.User.setVar('minornotifytime',minornotifytime);
+                            Mantis.User.setVar('minornotifyreason',minornotifyreason);
+                            Mantis.User.setVar('negligiblenotifytime',negligiblenotifytime);
+                            Mantis.User.setVar('negligiblenotifyreason',negligiblenotifyreason);
                             
                             // and commit the changes
                             Mantis.User.commit();
@@ -773,19 +775,21 @@ Mantis.User.Preferences = function () {
                 });
                 
                 // the button for clearing the password change form
-                this.resetSettingsButton = new Ext.Button({
+                this.resetNotificationsButton = new Ext.Button({
                     text: "Reset", 
                     handler: function () {
                         // reset all the variables from the user object
-                        this.nameField.setValue(Mantis.User.getVar('name'));
-                        this.emailField.setValue(Mantis.User.getVar('email'));
-                        this.timeFormatField.setValue(Mantis.User.getVar('timeformat'));
-                        this.dateFormatField.setValue(Mantis.User.getVar('dateformat'));
-                        this.callsPerPageField.setValue(Mantis.User.getVar('callsperpage'));
-                        this.showCallsField.setValue(Mantis.User.getVar('showcalls'));
-                        this.orderCallsField.setValue(Mantis.User.getVar('ordercalls'));
-                        this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
-                        this.commentOrderField.setValue(Mantis.User.getVar('commentorder'));
+                        this.sendNotificationsField.setValue(Mantis.User.getVar('sendnotifications'));
+                        this.criticalNotifyTime.setValue(Mantis.User.getVarDefault('criticalnotifytime','immediate'));
+                        this.criticalNotifyReason.setValue(Mantis.User.getVarDefault('criticalnotifyreason','updated'));
+                        this.urgentNotifyTime.setValue(Mantis.User.getVarDefault('urgentnotifytime','30mins'));
+                        this.urgentNotifyReason.setValue(Mantis.User.getVarDefault('urgentnotifyreason','updated'));
+                        this.moderateNotifyTime.setValue(Mantis.User.getVarDefault('moderatenotifytime','60mins'));
+                        this.moderateNotifyReason.setValue(Mantis.User.getVarDefault('moderatenotifyreason','updated'));
+                        this.minorNotifyTime.setValue(Mantis.User.getVarDefault('minornotifytime','60mins'));
+                        this.minorNotifyReason.setValue(Mantis.User.getVarDefault('minornotifyreason','assigned'));
+                        this.negligibleNotifyTime.setValue(Mantis.User.getVarDefault('negligiblenotifytime','never'));
+                        this.negligibleNotifyReason.setValue(Mantis.User.getVarDefault('negligiblenotifyreason','assigned'));
                     }, 
                     scope: this
                 });
@@ -802,7 +806,15 @@ Mantis.User.Preferences = function () {
                                   'Notifications are only sent to you about calls that are assigned to you.',
                             bodyStyle:'padding-bottom:8px;'
                         },
-                        this.notificationFieldset
+                        this.notificationFieldset,
+                        {
+                            layout:'hbox',
+                            items: [
+                                this.saveNotificationsButton,
+                                { html: '&nbsp;' },
+                                this.resetNotificationsButton
+                            ]
+                        }
                     ], 
                     cls: 'main-form-panel',
                     bodyStyle: "padding:5px;"
