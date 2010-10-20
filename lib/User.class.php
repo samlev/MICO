@@ -365,6 +365,21 @@ class User {
                             $date = date('Y-m-d H:i:00', strtotime('+'.(60-intval(date('i'))).' minutes'));
                             break;
                     }
+                    
+                    // insert into the database
+                    $query = "INSERT INTO `".DB_PREFIX."user_notifications`
+                              (`user_id`,`call_id`,`type`,`notify_after`,`comment_id`)
+                              VALUES (".intval($this->id).",".intval($call_id).",
+                                      '".mysql_real_escape_string($type)."',
+                                      '".mysql_real_escape_string($date)."',
+                                      ".($comment_id===null?'NULL':intval($comment_id)).")";
+                    run_query($query);
+                    
+                    // Run the notifier
+                    if ($this->get_var($call->get_priority().'notifytime')=='immediate') {
+                        // TODO: build the notifier
+                        // Notifier::run();
+                    }
                 }
             }
         }
