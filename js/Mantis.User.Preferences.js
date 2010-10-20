@@ -618,7 +618,104 @@ Mantis.User.Preferences = function () {
                     ],
                     bodyStyle:'padding-top:2px;'
                 };
-                
+                // minor calls
+                this.minorNotifyTime = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 150,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['immediate','immediately'],
+                            ['30mins','once every half hour'],
+                            ['60mins','once every hour'],
+                            ['never','never']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('minornotifytime','60mins'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                this.minorNotifyReason = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 120,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['assigned','assigned to me'],
+                            ['updated','updated']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('minornotifyreason','assigned'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                var minorForm = {
+                    layout:'hbox',
+                    items:[
+                        {html:'For <b>MINOR</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        this.minorNotifyTime,
+                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        this.minorNotifyReason
+                    ],
+                    bodyStyle:'padding-top:2px;'
+                };
+                // negligible calls
+                this.negligibleNotifyTime = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 150,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['immediate','immediately'],
+                            ['30mins','once every half hour'],
+                            ['60mins','once every hour'],
+                            ['never','never']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('negligiblenotifytime','never'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                this.negligibleNotifyReason = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 120,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['assigned','assigned to me'],
+                            ['updated','updated']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('negligiblenotifyreason','assigned'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                var negligibleForm = {
+                    layout:'hbox',
+                    items:[
+                        {html:'For <b>NEGLIGIBLE</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        this.negligibleNotifyTime,
+                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        this.negligibleNotifyReason
+                    ],
+                    bodyStyle:'padding-top:2px;'
+                };
                 
                 // notification settings panel
                 this.notificationFieldset = new Ext.form.FieldSet({
@@ -627,10 +724,73 @@ Mantis.User.Preferences = function () {
                         this.sendNotificationsField,
                         criticalForm,
                         urgentForm,
-                        moderateForm
+                        moderateForm,
+                        minorForm,
+                        negligibleForm
                     ]
                 });
                 
+                
+                
+                // The button for changing the user's password
+                this.saveSettingsButton = new Ext.Button({
+                    text: "Save Settings", 
+                    handler: function () {
+                        if (this.settingsPanel.getForm().isValid()) {
+                            // notify the user that we're saving their settings
+                            Ext.Msg.wait('Save Settings','Saving your settings',{
+                                closable:false,
+                                modal:true
+                            });
+                            
+                            // get the settings
+                            var name = String(this.nameField.getValue()).trim();
+                            var email = String(this.emailField.getValue()).trim();
+                            var timeformat = String(this.timeFormatField.getValue()).trim();
+                            var dateformat = String(this.dateFormatField.getValue()).trim();
+                            var callsperpage = String(this.callsPerPageField.getValue()).trim();
+                            var showcalls = String(this.showCallsField.getValue()).trim();
+                            var ordercalls = String(this.orderCallsField.getValue()).trim();
+                            var showclosed = this.showClosedField.getValue();
+                            var commentorder = String(this.commentOrderField.getValue()).trim();
+                            
+                            // set the values that we can
+                            if (name.length) { Mantis.User.setVar('name',name); }
+                            if (email.length) { Mantis.User.setVar('email',email); }
+                            if (timeformat.length) { Mantis.User.setVar('timeformat',timeformat); }
+                            if (dateformat.length) { Mantis.User.setVar('dateformat',dateformat); }
+                            if (callsperpage.length) { Mantis.User.setVar('callsperpage',callsperpage); }
+                            if (showcalls.length) { Mantis.User.setVar('showcalls',showcalls); }
+                            if (ordercalls.length) { Mantis.User.setVar('ordercalls',ordercalls); }
+                            Mantis.User.setVar('showclosed',showclosed);
+                            if (commentorder.length) { Mantis.User.setVar('commentorder',commentorder); }
+                            
+                            // and commit the changes
+                            Mantis.User.commit();
+                        }
+                    }, 
+                    scope: this
+                });
+                
+                // the button for clearing the password change form
+                this.resetSettingsButton = new Ext.Button({
+                    text: "Reset", 
+                    handler: function () {
+                        // reset all the variables from the user object
+                        this.nameField.setValue(Mantis.User.getVar('name'));
+                        this.emailField.setValue(Mantis.User.getVar('email'));
+                        this.timeFormatField.setValue(Mantis.User.getVar('timeformat'));
+                        this.dateFormatField.setValue(Mantis.User.getVar('dateformat'));
+                        this.callsPerPageField.setValue(Mantis.User.getVar('callsperpage'));
+                        this.showCallsField.setValue(Mantis.User.getVar('showcalls'));
+                        this.orderCallsField.setValue(Mantis.User.getVar('ordercalls'));
+                        this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
+                        this.commentOrderField.setValue(Mantis.User.getVar('commentorder'));
+                    }, 
+                    scope: this
+                });
+                
+                // notifications panel
                 this.notificationsForm = new Ext.form.FormPanel({
                     id: "Mantis.User.Preferences.notificationsForm",
                     title:'Notification Settings',
