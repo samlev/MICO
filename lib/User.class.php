@@ -338,7 +338,35 @@ class User {
     function add_notification($call_id,$type,$comment_id=null) {
         // check if the user wants to recieve notifications
         if ($this->get_var_default('sendnotifications',false)) {
+            // build the call
+            $call = Call::by_id($call_id);
             
+            // check if the user wants to be notified for calls of this priority
+            if ($this->get_var($call->get_priority().'notifytime') != 'never') {
+                // check it the user wants notifications for call updates of this type
+                if ($this->get_var($call->get_priority().'notifyreason') == 'update' || $type == 'assigned') {
+                    // add the notification
+                    $date = '';
+                    switch ($this->get_var($call->get_priority().'notifytime')) {
+                        case 'immediate':
+                            // set an impossibly early date so that the notification is sent on the next run
+                            $date = '1970-01-01 00:00:00';
+                            break;
+                        case '30mins':
+                            // find the next 30 minutes
+                            if (intval(date('i')) < 30) {
+                                $date = date('Y-m-d H:i:00', strtotime('+'.(30-intval(date('i'))).' minutes'));
+                            } else {
+                                $date = date('Y-m-d H:i:00', strtotime('+'.(60-intval(date('i'))).' minutes'));
+                            }
+                            break;
+                        case '60mins':
+                            // find the next 60 minutes
+                            $date = date('Y-m-d H:i:00', strtotime('+'.(60-intval(date('i'))).' minutes'));
+                            break;
+                    }
+                }
+            }
         }
         
         // set the 'last update' variable - not meaningful just unique
