@@ -82,6 +82,11 @@ Mantis.User.Preferences = function () {
                 this.settingsFieldset = new Ext.form.FieldSet({
                     title: 'Your settings',
                     items: [
+                        {
+                            html: 'Your name and email address are used to notify you of calls assigned to you, '+
+                                  'and for resetting your passowrd. Please ensure that they are correct.',
+                            bodyStyle:'padding-bottom:8px;'
+                        },
                         this.nameField,
                         this.emailField
                     ]
@@ -215,6 +220,11 @@ Mantis.User.Preferences = function () {
                 this.preferencesFieldset = new Ext.form.FieldSet({
                     title: 'Display preferences',
                     items: [
+                        {
+                            html: 'The date and time format settings will take affect immediately, but the other '+
+                                  'settings may not take affect until the next time you log in.',
+                            bodyStyle:'padding-bottom:8px;'
+                        },
                         this.timeFormatField,
                         this.dateFormatField,
                         this.callsPerPageField,
@@ -230,6 +240,7 @@ Mantis.User.Preferences = function () {
                     text: "Save Settings", 
                     handler: function () {
                         if (this.settingsPanel.getForm().isValid()) {
+                            // notify the user that we're saving their settings
                             Ext.Msg.wait('Save Settings','Saving your settings',{
                                 closable:false,
                                 modal:true
@@ -265,8 +276,8 @@ Mantis.User.Preferences = function () {
                 });
                 
                 // the button for clearing the password change form
-                this.clearSettingsButton = new Ext.Button({
-                    text: "Clear", 
+                this.resetSettingsButton = new Ext.Button({
+                    text: "Reset", 
                     handler: function () {
                         // reset all the variables from the user object
                         this.nameField.setValue(Mantis.User.getVar('name'));
@@ -295,8 +306,8 @@ Mantis.User.Preferences = function () {
                             layout:'hbox',
                             items: [
                                 this.saveSettingsButton,
-                                { html: '&nbsp;',bodyStyle: "background-color:#dfe8f6;" },
-                                this.clearSettingsButton
+                                { html: '&nbsp;' },
+                                this.resetSettingsButton
                             ]
                         }
                     ],
@@ -363,6 +374,16 @@ Mantis.User.Preferences = function () {
                     blankText: "You must enter your password"
                 });
                 
+                this.passwordFieldset = new Ext.form.FieldSet({
+                    title: 'Change your password',
+                    items: [
+                        this.oldPasswordField,
+                        this.passwordField,
+                        this.passwordStrengthIndicator,
+                        this.passwordConfirmField
+                    ]
+                });
+                
                 // The button for changing the user's password
                 this.passwordChangeButton = new Ext.Button({
                     text: "Change Password", 
@@ -426,18 +447,44 @@ Mantis.User.Preferences = function () {
                     labelWidth:140,
                     layout:'form',
                     items: [
-                        this.oldPasswordField,
-                        this.passwordField,
-                        this.passwordStrengthIndicator,
-                        this.passwordConfirmField,
+                        {
+                            html: 'There are no restrictions on your password, but a medium-strong password is advised',
+                            bodyStyle:'padding-bottom:8px;'
+                        },
+                        this.passwordFieldset,
                         {
                             layout:'hbox',
                             items: [
                                 this.passwordChangeButton,
-                                { html: '&nbsp;',bodyStyle: "background-color:#dfe8f6;" },
+                                { html: '&nbsp;' },
                                 this.clearPasswordFormButton
                             ]
                         }
+                    ], 
+                    cls: 'main-form-panel',
+                    bodyStyle: "padding:5px;"
+                });
+                
+                // notification settings panel
+                this.notificationFieldset = new Ext.form.FieldSet({
+                    title: 'Email notification options',
+                    items: [
+                        { html : ''}
+                    ]
+                });
+                
+                this.notificationsForm = new Ext.form.FormPanel({
+                    id: "Mantis.User.Preferences.notificationsForm",
+                    title:'Notification Settings',
+                    labelWidth:140,
+                    layout:'form',
+                    items: [
+                        {
+                            html: 'This section allows you to manage your email notification settings. '+
+                                  'Notifications are only sent to you about calls that are assigned to you.',
+                            bodyStyle:'padding-bottom:8px;'
+                        },
+                        this.notificationFieldset
                     ], 
                     cls: 'main-form-panel',
                     bodyStyle: "padding:5px;"
@@ -448,7 +495,8 @@ Mantis.User.Preferences = function () {
                     id:'Mantis.User.Preferences.panel',
                     items: [
                         this.settingsPanel,
-                        this.changePasswordForm
+                        this.changePasswordForm,
+                        this.notificationsForm
                     ],
                     activeItem:0
                 });
