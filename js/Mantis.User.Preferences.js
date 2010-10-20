@@ -282,13 +282,13 @@ Mantis.User.Preferences = function () {
                         // reset all the variables from the user object
                         this.nameField.setValue(Mantis.User.getVar('name'));
                         this.emailField.setValue(Mantis.User.getVar('email'));
-                        this.timeFormatField.setValue(Mantis.User.getVar('timeformat'));
-                        this.dateFormatField.setValue(Mantis.User.getVar('dateformat'));
-                        this.callsPerPageField.setValue(Mantis.User.getVar('callsperpage'));
-                        this.showCallsField.setValue(Mantis.User.getVar('showcalls'));
-                        this.orderCallsField.setValue(Mantis.User.getVar('ordercalls'));
-                        this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
-                        this.commentOrderField.setValue(Mantis.User.getVar('commentorder'));
+                        this.timeFormatField.setValue(Mantis.User.getVarDefault('timeformat','g:ia'));
+                        this.dateFormatField.setValue(Mantis.User.getVarDefault('dateformat','jS M, Y'));
+                        this.callsPerPageField.setValue(Mantis.User.getVarDefault('callsperpage','30'));
+                        this.showCallsField.setValue(Mantis.User.getVarDefault('showcalls','assigned'));
+                        this.orderCallsField.setValue(Mantis.User.getVarDefault('ordercalls','recent'));
+                        this.showClosedField.setValue(Mantis.User.getVarDefault('showclosed',false));
+                        this.commentOrderField.setValue(Mantis.User.getVarDefault('commentorder','newest'));
                     }, 
                     scope: this
                 });

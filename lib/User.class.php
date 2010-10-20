@@ -199,6 +199,9 @@ class User {
     function get_var($var) {
         return $this->vars[$var];
     }
+    function get_var_default($var,$default) {
+        return (isset($this->vars[$var])?$this->vars[$var]:$default);
+    }
     function get_vars() {
         return $this->vars;
     }
@@ -325,6 +328,22 @@ class User {
         } else {
             throw new UserNotFoundException("Cannot find user information");
         }
+    }
+    
+    /** Adds a notification, and sets the 'last update' variable for the user
+     * @param int $call_id The ID of the call to notify the user about
+     * @param string $type The type of notification ('assigned' or 'update')
+     * @param int $comment_id The id of the comment associated with the update (if one exists)
+     */
+    function add_notification($call_id,$type,$comment_id=null) {
+        // check if the user wants to recieve notifications
+        if ($this->get_var_default('sendnotifications',false)) {
+            
+        }
+        
+        // set the 'last update' variable - not meaningful just unique
+        $this->set_var('lastupdate',md5(time().$call_id.($comment_id==null?'added':$comment_id)));
+        $this->commit();
     }
     
     /** Commits all changes to the object (essentially saves to the database) */
