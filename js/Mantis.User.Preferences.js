@@ -465,18 +465,176 @@ Mantis.User.Preferences = function () {
                     bodyStyle: "padding:5px;"
                 });
                 
+                // Send notifications field
+                this.sendNotificationsField = new Ext.form.Checkbox({
+                    fieldLabel:'Send me email notifications',
+                    checked: Mantis.User.getVar('sendnotifications')
+                });
+                
+                // critical calls
+                this.criticalNotifyTime = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 150,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['immediate','immediately'],
+                            ['30mins','once every half hour'],
+                            ['60mins','once every hour'],
+                            ['never','never']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('criticalnotifytime','immediate'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                this.criticalNotifyReason = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 120,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['assigned','assigned to me'],
+                            ['updated','updated']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('criticalnotifyreason','updated'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                var criticalForm = {
+                    layout:'hbox',
+                    items:[
+                        {html:'For <b>CRITICAL</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        this.criticalNotifyTime,
+                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        this.criticalNotifyReason
+                    ],
+                    bodyStyle:'padding-top:2px;'
+                };
+                // urgent calls
+                this.urgentNotifyTime = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 150,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['immediate','immediately'],
+                            ['30mins','once every half hour'],
+                            ['60mins','once every hour'],
+                            ['never','never']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('urgentnotifytime','30mins'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                this.urgentNotifyReason = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 120,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['assigned','assigned to me'],
+                            ['updated','updated']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('urgentnotifyreason','updated'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                var urgentForm = {
+                    layout:'hbox',
+                    items:[
+                        {html:'For <b>URGENT</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        this.urgentNotifyTime,
+                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        this.urgentNotifyReason
+                    ],
+                    bodyStyle:'padding-top:2px;'
+                };
+                // moderate calls
+                this.moderateNotifyTime = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 150,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['immediate','immediately'],
+                            ['30mins','once every half hour'],
+                            ['60mins','once every hour'],
+                            ['never','never']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('moderatenotifytime','60mins'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                this.moderateNotifyReason = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    width: 120,
+                    store: new Ext.data.SimpleStore ({
+                        fields:['notify','view'],
+                        data: [
+                            ['assigned','assigned to me'],
+                            ['updated','updated']
+                        ]
+                    }),
+                    displayField:'view',
+                    valueField:'notify',
+                    value:Mantis.User.getVarDefault('moderatenotifyreason','updated'),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                var moderateForm = {
+                    layout:'hbox',
+                    items:[
+                        {html:'For <b>MODERATE</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        this.moderateNotifyTime,
+                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        this.moderateNotifyReason
+                    ],
+                    bodyStyle:'padding-top:2px;'
+                };
+                
+                
                 // notification settings panel
                 this.notificationFieldset = new Ext.form.FieldSet({
                     title: 'Email notification options',
                     items: [
-                        { html : ''}
+                        this.sendNotificationsField,
+                        criticalForm,
+                        urgentForm,
+                        moderateForm
                     ]
                 });
                 
                 this.notificationsForm = new Ext.form.FormPanel({
                     id: "Mantis.User.Preferences.notificationsForm",
                     title:'Notification Settings',
-                    labelWidth:140,
+                    labelWidth:160,
                     layout:'form',
                     items: [
                         {
