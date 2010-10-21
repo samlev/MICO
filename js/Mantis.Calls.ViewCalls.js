@@ -489,7 +489,7 @@ Mantis.Calls.ViewCalls = function () {
                 if (rec.get('users')[0].id == Mantis.User.user_id) {
                     callInfoHTML += " <b>You</b>";
                 } else {
-                    callInfoHTML += rec.get('users')[0].name;
+                    callInfoHTML += " "+rec.get('users')[0].name;
                 }
             }
             

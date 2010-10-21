@@ -378,7 +378,7 @@ class User {
                     // Run the notifier
                     if ($this->get_var($call->get_priority().'notifytime')=='immediate') {
                         // TODO: build the notifier
-                        // Notifier::run();
+                        Notifier::run();
                     }
                 }
             }
