@@ -39,13 +39,13 @@ if (!$error) {
     if ($user) {
         
         // Check that the requested file exists
-        if ($user->get_role()=='admin' && file_exists ("api-admin/".$_GET ["f"].".php")) {
+        if ($user->get_role()=='admin' && api_exists ("api-admin",$_GET ["f"])) {
             // admin apis can override normal and manager apis, but only users with admin access can hit them
             require_once ("api-admin/".$_GET ["f"].".php");
-        } else if (($user->get_role()=='admin' || $user->get_role()=='manager') && file_exists ("api-manager/".$_GET ["f"].".php")) {
+        } else if (($user->get_role()=='admin' || $user->get_role()=='manager') && api_exists ("api-manager",$_GET ["f"])) {
             // manager apis can override normal apis, but only users with admin or manager access can hit them
             require_once ("api-manager/".$_GET ["f"].".php");
-        } else if (file_exists ("api/".$_GET ["f"].".php")) {
+        } else if (api_exists ("api",$_GET ["f"])) {
             // regular API
             require_once ("api/".$_GET ["f"].".php");
         } else {
@@ -54,7 +54,7 @@ if (!$error) {
         }
     } else {
         // we can only check the public API
-        if (file_exists ("api-public/".$_GET ["f"].".php")) {
+        if (api_exists ("api-public",$_GET ["f"])) {
             // Include the remote API file for processing
             require_once ("api-public/".$_GET ["f"].".php");
         } else {
