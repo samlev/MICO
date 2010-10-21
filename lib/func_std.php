@@ -138,6 +138,26 @@ function html_scrub($in) {
     return $out;
 }
 
+/** Checks to see if the requested API function is an actual API function so as
+ * to protect against remote file inclusion
+ * @see http://en.wikipedia.org/wiki/Remote_File_Inclusion
+ * @param string $section The API section to search
+ * @param string $name The API function to check for
+ * @return bool True if it exists, and is valid, false if not.
+ */
+function api_exists($section,$name) {
+    $exists = false;
+    
+    // check that the API requested contains only valid alpha-numeric characters
+    if (preg_match('/^[a-zA-Z0-9]+$/',$name)) {
+        if (file_exists($section.'/'.$name.'.php')) {
+            $exists = true;
+        }
+    }
+    
+    return $exists;
+}
+
 // JSON helper functions (pre php 5.2 compatibility)
 if (!function_exists('json_encode')) {
     // pull in the json library
