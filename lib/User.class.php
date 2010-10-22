@@ -374,12 +374,6 @@ class User {
                                       '".mysql_real_escape_string($date)."',
                                       ".($comment_id===null?'NULL':intval($comment_id)).")";
                     run_query($query);
-                    
-                    // Run the notifier
-                    if ($this->get_var($call->get_priority().'notifytime')=='immediate') {
-                        // TODO: build the notifier
-                        Notifier::run();
-                    }
                 }
             }
         }

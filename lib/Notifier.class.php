@@ -19,6 +19,18 @@ class Notifier {
         while ($tries < 5) {
             // get the notifier lock
             if (Notifier::get_lock()) {
+                $date = date('Y-m-d H:i:s');
+                
+                // get calls for the notifier
+                $query = "SELECT un.`id`, un.`user_id`,un.`call_id`,c.`priority`,
+                                 un.`type`,un.`notify_after`,un.`comment_id`
+                                 cc.`date`,cc.`action`,cc.`comment`
+                          FROM `".DB_PREFIX."user_notifications` un
+                          INNER JOIN `".DB_PREFIX."calls` c ON c.`id` = un.`call_id`
+                          LEFT JOIN `".DB_PREFIX."call_comments` cc ON cc.`id` = un.`comment_id`
+                          WHERE un.`notify_after` <= '$date'
+                          AND un.`notification_sent` IS NULL
+                          ORDER BY un.`user_id` ASC, c.`priority` ASC, un.`type` ASC, un.`comment_id` ASC";
                 
                 // done, so release the lock and get out of the loop
                 Notifier::release_lock();
