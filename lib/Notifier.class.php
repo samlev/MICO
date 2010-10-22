@@ -31,6 +31,25 @@ class Notifier {
                           WHERE un.`notify_after` <= '$date'
                           AND un.`notification_sent` IS NULL
                           ORDER BY un.`user_id` ASC, c.`priority` ASC, un.`type` ASC, un.`comment_id` ASC";
+                $res = run_query($query);
+                
+                // set up some variables
+                $notifyids = array();
+                $users = array();
+                
+                // now pull out the notifications
+                while ($row = mysql_fetch_assoc($res)) {
+                    $notifyids[] = $row['id'];
+                    
+                    // set up the in the array (if it doesn't exist yet)
+                    if (!isset($users[$row['userid']])) {
+                        $users[$row['userid']] = array('user'=>User::by_id($row['userid']),
+                                                       'notifications'=>array());
+                    }
+                    
+                    // add to the user's notifications array
+                    $users[$row['userid']]['notifications'][] = $row;
+                }
                 
                 // done, so release the lock and get out of the loop
                 Notifier::release_lock();
