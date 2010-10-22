@@ -137,9 +137,12 @@ class Call {
         if ($id > 0 && !in_array($id,$this->users)) {
             if (!isset($this->changes["user"])) { $this->changes["user"] = array(); }
             // add the change
-            if (!in_array($id,$this->changes["user"])) {
-                $this->dirty = true;
-                $this->changes["user"][] = $id;
+            if (!array_key_exists($id,$this->changes["user"])) {
+                try {
+                    $u = User::by_id($id);
+                    $this->dirty = true;
+                    $this->changes["user"][$id] = $u;
+                } catch (UserException $e) { /* Silently discard */ }
             }
         }
     }
@@ -299,7 +302,7 @@ class Call {
                     if (isset($this->changes['user'])) {
                         // simple way of sorting out the user queries
                         $user_queries = array();
-                        foreach ($this->changes['user'] as $u_id) {
+                        foreach ($this->changes['user'] as $u_id=>$user) {
                             $user_queries[] = "(".intval($u_id).",".intval($this->id).")";
                         }
                         
@@ -338,6 +341,23 @@ class Call {
                                       '".mysql_real_escape_string($comment_text)."', -- the comment action text
                                       '".mysql_real_escape_string($this->changes['comment'])."')";
                     run_query($query);
+                    
+                    // get the comment id
+                    $c_id = mysql_insert_id();
+                    
+                    // notify new users added to the call
+                    foreach ($this->changes['user'] as $u) {
+                        $u->add_notification($this->id,'assigned',$c_id);
+                    }
+                    
+                    // notify old users of the update
+                    $users = $this->get_users();
+                    foreach ($users as $u) {
+                        // dont' notify the user that did the update
+                        if ($this->changes['updater'] !== null && $u->get_id() != $this->changes['updater']->get_id()) {
+                            $u->add_notification($this->id,'update',$c_id);
+                        }
+                    }
                     
                     // and now that we're done, re-sync with the database
                     $this->load();

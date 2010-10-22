@@ -55,7 +55,8 @@ class PasswordReset {
                 $body .= "* Please note: The server time may vary from your local time.";
                 
                 // set the 'from' address
-                $header = "From: ".Settings::get('mail_from');
+                $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
+                $header .= "From: ".Settings::get('mail_from') . "\r\n";
                 
                 // and send the email
                 if (!mail($email,"Mantis CRM Password Reset Request",$body,$header)) {
@@ -116,7 +117,8 @@ class PasswordReset {
                 $body .= "* Please note: The server time may vary from your local time.";
                 
                 // set the 'from' address
-                $header = "From: ".Settings::get('mail_from');
+                $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
+                $header .= "From: ".Settings::get('mail_from') . "\r\n";
                 
                 // and send the email
                 if (!mail($email,"Mantis CRM Registration",$body,$header)) {

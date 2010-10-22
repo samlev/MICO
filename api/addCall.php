@@ -66,17 +66,23 @@ if (is_array($users) && count($users) == 0) {
         $c_id = intval($c_id);
         // make a list of all valid user links
         $user_links = array();
+        $user_objects = array();
         foreach ($users as $u_id) {
             //clean up the user id (this has been done earlier, but better to be safe than sorry)
             $u_id = intval($u_id);
             
-            // check if the user is a valid, active user
-            $query = "SELECT * FROM `".DB_PREFIX."users` WHERE `id`=$u_id AND `role`!='disabled'";
-            $res = run_query($query);
-            
-            // add to the 'user links' array
-            if (mysql_num_rows($res)) {
-                $user_links[] = "($u_id,$c_id)";
+            // don't double-add
+            if (!array_key_exists($u_id,$user_objects)) {
+                try {
+                    $u = User::by_id($u_id);
+                    
+                    $user_objects[$u_id] = $u;
+                    
+                    // add to the 'user links' array
+                    if (mysql_num_rows($res)) {
+                        $user_links[] = "($u_id,$c_id)";
+                    }
+                } catch (UserException $e) { /* Silently discard */ }
             }
         }
         
@@ -87,6 +93,11 @@ if (is_array($users) && count($users) == 0) {
                         (`user_id`,`call_id`)
                       VALUES ".implode(',',$user_links);
             run_query($query);
+            
+            // and notify the users
+            foreach ($user_objects as $u) {
+                $u->add_notification($c_id,'assigned',null);
+            }
             
             // and that's it!
             $data = array("success"=>true);

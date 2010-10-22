@@ -34,18 +34,74 @@ class Settings {
         
         return $val;
     }
+    /** Gets a system setting or a default if it doesn't exist
+     * @param string $key The setting name to get
+     * @param mixed $default The default to use if the setting doesn't exist
+     * @return mixed The value
+     */
+    static function get_default($key,$default) {
+        $val = $default;
+        
+        // pull the latest entry from the database
+        $query = "SELECT `value`
+                  FROM `".DB_PREFIX."settings`
+                  WHERE `key`='".mysql_real_escape_string($key)."'
+                  ORDER BY `set` DESC
+                  LIMIT 1";
+        $res = run_query($query);
+        
+        // check that we got something
+        if ($row = mysql_fetch_assoc($res)) {
+            $val = unserialize($row['value']);
+        }
+        
+        return $val;
+    }
     
     /** Sets a system setting
-     * @param string $key The setting name to get
+     * @param string $key The setting name to set
      * @param mixed $val The setting value
      */
     static function set($key, $val) {
+        $date = date('Y-m-d H:i:s');
+        
         // Save to the database
         $query = "INSERT INTO `".DB_PREFIX."settings`
                          (`key`,`value`,`set`)
                   VALUES ('".mysql_real_escape_string($key)."',
                           '".mysql_real_escape_string(serialize($val))."',
-                          NOW())";
+                          '".mysql_real_escape_string($date)."')";
+        run_query($query);
+    }
+    
+    /** Overrides a system setting (no history)
+     * @param string $key The setting name to set
+     * @param mixed $val The setting value
+     */
+    static function override($key, $val) {
+        $date = date('Y-m-d H:i:s');
+        
+        // check to see if the setting exists
+        $query = "SELECT `id`
+                  FROM `".DB_PREFIX."settings`
+                  WHERE `key`='".mysql_real_escape_string($key)."'
+                  ORDER BY `set` DESC
+                  LIMIT 1";
+        $res = run_query($query);
+        
+        // if the setting exists, update it
+        if ($row = mysql_fetch_assoc($res)) {
+            // Save to the database, overriding the last value
+            $query = "UPDATE `".DB_PREFIX."settings`
+                      SET `value` = '".mysql_real_escape_string(serialize($val))."',
+                           `set` = '".mysql_real_escape_string($date)."'
+                      WHERE `key`='".mysql_real_escape_string($key)."'
+                      ORDER BY `set` DESC
+                      LIMIT 1";
+        } else {
+            // insert it
+            Settings::set($key,$val);
+        }
         run_query($query);
     }
     
