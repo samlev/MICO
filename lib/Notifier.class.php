@@ -23,7 +23,7 @@ class Notifier {
                 
                 // get calls for the notifier
                 $query = "SELECT un.`id`, un.`user_id`,un.`call_id`,c.`priority`,
-                                 c.`caller_name`,c.`caller_company`, c.`message`,
+                                 c.`caller_name`,c.`company_name`, c.`message`,
                                  c.`date` AS `call_date`, c.`action` AS `call_action`,
                                  un.`type`,un.`notify_after`,un.`comment_id`,
                                  cc.`user_id` AS `comment_user`,cc.`date` AS `comment_date`,
