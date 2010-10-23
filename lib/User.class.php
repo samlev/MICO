@@ -344,7 +344,7 @@ class User {
             // check if the user wants to be notified for calls of this priority
             if ($this->get_var($call->get_priority().'notifytime') != 'never') {
                 // check it the user wants notifications for call updates of this type
-                if ($this->get_var($call->get_priority().'notifyreason') == 'update' || $type == 'assigned') {
+                if ($this->get_var($call->get_priority().'notifyreason') == 'updated' || $type == 'assigned') {
                     // add the notification
                     $date = '';
                     switch ($this->get_var($call->get_priority().'notifytime')) {
