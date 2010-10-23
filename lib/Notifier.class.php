@@ -44,7 +44,7 @@ class Notifier {
                 while ($row = mysql_fetch_assoc($res)) {
                     // set up the in the array (if it doesn't exist yet)
                     if (!isset($users[$row['userid']])) {
-                        $users[$row['userid']] = array('user'=>User::by_id($row['userid']),
+                        $users[$row['user_id']] = array('user'=>User::by_id($row['user_id']),
                                                        'notifications'=>array(),
                                                        'newcalls'=>false,
                                                        'updatedcalls'=>false);
@@ -55,9 +55,9 @@ class Notifier {
                     
                     // and a little helper for the email text
                     if ($row['type']=='assigned') {
-                        $users[$row['userid']]['newcalls'] = true;
+                        $users[$row['user_id']]['newcalls'] = true;
                     } else {
-                        $users[$row['userid']]['updatedcalls'] = true;
+                        $users[$row['user_id']]['updatedcalls'] = true;
                     }
                 }
                 
