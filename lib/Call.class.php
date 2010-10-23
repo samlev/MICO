@@ -355,7 +355,7 @@ class Call {
                     foreach ($users as $u) {
                         // dont' notify the user that did the update
                         if ($this->changes['updater'] !== null && $u->get_id() != $this->changes['updater']->get_id()) {
-                            $u->add_notification($this->id,'update',$c_id);
+                            $u->add_notification($this->id,'updated',$c_id);
                         }
                     }
                     
