@@ -79,9 +79,7 @@ if (is_array($users) && count($users) == 0) {
                     $user_objects[$u_id] = $u;
                     
                     // add to the 'user links' array
-                    if (mysql_num_rows($res)) {
-                        $user_links[] = "($u_id,$c_id)";
-                    }
+                    $user_links[] = "($u_id,$c_id)";
                 } catch (UserException $e) { /* Silently discard */ }
             }
         }
