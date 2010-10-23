@@ -67,13 +67,13 @@ class Notifier {
                     $notifyids = array();
                     
                     // get the email address and name
-                    $to = $u['user']->get('email');
+                    $to = $u['user']->get_var('email');
                     
                     // this is simeple helper text for the email body and the subject
                     $up_text = ($u['newcalls']?'new'.($u['updatedcalls']?' and updated':''):'updated').' call'.(count($u['notifications'])==1?'':'s');
                     
                     // start the body text off
-                    $body = $u['user']->get('name').','."\r\n";
+                    $body = $u['user']->get_var('name').','."\r\n";
                     $body .= 'You have '.count($u['notifications'])." $up_text.\r\n";
                     
                     $curr_priority = '';
