@@ -51,6 +51,11 @@ if (defined('PASSWORD_RESET')) {
     $js_array = $passreset;
 }
 
+// add the simple cron (if required)
+if (Settings::get_default('simplecron',false)) {
+    $js_array[] = 'Mantis.SimpleCron.js';
+}
+
 // and now output
 if (Settings::get('DEBUG_MODE')) {
     // output a link to each javascript file

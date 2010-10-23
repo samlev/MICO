@@ -3,9 +3,9 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: api.php
+ ** File: notify.php
  ** 
- ** Description: Calls API functions
+ ** Description: Simple cron file to send out notifications
  *******************************************************************************
  ******************************************************************************/
 // include the configuration file
