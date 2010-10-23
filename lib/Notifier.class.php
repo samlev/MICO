@@ -51,7 +51,7 @@ class Notifier {
                     }
                     
                     // add to the user's notifications array
-                    $users[$row['userid']]['notifications'][] = $row;
+                    $users[$row['user_id']]['notifications'][] = $row;
                     
                     // and a little helper for the email text
                     if ($row['type']=='assigned') {
