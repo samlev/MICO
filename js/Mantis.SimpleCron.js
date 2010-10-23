@@ -11,7 +11,7 @@ Mantis.SimpleCron = function () {
     return {
         /** Runs the cron */
         run: function () {
-            var conn;
+            var conn = new Ext.data.Connection();
             
             // call the notify function
             conn.request({
@@ -22,5 +22,6 @@ Mantis.SimpleCron = function () {
 } ();
 
 Ext.onReady (function () {
-    setInterval('Mantis.SimpleCron.run()',000);
+    // run the cron every 2 minutes
+    setInterval('Mantis.SimpleCron.run()',120000);
 });

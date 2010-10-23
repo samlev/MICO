@@ -424,6 +424,9 @@ Mantis.Calls.ViewCalls = function () {
                 
                 // and add the panel to the calls section
                 Mantis.Calls.addPanel(this.panel);
+                
+                // set up the auto updater
+                setTimeout('Mantis.Calls.checkUpdates()',15000);
             }
             
             // load the store

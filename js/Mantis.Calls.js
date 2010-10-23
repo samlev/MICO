@@ -98,6 +98,34 @@ Mantis.Calls = function () {
                 },
                 scope: this
             });
+        },
+        checkUpdates: function () {
+            var conn = new Ext.data.Connection();
+            
+            conn.request({
+                url:APP_ROOT+'/api.php?f=getLastUpdate',
+                params: { session: Mantis.User.getSession() },
+                callback: function (options, success, response) {
+                    var res = Ext.decode(response.responseText);
+                    if (success && res.success) {
+                        // check if there have been any updates
+                        if (res.lastupdate != Mantis.User.getVar('lastupdate')) {
+                            // don't reload if we're viewing a call
+                            if (Mantis.Calls.ViewCalls.grid.getSelectionModel().getCount() !== 1) {
+                                Mantis.Calls.ViewCalls.gridStore.reload();
+                                
+                                var dirty = Mantis.User.dirty;
+                                Mantis.User.setVar('lastupdate',res.lastupdate);
+                                Mantis.User.dirty = dirty;
+                            }
+                        }
+                    }
+                    
+                    // set the timeout to check again in 15 seconds
+                    this.updateTimeout = setTimeout('Mantis.Calls.checkUpdates()',15000);
+                },
+                scope: this
+            });
         }
     };
 } ();
