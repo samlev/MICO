@@ -194,7 +194,7 @@ class Notifier {
         $lock = false;
         
         // check if the lock is set
-        if (Settings::get_default('notifylock',false)) {
+        if (Settings::get_default('notifylock',false)==false) {
             // set the lock
             Settings::override('notifylock',true);
             $lock = true;
