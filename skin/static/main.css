@@ -131,6 +131,9 @@ body {
 }
 
 /* Basic skinning niceties */
+button:focus {
+	border:1px dotted #000000;
+}
 .x-panel-body {
     border:none;
 }
