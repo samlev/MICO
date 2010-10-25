@@ -594,6 +594,8 @@ Mantis.Calls.ViewCalls = function () {
                     var m = -1;
                 }
                 
+                var first = true;
+                
                 // display each of the comments
                 for (i; i != l; i+=m) {
                     var comment = comments[i];
@@ -635,7 +637,9 @@ Mantis.Calls.ViewCalls = function () {
                     // and the style
                     var bstyle = 'padding-top:3px;padding-bottom:3px;';
                     // add a separator
-                    if (i > 0) {
+                    if (first) {
+                        first = false;
+                    } else {
                         bstyle += 'border-top:1px dashed #DDDDDD;';
                     }
                     
