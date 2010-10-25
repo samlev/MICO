@@ -346,8 +346,10 @@ class Call {
                     $c_id = mysql_insert_id();
                     
                     // notify new users added to the call
-                    foreach ($this->changes['user'] as $u) {
-                        $u->add_notification($this->id,'assigned',$c_id);
+                    if (isset($this->changes['user'])) {
+                        foreach ($this->changes['user'] as $u) {
+                            $u->add_notification($this->id,'assigned',$c_id);
+                        }
                     }
                     
                     // notify old users of the update
