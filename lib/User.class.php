@@ -26,11 +26,11 @@ class User {
         $user = null;
         
         // Check that the session ID is actually plausibly valid
-        if (preg_match('/^[0-9a-f]{32}$/i',$session)) {
+        if (preg_match('/^[0-9a-f]{32}$/',$session)) {
             $query = "SELECT s.`user_id`, s.`last_action`, u.`role`
                       FROM `".DB_PREFIX."sessions` s
                       INNER JOIN `".DB_PREFIX."users` u ON s.`user_id` = u.`id`
-                      WHERE LOWER(`key`) LIKE LOWER('$session')"; // #NB: no need sanitise this, because we already check that it's sanitary. Like a wipe or something.
+                      WHERE `key` = '$session'"; // #NB: no need sanitise this, because we already check that it's sanitary.
             
             $res = run_query($query);
             
@@ -43,18 +43,19 @@ class User {
                         $time = date('Y-m-d H:i:s');
                         
                         // update the session
-                        run_query("UPDATE `".DB_PREFIX."sessions` SET `last_action`='".mysql_real_escape_string($time)."' WHERE LOWER(`key`) LIKE LOWER('$session')");
+                        run_query("UPDATE `".DB_PREFIX."sessions` SET `last_action`='".mysql_real_escape_string($time)."' WHERE `key` = '$session'");
                         
                         // and build the object
                         $user = new User();
                         $user->set_id($row['user_id']);
+                        $user->set_session($session);
                         $user->load();
                         
                         // refresh the cookie
                         setcookie('session',$session,strtotime($time.' +'.Settings::get('SESSION_LENGTH')));
                     } else {
                         // clear the session
-                        run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('$session')");
+                        run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE `key` = '$session'");
                         // clean up
                         run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
                         
@@ -62,7 +63,7 @@ class User {
                     }
                 } else {
                     // clear the session
-                    run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('$session')");
+                    run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE `key` = '$session'");
                     // clean up
                     run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
                     
@@ -165,12 +166,13 @@ class User {
             
             // Add the session, replacing any existing sessions
             $session = md5('user'.$row['id'].'at'.time());
-            run_query("REPLACE INTO `".DB_PREFIX."sessions` (`key`,`user_id`,`active_from`,`last_action`)
+            run_query("INSERT INTO `".DB_PREFIX."sessions` (`key`,`user_id`,`active_from`,`last_action`)
                        VALUES('$session',".intval($row['id']).",'".mysql_real_escape_string($time)."','".mysql_real_escape_string($time)."')");
             
             // and build the object
             $user = new User();
             $user->set_id($row['id']);
+            $user->set_session($session);
             $user->load();
             
             // set the cookie
@@ -309,7 +311,7 @@ class User {
         $u = intval($this->id);
         
         // Get the user information
-        $query = "SELECT u.`username`, u.`role`, u.`variables`, s.`key` AS session
+        $query = "SELECT u.`username`, u.`role`, u.`variables`
                   FROM `".DB_PREFIX."users` u
                   LEFT JOIN `".DB_PREFIX."sessions` s ON s.`user_id` = u.`id`
                   WHERE `id`=$u";
@@ -319,7 +321,6 @@ class User {
         if ($row = mysql_fetch_assoc($res)) {
             // fill out the object information
             $this->username = $row['username'];
-            $this->session = $row['session'];
             $this->role = $row['role'];
             $this->vars = unserialize($row['variables']);
             
@@ -403,13 +404,38 @@ class User {
         }
     }
     
+    /** Logs out the active user */
     function logout() {
         // clear the session
-        run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE LOWER(`key`) LIKE LOWER('".$this->session."')");
+        run_query("DELETE FROM `".DB_PREFIX."sessions` WHERE `key` = '".$this->session."'");
         // clean up
         run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
         // clear the cookie
         setcookie('session','',time()-3600);
+    }
+    
+    /** Checks for any sessions owned by this user that have been active within the last 5 minutes
+     * @return bool Whether the user is active or idle
+     */
+    function is_idle() {
+        $idle = true;
+        
+        // get 5 minutes ago
+        $time = strtotime('-5 minutes');
+        
+        // check if the user has a session that has been active within the last 5 minutes
+        $query = "SELECT `key`
+                  FROM `".DB_PREFIX."sessions`
+                  WHERE `user_id`=".intval($this->id)."
+                  AND `last_action` > '$time'
+                  LIMIT 1";
+        $res = run_query($query);
+        
+        // if we have any rows, then we're not idle
+        if (mysql_num_rows($res)) {
+            $idle = false;
+        }
+        return $idle;
     }
 }
 

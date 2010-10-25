@@ -24,11 +24,19 @@ while ($row = mysql_fetch_assoc($res)) {
         // get the user
         $temp_user = User::by_id($row['id']);
         
+        if ($temp_user->is_idle()) {
+            $status = "offline";
+            $statustext = "Offline";
+        } else {
+            $status = $temp_user->get_var_default('status','available');
+            $statustext = $temp_user->get_var_default('statustext','Available');
+        }
+        
         // pull out the info we need
         $u_data = array('id'=>$row['id'], // user id
                         'name'=>$temp_user->get_var('name'), // user's name
-                        'status'=>$temp_user->get_var('status'), // user's status (available, away, busy, offline)
-                        'statustext'=>$temp_user->get_var('statustext')); // status text ('In a meeting','out to lunch', etc.)
+                        'status'=>$status, // user's status (available, away, busy, offline)
+                        'statustext'=>$statustext); // status text ('In a meeting','out to lunch', etc.)
         
         // and add it to the array
         $users[] = $u_data;
