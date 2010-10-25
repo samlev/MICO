@@ -421,7 +421,7 @@ class User {
         $idle = true;
         
         // get 5 minutes ago
-        $time = strtotime('-5 minutes');
+        $time = date('Y-m-d H:i:s',strtotime('-5 minutes'));
         
         // check if the user has a session that has been active within the last 5 minutes
         $query = "SELECT `key`
