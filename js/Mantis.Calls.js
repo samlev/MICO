@@ -43,11 +43,10 @@ Mantis.Calls = function () {
                 
                 // Add to the main panel
                 Mantis.Application.addPanel(this.panel);
-                
-                // mark this panel as selected
-                Mantis.SystemMenu.markSelected(this.menuId);
             }
             
+            // mark this panel as selected
+            Mantis.SystemMenu.markSelected(this.menuId);
             Mantis.Application.showPanel('Mantis.Calls.panel');
         },
         /** Adds a panel to this panel

@@ -404,7 +404,7 @@ Mantis.Calls.AddCall = function () {
                     allowBlank:false,
                     required:true,
                     editable:false,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['priority','view'],
                         data: [
                             ['critical','Critical'],
@@ -431,7 +431,7 @@ Mantis.Calls.AddCall = function () {
                 this.callActionField = new Ext.form.ComboBox({
                     allowBlank:true,
                     editable:true,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['action'],
                         data: [
                             ['Call back ASAP'],

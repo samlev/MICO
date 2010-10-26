@@ -61,6 +61,7 @@ Mantis.Application = function () {
                     Mantis.SystemMenu.show(); // system and user menus
                     Mantis.Calls.init(); // initialize calls panel
                     Mantis.User.Preferences.init(); // initialize the user preferences panel
+                    Mantis.User.Status.init(); // initialize the user status panel
                     
                     // add the user logout menu
                     Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');

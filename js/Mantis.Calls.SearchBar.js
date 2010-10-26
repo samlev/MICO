@@ -24,7 +24,7 @@ Mantis.Calls.SearchBar = function () {
                 this.filterField = new Ext.form.ComboBox({
                     allowBlank:false,
                     editable:false,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: [
                             ['Calls assigned to me','assigned'],
@@ -47,7 +47,7 @@ Mantis.Calls.SearchBar = function () {
                 this.orderField = new Ext.form.ComboBox({
                     allowBlank:false,
                     editable:false,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: [
                             ['Most recent','recent'],

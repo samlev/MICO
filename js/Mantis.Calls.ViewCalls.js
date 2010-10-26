@@ -139,7 +139,7 @@ Mantis.Calls.ViewCalls = function () {
                 this.commentOrder = new Ext.form.ComboBox ({
                     allowBlank:false,
                     editable:false,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: [
                             ['Oldest First','oldest'],
@@ -233,7 +233,7 @@ Mantis.Calls.ViewCalls = function () {
                     allowBlank:false,
                     required:false,
                     editable:false,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['priority','view'],
                         data: [
                             ['critical','Critical'],

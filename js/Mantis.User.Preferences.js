@@ -101,7 +101,7 @@ Mantis.User.Preferences = function () {
                     editable:false,
                     required:true,
                     fieldLabel:'Time format',
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['format','dispaly'],
                         data: [
                             ['g:ia','12 hour with am/pm ('+now.format('g:ia')+')'],
@@ -123,7 +123,7 @@ Mantis.User.Preferences = function () {
                     editable:false,
                     required:true,
                     fieldLabel:'Date format',
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['format','dispaly'],
                         data: [
                             ['jS M, Y','Textual ('+now.format('jS M, Y')+')'],
@@ -146,7 +146,7 @@ Mantis.User.Preferences = function () {
                     editable:false,
                     required:true,
                     fieldLabel:'Calls per page',
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['calls'],
                         data: [
                             ['10'],
@@ -202,7 +202,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Call Comment Order',
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: [
                             ['Oldest First','oldest'],
@@ -477,7 +477,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 150,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['immediate','immediately'],
@@ -497,7 +497,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 120,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['assigned','assigned to me'],
@@ -526,7 +526,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 150,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['immediate','immediately'],
@@ -546,7 +546,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 120,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['assigned','assigned to me'],
@@ -575,7 +575,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 150,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['immediate','immediately'],
@@ -595,7 +595,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 120,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['assigned','assigned to me'],
@@ -624,7 +624,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 150,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['immediate','immediately'],
@@ -644,7 +644,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 120,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['assigned','assigned to me'],
@@ -673,7 +673,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 150,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['immediate','immediately'],
@@ -693,7 +693,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     width: 120,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
                         data: [
                             ['assigned','assigned to me'],

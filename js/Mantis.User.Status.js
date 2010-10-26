@@ -19,7 +19,7 @@ Mantis.User.Status = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('Set Status', 'Mantis.User.Preferences.show()','system');
+                this.menuId = Mantis.SystemMenu.addItem('Set Status', 'Mantis.User.Status.show()','system');
             }
         },
         /** Shows the panel */
@@ -30,10 +30,11 @@ Mantis.User.Status = function () {
                     this.init();
                 }
                 
+                // status field
                 this.statusField = new Ext.form.ComboBox({
                     allowBlank:false,
                     editable:false,
-                    store: new Ext.data.SimpleStore ({
+                    store: new Ext.data.ArrayStore ({
                         fields:['status','name'],
                         data: [
                             ['available','Available'],
@@ -44,23 +45,36 @@ Mantis.User.Status = function () {
                     }),
                     displayField:'name',
                     valueField:'status',
-                    value:Mantis.User.getVarDefault('status','available'),
                     mode:'local',
                     triggerAction:'all',
                     tpl:Mantis.Utils.userTemplate,
                     listeners: {
                         scope:this,
                         'select': function () {
-                            // TODO
+                            // load the store
+                            this.statusTextStore.loadData(this.statusText(this.statusField.getValue()),false);
+                            
+                            // if appear offline, don't give the user an option
+                            if (this.statusField.getValue() == "offline") {
+                                this.statusTextField.setValue('Offline');
+                                this.statusTextField.disable();
+                            } else {
+                                this.statusTextField.setValue(this.statusTextStore.getAt(0).get('text'));
+                                this.statusTextField.enable();
+                            }
                         }
-                    }
+                    },
+                    fieldLabel:'Status',
+                    width:160
                 });
                 
-                this.statusTextStore = new Ext.data.SimpleStore ({
+                // store
+                this.statusTextStore = new Ext.data.ArrayStore ({
                     fields:['text'],
                     data: this.statusText(Mantis.User.getVarDefault('status','available'))
                 });
                 
+                // status text
                 this.statusTextField = new Ext.form.ComboBox({
                     store: this.statusTextStore,
                     triggerAction: 'all',
@@ -69,30 +83,77 @@ Mantis.User.Status = function () {
                     allowBlank:true,
                     editable:true,
                     autoSelect:false,
-                    valueField:'name',
-                    displayField:'name',
-                    tpl:Mantis.Utils.callerTemplate('name'),
-                    mode:'remote',
+                    valueField:'text',
+                    displayField:'text',
+                    mode:'local',
                     enableKeyEvents: true,
-                    width:200,
-                    value:Mantis.User.getVarDefault('statustext','Available')
+                    width:160,
+                    lazyInit:false,
+                    fieldLabel:'Extra details',
+                    listeners: {
+                        scope:this,
+                        'focus': function () { this.statusTextField.doQuery('',true); }
+                    }
+                });
+                
+                this.setStatusButton = new Ext.Button({
+                    text:'Set Status',
+                    scope:this,
+                    handler: function() {
+                        Mantis.User.setVar('status',this.statusField.getValue());
+                        Mantis.User.setVar('statustext',this.statusTextField.getValue());
+                        Mantis.User.commit();
+                        this.panel.hide();
+                    }
+                });
+                
+                this.cancelButton = new Ext.Button({
+                    text:'Cancel',
+                    scope:this,
+                    handler: function() {
+                        this.panel.hide();
+                    }
                 });
                 
                 // set up the main panel
                 this.panel = new Ext.Window({
                     id:'Mantis.User.Status.panel',
-                    layout:form,
+                    layout:'form',
                     modal:true,
                     closable:false,
                     closeAction:'hide',
+                    height:110,
+                    width:300,
+                    bodyStyle:'padding:8px;',
                     items: [
                         this.statusField,
                         this.statusTextField
-                    ]
+                    ],
+                    buttons: [
+                        this.setStatusButton,
+                        this.cancelButton
+                    ],
+                    listeners:{
+                        scope: this,
+                        'hide': function () {
+                            // show the call panel when this dialog hides
+                            Mantis.Calls.show();
+                        }
+                    }
                 });
             }
             
             this.panel.show();
+            // set the values
+            this.statusField.setValue(Mantis.User.getVarDefault('status','available'));
+            this.statusTextField.setValue(Mantis.User.getVarDefault('statustext','Available'));
+            // enable/disable the 'statustext' field
+            if (this.statusField.getValue() == "offline") {
+                this.statusTextField.setValue('Offline');
+                this.statusTextField.disable();
+            } else {
+                this.statusTextField.enable();
+            }
         },
         statusText: function (status) {
             if (this.statusOptions === undefined) {
