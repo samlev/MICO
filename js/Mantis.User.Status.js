@@ -160,8 +160,8 @@ Mantis.User.Status = function () {
                 this.statusOptions = {
                     available:[['Available']],
                     offline:[['Offline']],
-                    busy:[['Busy','On the phone','In a meeting']],
-                    away:[['Away','Out to lunch','Not available']]
+                    busy:[['Busy'],['On the phone'],['In a meeting']],
+                    away:[['Away'],['Out to lunch'],['Not available']]
                 }
             }
             
