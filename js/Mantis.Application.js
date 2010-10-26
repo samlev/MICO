@@ -63,6 +63,11 @@ Mantis.Application = function () {
                     Mantis.User.Preferences.init(); // initialize the user preferences panel
                     Mantis.User.Status.init(); // initialize the user status panel
                     
+                    // initialises the manage users panel
+                    if (Mantis.ManageUsers !== undefined) {
+                        Mantis.ManageUsers.init ();
+                    }
+                    
                     // add the user logout menu
                     Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');
                 }

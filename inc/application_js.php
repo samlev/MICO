@@ -23,12 +23,14 @@ $authed = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js'
 $manager = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
                  'Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
                  'Mantis.Utils.js','Mantis.User.js','Mantis.User.Preferences.js',
-                 'Mantis.User.Status.js','manager/Mantis.Calls.SearchBar.js');
+                 'Mantis.User.Status.js','manager/Mantis.Calls.SearchBar.js',
+                 'manager/Mantis.ManageUsers.js');
 // administrators get more
 $admin = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
                'Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
                'Mantis.Utils.js','Mantis.User.js','Mantis.User.Preferences.js',
-               'Mantis.User.Status.js','manager/Mantis.Calls.SearchBar.js');
+               'Mantis.User.Status.js','manager/Mantis.Calls.SearchBar.js',
+               'manager/Mantis.ManageUsers.js');
 // and an odd case for password reset
 $passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 
