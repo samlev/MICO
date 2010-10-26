@@ -188,19 +188,7 @@ Mantis.Calls.ViewCalls = function () {
                 this.escalateCallRadio = new Ext.form.Radio({
                     boxLabel:'Escalate call',
                     checked:false,
-                    name:'action',
-                    listeners: {
-                        scope:this,
-                        'check': function () {
-                            if (this.escalateCallRadio.getValue()) {
-                                this.priorityCombo.enable();
-                                this.userCombo.enable();
-                            } else {
-                                this.priorityCombo.disable();
-                                this.userCombo.disable();
-                            }
-                        }
-                    }
+                    name:'action'
                 }); // when selected adds a user to the call (if selected), and changes the priority
                 this.justCommentRadio = new Ext.form.Radio({
                     boxLabel:'Just Comment',
@@ -249,7 +237,11 @@ Mantis.Calls.ViewCalls = function () {
                     mode:'local',
                     triggerAction:'all',
                     width:120,
-                    tpl:Mantis.Utils.priorityTemplate
+                    tpl:Mantis.Utils.priorityTemplate,
+                    listeners:{
+                        scope:this,
+                        'select': function () { this.escalateCallRadio.setValue(true); }
+                    }
                 });
                 
                 // user store
@@ -286,7 +278,8 @@ Mantis.Calls.ViewCalls = function () {
                     width:120,
                     listeners:{
                         scope:this,
-                        'focus': function () { this.userStore.load(); } // display the dropdown on focus
+                        'focus': function () { this.userStore.load(); }, // display the dropdown on focus,
+                        'select': function () { this.escalateCallRadio.setValue(true); }
                     }
                 });
                 
@@ -563,9 +556,9 @@ Mantis.Calls.ViewCalls = function () {
                 // enable the comment text
                 this.commentText.setValue('');
                 this.commentText.enable();
-                // disable the escalate fields
-                this.priorityCombo.disable();
-                this.userCombo.disable();
+                // enable the escalate fields
+                this.priorityCombo.enable();
+                this.userCombo.enable();
                 this.userCombo.reset();
                 // set the priority field
                 this.priorityCombo.setValue(rec.get('priority'));
