@@ -108,7 +108,8 @@ Mantis.ManageUsers = function () {
                     id:'Mantis.ManageUsers.userGrid',
                     store: this.userGridStore,
                     sm: new Ext.grid.RowSelectionModel({singleSelect:true}),
-                    autoSizeColumns: false, 
+                    autoSizeColumns: false,
+                    layout:'fit',
                     cm: new Ext.grid.ColumnModel([
                         {header: "Username", dataIndex: "username", id: "username", width: 100},
                         {header: "Name", dataIndex: "name", id: "name", width: 140},
