@@ -78,6 +78,6 @@ if ($row = mysql_fetch_assoc($res)) {
 }
 
 $data = array("success"=>true,
-              "users"=>$users,
+              "users"=>$users_sorted,
               "total"=>$total);
 ?>
