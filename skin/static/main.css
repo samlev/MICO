@@ -119,6 +119,13 @@ body {
 }
 /* end view call styles */
 
+/* User styles */
+.user-disabled {
+	color:#666666;
+	text-decoration: line-through;
+}
+/* end view call styles */
+
 /* Helper styles for dynamic scrolling for vbox panels */
 .dynamic-panel-scroll-y .x-box-inner {
 	overflow-y:auto;

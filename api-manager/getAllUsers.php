@@ -3,22 +3,47 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: api/getUsers.php
+ ** File: api-manager/getAllUsers.php
  ** 
- ** Description: Gets a simple list of all users
+ ** Description: Gets a list of all users for the 'Manage users' section
  *******************************************************************************
  ******************************************************************************/
 
+// never return the active user (easiest way to stop them from changing their own role)
 $u = intval($user->get_id());
 
+// get the filter and limit vars
+$f = $_POST['filter'];
+$start = (isset($_POST['start'])?intval($_POST['start']):0);
+$limit = (isset($_POST['limit'])?intval($_POST['limit']):30);
+
+// default to 'active'
+$filter = "`role` != 'disabled'";
+
+// check for other filters
+switch ($f) {
+    case 'all':
+        // return everything
+        $filter = '1';
+        break;
+    case 'inactive':
+    case 'user':
+    case 'manager':
+    case 'admin':
+        // return a specific role
+        $filter = "`role` = '$f'";
+        break;
+}
+
+// build the query
 $query = "SELECT `id` FROM `".DB_PREFIX."users`
-          WHERE `role` != 'disabled'
-          AND `id` != $u";
+          WHERE $filter
+          AND `id` != $u
+          LIMIT $start,$limit";
 
 $res = run_query($query);
 
 $users = array();
-$u_sort = array();
 
 while ($row = mysql_fetch_assoc($res)) {
     try {
@@ -40,20 +65,10 @@ while ($row = mysql_fetch_assoc($res)) {
                         'statustext'=>$statustext); // status text ('In a meeting','out to lunch', etc.)
         
         // and add it to the array
-        $users[$row['id']] = $u_data;
-        $u_sort[$row['id']] = $temp_user->get_var('name');
+        $users[] = $u_data;
     } catch (UserNotFoundException $e) { /* Don't worry if we can't get user details */ }
 }
 
-// sort the names
-asort($u_sort);
-// rebuild the array in a sorted manner
-$users_sorted = array();
-foreach ($u_sort as $k=>$dummy) {
-    $users_sorted[] = $users[$k];
-}
-
-
 $data = array("success"=>true,
-              "users"=>$users_sorted);
+              "users"=>$users);
 ?>
