@@ -146,6 +146,36 @@ Mantis.ManageUsers = function () {
             
             // load the store
             this.userGridStore.load({params:{start:0,limit:parseInt(Mantis.User.getVarDefault('callsperpage',30),10)}})
+        },
+        /** Sends a user a 'reset password' request
+         * @param id {int} The user ID
+         */
+        resetPassword: function(id) {
+            var conn = new Ext.data.Connection();
+            
+            // send the logout request
+            conn.request({
+                url:APP_ROOT+'/api.php?f=resetPassword',
+                params: {
+                    session: Mantis.User.getSession(),
+                    id: id
+                },
+                callback: function (options, success, response) {
+                    var res = Ext.decode(response.responseText);
+                    if (success && res.success) {
+                        // notify the user that the action was successful
+                        Ext.Msg.alert('Reset Password','A reset password email has been sent to the user');
+                    } else {
+                        Ext.Msg.hide();
+                        var msg = "Unknown system error";
+                        if (res.result !== undefined) {
+                            msg = res.result.info;
+                        }
+                        Ext.Msg.alert("Error", msg);
+                    }
+                },
+                scope: this
+            });
         }
     };
     

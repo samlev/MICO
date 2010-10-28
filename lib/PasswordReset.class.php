@@ -59,7 +59,7 @@ class PasswordReset {
                 $header .= "From: ".Settings::get('mail_from') . "\r\n";
                 
                 // and send the email
-                if (!mail($email,"Mantis CRM Password Reset Request",$body,$header)) {
+                if (!mail($email,"Mantis - Password Reset Request",$body,$header)) {
                     // there was an error sending the email. Clear the reset request
                     PasswordReset::clear_request($request);
                     
@@ -121,7 +121,7 @@ class PasswordReset {
                 $header .= "From: ".Settings::get('mail_from') . "\r\n";
                 
                 // and send the email
-                if (!mail($email,"Mantis CRM Registration",$body,$header)) {
+                if (!mail($email,"Mantis - User Registration",$body,$header)) {
                     // there was an error sending the email. Clear the reset request
                     PasswordReset::clear_request($request);
                     
