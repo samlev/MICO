@@ -35,7 +35,13 @@ try {
             case 'role':
                 // make sure the value isn't empty
                 if (in_array($value,array('admin','manager','user','disabled'))) {
-                    $u->set_role($value);
+                    // check that the user isn't changing thier own role
+                    if ($u->get_id() != $user->get_id()) {
+                        $u->set_role($value);
+                    } else {
+                        $error = true;
+                        $error_message = "You may not change your own role";
+                    }
                 } else {
                     $error = true;
                     $error_message = "Not a valid role";
