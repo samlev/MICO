@@ -21,7 +21,7 @@ try {
     $data = array("success"=>true);
 } catch (UserLoginException $e) {
     // couldn't log in - return the error message
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message=$e->getMessage();
 }
 ?>

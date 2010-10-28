@@ -77,8 +77,8 @@ Mantis.User = function () {
                     },
                     failure: function (res, opt) {
                         var msg = "Unknown system error";
-                        if (res.result !== undefined) {
-                            msg = res.result.info;
+                        if (res.info !== undefined) {
+                            msg = res.info;
                         }
                         Ext.Msg.alert("Error", msg);
                     },
@@ -116,8 +116,8 @@ Mantis.User = function () {
                     } else {
                         Ext.Msg.hide();
                         var msg = "Unknown system error";
-                        if (res.result !== undefined) {
-                            msg = res.result.info;
+                        if (res.info !== undefined) {
+                            msg = res.info;
                         }
                         Ext.Msg.alert("Error", msg);
                     }

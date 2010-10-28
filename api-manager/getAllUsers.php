@@ -23,7 +23,7 @@ switch ($f) {
         // return everything
         $filter = '1';
         break;
-    case 'inactive':
+    case 'disabled':
     case 'user':
     case 'manager':
     case 'admin':

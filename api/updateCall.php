@@ -54,8 +54,8 @@ try {
     $data = array("success"=>true);
 } catch (CallUpdateException $e) {
     // couldn't commit the update - return the error message
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message=$e->getMessage();
 }
 
 ?>

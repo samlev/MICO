@@ -66,7 +66,7 @@ Mantis.ManageUsers = function () {
                         fields:['type','filter'],
                         data: [
                             ['Active Users','active'],      // shows all users with roles 'user','manager', or 'admin'
-                            ['Inactive Users','inactive'],
+                            ['Inactive Users','disabled'],
                             ['Administrators','admin'],
                             ['Managers','manager'],
                             ['Standard Users','user'],
@@ -110,11 +110,37 @@ Mantis.ManageUsers = function () {
                     sm: new Ext.grid.RowSelectionModel({singleSelect:true}),
                     autoSizeColumns: false,
                     layout:'fit',
+                    clicksToEdit:1,
                     cm: new Ext.grid.ColumnModel([
-                        {header: "Username", dataIndex: "username", id: "username", width: 100},
-                        {header: "Name", dataIndex: "name", id: "name", width: 140},
-                        {header: "Email", dataIndex: "email", id: "email", width: 140},
-                        {header: "Role", dataIndex: "role", id: "role", width: 100},
+                        {header: "Username", dataIndex: "username", id: "username", width: 100, renderer: renderGeneric},
+                        {header: "Name", dataIndex: "name", id: "name", width: 140, renderer: renderGeneric, editor:new Ext.form.TextField({
+                            name:'email',
+                            allowBlank:false,
+                            required:true
+                        })},
+                        {header: "Email", dataIndex: "email", id: "email", width: 140, renderer: renderGeneric, editor:new Ext.form.TextField({
+                            name:'email',
+                            allowBlank:false,
+                            required:true
+                        })},
+                        {header: "Role", dataIndex: "role", id: "role", width: 100, renderer: renderRole, editor:new Ext.form.ComboBox ({
+                            allowBlank:false,
+                            editable:false,
+                            name:'role',
+                            store: new Ext.data.ArrayStore ({
+                                fields:['display','role'],
+                                data: [
+                                    ['Administrator','admin'],
+                                    ['Manager','manager'],
+                                    ['Standard User','user'],
+                                    ['Disabled','disabled']
+                                ]
+                            }),
+                            displayField:'display',
+                            valueField:'role',
+                            mode:'local',
+                            triggerAction:'all'
+                        })},
                         {header: "Reset password", id: "password", width: 100, renderer: renderResetPassword}
                     ]),
                     tbar:[
@@ -126,6 +152,52 @@ Mantis.ManageUsers = function () {
                     bbar:this.pager
                 });
                 
+                // user grid listeners
+                this.userGrid.on('beforeedit',function (e) {
+                    var allowedit = true;
+                    
+                    // if the user is disabled, only allow editing of the 'role' field
+                    if (e.record.get('role')=='disabled' && e.field != 'role') {
+                        allowedit = false;
+                    }
+                    
+                    return allowedit;
+                }, this);
+                
+                
+                this.userGrid.on('afteredit',function (e) {
+                    var conn = new Ext.data.Connection();
+                    
+                    // send the logout request
+                    conn.request({
+                        url:APP_ROOT+'/api.php?f=updateUser',
+                        params: {
+                            session: Mantis.User.getSession(),
+                            id: e.record.get('id'),
+                            field: e.field,
+                            value: e.value
+                        },
+                        callback: function (options, success, response) {
+                            var res = Ext.decode(response.responseText);
+                            if (success && res.success) {
+                                e.record.commit();
+                            } else {
+                                Ext.Msg.hide();
+                                var msg = "Unknown system error";
+                                if (res.info !== undefined) {
+                                    msg = res.info;
+                                }
+                                Ext.Msg.alert("Error", msg);
+                            }
+                        },
+                        scope: this
+                    });
+                    
+                    // if the user is disabled, only allow editing of the 'role' field
+                    if (e.record.get('role')=='disabled' && e.field != 'role') {
+                        allowedit = false;
+                    }
+                }, this);
                 
                 // set up the panel
                 this.panel = new Ext.Panel({
@@ -168,8 +240,8 @@ Mantis.ManageUsers = function () {
                     } else {
                         Ext.Msg.hide();
                         var msg = "Unknown system error";
-                        if (res.result !== undefined) {
-                            msg = res.result.info;
+                        if (res.info !== undefined) {
+                            msg = res.info;
                         }
                         Ext.Msg.alert("Error", msg);
                     }
@@ -187,6 +259,41 @@ Mantis.ManageUsers = function () {
         } else {
             value = '<a href="#" onclick="Mantis.ManageUsers.resetPassword('+rec.get('id')+')">Reset Password</a>';
         }
+        
+        // set the CSS class
+        meta.css = (rec.get('role')=='disabled'?'user-disabled':'');
+        
+        // and return our formatted value
+        return value;
+    }
+    
+    function renderRole(val, meta, rec, row, col, store) {
+        var value = '';
+        
+        switch (val) {
+            case 'admin':
+                value = 'Administrator';
+                break;
+            case 'manager':
+                value = 'Manager';
+                break;
+            case 'user':
+                value = 'Standard User';
+                break;
+            case 'disabled':
+                value = 'Disabled';
+                break;
+        }
+        
+        // set the CSS class
+        meta.css = (rec.get('role')=='disabled'?'user-disabled':'');
+        
+        // and return our formatted value
+        return value;
+    }
+    
+    function renderGeneric(val, meta, rec, row, col, store) {
+        var value = val;
         
         // set the CSS class
         meta.css = (rec.get('role')=='disabled'?'user-disabled':'');

@@ -24,7 +24,7 @@ try {
                   "info"=>"Password has successfully been changed");
 } catch (UserPasswordException $e) {
     // problem with the password
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message = $e->getMessage();
 }
 ?>

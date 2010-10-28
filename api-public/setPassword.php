@@ -28,11 +28,11 @@ try {
                   "info"=>"Password has successfully been set");
 } catch (UserNotFoundException $e) {
     // couldn't log in - return the error message
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message=$e->getMessage();
 } catch (UserPasswordException $e) {
     // problem with the password
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message=$e->getMessage();
 }
 ?>

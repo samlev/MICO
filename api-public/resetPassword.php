@@ -26,11 +26,11 @@ try {
                   "info"=>"An email was sent to $email with further isntructions.");
 } catch (UserNotFoundException $e) {
     // couldn't log in - return the error message
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message=$e->getMessage();
 } catch (PasswordResetException $e) {
     // There was a problem generating the request - return the error message
-    $data = array("success"=>false,
-                  "info"=>$e->getMessage());
+    $error = true;
+    $error_message=$e->getMessage();
 }
 ?>
