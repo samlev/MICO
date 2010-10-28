@@ -7,6 +7,8 @@
  ** Description: Basic utilities/helpers
  *******************************************************************************
  ******************************************************************************/
+Ext.namespace('Mantis.Utils');
+
 Mantis.Utils = function () {
     return {
         /** Tests the strength of a password, and returns it as an integer out

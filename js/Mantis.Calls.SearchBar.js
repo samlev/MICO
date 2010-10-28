@@ -26,10 +26,7 @@ Mantis.Calls.SearchBar = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: [
-                            ['Calls assigned to me','assigned'],
-                            ['Calls opened by me','opened']
-                        ]
+                        data: Mantis.Utils.CommonStores.callsSearchFilter
                     }),
                     displayField:'type',
                     valueField:'filter',
@@ -49,10 +46,7 @@ Mantis.Calls.SearchBar = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: [
-                            ['Most recent','recent'],
-                            ['Most urgent','urgent']
-                        ]
+                        data: Mantis.Utils.CommonStores.callsOrderFilter
                     }),
                     displayField:'type',
                     valueField:'filter',

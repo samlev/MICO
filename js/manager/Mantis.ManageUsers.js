@@ -129,16 +129,7 @@ Mantis.ManageUsers = function () {
                             name:'role',
                             store: new Ext.data.ArrayStore ({
                                 fields:['display','role'],
-                                data: (Mantis.User.role == 'admin'?[
-                                    ['Administrator','admin'],
-                                    ['Manager','manager'],
-                                    ['Standard User','user'],
-                                    ['Disabled','disabled']
-                                ] : [ // managers cannot add administrators
-                                    ['Manager','manager'],
-                                    ['Standard User','user'],
-                                    ['Disabled','disabled']
-                                ])
+                                data: Mantis.Utils.CommonStores.userTypesAll
                             }),
                             displayField:'display',
                             valueField:'role',
@@ -298,14 +289,7 @@ Mantis.ManageUsers = function () {
                     required:true,
                     store: new Ext.data.ArrayStore ({
                         fields:['display','role'],
-                        data: (Mantis.User.role == 'admin'?[
-                            ['Administrator','admin'],
-                            ['Manager','manager'],
-                            ['Standard User','user']
-                        ] : [ // managers cannot add administrators
-                            ['Manager','manager'],
-                            ['Standard User','user']
-                        ])
+                        data: Mantis.Utils.CommonStores.userTypesActive
                     }),
                     displayField:'display',
                     valueField:'role',

@@ -406,13 +406,7 @@ Mantis.Calls.AddCall = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['priority','view'],
-                        data: [
-                            ['critical','Critical'],
-                            ['urgent','Urgent'],
-                            ['moderate','Moderate'],
-                            ['minor','Minor'],
-                            ['negligible','Negligible']
-                        ]
+                        data: Mantis.Utils.CommonStores.callPriority
                     }),
                     displayField:'view',
                     valueField:'priority',

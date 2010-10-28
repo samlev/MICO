@@ -162,13 +162,13 @@ Mantis.User.Preferences = function () {
                     triggerAction:'all'
                 });
                 
-                // show calls field (cheat a bit with the store)
+                // show calls field
                 this.showCallsField = new Ext.form.ComboBox ({
                     allowBlank:false,
                     required:true,
                     editable:false,
                     fieldLabel:'Show',
-                    store: Mantis.Calls.SearchBar.filterField.getStore(),
+                    store: Mantis.Utils.CommonStores.callsSearchFilter,
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
@@ -182,7 +182,7 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Order',
-                    store: Mantis.Calls.SearchBar.orderField.getStore(),
+                    store: Mantis.Utils.CommonStores.callsOrderFilter,
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
