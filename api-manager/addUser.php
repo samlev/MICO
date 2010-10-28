@@ -29,28 +29,33 @@ if (preg_match('/^([a-z0-9]+[\.\-_]?[a-z0-9]*)+$/',$username)) {
         if (strlen($name) && strlen($email)) {
             // and that the role selected is valid
             if (in_array($role, array('admin','manager','user'))) {
-                // Got all of that? Add the user!
-                $query = "INSERT INTO `".DB_PREFIX."users` (`username`,`role`)
-                          VALUES ('".mysql_real_escape_string($username)."','$role')";
-                run_query($query);
-                
-                if ($id = mysql_insert_id()) {
-                    // build the user object
-                    $u = User::by_id($id);
+                if ($user->get_role() == 'admin' || $role != 'admin'){
+                    // Got all of that? Add the user!
+                    $query = "INSERT INTO `".DB_PREFIX."users` (`username`,`role`)
+                              VALUES ('".mysql_real_escape_string($username)."','$role')";
+                    run_query($query);
                     
-                    // add the name and email fields
-                    $u->set_var('name',$name);
-                    $u->set_var('email',$email);
-                    $u->commit();
-                    
-                    // now send a password reset request
-                    PasswordReset::new_user_request($u->get_username());
-                    
-                    // And build the response
-                    $data = array("success"=>true);
+                    if ($id = mysql_insert_id()) {
+                        // build the user object
+                        $u = User::by_id($id);
+                        
+                        // add the name and email fields
+                        $u->set_var('name',$name);
+                        $u->set_var('email',$email);
+                        $u->commit();
+                        
+                        // now send a password reset request
+                        PasswordReset::new_user_request($u->get_username());
+                        
+                        // And build the response
+                        $data = array("success"=>true);
+                    } else {
+                        $error = true;
+                        $error_message = "Error adding user";
+                    }
                 } else {
                     $error = true;
-                    $error_message = "Error adding user";
+                    $error_message = "You do not have permission to add an administrative user";
                 }
             } else {
                 $error = true;
