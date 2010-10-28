@@ -384,7 +384,9 @@ Mantis.ManageUsers = function () {
                         this.clearAddUsersButton,
                         this.hideAddUsersButton
                     ],
-                    bodyStyle:'padding:5px;'
+                    bodyStyle:'padding:5px;',
+                    width: 290,
+                    height: 180
                 });
             }
             
