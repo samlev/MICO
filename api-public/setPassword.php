@@ -11,7 +11,7 @@
  ******************************************************************************/
 
 // get the values
-$username = $_POST['username'];
+$username = strtolower($_POST['username']); // usernames are lower case
 $password1 = $_POST['password1'];
 $password2 = $_POST['password2'];
 $confirmation_key = $_POST['confirmation_key'];

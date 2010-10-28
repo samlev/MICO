@@ -254,6 +254,143 @@ Mantis.ManageUsers = function () {
                 },
                 scope: this
             });
+        },
+        // shows the 'add users' dialog
+        showAddUsers: function () {
+            if (this.addUsersPanel === undefined) {
+                // username field
+                this.usernameField = new Ext.form.TextField({
+                    fieldLabel:'Username',
+                    required:true,
+                    allowBlank:false
+                });
+                
+                // name field
+                this.nameField = new Ext.form.TextField({
+                    fieldLabel:'Name',
+                    required:true,
+                    allowBlank:false
+                });
+                
+                // email field
+                this.emailField = new Ext.form.TextField({
+                    fieldLabel:'Email',
+                    required:true,
+                    allowBlank:false
+                });
+                
+                this.roleField = new Ext.form.ComboBox ({
+                    fieldLabel:'Role',
+                    allowBlank:false,
+                    editable:false,
+                    required:true,
+                    store: new Ext.data.ArrayStore ({
+                        fields:['display','role'],
+                        data: [
+                            ['Administrator','admin'],
+                            ['Manager','manager'],
+                            ['Standard User','user']
+                        ]
+                    }),
+                    displayField:'display',
+                    valueField:'role',
+                    mode:'local',
+                    triggerAction:'all',
+                    value:'user',
+                    width:120
+                });
+                
+                // buttons
+                this.addUserButton = new Ext.Button({
+                    text:'Add User',
+                    scope: this,
+                    handler: function () {
+                        var conn = new Ext.data.Connection();
+                        
+                        conn.request({
+                            url:APP_ROOT+'/api.php?f=addUser',
+                            params: {
+                                session: Mantis.User.getSession(),
+                                username: this.usernameField.getValue(),
+                                name: this.nameField.getValue(),
+                                email: this.emailField.getValue(),
+                                role: this.roleField.getValue()
+                            },
+                            callback: function (options, success, response) {
+                                var res = Ext.decode(response.responseText);
+                                if (success && res.success) {
+                                    // notify the user that the action was successful
+                                    Ext.Msg.alert('User added','The user has been added. An email explaining the process for setting their password has been sent.');
+                                    
+                                    // clear the form
+                                    this.usernameField.reset();
+                                    this.nameField.reset();
+                                    this.emailField.reset();
+                                    this.roleField.reset();
+                                    
+                                    // reload the store
+                                    this.userGridStore.reload();
+                                } else {
+                                    Ext.Msg.hide();
+                                    var msg = "Unknown system error";
+                                    if (res.info !== undefined) {
+                                        msg = res.info;
+                                    }
+                                    Ext.Msg.alert("Error", msg);
+                                }
+                            },
+                            scope: this
+                        });
+                    }
+                });
+                this.clearAddUsersButton = new Ext.Button({
+                    text:'Clear',
+                    scope:this,
+                    handler: function () {
+                        // clear the fields
+                        this.usernameField.reset();
+                        this.nameField.reset();
+                        this.emailField.reset();
+                        this.roleField.reset();
+                    }
+                });
+                this.hideAddUsersButton = new Ext.Button({
+                    text:'Close',
+                    scope:this,
+                    handler: function () {
+                        // hide the dialog
+                        this.addUsersPanel.hide();
+                    }
+                });
+                
+                // build the panel
+                this.addUsersPanel = new Ext.Window({
+                    id:'Mantis.ManageUsers.addUsersPanel',
+                    closeAction:'hide',
+                    layout:'form',
+                    title:'Add Users',
+                    modal:true,
+                    items:[
+                        this.usernameField,
+                        this.nameField,
+                        this.emailField,
+                        this.roleField
+                    ],
+                    buttons:[
+                        this.addUserButton,
+                        this.clearAddUsersButton,
+                        this.hideAddUsersButton
+                    ],
+                    bodyStyle:'padding:5px;'
+                });
+            }
+            
+            this.addUsersPanel.show();
+            // clear the fields
+            this.usernameField.reset();
+            this.nameField.reset();
+            this.emailField.reset();
+            this.roleField.reset();
         }
     };
     

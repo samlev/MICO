@@ -90,7 +90,7 @@ if (isset($_COOKIE['session'])) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple CRM" id="mantisLogo" />
+      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple Call Centre" id="mantisLogo" />
       <div class="visual-clear"></div>
       <div id="userMenu"></div>
       <div id="systemMenu"></div>

@@ -10,7 +10,7 @@
  ******************************************************************************/
 
 // get the values
-$username = $_POST['username'];
+$username = strtolower($_POST['username']); // usernames are lowercase
 
 // attempt to log the user in
 try {

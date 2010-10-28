@@ -43,7 +43,7 @@ class PasswordReset {
                 // now finally, email the user - a simple text email
                 $body = "Dear ".$user->get_var('name').",\r\n\r\n";
                 $body .= "This email has been sent to you as part of the 'forgotten password'\r\n";
-                $body .= "process for Mantis CRM.\r\n\r\n";
+                $body .= "process for Mantis.\r\n\r\n";
                 $body .= "To change your password, visit the following link:\r\n";
                 $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
                 $body .= "This link will expire in approximately 24 hours, at ".date('h:i A',$expiry_time)."\r\n";
@@ -103,10 +103,10 @@ class PasswordReset {
                 // now finally, email the user - a simple text email
                 $body = "Dear ".$user->get('name').",\r\n\r\n";
                 $body .= "This email has been sent to you as part of the user registration\r\n";
-                $body .= "process for Mantis CRM.\r\n\r\n";
+                $body .= "process for Mantis.\r\n\r\n";
                 $body .= "To set your password for the first time, visit the following link:\r\n";
                 $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
-                $body .= "Your username for Mantis CRM is: $username\r\n\r\n";
+                $body .= "Your username for Mantis is: $username\r\n\r\n";
                 $body .= "This link will expire in approximately 72 hours, at ".date('h:i A',$expiry_time)."\r\n";
                 $body .= "on ".date('jS M, Y',$expiry_time).", server time*.\r\n\r\n";
                 $body .= "If the link expires before you can use it, you can also set your\r\n";
