@@ -194,6 +194,9 @@ Mantis.ManageUsers = function () {
                                     msg = res.info;
                                 }
                                 Ext.Msg.alert("Error", msg);
+                                
+                                // roll back the record
+                                e.record.reject();
                             }
                         },
                         scope: this

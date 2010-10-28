@@ -37,7 +37,17 @@ try {
                 if (in_array($value,array('admin','manager','user','disabled'))) {
                     // check that the user isn't changing thier own role
                     if ($u->get_id() != $user->get_id()) {
-                        $u->set_role($value);
+                        // ensure that managers can't escalate (or de-escalate) beyond their level
+                        if ($user->get_role() == "admin" || ($u->get_role() != "admin" && $value != "admin")) {
+                            $u->set_role($value);
+                        } else {
+                            $error = true;
+                            if ($u->get_role() == "admin") {
+                                $error_message = "You do not have permission to change that user's role";
+                            } else {
+                                $error_message = "You do not have permission to set that role";
+                            }
+                        }
                     } else {
                         $error = true;
                         $error_message = "You may not change your own role";
