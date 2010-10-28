@@ -182,11 +182,6 @@ Mantis.ManageUsers = function () {
                             if (success && res.success) {
                                 // commit the record
                                 e.record.commit();
-                                
-                                // reload the grid store if the 'role' field has changed
-                                if (e.field == 'role') {
-                                    this.userGridStore.reload();
-                                }
                             } else {
                                 Ext.Msg.hide();
                                 var msg = "Unknown system error";
