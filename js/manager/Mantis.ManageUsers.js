@@ -129,12 +129,16 @@ Mantis.ManageUsers = function () {
                             name:'role',
                             store: new Ext.data.ArrayStore ({
                                 fields:['display','role'],
-                                data: [
+                                data: (Mantis.User.role == 'admin'?[
                                     ['Administrator','admin'],
                                     ['Manager','manager'],
                                     ['Standard User','user'],
                                     ['Disabled','disabled']
-                                ]
+                                ] : [ // managers cannot add administrators
+                                    ['Manager','manager'],
+                                    ['Standard User','user'],
+                                    ['Disabled','disabled']
+                                ])
                             }),
                             displayField:'display',
                             valueField:'role',
@@ -158,6 +162,16 @@ Mantis.ManageUsers = function () {
                     
                     // if the user is disabled, only allow editing of the 'role' field
                     if (e.record.get('role')=='disabled' && e.field != 'role') {
+                        allowedit = false;
+                    }
+                    
+                    // if the user isnt' an administrator, don't allow them to edit administrators
+                    if (Mantis.User.role != 'admin' && e.record.get('role') == 'admin') {
+                        allowedit = false;
+                    }
+                    
+                    // don't allow the user to edit their own role
+                    if (Mantis.User.user_id == e.record.get('id') && e.field == 'role') {
                         allowedit = false;
                     }
                     
