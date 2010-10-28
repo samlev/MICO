@@ -89,7 +89,7 @@ class PasswordReset {
                 // get a random key and expiry time - The user has 72 hours to 'confirm'
                 $request = random_string(rand(7,15),2);
                 $expiry_time = strtotime('+72 hours');
-                $email = $user->get('email');
+                $email = $user->get_var('email');
                 
                 // add into the database
                 $query = "INSERT INTO `".DB_PREFIX."password_reset_requests`
@@ -101,7 +101,7 @@ class PasswordReset {
                 run_query($query);
                 
                 // now finally, email the user - a simple text email
-                $body = "Dear ".$user->get('name').",\r\n\r\n";
+                $body = "Dear ".$user->get_var('name').",\r\n\r\n";
                 $body .= "This email has been sent to you as part of the user registration\r\n";
                 $body .= "process for Mantis.\r\n\r\n";
                 $body .= "To set your password for the first time, visit the following link:\r\n";
