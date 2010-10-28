@@ -20,6 +20,7 @@ $error = false;
 $error_message = '';
 
 $user = false;
+$session_expired = false;
 
 // check if the user is logged in or not
 if (isset($_POST['session'])) {
@@ -30,6 +31,7 @@ if (isset($_POST['session'])) {
         $error = true;
         $error_message = $e->getMessage();
         $user = false;
+        $session_expired = true;
     }
 }
 
@@ -74,6 +76,11 @@ if (!$error && $data === false) {
 if ($error) {
     $data = array ("success" => false, "info" => $error_message);
 } // if ()
+
+// notify the user that their session has expired
+if ($session_expired) {
+    $data['sessionexpired'] = $session_expired;
+}
 
 // Return the data value
 header ("Content-Type: text/javascript");

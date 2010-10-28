@@ -118,10 +118,18 @@ Mantis.Calls = function () {
                                 Mantis.User.dirty = dirty;
                             }
                         }
+                    } else {
+                        // if the user's session has expired, block access to the system, and refresh
+                        if (res.sessionexpired) {
+                            Ext.Msg.alert('Session Expired','Your session has expired.<br /><br />You will now be redirected to the login page.',function () {window.location=APP_ROOT;}, this);
+                        }
                     }
                     
-                    // set the timeout to check again in 15 seconds
-                    this.updateTimeout = setTimeout('Mantis.Calls.checkUpdates()',15000);
+                    // if we're not logged out, check again
+                    if (!res.sessionexpired) {
+                        // set the timeout to check again in 15 seconds
+                        this.updateTimeout = setTimeout('Mantis.Calls.checkUpdates()',15000);
+                    }
                 },
                 scope: this
             });
