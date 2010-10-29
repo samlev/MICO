@@ -250,6 +250,12 @@ Mantis.SystemSettings = function () {
         saveSettings: function() {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {
+                // show that something is happening
+                Ext.Msg.wait('Save Settings','Saving system settings',{
+                    closable:false,
+                    modal:true
+                });
+                
                 // save the values
                 var conn = new Ext.data.Connection();
                 
@@ -266,6 +272,8 @@ Mantis.SystemSettings = function () {
                     callback: function (options, success, response) {
                         var res = Ext.decode(response.responseText);
                         if (success && res.success) {
+                            // hide the 'wait' box
+                            Ext.Msg.hide();
                             // notify the user that the setting shave been updated
                             Ext.Msg.alert("System Settings", "The system settings have been updated");
                         } else {
