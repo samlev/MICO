@@ -47,7 +47,8 @@ Mantis.SystemSettings = function () {
                 this.debugModeField = new Ext.form.Checkbox({
                     checked: false,
                     disabled: true,
-                    hideLabel: true
+                    hideLabel: true,
+                    boxLabel: 'Use debug mode'
                 });
                 
                 // debug mode fieldset
@@ -134,25 +135,37 @@ Mantis.SystemSettings = function () {
                 this.simpleCronField = new Ext.form.Checkbox({
                     checked: false,
                     disabled: true,
-                    hideLabel: true
+                    hideLabel: true,
+                    boxLabel: 'Use simple cron'
                 });
                 
                 // debug mode fieldset
                 this.simpleCronFieldset = new Ext.form.FieldSet({
-                    title: 'Use simple cron',
+                    title: 'Simple cron',
                     items: [
                         {
-                            html: 'The simple cron should only be used if you do not have access to '+
-                                  'a proper cron system. It will only run when a user has Mantis open. '+
+                            html: 'The cron is a recurring task which sends out notification emails.<br /><br />'+
+                                  'The simple cron should only be used if you do not have access to '+
+                                  'a proper cron system. It will only run when a user has Mantis open.<br /><br />'+
                                   'If you have access to proper task scheduler, you can set it to call '+
-                                  'notify.php using a command similar to the one below:',
-                            bodyStyle:'padding-bottom:3px;'
+                                  '<b>'+APP_ROOT+'/notify.php</b> using a command similar to the one below. The notify script '+
+                                  'should be run at least every 5 minutes to ensure that notification emails '+
+                                  'are sent out as early as possible.',
+                            bodyStyle:'padding-bottom:5px;'
                         },
+                        // a simple field to give the 'cron' command
                         new Ext.form.TextField({
-                            value:'/usr/bin/wget -q '+APP_ROOT+'/notify.php > /dev/null',
-                            disabled:true,
+                            value:'*/5 * * * *  /usr/bin/wget -q '+APP_ROOT+'/notify.php > /dev/null',
                             width: 400,
-                            hideLabel: true
+                            hideLabel: true,
+                            selectOnFocus:true,
+                            listeners: {
+                                scope:this,
+                                "change": function (field, newVal, oldVal) {
+                                    // reject any changes
+                                    field.setValue(oldVal);
+                                }
+                            }
                         }),
                         this.simpleCronField
                     ]
