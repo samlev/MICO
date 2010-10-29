@@ -30,8 +30,8 @@ $manager = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js
 $admin = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
                'Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
                'Mantis.Utils.js','admin/Mantis.Utils.CommonStores.js','Mantis.User.js',
-               'Mantis.User.Preferences.js','Mantis.User.Status.js','Mantis.Calls.SearchBar.js',
-               'manager/Mantis.ManageUsers.js');
+               'admin/Mantis.SystemSettings.js','Mantis.User.Preferences.js',
+               'Mantis.User.Status.js','Mantis.Calls.SearchBar.js','manager/Mantis.ManageUsers.js');
 // and an odd case for password reset
 $passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 
@@ -43,7 +43,7 @@ if ($loggedin) {
     if ($user->get_role()=='admin') {
         $js_array = $admin;
     } else if ($user->get_role()=='manager') {
-        $js_array = $admin;
+        $js_array = $manager;
     } else {
         $js_array = $authed;
     }

@@ -59,16 +59,22 @@ Mantis.Application = function () {
                 } else {
                     // show standard application components
                     Mantis.SystemMenu.show(); // system and user menus
-                    Mantis.Calls.init(); // initialize calls panel
-                    Mantis.User.Preferences.init(); // initialize the user preferences panel
-                    Mantis.User.Status.init(); // initialize the user status panel
                     
+                    // Set the left ('system') menu items
+                    Mantis.Calls.init(); // initialize calls panel
+                    Mantis.User.Status.init(); // initialize the user status panel
                     // initialises the manage users panel
                     if (Mantis.ManageUsers !== undefined) {
                         Mantis.ManageUsers.init ();
                     }
                     
-                    // add the user logout menu
+                    // set the right ('user') menu items
+                    // initialise the system settings panel
+                    if (Mantis.SystemSettings !== undefined) {
+                        Mantis.SystemSettings.init ();
+                    }
+                    Mantis.User.Preferences.init(); // initialize the user preferences panel
+                    // add the user logout menu item
                     Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');
                 }
             }
