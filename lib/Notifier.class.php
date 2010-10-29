@@ -163,7 +163,7 @@ class Notifier {
                     
                     // and headers
                     $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
-                    $header .= "From: ".Settings::get('mail_from')."\r\n";
+                    $header .= "From: ".Settings::get('MAIL_FROM')."\r\n";
                     
                     // if we send the mail successfully, mark the calls as notified
                     if (mail($to,$subject,$body,$header)) {
@@ -194,9 +194,9 @@ class Notifier {
         $lock = false;
         
         // check if the lock is set
-        if (Settings::get_default('notifylock',false)==false) {
+        if (Settings::get_default('NOTIFY_LOCK',false)==false) {
             // set the lock
-            Settings::override('notifylock',true);
+            Settings::override('NOTIFY_LOCK',true);
             $lock = true;
         }
         
@@ -205,7 +205,7 @@ class Notifier {
     
     /** Releases the notification lock */
     static function release_lock() {
-        Settings::override('notifylock',false);
+        Settings::override('NOTIFY_LOCK',false);
     }
 }
 ?>

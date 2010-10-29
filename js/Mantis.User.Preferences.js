@@ -47,7 +47,7 @@ Mantis.User.Preferences = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('Preferences', 'Mantis.User.Preferences.show()','user');
+                this.menuId = Mantis.SystemMenu.addItem('My Preferences', 'Mantis.User.Preferences.show()','user');
             }
         },
         /** Shows the panel */

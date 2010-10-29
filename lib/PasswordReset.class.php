@@ -56,7 +56,7 @@ class PasswordReset {
                 
                 // set the 'from' address
                 $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
-                $header .= "From: ".Settings::get('mail_from') . "\r\n";
+                $header .= "From: ".Settings::get('MAIL_FROM') . "\r\n";
                 
                 // and send the email
                 if (!mail($email,"Mantis - Password Reset Request",$body,$header)) {
@@ -118,7 +118,7 @@ class PasswordReset {
                 
                 // set the 'from' address
                 $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
-                $header .= "From: ".Settings::get('mail_from') . "\r\n";
+                $header .= "From: ".Settings::get('MAIL_FROM') . "\r\n";
                 
                 // and send the email
                 if (!mail($email,"Mantis - User Registration",$body,$header)) {
