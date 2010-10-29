@@ -7,3 +7,8 @@
 .main-form-panel .x-panel-body {
     background:#f0fff0;
 }
+
+.x-grid3-row-selected {
+    background-color:#f0fff0 !important;
+    border-color:#569F34;
+}
