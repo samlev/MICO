@@ -13,27 +13,27 @@
  ******************************************************************************/
 
 // public only need the 'login' page
-$public = array('Mantis.Application.js','Mantis.Login.js');
+$public = array('Mantis.Application.js','Mantis.Footer.js','Mantis.Login.js');
 // standard scipts for users
-$authed = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
-                'Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
+$authed = array('Mantis.Application.js','Mantis.Footer.js','Mantis.SystemMenu.js',
+                'Mantis.Calls.js','Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
                 'Mantis.Utils.js','Mantis.Utils.CommonStores.js','Mantis.User.js',
                 'Mantis.User.Preferences.js','Mantis.User.Status.js',
                 'Mantis.Calls.SearchBar.js');
 // standard scipts for managers
-$manager = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
-                 'Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
+$manager = array('Mantis.Application.js','Mantis.Footer.js','Mantis.SystemMenu.js',
+                 'Mantis.Calls.js','Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
                  'Mantis.Utils.js','manager/Mantis.Utils.CommonStores.js','Mantis.User.js',
                  'Mantis.User.Preferences.js','Mantis.User.Status.js',
                  'Mantis.Calls.SearchBar.js','manager/Mantis.ManageUsers.js');
 // administrators get more
-$admin = array('Mantis.Application.js','Mantis.SystemMenu.js','Mantis.Calls.js',
-               'Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
+$admin = array('Mantis.Application.js','Mantis.Footer.js','Mantis.SystemMenu.js',
+               'Mantis.Calls.js','Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
                'Mantis.Utils.js','admin/Mantis.Utils.CommonStores.js','Mantis.User.js',
                'admin/Mantis.SystemSettings.js','Mantis.User.Preferences.js',
                'Mantis.User.Status.js','Mantis.Calls.SearchBar.js','manager/Mantis.ManageUsers.js');
 // and an odd case for password reset
-$passreset = array('Mantis.Application.js','Mantis.PasswordSet.js','Mantis.Utils.js');
+$passreset = array('Mantis.Application.js','Mantis.Footer.js','Mantis.PasswordSet.js','Mantis.Utils.js');
 
 
 // decide on what javascript files to use

@@ -14,4 +14,5 @@
 var WEB_DOMAIN='<?=WEB_DOMAIN?>';
 var WEB_ROOT='<?=WEB_ROOT?>';
 var APP_ROOT='<?=APP_ROOT?>';
+var MANTIS_VERSION='<?=Settings::get_default('MANTIS_VERSION','unknown')?>';
 </script>

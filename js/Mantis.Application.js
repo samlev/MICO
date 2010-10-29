@@ -34,7 +34,8 @@ Mantis.Application = function () {
                             bodyStyle: 'background-color:#B6E0A3;'
                         }
                     ],
-                    activeItem:0
+                    activeItem:0,
+                    bbar: Mantis.Footer.getFooter()
                 });
                 
                 // Set up the viewport!

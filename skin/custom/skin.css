@@ -4,6 +4,14 @@
 	background: #569F34 url(../static/bg.jpg) repeat-x;
 }
 
+.menu-item {
+    color:#FFFFFF;
+}
+.menu-item-selected .menu-item{
+	color:#000000;
+	background:#99D37E;
+}
+
 .main-form-panel .x-panel-body {
     background:#f0fff0;
 }
@@ -11,4 +19,11 @@
 .x-grid3-row-selected {
     background-color:#f0fff0 !important;
     border-color:#569F34;
+}
+
+.footer-bar.x-toolbar {
+    border:0px;
+    border-top: 1px #f0fff0 solid;
+    background:#569F34;
+    color:#FFFFFF;
 }

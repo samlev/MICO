@@ -9,6 +9,13 @@ body {
 	overflow:hidden;
 }
 
+.footer-bar.x-toolbar {
+    border:0px;
+    border-top: 1px #f0fff0 solid;
+    background:#569F34;
+    color:#FFFFFF;
+}
+
 #mantisLogo {
 	margin:0px;
 	float:right;
@@ -136,7 +143,6 @@ body {
 .dynamic-panel-scroll .x-box-inner {
 	overflow:auto;
 }
-
 /* Basic skinning niceties */
 button:focus {
 	border:1px dotted #000000;
@@ -155,4 +161,12 @@ button:focus {
 }
 .x-toolbar {
     border:none !important;
+}
+/* Changing default view */
+.main-form-panel .x-panel-body {
+    background:#f0fff0;
+}
+.x-grid3-row-selected {
+    background-color:#f0fff0 !important;
+    border-color:#569F34;
 }
