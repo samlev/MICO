@@ -1,5 +1,29 @@
-/*#6EC249*/
-
+/*******************************************************************************
+ *******************************************************************************
+ ** Author: Samuel Levy <sam@samuellevy.com>
+ ** 
+ ** File: skin/custom/skin.css
+ ** 
+ ** Description: This is a simple way to alter the colour scheme of Mantis for
+ **              the purposes of white-labeling the software. The items in this
+ **              style sheet may be changed without affecting the functionality
+ **              of the software.
+ **
+ ** Copyright (c) 2010 Samuel Levy
+ ** 
+ ** Mantis Simple Call Centre is free software: you can redistribute it and/or
+ ** modify it under the terms of the GNU Lesser General Public License as
+ ** published by the Free Software Foundation, either version 3 of the License,
+ ** or (at your option) any later version.
+ **
+ ** This program is distributed in the hope that it will be useful, but WITHOUT
+ ** ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ ** FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+ ** for more details.
+ **
+ ** You should have received a copy of the GNU Lesser General Public License
+ *******************************************************************************
+ ******************************************************************************/
 #pageHeader {
 	background: #569F34 url(../static/bg.jpg) repeat-x;
 }
@@ -26,4 +50,9 @@
     border-top: 1px #f0fff0 solid;
     background:#569F34;
     color:#FFFFFF;
+}
+
+.footer-bar a {
+    color:#FFFFFF;
+    text-decoration:underline;
 }

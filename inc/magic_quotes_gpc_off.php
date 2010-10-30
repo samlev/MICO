@@ -8,6 +8,20 @@
  ** Description: This file removes the damage done by magic_quotes_gpc. It is
  **              done manually because it cannot be certain that the installer
  **              will have access to the server config. Turning it off in the
+ **
+ ** Copyright (c) 2010 Samuel Levy
+ ** 
+ ** Mantis Simple Call Centre is free software: you can redistribute it and/or
+ ** modify it under the terms of the GNU Lesser General Public License as
+ ** published by the Free Software Foundation, either version 3 of the License,
+ ** or (at your option) any later version.
+ **
+ ** This program is distributed in the hope that it will be useful, but WITHOUT
+ ** ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ ** FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+ ** for more details.
+ **
+ ** You should have received a copy of the GNU Lesser General Public License
  **              server will still be faster, and won't cause errors here. 
  *******************************************************************************
  ******************************************************************************/

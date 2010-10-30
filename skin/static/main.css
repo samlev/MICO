@@ -1,3 +1,33 @@
+/*******************************************************************************
+ *******************************************************************************
+ ** Author: Samuel Levy <sam@samuellevy.com>
+ ** 
+ ** File: skin/static/main.css
+ ** 
+ ** Description: This provides the basic skin and many functionality-based CSS
+ ** 			 changes to the Sencha (http://www.sencha.com) basic theme.
+ **
+ ** 			 You should not make changes to this file for white-labeling,
+ ** 			 and instead use the skin/custom/skin.css file, which by default
+ ** 			 has the relevant styles required to change the colour or feel
+ ** 			 of the application without affecting functionality. It will
+ ** 			 override the default skinning defined here.
+ **
+ ** Copyright (c) 2010 Samuel Levy
+ ** 
+ ** Mantis Simple Call Centre is free software: you can redistribute it and/or
+ ** modify it under the terms of the GNU Lesser General Public License as
+ ** published by the Free Software Foundation, either version 3 of the License,
+ ** or (at your option) any later version.
+ **
+ ** This program is distributed in the hope that it will be useful, but WITHOUT
+ ** ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ ** FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+ ** for more details.
+ **
+ ** You should have received a copy of the GNU Lesser General Public License
+ *******************************************************************************
+ ******************************************************************************/
 body {
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 	font-size: 12px;
@@ -14,6 +44,11 @@ body {
     border-top: 1px #f0fff0 solid;
     background:#569F34;
     color:#FFFFFF;
+}
+
+.footer-bar a {
+    color:#FFFFFF;
+    text-decoration:underline;
 }
 
 #mantisLogo {
@@ -58,6 +93,23 @@ body {
 	background:#99D37E;
 }
 /* End system menu styles */
+
+/* About page styles */
+.about-mantis {
+	color:#000000;
+}
+
+.about-mantis h1 {
+	font-size: 18pt;
+	border-bottom: groove #BBBBBB 1px;
+	padding-bottom: 3px;
+	margin-bottom: 8px;
+	color:#106610;
+}
+
+.about-mantis p {
+	margin-bottom:8px;
+}
 
 /* Add call panel styles */
 .field-helper {
