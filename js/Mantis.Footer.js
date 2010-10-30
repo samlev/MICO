@@ -70,7 +70,7 @@ Mantis.Footer = function () {
                         {
                             html:'<img src="'+APP_ROOT+'/skin/static/mantis_large.png" alt="Mantis Large" />',
                             width: 250,
-                            height: 500,
+                            height: 510,
                             bodyStyle:'background:none;padding-top:10px;'
                         },
                         {
