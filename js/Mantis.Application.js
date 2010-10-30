@@ -38,6 +38,11 @@ Mantis.Application = function () {
          */
         init: function () {
             if (this.viewport === undefined) {
+                var footer;
+                if (Mantis.Footer !== undefined) {
+                    footer = Mantis.Footer.getFooter();
+                }
+                
                 // Set up the holder panel
                 this.panel = new Ext.Panel ({
                     id: "Mantis.Application.panel", 
@@ -49,7 +54,7 @@ Mantis.Application = function () {
                         }
                     ],
                     activeItem:0,
-                    bbar: Mantis.Footer.getFooter()
+                    bbar: footer
                 });
                 
                 // Set up the viewport!
@@ -71,7 +76,7 @@ Mantis.Application = function () {
                     Mantis.Login.show();
                 } else if (Mantis.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
                     Mantis.PasswordSet.show();
-                } else {
+                } else if (Mantis.Calls !== undefined) { // if the main 'calls' section is defined, show it
                     // show standard application components
                     Mantis.SystemMenu.show(); // system and user menus
                     

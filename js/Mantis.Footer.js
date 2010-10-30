@@ -53,7 +53,7 @@ Mantis.Footer = function () {
                 var aboutHTML = '<h1>Mantis Simple Call Centre</h1>';
                 aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MANTIS_VERSION+'</p>';
                 aboutHTML += '<p>Mantis is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
-                             'licence, and is available for free, without warranty.</p>';
+                             'licence version 3.0, and is available for free, without warranty.</p>';
                 aboutHTML += '<p>Icons from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_new">silk icon set</a> '+
                              'were used in this system.</p>';
                 aboutHTML += '<p style="color:#88BB88;">All code and images are &copy; 2010 to <a href="http://www.samuellevy.com/" style="color:#88BB88;" target="_new">Samuel Levy</a>, unless otherwise noted.</p>';

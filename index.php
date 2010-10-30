@@ -39,16 +39,37 @@ if (!defined('CONFIGURED')) {
     <link type="text/css" rel="stylesheet" href="js/ext/resources/css/ext-all.css" />
     <link type="text/css" rel="stylesheet" href="skin/static/main.css" />
     <link type="text/css" rel="stylesheet" href="skin/custom/skin.css" />
+    <style>
+        html {
+            height:100%;
+        }
+        body {
+            background-color: #f0fff0;
+        }
+    </style>
   </head>
   <body>
     <div id="pageHeader">
       <img src="skin/static/mantis.png" alt="Mantis" id="mantisLogo" />
     </div>
-    <div>
+    <div style="padding:8px;">
       <h2>Installation Instructions</h2>
       <p>
-        You need to <a href="#">install</a>.
+        To install Mantis, you must follow these steps:
       </p>
+      <ol>
+        <li>
+          Ensure that the 'inc' directory is writable by the server.
+        </li>
+        <li>
+          Follow the steps in the <a href="install/">install</a> process to set
+          up the system.
+        </li>
+        <li>
+          Once complete, you should delete the 'install' directory for security
+          reasons.
+        </li>
+      </ol>
     </div>
   </body>
 </html>
@@ -87,16 +108,16 @@ if (isset($_COOKIE['session'])) {
     <title>Mantis - Simple Call Centre</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
-    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
-    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
-    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/custom/skin.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/custom/skin.css" />
     
     <!-- set some system variables for the javascript to use -->
     <?php include_once(FS_ROOT.'/inc/system_vars.php'); ?>
    
     <!-- Link to the Javascript library files -->
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
+    <script type="text/javascript" src="<?=APP_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
+    <script type="text/javascript" src="<?=APP_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
     <?php
     // pull in the required javascript
     include_once(FS_ROOT.'/inc/application_js.php');
@@ -104,7 +125,7 @@ if (isset($_COOKIE['session'])) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple Call Centre" id="mantisLogo" />
+      <img src="<?=APP_ROOT?>/skin/static/mantis.png" alt="Mantis Simple Call Centre" id="mantisLogo" />
       <div class="visual-clear"></div>
       <div id="userMenu"></div>
       <div id="systemMenu"></div>
