@@ -29,7 +29,7 @@ if (intval($_POST['autopath'])) {
     $FS_ROOT = realpath('../..');
     $WEB_DOMAIN = '$_SERVER["HTTP_HOST"]';
     $WEB_ROOT = '($_SERVER["SERVER_PORT"]==443?"https://":"http://").WEB_DOMAIN';
-    $APP_ROOT = 'WEB_ROOT."'.substr($_SERVER["REQUEST_URI"],0,strrpos($_SERVER['REQUEST_URI'],'/install')).'"';
+    $APP_ROOT = 'WEB_ROOT."'.substr($_SERVER["REQUEST_URI"],0,strrpos($_SERVER['REQUEST_URI'],'/install/api')).'"';
 } else {
     $autopath = false;
     $FS_ROOT = trim($_POST['FS_ROOT']);
@@ -49,6 +49,7 @@ $success = true;
 
 // Attempt to write the config file
 $conf_data = <<<EOF
+<?php
 /*******************************************************************************
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>

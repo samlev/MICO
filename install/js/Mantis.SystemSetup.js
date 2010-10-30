@@ -55,6 +55,7 @@ Mantis.SystemSetup = function () {
                 // debug mode
                 this.debugModeField = new Ext.form.Checkbox({
                     checked: false,
+                    value: false,
                     hideLabel: true,
                     boxLabel: 'Use debug mode'
                 });
@@ -78,7 +79,6 @@ Mantis.SystemSetup = function () {
                     width: 135, 
                     allowBlank: false,
                     required: true,
-                    value: '',
                     emptyText: 'mantis@example.com',
                     hideLabel: true
                 });
@@ -141,6 +141,7 @@ Mantis.SystemSetup = function () {
                 // simple cron mode
                 this.simpleCronField = new Ext.form.Checkbox({
                     checked: false,
+                    value: false,
                     hideLabel: true,
                     boxLabel: 'Use simple cron'
                 });
@@ -168,8 +169,7 @@ Mantis.SystemSetup = function () {
                     width: 200, 
                     allowBlank: false,
                     required:true,
-                    value:'admin',
-                    blankText: "admin"
+                    blankText: "You must enter your username"
                 });
                 // the user's name field
                 this.nameField = new Ext.form.TextField ({
@@ -177,7 +177,7 @@ Mantis.SystemSetup = function () {
                     width: 200, 
                     allowBlank: false, 
                     required:true,
-                    blankText: "Joe Bloggs"
+                    blankText: "You must enter your name"
                 });
                 // the user's email field
                 this.emailField = new Ext.form.TextField ({
@@ -185,7 +185,7 @@ Mantis.SystemSetup = function () {
                     width: 200, 
                     allowBlank: false, 
                     required:true,
-                    blankText: "admin@example.com"
+                    blankText: "You must enter your email"
                 });
                 
                 // password field
@@ -290,11 +290,13 @@ Mantis.SystemSetup = function () {
                 // perferences form
                 this.panel = new Ext.form.FormPanel({
                     id: "Mantis.SystemSetup.panel",
+                    autoScroll:true,
                     items: [
                         this.debugModeFieldset,
                         this.mailFromFieldset,
                         this.sessionLengthFieldset,
                         this.simpleCronFieldset,
+                        this.passwordFieldset,
                         {
                             layout:'hbox',
                             items: [

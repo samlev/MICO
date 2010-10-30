@@ -24,7 +24,7 @@
  ******************************************************************************/
 
 // include the configuration file
-include_once ('inc/config.php');
+@include_once ('inc/config.php');
 
 // If the system isn't configured, show the 'install' page
 if (!defined('CONFIGURED')) {
@@ -53,23 +53,26 @@ if (!defined('CONFIGURED')) {
       <img src="skin/static/mantis.png" alt="Mantis" id="mantisLogo" />
     </div>
     <div style="padding:8px;">
-      <h2>Installation Instructions</h2>
-      <p>
+      <h2 style="font-size:16pt;margin-bottom:8px;">Installation Instructions</h2>
+      <p style="margin-bottom:8px;">
         To install Mantis, you must follow these steps:
       </p>
       <ol>
-        <li>
-          Ensure that the 'inc' directory is writable by the server.
+        <li style="margin-bottom:8px;">
+          1. Ensure that the 'inc' directory is writable by the server.
         </li>
-        <li>
-          Follow the steps in the <a href="install/">install</a> process to set
+        <li style="margin-bottom:8px;">
+          2. Follow the steps in the <a href="install/">install</a> process to set
           up the system.
         </li>
-        <li>
-          Once complete, you should delete the 'install' directory for security
+        <li style="margin-bottom:8px;">
+          3. Once complete, you should delete the 'install' directory for security
           reasons.
         </li>
       </ol>
+      <p style="margin-bottom:8px;">
+        <a href="install/">Click here</a> to continue to the installer
+      </p>
     </div>
   </body>
 </html>

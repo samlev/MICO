@@ -24,7 +24,7 @@
  ******************************************************************************/
 
 // include the configuration file
-include_once ('../inc/config.php');
+@include_once ('../inc/config.php');
 
 // If the system isn't configured, show the 'install' page
 if (defined('CONFIGURED')) {
@@ -53,10 +53,13 @@ if (defined('CONFIGURED')) {
       <img src="../skin/static/mantis.png" alt="Mantis" id="mantisLogo" />
     </div>
     <div style="padding:8px;">
-      <h2>Installation</h2>
-      <p>
+      <h2 style="font-size:16pt;margin-bottom:8px;">Installation</h2>
+      <p style="margin-bottom:8px;">
         Mantis is installed. Please delete the 'install' directory and all of
         its contents.
+      </p>
+      <p style="margin-bottom:8px;">
+        <a href="<?=APP_ROOT?>">Click here</a> to go to the login page.
       </p>
     </div>
   </body>
@@ -87,8 +90,8 @@ if (defined('FS_ROOT')) {
     <link type="text/css" rel="stylesheet" href="../skin/custom/skin.css" />
    
     <!-- Link to the Javascript library files -->
-    <script type="text/javascript" src="../js/ext/adapter/ext/<?=(true?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
-    <script type="text/javascript" src="../js/ext/<?=(true?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
+    <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../js/ext/ext-all.js"></script>
         
     <script type="text/javascript" src="../js/Mantis.Application.js"></script>
     <script type="text/javascript" src="../js/Mantis.Utils.js"></script>
@@ -100,7 +103,9 @@ if (defined('FS_ROOT')) {
     <?php
     if ($config_written) {
         // display the 'system setup' page
-        echo 'setTimeout("Mantis.SystemSetup.show()",200);';
+        ?>
+        setTimeout("Mantis.SystemSetup.show()",200);
+        <?php
     } else {
         // get the default values
         $FS_ROOT = realpath('..'); // the fielsystem root
@@ -114,8 +119,9 @@ if (defined('FS_ROOT')) {
         var WEB_DOMAIN = '<?=addslashes($WEB_DOMAIN)?>';
         var WEB_ROOT = '<?=addslashes($WEB_ROOT)?>';
         var APP_ROOT = '<?=addslashes($APP_ROOT)?>';
-        <?
-        echo 'setTimeout("Mantis.ConfigSetup.show();",200);';
+        
+        setTimeout("Mantis.ConfigSetup.show();",200);
+        <?php
     }?>
     -->
     </script>

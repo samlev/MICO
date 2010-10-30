@@ -88,7 +88,7 @@ Mantis.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    value: FS_ROOT,
+                    value: WEB_DOMAIN,
                     fieldLabel: 'Web Domain',
                     disabled:true
                 });
@@ -97,7 +97,7 @@ Mantis.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    value: FS_ROOT,
+                    value: WEB_ROOT,
                     fieldLabel: 'Web Root',
                     disabled:true
                 });
@@ -106,7 +106,7 @@ Mantis.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    value: FS_ROOT,
+                    value: APP_ROOT,
                     fieldLabel: 'Application Root',
                     disabled:true
                 });
@@ -142,15 +142,11 @@ Mantis.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    value: '',
                     fieldLabel: 'User name'
                 });
                 // password field
                 this.passField = new Ext.form.TextField ({
                     width: 200, 
-                    allowBlank: false,
-                    required: true,
-                    value: '',
                     fieldLabel: 'Password'
                 });
                 // database name field
@@ -158,7 +154,6 @@ Mantis.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    value: '',
                     fieldLabel: 'Database'
                 });
                 // table prefix field field

@@ -23,13 +23,13 @@
  *******************************************************************************
  ******************************************************************************/
 
-include_once('../../inc/config.php');
+@include_once('../../inc/config.php');
 
 // check that the system isn't arelady configured
 if (!defined('CONFIGURED')) {
     if (defined('FS_ROOT')) {
         // at last, some civilization
-        include_once(FS_ROOT.'/connect.php');
+        include_once(FS_ROOT.'/inc/connect.php');
         
         // get the values
         $DEBUG_MODE = boolval($_POST['DEBUG_MODE'],true);
@@ -37,14 +37,15 @@ if (!defined('CONFIGURED')) {
         $SESSION_LENGTH = trim(html_scrub($_POST['SESSION_LENGTH']));
         $SIMPLE_CRON = boolval($_POST['SIMPLE_CRON'],true);
         
-        include_once('version.php');
+        // get the version
+        include_once(FS_ROOT.'/install/version.php');
         
         $success = true;
         
         // set what we can
         if ($DEBUG_MODE !== null) {
             // if the setting is different, save it
-            if (Settings::get_default('DEBUG_MODE',null)!=$DEBUG_MODE) {
+            if (Settings::get_default('DEBUG_MODE',null)!==$DEBUG_MODE) {
                 Settings::set('DEBUG_MODE',$DEBUG_MODE);
             }
         } else {
@@ -61,7 +62,7 @@ if (!defined('CONFIGURED')) {
         
         if (strlen($MAIL_FROM)) {
             // if the setting is different, save it
-            if (Settings::get_default('MAIL_FROM',null)!=$MAIL_FROM) {
+            if (Settings::get_default('MAIL_FROM',null)!==$MAIL_FROM) {
                 Settings::set('MAIL_FROM',$MAIL_FROM);
             }
         } else {
@@ -79,7 +80,7 @@ if (!defined('CONFIGURED')) {
         // check that 'session length' is a valid time period
         if (preg_match('/^[1-9][0-9]{0,2} (minute|hour|day|week|month|year)s?$/i',$SESSION_LENGTH)) {
             // if the setting is different, save it
-            if (Settings::get_default('SESSION_LENGTH',null)!=$SESSION_LENGTH) {
+            if (Settings::get_default('SESSION_LENGTH',null)!==$SESSION_LENGTH) {
                 Settings::set('SESSION_LENGTH',$SESSION_LENGTH);
             }
         } else {
@@ -97,7 +98,7 @@ if (!defined('CONFIGURED')) {
         // simple cron
         if ($SIMPLE_CRON !== null) {
             // if the setting is different, save it
-            if (Settings::get_default('SIMPLE_CRON',null)!=$SIMPLE_CRON) {
+            if (Settings::get_default('SIMPLE_CRON',null)!==$SIMPLE_CRON) {
                 Settings::set('SIMPLE_CRON',$SIMPLE_CRON);
             }
         } else {
@@ -115,11 +116,11 @@ if (!defined('CONFIGURED')) {
         // mantis version
         if (defined('MANTIS_VERSION')) {
             // if the setting is different, save it
-            if (Settings::get_default('MANTIS_VERSION',null)!=MANTIS_VERSION) {
+            if (Settings::get_default('MANTIS_VERSION',null)!==MANTIS_VERSION) {
                 Settings::set('MANTIS_VERSION',MANTIS_VERSION);
             }
         } else {
-            if (Settings::get_default('MANTIS_VERSION',null)!="unknown") {
+            if (Settings::get_default('MANTIS_VERSION',null)!=="unknown") {
                 Settings::set('MANTIS_VERSION',"unknown");
             }
         }
@@ -197,7 +198,8 @@ if (!defined('CONFIGURED')) {
             // mark the system as fully configured
             $f = fopen(FS_ROOT.'/inc/config.php','a');
             fputs($f,"// This is required to inform the system that it is properly configured\n");
-            fputs($f,'define ("CONFIGURED", true);');
+            fputs($f,"define ('CONFIGURED', true);\n");
+            fputs($f,'?>');
             fclose($f);
         }
     }
