@@ -245,7 +245,7 @@ Mantis.Calls.ViewCalls = function () {
                     mode:'local',
                     triggerAction:'all',
                     width:120,
-                    tpl:Mantis.Utils.priorityTemplate,
+                    tpl:Mantis.Utils.priorityTemplate(),
                     listeners:{
                         scope:this,
                         'select': function () { this.escalateCallRadio.setValue(true); }
@@ -279,7 +279,7 @@ Mantis.Calls.ViewCalls = function () {
                     editable:false,
                     valueField:'id',
                     displayField:'name',
-                    tpl:Mantis.Utils.userTemplate,
+                    tpl:Mantis.Utils.userTemplate(),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Escalate to",

@@ -89,13 +89,7 @@ if (defined('FS_ROOT')) {
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="../js/ext/adapter/ext/<?=(true?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
     <script type="text/javascript" src="../js/ext/<?=(true?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
-    
-    <script type="text/javascript">
-    <!--
-    var MANTIS_VERSION = '<?=MANTIS_VERSION?>';
-    -->
-    </script>
-    
+        
     <script type="text/javascript" src="../js/Mantis.Application.js"></script>
     <script type="text/javascript" src="../js/Mantis.Utils.js"></script>
     <!-- pull in the appropriate installer files -->

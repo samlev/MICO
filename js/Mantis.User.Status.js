@@ -61,7 +61,7 @@ Mantis.User.Status = function () {
                     valueField:'status',
                     mode:'local',
                     triggerAction:'all',
-                    tpl:Mantis.Utils.userTemplate,
+                    tpl:Mantis.Utils.userTemplate(),
                     listeners: {
                         scope:this,
                         'select': function () {
