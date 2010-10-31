@@ -27,11 +27,12 @@ Mantis.Utils.CommonStores = function () {
         callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All Calls','all']],
         // order options for calls
         callsOrderFilter:[['Most recent','recent'],['Most urgent','urgent']],
+        // call priority
+        callPriority:[['critical','Critical'],['urgent','Urgent'],['moderate','Moderate'],['minor','Minor'],['negligible','Negligible']],
+        /** USER MANAGEMENT **/
         // user types for adding users; manager users can only add managers or standard users
         userTypesActive:[['Manager','manager'],['Standard User','user']],
         // user types for editing users; manager users can set user types up to manager
-        userTypesAll:[['Manager','manager'],['Standard User','user'],['Disabled','disabled']],
-        // call priority
-        callPriority:[['critical','Critical'],['urgent','Urgent'],['moderate','Moderate'],['minor','Minor'],['negligible','Negligible']]
+        userTypesAll:[['Manager','manager'],['Standard User','user'],['Disabled','disabled']]
     };
 } ();

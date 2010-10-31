@@ -388,6 +388,7 @@ Mantis.User.Preferences = function () {
                     blankText: "You must enter your password"
                 });
                 
+                // passowrd fieldset
                 this.passwordFieldset = new Ext.form.FieldSet({
                     title: 'Change your password',
                     items: [
@@ -849,6 +850,7 @@ Mantis.User.Preferences = function () {
                 Mantis.Application.addPanel(this.panel);
             }
             
+            // show the preferences panel
             Mantis.Application.showPanel('Mantis.User.Preferences.panel');
         }
     };

@@ -68,7 +68,7 @@ Mantis.User.Status = function () {
                             // load the store
                             this.statusTextStore.loadData(this.statusText(this.statusField.getValue()),false);
                             
-                            // if appear offline, don't give the user an option
+                            // if appear offline, don't give the user an option for the status text
                             if (this.statusField.getValue() == "offline") {
                                 this.statusTextField.setValue('Offline');
                                 this.statusTextField.disable();
@@ -115,8 +115,10 @@ Mantis.User.Status = function () {
                     text:'Set Status',
                     scope:this,
                     handler: function() {
+                        // set the variables in the user
                         Mantis.User.setVar('status',this.statusField.getValue());
                         Mantis.User.setVar('statustext',this.statusTextField.getValue());
+                        // commit the changes
                         Mantis.User.commit();
                         this.panel.hide();
                     }

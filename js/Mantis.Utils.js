@@ -88,12 +88,17 @@ Mantis.Utils = function () {
             text = 'a:' + total + ':{' + text + '}';
             return text;
         },
+        /** Returns the template for 'caller' fields
+         * @param displayField {string} The field to display
+         */
         callerTemplate: function (displayField) {
             return '<tpl for="."><div class="x-combo-list-item caller-match-{match}">{'+displayField+'}</div></tpl>';
         },
+        /** Returns the template for 'user' fields */
         userTemplate: function () {
             return '<tpl for="."><div class="x-combo-list-item"><img class="user-status-icon" title="{statustext}" src="'+APP_ROOT+'/skin/static/status/{status}.png" />{name}</div></tpl>';
         },
+        /** Returns the template for 'priority' fields */
         priorityTemplate: function () {
             return '<tpl for="."><div class="x-combo-list-item priority-{priority}">{view}</div></tpl>';
         }

@@ -48,16 +48,23 @@ Mantis.Footer = function () {
             
             return this.bar;
         },
+        /** Shows the 'About Mantis' window */
         showAbout: function () {
             if (this.aboutWindow === undefined) {
-                var aboutHTML = '<h1>Mantis Simple Call Centre</h1>';
+                // build the 'About Mantis' HTML 
+                var aboutHTML = '<h1>Mantis Simple Call Centre</h1>'; // Title
+                // Version
                 aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MANTIS_VERSION+'</p>';
+                // Licence
                 aboutHTML += '<p>Mantis is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
                              'licence version 3.0, and is available for free, without warranty.</p>';
+                // Acknowledgements
                 aboutHTML += '<p>Icons from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_new">silk icon set</a> '+
                              'were used in this system.</p>';
+                // Copyright
                 aboutHTML += '<p style="color:#88BB88;">All code and images are &copy; 2010 to <a href="http://www.samuellevy.com/" style="color:#88BB88;" target="_new">Samuel Levy</a>, unless otherwise noted.</p>';
                 
+                // build the window
                 this.aboutWindow = new Ext.Window({
                     title:'About Mantis',
                     modal:false,
@@ -67,16 +74,19 @@ Mantis.Footer = function () {
                     bodyStyle: 'background: #f0fff0 url('+APP_ROOT+'/skin/static/about_bg.png) repeat-y;',
                     layout:'hbox',
                     items: [
+                        // Large Mantis logo on the left
                         {
                             html:'<img src="'+APP_ROOT+'/skin/static/mantis_large.png" alt="Mantis Large" />',
                             width: 250,
                             height: 510,
                             bodyStyle:'background:none;padding-top:10px;'
                         },
+                        // Spacer to get over the transition gradient
                         {
                             width:100,
                             bodyStyle:'background:none'
                         },
+                        // about mantis text
                         {
                             html: aboutHTML,
                             width: 340,
@@ -85,9 +95,10 @@ Mantis.Footer = function () {
                             cls: 'about-mantis'
                         }
                     ]
-                })
+                });
             }
             
+            // show the window
             this.aboutWindow.show();
         }
     };
