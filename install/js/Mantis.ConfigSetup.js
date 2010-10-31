@@ -247,6 +247,7 @@ Mantis.ConfigSetup = function () {
             
             Mantis.Application.showPanel('Mantis.ConfigSetup.panel');
         },
+        /** Saves the settings */
         saveSettings: function() {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {

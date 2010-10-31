@@ -23,22 +23,25 @@
  *******************************************************************************
  ******************************************************************************/
 
+// search for all users other than the active user
 $u = intval($user->get_id());
-
 $query = "SELECT `id` FROM `".DB_PREFIX."users`
           WHERE `role` != 'disabled'
           AND `id` != $u";
 
 $res = run_query($query);
 
+// set up some holders
 $users = array();
 $u_sort = array();
 
+// go through the list of users
 while ($row = mysql_fetch_assoc($res)) {
     try {
         // get the user
         $temp_user = User::by_id($row['id']);
         
+        // check status - if the user is idle (session hasn't been used within the last 5 minutes), mark them as offline
         if ($temp_user->is_idle()) {
             $status = "offline";
             $statustext = "Offline";
@@ -55,8 +58,9 @@ while ($row = mysql_fetch_assoc($res)) {
         
         // and add it to the array
         $users[$row['id']] = $u_data;
+        // put the name in the 'sort' array
         $u_sort[$row['id']] = $temp_user->get_var('name');
-    } catch (UserNotFoundException $e) { /* Don't worry if we can't get user details */ }
+    } catch (UserNotFoundException $e) { /* Don't worry if we can't get user details - skip the user */ }
 }
 
 // sort the names
@@ -67,7 +71,7 @@ foreach ($u_sort as $k=>$dummy) {
     $users_sorted[] = $users[$k];
 }
 
-
+// return the users
 $data = array("success"=>true,
               "users"=>$users_sorted);
 ?>

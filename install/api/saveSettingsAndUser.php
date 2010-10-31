@@ -146,7 +146,9 @@ if (!defined('CONFIGURED')) {
                 if (mysql_num_rows($res) == 0) {
                     // check quickly that the name and email aren't blank
                     if (strlen($name) && strlen($email)) {
+                        // check that the password isn't blank
                         if (strlen($password1)) {
+                            // check that the password matches the confirmation
                             if ($password1 == $password2) {
                                 // hash the password
                                 $pass = md5(strrev(sha1($password1)));
@@ -156,6 +158,7 @@ if (!defined('CONFIGURED')) {
                                           VALUES ('".mysql_real_escape_string($username)."','$pass','admin')";
                                 run_query($query);
                                 
+                                // get the id and set the user details
                                 if ($id = mysql_insert_id()) {
                                     // build the user object
                                     $u = User::by_id($id);

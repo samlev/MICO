@@ -316,6 +316,7 @@ Mantis.SystemSetup = function () {
             
             Mantis.Application.showPanel('Mantis.SystemSetup.panel');
         },
+        /** Saves the settings */
         saveSettings: function() {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {
