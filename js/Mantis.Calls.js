@@ -112,6 +112,7 @@ Mantis.Calls = function () {
                 scope: this
             });
         },
+        /** Checks for updates affecting the active user */
         checkUpdates: function () {
             var conn = new Ext.data.Connection();
             
@@ -125,11 +126,14 @@ Mantis.Calls = function () {
                         if (res.lastupdate != Mantis.User.getVar('lastupdate')) {
                             // don't reload if we're viewing a call
                             if (Mantis.Calls.ViewCalls.grid.getSelectionModel().getCount() !== 1) {
+                                // reload the grid
                                 Mantis.Calls.ViewCalls.gridStore.reload();
                                 
-                                var dirty = Mantis.User.dirty;
+                                dirty = Mantis.User.dirty;
+                                // set the variable
                                 Mantis.User.setVar('lastupdate',res.lastupdate);
-                                Mantis.User.dirty = dirty;
+                                // commit the changes locally
+                                Mantis.User.commit(true);
                             }
                         }
                     } else {

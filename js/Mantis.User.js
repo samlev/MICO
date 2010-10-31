@@ -68,36 +68,47 @@ Mantis.User = function () {
             this.vars[key] = val;
             this.dirty = true;
         },
-        /** Commits all variable changes to the database */
-        commit: function () {
+        /** Commits all variable changes to the database
+         * @param localonly {bool} If true, only commit the changes locally
+         **/
+        commit: function (localonly) {
             // only bother if the data is dirty
             if (this.dirty) {
-                var conn = new Ext.data.Connection();
-                
-                // send the 'save' request to the server
-                conn.request({
-                    url:APP_ROOT+'/api.php?f=saveUserVars',
-                    params: {
-                        session: Mantis.User.getSession(),
-                        vars: Mantis.Utils.serialiseArray(this.vars)
-                    },
-                    success: function (res, opt) {
-                        // hide any message box
-                        Ext.Msg.hide();
-                        // set the variables
-                        this.orig_vars = this.vars;
-                        this.dirty = false;
-                        // notify the user that this has been completed
-                    },
-                    failure: function (res, opt) {
-                        var msg = "Unknown system error";
-                        if (res.info !== undefined) {
-                            msg = res.info;
-                        }
-                        Ext.Msg.alert("Error", msg);
-                    },
-                    scope: this
-                })
+                if (localonly) {
+                    this.orig_vars = this.vars;
+                    this.dirty = false;
+                } else {
+                    var conn = new Ext.data.Connection();
+                    
+                    // send the 'save' request to the server
+                    conn.request({
+                        url:APP_ROOT+'/api.php?f=saveUserVars',
+                        params: {
+                            session: Mantis.User.getSession(),
+                            vars: Mantis.Utils.serialiseArray(this.vars)
+                        },
+                        callback: function (options, success, response) {
+                            var res = Ext.decode(response.responseText);
+                            // check if the call was successful
+                            if (success && res.success) {
+                                // hide any message box
+                                Ext.Msg.hide();
+                                // set the variables
+                                this.orig_vars = this.vars;
+                                this.dirty = false;
+                                // notify the user that this has been completed
+                            } else {
+                                Ext.Msg.hide();
+                                var msg = "Unknown system error";
+                                if (res.info !== undefined) {
+                                    msg = res.info;
+                                }
+                                Ext.Msg.alert("Error", msg);
+                            }
+                        },
+                        scope: this
+                    });
+                }
             }
         },
         /** Reverts all un-commited changes */
@@ -105,6 +116,7 @@ Mantis.User = function () {
             this.vars = this.orig_vars;
             this.dirty = false;
         },
+        /** Logs out the active user */
         logout: function () {
             Ext.Msg.wait('Log out','Logging you out',{
                 closable:false,

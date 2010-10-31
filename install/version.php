@@ -24,5 +24,5 @@
  ******************************************************************************/
 
 // include the configuration file
-define('MANTIS_VERSION', '0.9a');
+define('MANTIS_VERSION', '0.10.2a');
 ?>

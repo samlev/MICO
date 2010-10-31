@@ -272,7 +272,7 @@ Mantis.ManageUsers = function () {
                 scope: this
             });
         },
-        // shows the 'add users' dialog
+        /** shows the 'add users' dialog */
         showAddUsers: function () {
             if (this.addUsersPanel === undefined) {
                 // username field
@@ -356,6 +356,7 @@ Mantis.ManageUsers = function () {
                         });
                     }
                 });
+                // clear button to reset the fields
                 this.clearAddUsersButton = new Ext.Button({
                     text:'Clear',
                     scope:this,
@@ -367,6 +368,7 @@ Mantis.ManageUsers = function () {
                         this.roleField.reset();
                     }
                 });
+                // close/hide button to hide the panel
                 this.hideAddUsersButton = new Ext.Button({
                     text:'Close',
                     scope:this,
@@ -400,6 +402,7 @@ Mantis.ManageUsers = function () {
                 });
             }
             
+            // show the panel
             this.addUsersPanel.show();
             // clear the fields
             this.usernameField.reset();
@@ -409,9 +412,11 @@ Mantis.ManageUsers = function () {
         }
     };
     
+    /** Grid renderer for 'reset password' link */
     function renderResetPassword(val, meta, rec, row, col, store) {
         var value = '';
         
+        // check if the user is disabled or not
         if (rec.get('role')=='disabled') {
             value = 'User disabled';
         } else {
@@ -425,9 +430,11 @@ Mantis.ManageUsers = function () {
         return value;
     }
     
+    /** Grid renderer for the 'role' field */
     function renderRole(val, meta, rec, row, col, store) {
         var value = '';
         
+        // check for known role types
         switch (val) {
             case 'admin':
                 value = 'Administrator';
@@ -450,6 +457,7 @@ Mantis.ManageUsers = function () {
         return value;
     }
     
+    /** Generic grid renderer to apply the 'user-disabled' class on fields */
     function renderGeneric(val, meta, rec, row, col, store) {
         var value = val;
         

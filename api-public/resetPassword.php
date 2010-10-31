@@ -26,7 +26,6 @@
 // get the values
 $username = strtolower($_POST['username']); // usernames are lowercase
 
-// attempt to log the user in
 try {
     // create and send the password request
     PasswordReset::get_request($username);
@@ -39,7 +38,7 @@ try {
     $data = array("success"=>true,
                   "info"=>"An email was sent to $email with further isntructions.");
 } catch (UserNotFoundException $e) {
-    // couldn't log in - return the error message
+    // couldn't find user - return the error message
     $error = true;
     $error_message=$e->getMessage();
 } catch (PasswordResetException $e) {

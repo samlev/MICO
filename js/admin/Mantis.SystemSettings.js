@@ -232,12 +232,18 @@ Mantis.SystemSettings = function () {
             Mantis.Application.showPanel('Mantis.SystemSettings.panel');
             this.loadSettings();
         },
+        /** Loads the settings from the database **/
         loadSettings: function() {
             // disable the fields until we have loaded the values
             this.debugModeField.disable();
             this.mailFromField.disable();
             this.sessionLengthField.disable();
             this.simpleCronField.disable();
+            
+            Ext.Msg.wait('Loading','Loading settings from the server',{
+                closable:false,
+                modal:true
+            });
             
             // now load the values
             var conn = new Ext.data.Connection();
@@ -262,6 +268,8 @@ Mantis.SystemSettings = function () {
                         this.mailFromField.setValue(res.MAIL_FROM);
                         this.sessionLengthField.setValue(res.SESSION_LENGTH);
                         this.simpleCronField.setValue(res.SIMPLE_CRON);
+                        
+                        Ext.Msg.hide();
                     } else {
                         Ext.Msg.hide();
                         var msg = "Unknown system error";
@@ -274,6 +282,7 @@ Mantis.SystemSettings = function () {
                 scope: this
             });
         },
+        /** Saves the settings to the database */
         saveSettings: function() {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {

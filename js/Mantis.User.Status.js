@@ -110,6 +110,7 @@ Mantis.User.Status = function () {
                     }
                 });
                 
+                // set status button
                 this.setStatusButton = new Ext.Button({
                     text:'Set Status',
                     scope:this,
@@ -121,6 +122,7 @@ Mantis.User.Status = function () {
                     }
                 });
                 
+                // cancel button
                 this.cancelButton = new Ext.Button({
                     text:'Cancel',
                     scope:this,
@@ -157,11 +159,12 @@ Mantis.User.Status = function () {
                 });
             }
             
+            // show the panel
             this.panel.show();
             // set the values
             this.statusField.setValue(Mantis.User.getVarDefault('status','available'));
             this.statusTextField.setValue(Mantis.User.getVarDefault('statustext','Available'));
-            // enable/disable the 'statustext' field
+            // Disable the 'statustext' field if the status is 'offline'
             if (this.statusField.getValue() == "offline") {
                 this.statusTextField.setValue('Offline');
                 this.statusTextField.disable();
@@ -169,7 +172,12 @@ Mantis.User.Status = function () {
                 this.statusTextField.enable();
             }
         },
+        /** Simple helper to return status text templates
+         * @param status {string} The status type to retirieve templates for
+         * @returns {array} Status templates
+         */
         statusText: function (status) {
+            // build the 'status options' object for retrieving templates
             if (this.statusOptions === undefined) {
                 this.statusOptions = {
                     available:[['Available']],

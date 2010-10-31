@@ -38,6 +38,7 @@ Mantis.Application = function () {
          */
         init: function () {
             if (this.viewport === undefined) {
+                // get the footer if it's defined (it won't be for the installer)
                 var footer;
                 if (Mantis.Footer !== undefined) {
                     footer = Mantis.Footer.getFooter();
@@ -114,6 +115,7 @@ Mantis.Application = function () {
     };
 } ();
 
+// When ExtJS is ready, initialize the application
 Ext.onReady (function () {
     Mantis.Application.init ();
 });

@@ -26,17 +26,23 @@
 // get the values
 $vars = unserialize($_POST['vars']);
 
+// variables not to overwrite (typically not user controllable config items)
+$nowrite = array('lastupdate');
+
 // go through and set the required variables to update
 foreach ($vars as $k=>$v) {
-    // check for a strict boolean true or false
-    if (boolval($v,true)!== null) {
-        $v = boolval($v,true);
-    } else {
-        $v = trim(html_scrub($v));
-    }
-    // Check if the update is a change
-    if ($user->get_var($k) != $v) {
-        $user->set_var($k,$v);
+    // check that the variable isn't in the 'nowrite' list
+    if (!in_array($k,$nowrite)) {
+        // check for a strict boolean true or false
+        if (boolval($v,true)!== null) {
+            $v = boolval($v,true);
+        } else {
+            $v = trim(html_scrub($v));
+        }
+        // Check if the update is a change
+        if ($user->get_var($k) !== $v) {
+            $user->set_var($k,$v);
+        }
     }
 }
 

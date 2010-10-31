@@ -21,12 +21,18 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
+
 Mantis.Utils.CommonStores = function () {
     return {
+        // search options for calls; admin users can see all calls in the system
         callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All Calls','all']],
+        // order options for calls
         callsOrderFilter:[['Most recent','recent'],['Most urgent','urgent']],
+        // user types for adding users; admin users can set all user types
         userTypesActive:[['Administrator','admin'],['Manager','manager'],['Standard User','user']],
+        // user types for editing users; amdin users can set all user types
         userTypesAll:[['Administrator','admin'],['Manager','manager'],['Standard User','user'],['Disabled','disabled']],
+        // call priority
         callPriority:[['critical','Critical'],['urgent','Urgent'],['moderate','Moderate'],['minor','Minor'],['negligible','Negligible']]
     };
 } ();

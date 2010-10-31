@@ -636,6 +636,7 @@ Mantis.Calls.AddCall = function () {
             this.callerCompanyVal = '';
             this.callerContactStore.removeAll();
         },
+        /** Adds a call to the system */
         addCall: function () {
             // collect the data
             var caller = this.callerNameField.getValue().trim();

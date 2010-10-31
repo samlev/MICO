@@ -578,6 +578,9 @@ Mantis.Calls.ViewCalls = function () {
                 this.callUpdatePanel.doLayout();
             }
         },
+        /** Shows the 'comments' part of the call info box
+         * @param comments {array} An array of comments, ordered oldest first
+         */
         showComments: function (comments) {
             // clear previous comments
             this.callCommentPanel.removeAll(true);
@@ -656,6 +659,7 @@ Mantis.Calls.ViewCalls = function () {
         }
     };
     
+    /** Grid renderer for dates */
     function renderDate(val, meta, rec, row, col, store) {
         var value = '';
         
@@ -686,6 +690,7 @@ Mantis.Calls.ViewCalls = function () {
         return value;
     }
     
+    /** Grid renderer for the 'contact' field */
     function renderContact(val, meta, rec, row, col, store) {
         var value = '';
         
@@ -713,6 +718,7 @@ Mantis.Calls.ViewCalls = function () {
         return value;
     }
     
+    /** Grid renderer for the 'message' field */
     function renderMessage(val, meta, rec, row, col, store) {
         var value = '';
         var title = '';
@@ -735,6 +741,7 @@ Mantis.Calls.ViewCalls = function () {
         return value;
     }
     
+    /** Grid renderer for the 'priority' field */
     function renderPriority(val, meta, rec, row, col, store) {
         var value = '';
         
@@ -747,6 +754,7 @@ Mantis.Calls.ViewCalls = function () {
         return value;
     }
     
+    /** Grid renderer for the 'close call' column */
     function renderClose(val, meta, rec, row, col, store) {
         var value = '';
         
@@ -763,6 +771,7 @@ Mantis.Calls.ViewCalls = function () {
         return value;
     }
     
+    /** Generic grid renderer to apply the 'call-closed' class on fields */
     function renderGeneric(val, meta, rec, row, col, store) {
         // set the CSS class
         meta.css = 'call-'+rec.get('status');
