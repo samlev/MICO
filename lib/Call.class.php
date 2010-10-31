@@ -340,6 +340,8 @@ class Call {
                         $comment_text = "Call escalated to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
                     } else if (isset($this->changes['priority'])) {
                         $comment_text = "Call escalated";
+                    } else if (isset($this->changes['user'])) {
+                        $comment_text = "Call assigned to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
                     } else if (isset($this->changes['comment'])) {
                         $comment_text = "Comment";
                     } else {
