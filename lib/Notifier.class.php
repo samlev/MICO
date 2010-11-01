@@ -57,7 +57,7 @@ class Notifier {
                 // now pull out the notifications
                 while ($row = mysql_fetch_assoc($res)) {
                     // set up the in the array (if it doesn't exist yet)
-                    if (!isset($users[$row['userid']])) {
+                    if (!isset($users[$row['user_id']])) {
                         $users[$row['user_id']] = array('user'=>User::by_id($row['user_id']),
                                                        'notifications'=>array(),
                                                        'newcalls'=>false,
