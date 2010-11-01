@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `{$prefix}user_notifications` (
   `comment_id` int(11) DEFAULT NULL,
   `notification_sent` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`,`type`,`notify_after`)
+  KEY `user_id` (`user_id`,`type`,`notify_after`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 EOQ;
         
