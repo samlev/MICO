@@ -30,7 +30,7 @@ $id = $_POST['id'];
 try {
     $u = User::by_id($id);
     // create and send the password request
-    PasswordReset::get_request($user->get_username());
+    PasswordReset::get_request($u->get_username());
     
     // grab the user
     $email = $u->get_var('email');
