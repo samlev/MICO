@@ -24,5 +24,5 @@
  ******************************************************************************/
 
 // include the configuration file
-define('MANTIS_VERSION', '0.10.4a');
+define('SPHODRO_VERSION', '0.11.1a');
 ?>

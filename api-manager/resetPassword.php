@@ -32,9 +32,6 @@ try {
     // create and send the password request
     PasswordReset::get_request($u->get_username());
     
-    // grab the user
-    $email = $u->get_var('email');
-    
     // build the return data
     $data = array("success"=>true);
 } catch (UserNotFoundException $e) {

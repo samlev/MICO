@@ -26,7 +26,8 @@
 // get the values
 $id = $_POST['id'];
 $field = $_POST['field'];
-$value = trim(html_scrub($_POST['value']));
+// there is no need for there to be linebreaks in user vars
+$value = trim(remove_linebreaks(html_scrub($_POST['value'])));
 
 // attempt to log the user in
 try {

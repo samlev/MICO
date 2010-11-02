@@ -152,6 +152,14 @@ function html_scrub($in) {
     return $out;
 }
 
+/** Removes linebreaks from a string
+ * @param string $in The string to remove line breaks from
+ * @return string The cleaned string
+ */
+function remove_linebreaks($in) {
+    return str_replace(array("\n","\r"),"",$in);
+}
+
 /** Checks to see if the requested API function is an actual API function so as
  * to protect against remote file inclusion
  * @see http://en.wikipedia.org/wiki/Remote_File_Inclusion

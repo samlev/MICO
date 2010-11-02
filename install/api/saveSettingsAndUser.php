@@ -33,8 +33,8 @@ if (!defined('CONFIGURED')) {
         
         // get the values
         $DEBUG_MODE = boolval($_POST['DEBUG_MODE'],true);
-        $MAIL_FROM = trim(html_scrub($_POST['MAIL_FROM']));
-        $SESSION_LENGTH = trim(html_scrub($_POST['SESSION_LENGTH']));
+        $MAIL_FROM = trim(remove_linebreaks(html_scrub($_POST['MAIL_FROM'])));
+        $SESSION_LENGTH = trim(remove_linebreaks(html_scrub($_POST['SESSION_LENGTH'])));
         $SIMPLE_CRON = boolval($_POST['SIMPLE_CRON'],true);
         
         // get the version
@@ -114,14 +114,14 @@ if (!defined('CONFIGURED')) {
         }
         
         // sphodro version
-        if (defined('MANTIS_VERSION')) {
+        if (defined('SPHODRO_VERSION')) {
             // if the setting is different, save it
-            if (Settings::get_default('MANTIS_VERSION',null)!==MANTIS_VERSION) {
-                Settings::set('MANTIS_VERSION',MANTIS_VERSION);
+            if (Settings::get_default('SPHODRO_VERSION',null)!==SPHODRO_VERSION) {
+                Settings::set('SPHODRO_VERSION',SPHODRO_VERSION);
             }
         } else {
-            if (Settings::get_default('MANTIS_VERSION',null)!=="unknown") {
-                Settings::set('MANTIS_VERSION',"unknown");
+            if (Settings::get_default('SPHODRO_VERSION',null)!=="unknown") {
+                Settings::set('SPHODRO_VERSION',"unknown");
             }
         }
         

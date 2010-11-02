@@ -41,7 +41,7 @@ Sphodro.Footer = function () {
                         '-',
                         { html: '<a href="#" onclick="Sphodro.Footer.showAbout();">About Sphodro</a>'},
                         "->",
-                        "Version: "+MANTIS_VERSION
+                        "Version: "+SPHODRO_VERSION
                     ]
                 });
             }
@@ -54,7 +54,7 @@ Sphodro.Footer = function () {
                 // build the 'About Sphodro' HTML 
                 var aboutHTML = '<h1>Sphodro</h1>'; // Title
                 // Version
-                aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MANTIS_VERSION+'</p>';
+                aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+SPHODRO_VERSION+'</p>';
                 // Licence
                 aboutHTML += '<p>Sphodro is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
                              'licence version 3.0, and is available for free, without warranty.</p>';

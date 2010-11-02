@@ -37,7 +37,8 @@ foreach ($vars as $k=>$v) {
         if (boolval($v,true)!== null) {
             $v = boolval($v,true);
         } else {
-            $v = trim(html_scrub($v));
+            // remove linebreaks, html, etc.
+            $v = trim(remove_linebreaks(html_scrub($v)));
         }
         // Check if the update is a change
         if ($user->get_var($k) !== $v) {

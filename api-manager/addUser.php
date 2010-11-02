@@ -26,8 +26,8 @@
 
 // get the values
 $username = strtolower(trim($_POST['username'])); // usernames are lower-case to lower user-input confusion
-$name = trim(html_scrub($_POST['name']));
-$email = trim(html_scrub($_POST['email']));
+$name = trim(remove_linebreaks(html_scrub($_POST['name'])));
+$email = trim(remove_linebreaks(html_scrub($_POST['email'])));
 $role = $_POST['role'];
 
 $user_id = 0;
