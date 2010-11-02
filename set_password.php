@@ -45,7 +45,7 @@ define ('PASSWORD_RESET',true);
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Mantis Simple Call Centre" style="margin:0px; float:right;" />
+      <img src="<?=WEB_ROOT?>/skin/static/mantis.png" alt="Sphodro" style="margin:0px; float:right;" />
     </div>
   </body>
 </html>

@@ -9,7 +9,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Mantis Simple Call Centre is free software: you can redistribute it and/or
+ ** Sphodro is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -128,7 +128,7 @@ if (defined('FS_ROOT')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="../skin/static/mantis.png" alt="Mantis Simple Call Centre" id="mantisLogo" />
+      <img src="../skin/static/mantis.png" alt="Sphodro" id="mantisLogo" />
     </div>
   </body>
 </html>

@@ -9,7 +9,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Mantis Simple Call Centre is free software: you can redistribute it and/or
+ ** Sphodro is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -33,7 +33,7 @@ if (!defined('CONFIGURED')) {
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>Mantis - Simple Call Centre</title>
+    <title>Sphodro</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="js/ext/resources/css/ext-all.css" />
@@ -50,12 +50,12 @@ if (!defined('CONFIGURED')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="skin/static/mantis.png" alt="Mantis" id="mantisLogo" />
+      <img src="skin/static/sphodro.png" alt="Sphodro" id="sphodroLogo" />
     </div>
     <div style="padding:8px;">
       <h2 style="font-size:16pt;margin-bottom:8px;">Installation Instructions</h2>
       <p style="margin-bottom:8px;">
-        To install Mantis, you must follow these steps:
+        To install Sphodro, you must follow these steps:
       </p>
       <ol>
         <li style="margin-bottom:8px;">
@@ -128,7 +128,7 @@ if (isset($_COOKIE['session'])) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=APP_ROOT?>/skin/static/mantis.png" alt="Mantis Simple Call Centre" id="mantisLogo" />
+      <img src="<?=APP_ROOT?>/skin/static/mantis.png" alt="Sphodro" id="mantisLogo" />
       <div class="visual-clear"></div>
       <div id="userMenu"></div>
       <div id="systemMenu"></div>

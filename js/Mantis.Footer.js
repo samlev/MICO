@@ -9,7 +9,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Mantis Simple Call Centre is free software: you can redistribute it and/or
+ ** Sphodro is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -37,7 +37,7 @@ Mantis.Footer = function () {
                 this.bar = new Ext.Toolbar({
                     cls:'footer-bar',
                     items: [
-                        "Mantis Simple Call Centre",
+                        "Sphodro",
                         '-',
                         { html: '<a href="#" onclick="Mantis.Footer.showAbout();">About Mantis</a>'},
                         "->",
@@ -52,7 +52,7 @@ Mantis.Footer = function () {
         showAbout: function () {
             if (this.aboutWindow === undefined) {
                 // build the 'About Mantis' HTML 
-                var aboutHTML = '<h1>Mantis Simple Call Centre</h1>'; // Title
+                var aboutHTML = '<h1>Sphodro</h1>'; // Title
                 // Version
                 aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MANTIS_VERSION+'</p>';
                 // Licence
