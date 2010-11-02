@@ -78,14 +78,14 @@ $conf_data = <<<EOF
 // NB: The software assumes that these paths do not contain a trailing slash
 define ("FS_ROOT", "$FS_ROOT"); // Filesystem root
 // Web paths
-define ("WEB_DOMAIN", $WEB_DOMAIN); // Base domain - best option is to use \$_SERVER['SERVER_NAME'] which will avoid javascript cross-domain issues
+define ("WEB_DOMAIN", $WEB_DOMAIN); // Base domain - best option is to use \$_SERVER['HTTP_HOST'] which will avoid javascript cross-domain issues
 define ("WEB_ROOT", $WEB_ROOT); // Base URL
 define ("APP_ROOT", $APP_ROOT); // Web path to application root
 
 // database connection variables
-\$DB_HOST = "$host";     // MySQL hostname
-\$DB_USER = "$user";      // MySQL username
-\$DB_PASS = "$pass";      // MySQL password
+\$DB_HOST = "$host"; // MySQL hostname
+\$DB_USER = "$user"; // MySQL username
+\$DB_PASS = "$pass"; // MySQL password
 \$DB_NAME = "$name"; // Database name
 
 // database assistance variables
