@@ -31,7 +31,7 @@ define ("FS_ROOT", "/absolute/path/to/application/root"); // Filesystem root
 // Web paths
 define ("WEB_DOMAIN", "www.example.com"); // Base domain - best option is to use $_SERVER['SERVER_NAME'] which will avoid javascript cross-domain issues
 define ("WEB_ROOT", "http://".WEB_DOMAIN); // Base URL
-define ("APP_ROOT", WEB_ROOT."/mantis"); // Web path to application root
+define ("APP_ROOT", WEB_ROOT."/sphodro"); // Web path to application root
 
 // database connection variables
 $DB_HOST = "localhost";     // MySQL hostname
@@ -40,8 +40,4 @@ $DB_PASS = "password";      // MySQL password
 $DB_NAME = "database_name"; // Database name
 
 // database assistance variables
-define ("DB_PREFIX", "mantis_"); // (optional) prefix for tables - use this if you are using the database for other uses
-
-// This is required to inform the system that it is properly configured
-define ("CONFIGURED", true);
-?>
+define ("DB_PREFIX", "sphodro_"); // (optional) prefix for tables - use this if you are using the database for other uses

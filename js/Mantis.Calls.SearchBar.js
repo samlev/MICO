@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Calls.SearchBar.js
+ ** File: js/Sphodro.Calls.SearchBar.js
  ** 
  ** Description: Defines the 'calls' searchbar
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.Calls.SearchBar = function () {
+Sphodro.Calls.SearchBar = function () {
     var toolbar;
     var filterField;
     var orderFilter;
@@ -40,18 +40,18 @@ Mantis.Calls.SearchBar = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: Mantis.Utils.CommonStores.callsSearchFilter
+                        data: Sphodro.Utils.CommonStores.callsSearchFilter
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVarDefault('showcalls','assigned'),
+                    value:Sphodro.User.getVarDefault('showcalls','assigned'),
                     mode:'local',
                     triggerAction:'all',
                     width:130
                 });
                 
                 this.filterField.on('select', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
+                    Sphodro.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // the order
@@ -60,28 +60,28 @@ Mantis.Calls.SearchBar = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: Mantis.Utils.CommonStores.callsOrderFilter
+                        data: Sphodro.Utils.CommonStores.callsOrderFilter
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVarDefault('ordercalls','recent'),
+                    value:Sphodro.User.getVarDefault('ordercalls','recent'),
                     mode:'local',
                     triggerAction:'all',
                     width:100
                 });
                 
                 this.orderField.on('select', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
+                    Sphodro.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // whether to show closed or not
                 this.showClosedField = new Ext.form.Checkbox({
                     checked:false
                 });
-                this.showClosedField.setValue(Mantis.User.getVar('showclosed'));
+                this.showClosedField.setValue(Sphodro.User.getVar('showclosed'));
                 
                 this.showClosedField.on('check', function () {
-                    Mantis.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
+                    Sphodro.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // and build the toolbar
@@ -108,9 +108,9 @@ Mantis.Calls.SearchBar = function () {
             
             if (this.toolbar == undefined) {
                 filter = [
-                    {name:'filter',value:Mantis.User.getVarDefault('showcalls','assigned')},
-                    {name:'order',value:Mantis.User.getVarDefault('ordercalls','recent')},
-                    {name:'closed',value:Mantis.User.getVarDefault('showclosed',false)}
+                    {name:'filter',value:Sphodro.User.getVarDefault('showcalls','assigned')},
+                    {name:'order',value:Sphodro.User.getVarDefault('ordercalls','recent')},
+                    {name:'closed',value:Sphodro.User.getVarDefault('showclosed',false)}
                 ];
             } else {
                 filter = [

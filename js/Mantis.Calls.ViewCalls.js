@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Calls.ViewCalls.js
+ ** File: js/Sphodro.Calls.ViewCalls.js
  ** 
  ** Description: The 'view calls' section of the system
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.Calls.ViewCalls = function () {
+Sphodro.Calls.ViewCalls = function () {
     // view calls grid
     var gridStore;
     var grid;
@@ -75,23 +75,23 @@ Mantis.Calls.ViewCalls = function () {
                         {name: "comments", mapping: "comments"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     }
                 });
                 
                 // the pager
                 this.pager = new Ext.PagingToolbar({
                     store: this.gridStore,
-                    pageSize:parseInt(Mantis.User.getVarDefault('callsperpage',30),10)
+                    pageSize:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)
                 });
                 
                 // get the filter parameters
                 this.gridStore.on('beforeload',function () {
-                    var filters = Mantis.Calls.SearchBar.getFilter();
+                    var filters = Sphodro.Calls.SearchBar.getFilter();
                     
                     // rebuild the base parameters
                     var bp = {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     }
                     
                     // add the new parameters
@@ -106,7 +106,7 @@ Mantis.Calls.ViewCalls = function () {
                 
                 // build the grid
                 this.grid = new Ext.grid.GridPanel({
-                    id:'Mantis.Calls.ViewCalls.grid',
+                    id:'Sphodro.Calls.ViewCalls.grid',
                     region:'center',
                     cm: new Ext.grid.ColumnModel ([
                         sm,
@@ -141,7 +141,7 @@ Mantis.Calls.ViewCalls = function () {
                 // Build the lower panel
                 // build the call info panel
                 this.callInfoPanel = new Ext.Panel({
-                    id:'Mantis.Calls.ViewCalls.callInfoPanel',
+                    id:'Sphodro.Calls.ViewCalls.callInfoPanel',
                     width:250,
                     height:250,
                     autoScroll:true,
@@ -162,7 +162,7 @@ Mantis.Calls.ViewCalls = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVarDefault('commentorder','newest'),
+                    value:Sphodro.User.getVarDefault('commentorder','newest'),
                     mode:'local',
                     triggerAction:'all',
                     width:100
@@ -176,7 +176,7 @@ Mantis.Calls.ViewCalls = function () {
                 
                 // build the comment panel
                 this.callCommentPanel = new Ext.Panel ({
-                    id:'Mantis.Calls.ViewCalls.callCommentPanel',
+                    id:'Sphodro.Calls.ViewCalls.callCommentPanel',
                     width:250,
                     height:250,
                     autoScroll:true,
@@ -237,7 +237,7 @@ Mantis.Calls.ViewCalls = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['priority','view'],
-                        data: Mantis.Utils.CommonStores.callPriority
+                        data: Sphodro.Utils.CommonStores.callPriority
                     }),
                     displayField:'view',
                     valueField:'priority',
@@ -245,7 +245,7 @@ Mantis.Calls.ViewCalls = function () {
                     mode:'local',
                     triggerAction:'all',
                     width:120,
-                    tpl:Mantis.Utils.priorityTemplate(),
+                    tpl:Sphodro.Utils.priorityTemplate(),
                     listeners:{
                         scope:this,
                         'select': function () { this.escalateCallRadio.setValue(true); }
@@ -265,7 +265,7 @@ Mantis.Calls.ViewCalls = function () {
                         {name: "statustext", mapping: "statustext"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -279,7 +279,7 @@ Mantis.Calls.ViewCalls = function () {
                     editable:false,
                     valueField:'id',
                     displayField:'name',
-                    tpl:Mantis.Utils.userTemplate(),
+                    tpl:Sphodro.Utils.userTemplate(),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Escalate to",
@@ -354,7 +354,7 @@ Mantis.Calls.ViewCalls = function () {
                             }
                         }
                         
-                        Mantis.Calls.updateCall(rec.get('id'), updates);
+                        Sphodro.Calls.updateCall(rec.get('id'), updates);
                     }
                 });
                 
@@ -369,7 +369,7 @@ Mantis.Calls.ViewCalls = function () {
                 });
                 
                 this.callUpdatePanel = new Ext.Panel ({
-                    id:'Mantis.Calls.ViewCalls.callUpdatePanel',
+                    id:'Sphodro.Calls.ViewCalls.callUpdatePanel',
                     width:250,
                     height:250,
                     layout:'form',
@@ -399,7 +399,7 @@ Mantis.Calls.ViewCalls = function () {
                 
                 // and the wrapper panel
                 this.callDetailPanel = new Ext.Panel({
-                    id:'Mantis.Calls.ViewCalls.callDetailPanel',
+                    id:'Sphodro.Calls.ViewCalls.callDetailPanel',
                     region:'south',
                     layout:'hbox',
                     items:[
@@ -413,10 +413,10 @@ Mantis.Calls.ViewCalls = function () {
                 
                 // build the panel
                 this.panel = new Ext.Panel({
-                    id:'Mantis.Calls.ViewCalls.panel',
+                    id:'Sphodro.Calls.ViewCalls.panel',
                     layout:'border',
                     region:'center',
-                    tbar:Mantis.Calls.SearchBar.getToolbar(),
+                    tbar:Sphodro.Calls.SearchBar.getToolbar(),
                     items:[
                         this.grid,
                         this.callDetailPanel
@@ -424,14 +424,14 @@ Mantis.Calls.ViewCalls = function () {
                 });
                 
                 // and add the panel to the calls section
-                Mantis.Calls.addPanel(this.panel);
+                Sphodro.Calls.addPanel(this.panel);
                 
                 // set up the auto updater
-                setTimeout('Mantis.Calls.checkUpdates()',15000);
+                setTimeout('Sphodro.Calls.checkUpdates()',15000);
             }
             
             // load the store
-            this.gridStore.load({params:{start:0,limit:Mantis.User.getVarDefault('callsperpage',30)}});
+            this.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
             if (this.grid.getSelectionModel().hasSelection()) {
                 this.grid.getSelectionModel().clearSelections();
             }
@@ -448,7 +448,7 @@ Mantis.Calls.ViewCalls = function () {
             // Build the call HTML
             var callInfoHTML = "";
             // time
-            callInfoHTML += "<b>"+rec.get('date').format(Mantis.User.getVarDefault('dateformat','jS M, Y'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mantis.User.getVarDefault('timeformat','g:ia'))+"</b>";
+            callInfoHTML += "<b>"+rec.get('date').format(Sphodro.User.getVarDefault('dateformat','jS M, Y'))+"</b>"+" at "+"<b>"+rec.get('date').format(Sphodro.User.getVarDefault('timeformat','g:ia'))+"</b>";
             // priority
             if (rec.get('status') == 'new') {
                 callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+rec.get('priority')+'</span>';
@@ -457,7 +457,7 @@ Mantis.Calls.ViewCalls = function () {
             }
             
             // taker
-            if (rec.get('taker').id == Mantis.User.user_id) {
+            if (rec.get('taker').id == Sphodro.User.user_id) {
                 callInfoHTML += "<br />Call taken by you";
             } else {
                 callInfoHTML += "<br />Call taken by "+rec.get('taker').name;
@@ -483,14 +483,14 @@ Mantis.Calls.ViewCalls = function () {
                 var users = rec.get('users');
                 
                 for (var i = 0; i < users.length; i++) {
-                    if (users[i].id == Mantis.User.user_id) {
+                    if (users[i].id == Sphodro.User.user_id) {
                         callInfoHTML += "<br /> - <b>You</b>";
                     } else {
                         callInfoHTML += "<br /> - "+users[i].name;
                     }
                 }
             } else {
-                if (rec.get('users')[0].id == Mantis.User.user_id) {
+                if (rec.get('users')[0].id == Sphodro.User.user_id) {
                     callInfoHTML += " <b>You</b>";
                 } else {
                     callInfoHTML += " "+rec.get('users')[0].name;
@@ -610,7 +610,7 @@ Mantis.Calls.ViewCalls = function () {
                     var date = Date.parseDate(comment.date,'Y-m-d H:i:s');
                     var today = new Date();
                     // and show the date
-                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Mantis.User.getVarDefault('timeformat','g:ia'))+'</b></td>';
+                    commentHTML += '<tr><td style="vertical-align:top;text-align:left;"><b>'+date.format(Sphodro.User.getVarDefault('timeformat','g:ia'))+'</b></td>';
                     
                     // get the day
                     var day = '';
@@ -622,13 +622,13 @@ Mantis.Calls.ViewCalls = function () {
                         day = 'Yesterday';
                     } else {
                         // just show the date
-                        day = date.format(Mantis.User.getVarDefault('dateformat','jS M, Y'));
+                        day = date.format(Sphodro.User.getVarDefault('dateformat','jS M, Y'));
                     }
                     // add the day to the HTML
                     commentHTML += '<td style="vertical-align:top;text-align:right;">'+day+'</td><tr/>';
                     
                     // add the action
-                    commentHTML += '<tr><td colspan="2"><b>'+comment.action+'</b> by <b>'+(comment.user_id == Mantis.User.user_id?'You':comment.commenter)+'</b></td></tr>';
+                    commentHTML += '<tr><td colspan="2"><b>'+comment.action+'</b> by <b>'+(comment.user_id == Sphodro.User.user_id?'You':comment.commenter)+'</b></td></tr>';
                     
                     // and add the comment (if there is one)
                     if (comment.comment.length) {
@@ -668,17 +668,17 @@ Mantis.Calls.ViewCalls = function () {
             var today = new Date();
             
             if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                value = val.format(Mantis.User.getVarDefault('timeformat','g:ia'));
+                value = val.format(Sphodro.User.getVarDefault('timeformat','g:ia'));
             } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                        (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
                                                      (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                value = val.format(Mantis.User.getVarDefault('timeformat','g:ia'))+' Yesterday';
+                value = val.format(Sphodro.User.getVarDefault('timeformat','g:ia'))+' Yesterday';
             } else {
                 // just show the date
-                value = ' ' + val.format(Mantis.User.getVarDefault('dateformat','jS M, Y'));
+                value = ' ' + val.format(Sphodro.User.getVarDefault('dateformat','jS M, Y'));
             }
             
-            meta.attr = 'ext:qtip="'+val.format(Mantis.User.getVarDefault('dateformat','jS M, Y'))+' at '+val.format(Mantis.User.getVarDefault('timeformat','g:ia'))+'"';
+            meta.attr = 'ext:qtip="'+val.format(Sphodro.User.getVarDefault('dateformat','jS M, Y'))+' at '+val.format(Sphodro.User.getVarDefault('timeformat','g:ia'))+'"';
         } else {
             value = val;
         }
@@ -759,7 +759,7 @@ Mantis.Calls.ViewCalls = function () {
         var value = '';
         
         if (rec.get('status')=='new') {
-            value = '<a href="#" onclick="Mantis.Calls.updateCall('+rec.get('id')+',{status:\'closed\'})">Close call</a>';
+            value = '<a href="#" onclick="Sphodro.Calls.updateCall('+rec.get('id')+',{status:\'closed\'})">Close call</a>';
         } else {
             value = 'Call closed';
         }

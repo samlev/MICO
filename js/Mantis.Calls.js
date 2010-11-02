@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Calls.js
+ ** File: js/Sphodro.Calls.js
  ** 
  ** Description: The main 'calls' section of the system
  **
@@ -21,9 +21,9 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Ext.namespace('Mantis.Calls');
+Ext.namespace('Sphodro.Calls');
 
-Mantis.Calls = function () {
+Sphodro.Calls = function () {
     // menu id
     var menuId;
     
@@ -34,7 +34,7 @@ Mantis.Calls = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('Calls', 'Mantis.Calls.show()','system');
+                this.menuId = Sphodro.SystemMenu.addItem('Calls', 'Sphodro.Calls.show()','system');
             }
         },
         /** Shows the panel */
@@ -47,21 +47,21 @@ Mantis.Calls = function () {
                 
                 // set up the panel
                 this.panel = new Ext.Panel({
-                    id:'Mantis.Calls.panel',
+                    id:'Sphodro.Calls.panel',
                     layout:'border'
                 });
                 
                 // Build the panels
-                Mantis.Calls.AddCall.show();
-                Mantis.Calls.ViewCalls.show();
+                Sphodro.Calls.AddCall.show();
+                Sphodro.Calls.ViewCalls.show();
                 
                 // Add to the main panel
-                Mantis.Application.addPanel(this.panel);
+                Sphodro.Application.addPanel(this.panel);
             }
             
             // mark this panel as selected
-            Mantis.SystemMenu.markSelected(this.menuId);
-            Mantis.Application.showPanel('Mantis.Calls.panel');
+            Sphodro.SystemMenu.markSelected(this.menuId);
+            Sphodro.Application.showPanel('Sphodro.Calls.panel');
         },
         /** Adds a panel to this panel
          * @param panel {Ext.Panel} The panel to add
@@ -82,7 +82,7 @@ Mantis.Calls = function () {
             
             // build the base paramaters object
             var params = {
-                session: Mantis.User.getSession(),
+                session: Sphodro.User.getSession(),
                 id:id
             }
             
@@ -90,7 +90,7 @@ Mantis.Calls = function () {
             if (updates.status !== undefined) { params.status = updates.status; }
             if (updates.priority !== undefined) { params.priority = updates.priority; }
             // users can be either an integer or an array
-            if (updates.users !== undefined) { params.users = (typeof(updates.users)=='int'?updates.users:Mantis.Utils.serialiseArray(updates.users)); }
+            if (updates.users !== undefined) { params.users = (typeof(updates.users)=='int'?updates.users:Sphodro.Utils.serialiseArray(updates.users)); }
             if (updates.comment !== undefined) { params.comment = updates.comment; }
             
             // make the call
@@ -100,7 +100,7 @@ Mantis.Calls = function () {
                 callback: function (options, success, response) {
                     var res = Ext.decode(response.responseText);
                     if (success && res.success) {
-                        Mantis.Calls.ViewCalls.gridStore.reload();
+                        Sphodro.Calls.ViewCalls.gridStore.reload();
                     } else {
                         var msg = "Unknown system error";
                         if (res.info !== undefined) {
@@ -118,22 +118,22 @@ Mantis.Calls = function () {
             
             conn.request({
                 url:APP_ROOT+'/api.php?f=getLastUpdate',
-                params: { session: Mantis.User.getSession() },
+                params: { session: Sphodro.User.getSession() },
                 callback: function (options, success, response) {
                     var res = Ext.decode(response.responseText);
                     if (success && res.success) {
                         // check if there have been any updates
-                        if (res.lastupdate != Mantis.User.getVar('lastupdate')) {
+                        if (res.lastupdate != Sphodro.User.getVar('lastupdate')) {
                             // don't reload if we're viewing a call
-                            if (Mantis.Calls.ViewCalls.grid.getSelectionModel().getCount() !== 1) {
+                            if (Sphodro.Calls.ViewCalls.grid.getSelectionModel().getCount() !== 1) {
                                 // reload the grid
-                                Mantis.Calls.ViewCalls.gridStore.reload();
+                                Sphodro.Calls.ViewCalls.gridStore.reload();
                                 
-                                dirty = Mantis.User.dirty;
+                                dirty = Sphodro.User.dirty;
                                 // set the variable
-                                Mantis.User.setVar('lastupdate',res.lastupdate);
+                                Sphodro.User.setVar('lastupdate',res.lastupdate);
                                 // commit the changes locally
-                                Mantis.User.commit(true);
+                                Sphodro.User.commit(true);
                             }
                         }
                     } else {
@@ -146,7 +146,7 @@ Mantis.Calls = function () {
                     // if we're not logged out, check again
                     if (!res.sessionexpired) {
                         // set the timeout to check again in 15 seconds
-                        this.updateTimeout = setTimeout('Mantis.Calls.checkUpdates()',15000);
+                        this.updateTimeout = setTimeout('Sphodro.Calls.checkUpdates()',15000);
                     }
                 },
                 scope: this

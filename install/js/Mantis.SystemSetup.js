@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: install/js/Mantis.SystemSetup.js
+ ** File: install/js/Sphodro.SystemSetup.js
  ** 
  ** Description: The system settings section of the system
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.SystemSetup = function () {
+Sphodro.SystemSetup = function () {
     // edit fields
     var debugModeField;
     var debugModeFieldset;
@@ -65,7 +65,7 @@ Mantis.SystemSetup = function () {
                     title: 'Debug Mode',
                     items: [
                         {
-                            html: 'Debug mode is useful for when you are working on the Mantis codebase, or '+
+                            html: 'Debug mode is useful for when you are working on the Sphodro codebase, or '+
                                   'if you are experiencing errors. For best performance, it is advised to leave '+
                                   'this option off.',
                             bodyStyle:'padding-bottom:3px;'
@@ -79,7 +79,7 @@ Mantis.SystemSetup = function () {
                     width: 135, 
                     allowBlank: false,
                     required: true,
-                    emptyText: 'mantis@example.com',
+                    emptyText: 'sphodro@example.com',
                     hideLabel: true
                 });
                 
@@ -129,7 +129,7 @@ Mantis.SystemSetup = function () {
                     items: [
                         {
                             html: 'The session length is how long a session persists for while a user '+
-                                  'does not have Mantis open. Short sessions are more secure, but long '+
+                                  'does not have Sphodro open. Short sessions are more secure, but long '+
                                   'sessions mean that a user will not have to log in every time they '+
                                   'open the application.',
                             bodyStyle:'padding-bottom:3px;'
@@ -153,7 +153,7 @@ Mantis.SystemSetup = function () {
                         {
                             html: 'The cron is a recurring task which sends out notification emails.<br /><br />'+
                                   'The simple cron should only be used if you do not have access to '+
-                                  'a proper cron system. It will only run when a user has Mantis open.<br /><br />'+
+                                  'a proper cron system. It will only run when a user has Sphodro open.<br /><br />'+
                                   'Once the system is installed, the "System Settings" tab will have '+
                                   'further instructions on how to set up the cron task.',
                             bodyStyle:'padding-bottom:5px;'
@@ -203,7 +203,7 @@ Mantis.SystemSetup = function () {
                 // check the strength of the password
                 this.passwordField.on('keyup', function() {
                     var pass = this.passwordField.getValue();
-                    var points = Mantis.Utils.passwordStrength(pass);
+                    var points = Sphodro.Utils.passwordStrength(pass);
                     
                     // password strength
                     var text = 'Weak';
@@ -289,7 +289,7 @@ Mantis.SystemSetup = function () {
                 
                 // perferences form
                 this.panel = new Ext.form.FormPanel({
-                    id: "Mantis.SystemSetup.panel",
+                    id: "Sphodro.SystemSetup.panel",
                     autoScroll:true,
                     items: [
                         this.debugModeFieldset,
@@ -311,10 +311,10 @@ Mantis.SystemSetup = function () {
                 });
                 
                 // Add to the main panel
-                Mantis.Application.addPanel(this.panel);
+                Sphodro.Application.addPanel(this.panel);
             }
             
-            Mantis.Application.showPanel('Mantis.SystemSetup.panel');
+            Sphodro.Application.showPanel('Sphodro.SystemSetup.panel');
         },
         /** Saves the settings */
         saveSettings: function() {
@@ -349,7 +349,7 @@ Mantis.SystemSetup = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             // notify the user that the setting shave been updated
-                            Ext.Msg.alert("Installed", "Mantis has now been successfully installed.<br /><br />"+
+                            Ext.Msg.alert("Installed", "Sphodro has now been successfully installed.<br /><br />"+
                                                        "Please delete the 'install' folder for security.<br /><br />"+
                                                        "You will now be redirected to the login page.", function () { window.location = '../' });
                         } else {

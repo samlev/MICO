@@ -57,7 +57,7 @@ class PasswordReset {
                 // now finally, email the user - a simple text email
                 $body = "Dear ".$user->get_var('name').",\r\n\r\n";
                 $body .= "This email has been sent to you as part of the 'forgotten password'\r\n";
-                $body .= "process for Mantis.\r\n\r\n";
+                $body .= "process for Sphodro.\r\n\r\n";
                 $body .= "To change your password, visit the following link:\r\n";
                 $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
                 $body .= "This link will expire in approximately 24 hours, at ".date('h:i A',$expiry_time)."\r\n";
@@ -73,7 +73,7 @@ class PasswordReset {
                 $header .= "From: ".Settings::get('MAIL_FROM') . "\r\n";
                 
                 // and send the email
-                if (!mail($email,"Mantis - Password Reset Request",$body,$header)) {
+                if (!mail($email,"Sphodro - Password Reset Request",$body,$header)) {
                     // there was an error sending the email. Clear the reset request
                     PasswordReset::clear_request($request);
                     
@@ -117,10 +117,10 @@ class PasswordReset {
                 // now finally, email the user - a simple text email
                 $body = "Dear ".$user->get_var('name').",\r\n\r\n";
                 $body .= "This email has been sent to you as part of the user registration\r\n";
-                $body .= "process for Mantis.\r\n\r\n";
+                $body .= "process for Sphodro.\r\n\r\n";
                 $body .= "To set your password for the first time, visit the following link:\r\n";
                 $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
-                $body .= "Your username for Mantis is: $username\r\n\r\n";
+                $body .= "Your username for Sphodro is: $username\r\n\r\n";
                 $body .= "This link will expire in approximately 72 hours, at ".date('h:i A',$expiry_time)."\r\n";
                 $body .= "on ".date('jS M, Y',$expiry_time).", server time*.\r\n\r\n";
                 $body .= "If the link expires before you can use it, you can also set your\r\n";
@@ -135,7 +135,7 @@ class PasswordReset {
                 $header .= "From: ".Settings::get('MAIL_FROM') . "\r\n";
                 
                 // and send the email
-                if (!mail($email,"Mantis - User Registration",$body,$header)) {
+                if (!mail($email,"Sphodro - User Registration",$body,$header)) {
                     // there was an error sending the email. Clear the reset request
                     PasswordReset::clear_request($request);
                     

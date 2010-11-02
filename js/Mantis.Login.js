@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Login.js
+ ** File: js/Sphodro.Login.js
  ** 
  ** Description: The login form for the application
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.Login = function () {
+Sphodro.Login = function () {
     var dlgLogin;
     var usernameField;
     var passwordField;
@@ -63,7 +63,7 @@ Mantis.Login = function () {
                 
                 // login form
                 this.loginForm = new Ext.form.FormPanel({
-                    id: "Mantis.Login.loginForm", 
+                    id: "Sphodro.Login.loginForm", 
                     url: APP_ROOT+"/api.php?f=login", 
                     method: "POST",
                     region:"center",
@@ -86,7 +86,7 @@ Mantis.Login = function () {
                     ], 
                     buttons: [
                         new Ext.Panel({
-                            html: '<a href="#" onclick="Mantis.Login.dlgLogin.layout.setActiveItem(\'Mantis.Login.resetPasswordForm\')">Forgotten Password?</a>',
+                            html: '<a href="#" onclick="Sphodro.Login.dlgLogin.layout.setActiveItem(\'Sphodro.Login.resetPasswordForm\')">Forgotten Password?</a>',
                             layout: 'fit',
                             bodyStyle: "background-color:#dfe8f6;",
                             region: 'south'
@@ -106,7 +106,7 @@ Mantis.Login = function () {
                 
                 // forgotten password form
                 this.resetPasswordForm = new Ext.form.FormPanel({
-                    id: "Mantis.Login.resetPasswordForm", 
+                    id: "Sphodro.Login.resetPasswordForm", 
                     url: APP_ROOT+"/api.php?f=resetPassword", 
                     method: "POST",
                     region:"center",
@@ -134,7 +134,7 @@ Mantis.Login = function () {
                         {
                             text: "Cancel", 
                             handler: function () {
-                                this.dlgLogin.layout.setActiveItem('Mantis.Login.loginForm');
+                                this.dlgLogin.layout.setActiveItem('Sphodro.Login.loginForm');
                             }, 
                             scope: this,
                             width:120
@@ -206,7 +206,7 @@ Mantis.Login = function () {
                 this.resetPasswordForm.getForm().submit({
                     success: function (form, action) {
                         // go back to the login form
-                        this.dlgLogin.layout.setActiveItem('Mantis.Login.loginForm');
+                        this.dlgLogin.layout.setActiveItem('Sphodro.Login.loginForm');
                         // notify the user
                         Ext.Msg.alert("Password reset", 'Further instructions have been sent to your email address.');
                         

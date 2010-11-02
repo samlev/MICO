@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Utils.js
+ ** File: js/Sphodro.Utils.js
  ** 
  ** Description: Basic utilities/helpers
  **
@@ -21,9 +21,9 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Ext.namespace('Mantis.Utils');
+Ext.namespace('Sphodro.Utils');
 
-Mantis.Utils = function () {
+Sphodro.Utils = function () {
     return {
         /** Tests the strength of a password, and returns it as an integer out
          *   of 50. In general, the following weights can be used:

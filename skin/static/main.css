@@ -51,7 +51,7 @@ body {
     text-decoration:underline;
 }
 
-#mantisLogo {
+#sphodroLogo {
 	margin:0px;
 	float:right;
 	height:70px;
@@ -95,11 +95,11 @@ body {
 /* End system menu styles */
 
 /* About page styles */
-.about-mantis {
+.about-sphodro {
 	color:#000000;
 }
 
-.about-mantis h1 {
+.about-sphodro h1 {
 	font-size: 18pt;
 	border-bottom: groove #BBBBBB 1px;
 	padding-bottom: 3px;
@@ -107,7 +107,7 @@ body {
 	color:#106610;
 }
 
-.about-mantis p {
+.about-sphodro p {
 	margin-bottom:8px;
 }
 

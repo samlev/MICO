@@ -33,7 +33,7 @@ if (defined('CONFIGURED')) {
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>Mantis - Simple Call Centre</title>
+    <title>Sphodro</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/ext-all.css" />
@@ -50,12 +50,12 @@ if (defined('CONFIGURED')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="../skin/static/mantis.png" alt="Mantis" id="mantisLogo" />
+      <img src="../skin/static/sphodro.png" alt="Sphodro" id="sphodroLogo" />
     </div>
     <div style="padding:8px;">
       <h2 style="font-size:16pt;margin-bottom:8px;">Installation</h2>
       <p style="margin-bottom:8px;">
-        Mantis is installed. Please delete the 'install' directory and all of
+        Sphodro is installed. Please delete the 'install' directory and all of
         its contents.
       </p>
       <p style="margin-bottom:8px;">
@@ -82,7 +82,7 @@ if (defined('FS_ROOT')) {
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title>Mantis - Simple Call Centre</title>
+    <title>Sphodro</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/ext-all.css" />
@@ -93,18 +93,18 @@ if (defined('FS_ROOT')) {
     <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
         
-    <script type="text/javascript" src="../js/Mantis.Application.js"></script>
-    <script type="text/javascript" src="../js/Mantis.Utils.js"></script>
+    <script type="text/javascript" src="../js/Sphodro.Application.js"></script>
+    <script type="text/javascript" src="../js/Sphodro.Utils.js"></script>
     <!-- pull in the appropriate installer files -->
-    <script type="text/javascript" src="js/Mantis.ConfigSetup.js"></script>
-    <script type="text/javascript" src="js/Mantis.SystemSetup.js"></script>
+    <script type="text/javascript" src="js/Sphodro.ConfigSetup.js"></script>
+    <script type="text/javascript" src="js/Sphodro.SystemSetup.js"></script>
     <script type="text/javascript" defer="defer">
     <!--
     <?php
     if ($config_written) {
         // display the 'system setup' page
         ?>
-        setTimeout("Mantis.SystemSetup.show()",200);
+        setTimeout("Sphodro.SystemSetup.show()",200);
         <?php
     } else {
         // get the default values
@@ -120,7 +120,7 @@ if (defined('FS_ROOT')) {
         var WEB_ROOT = '<?=addslashes($WEB_ROOT)?>';
         var APP_ROOT = '<?=addslashes($APP_ROOT)?>';
         
-        setTimeout("Mantis.ConfigSetup.show();",200);
+        setTimeout("Sphodro.ConfigSetup.show();",200);
         <?php
     }?>
     -->
@@ -128,7 +128,7 @@ if (defined('FS_ROOT')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="../skin/static/mantis.png" alt="Sphodro" id="mantisLogo" />
+      <img src="../skin/static/sphodro.png" alt="Sphodro" id="sphodroLogo" />
     </div>
   </body>
 </html>

@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: install/js/Mantis.ConfigSetup.js
+ ** File: install/js/Sphodro.ConfigSetup.js
  ** 
  ** Description: The configuration settings section of the system
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.ConfigSetup = function () {
+Sphodro.ConfigSetup = function () {
     // Path settings fields
     var automaticPathField;
     var FS_ROOT_Field;
@@ -116,7 +116,7 @@ Mantis.ConfigSetup = function () {
                     title:'Filesystem and path settings',
                     items: [
                         {
-                            html: 'The following settings define where Mantis is on your server, '+
+                            html: 'The following settings define where Sphodro is on your server, '+
                                   'and how you access it over the internet. The advanced settings '+
                                   'are only advisable if you know exactly what you are doing.',
                             bodyStyle:'padding-bottom:3px;'
@@ -161,7 +161,7 @@ Mantis.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: true,
                     required: false,
-                    value: 'mantis_',
+                    value: 'sphodro_',
                     fieldLabel: 'Table prefix'
                 });
                 
@@ -171,8 +171,8 @@ Mantis.ConfigSetup = function () {
                     items: [
                         {
                             html: 'The following settings are for your MySQL database. '+
-                                  'The table prefix will keep Mantis data separate from '+
-                                  'other tables if Mantis is sharing a database with '+
+                                  'The table prefix will keep Sphodro data separate from '+
+                                  'other tables if Sphodro is sharing a database with '+
                                   'other applications.',
                             bodyStyle:'padding-bottom:3px;'
                         },
@@ -214,14 +214,14 @@ Mantis.ConfigSetup = function () {
                         this.userField.setValue('');
                         this.passField.setValue('');
                         this.nameField.setValue('');
-                        this.prefField.setValue('mantis_');
+                        this.prefField.setValue('sphodro_');
                     }, 
                     scope: this
                 });
                 
                 // perferences form
                 this.panel = new Ext.form.FormPanel({
-                    id: "Mantis.ConfigSetup.panel",
+                    id: "Sphodro.ConfigSetup.panel",
                     items: [
                         {
                             html:'<h1>Step 1: set up the database</h1>'
@@ -242,10 +242,10 @@ Mantis.ConfigSetup = function () {
                 });
                 
                 // Add to the main panel
-                Mantis.Application.addPanel(this.panel);
+                Sphodro.Application.addPanel(this.panel);
             }
             
-            Mantis.Application.showPanel('Mantis.ConfigSetup.panel');
+            Sphodro.Application.showPanel('Sphodro.ConfigSetup.panel');
         },
         /** Saves the settings */
         saveSettings: function() {
@@ -274,7 +274,7 @@ Mantis.ConfigSetup = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             // open another wait box
-                            Ext.Msg.wait('Installing','Installing Mantis',{
+                            Ext.Msg.wait('Installing','Installing Sphodro',{
                                 closable:false,
                                 modal:true
                             });
@@ -304,7 +304,7 @@ Mantis.ConfigSetup = function () {
                                         Ext.Msg.hide();
                                         
                                         // next step - configuring the first user
-                                        Ext.Msg.alert('Installing','Step 1 complete. Next step is to set up system configuration.', function () { Mantis.SystemSetup.show() });
+                                        Ext.Msg.alert('Installing','Step 1 complete. Next step is to set up system configuration.', function () { Sphodro.SystemSetup.show() });
                                     } else {
                                         Ext.Msg.hide();
                                         var msg = "Unknown system error";

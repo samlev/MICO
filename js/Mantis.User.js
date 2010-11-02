@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.User.js
+ ** File: js/Sphodro.User.js
  ** 
  ** Description: Defines a simple user object
  **
@@ -21,9 +21,9 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Ext.namespace('Mantis.User');
+Ext.namespace('Sphodro.User');
 
-Mantis.User = function () {
+Sphodro.User = function () {
     var user_id;
     var session;
     var role;
@@ -84,8 +84,8 @@ Mantis.User = function () {
                     conn.request({
                         url:APP_ROOT+'/api.php?f=saveUserVars',
                         params: {
-                            session: Mantis.User.getSession(),
-                            vars: Mantis.Utils.serialiseArray(this.vars)
+                            session: Sphodro.User.getSession(),
+                            vars: Sphodro.Utils.serialiseArray(this.vars)
                         },
                         callback: function (options, success, response) {
                             var res = Ext.decode(response.responseText);
@@ -129,7 +129,7 @@ Mantis.User = function () {
             conn.request({
                 url:APP_ROOT+'/api.php?f=logout',
                 params: {
-                    session: Mantis.User.getSession()
+                    session: Sphodro.User.getSession()
                 },
                 callback: function (options, success, response) {
                     var res = Ext.decode(response.responseText);

@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Application.js
+ ** File: js/Sphodro.Application.js
  ** 
  ** Description: The main application/page framework that everything else uses
  **
@@ -25,9 +25,9 @@ Ext.QuickTips.init ();
 
 Ext.BLANK_IMAGE_URL = "skin/static/s.gif";
 
-Ext.namespace ("Mantis");
+Ext.namespace ("Sphodro");
 
-Mantis.Application = function () {
+Sphodro.Application = function () {
     var viewport;
     
     var panel;
@@ -40,13 +40,13 @@ Mantis.Application = function () {
             if (this.viewport === undefined) {
                 // get the footer if it's defined (it won't be for the installer)
                 var footer;
-                if (Mantis.Footer !== undefined) {
-                    footer = Mantis.Footer.getFooter();
+                if (Sphodro.Footer !== undefined) {
+                    footer = Sphodro.Footer.getFooter();
                 }
                 
                 // Set up the holder panel
                 this.panel = new Ext.Panel ({
-                    id: "Mantis.Application.panel", 
+                    id: "Sphodro.Application.panel", 
                     region: "center", 
                     layout: "card",
                     items: [
@@ -60,7 +60,7 @@ Mantis.Application = function () {
                 
                 // Set up the viewport!
                 this.viewport = new Ext.Viewport ({
-                    id: "Mantis.Application.viewport", 
+                    id: "Sphodro.Application.viewport", 
                     layout: "border",
                     enableTabScroll:true,
                     items: [{
@@ -73,30 +73,30 @@ Mantis.Application = function () {
                     ]
                 });
                 
-                if (Mantis.Login !== undefined) { // if the login page is defined, show it
-                    Mantis.Login.show();
-                } else if (Mantis.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
-                    Mantis.PasswordSet.show();
-                } else if (Mantis.Calls !== undefined) { // if the main 'calls' section is defined, show it
+                if (Sphodro.Login !== undefined) { // if the login page is defined, show it
+                    Sphodro.Login.show();
+                } else if (Sphodro.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
+                    Sphodro.PasswordSet.show();
+                } else if (Sphodro.Calls !== undefined) { // if the main 'calls' section is defined, show it
                     // show standard application components
-                    Mantis.SystemMenu.show(); // system and user menus
+                    Sphodro.SystemMenu.show(); // system and user menus
                     
                     // Set the left ('system') menu items
-                    Mantis.Calls.init(); // initialize calls panel
-                    Mantis.User.Status.init(); // initialize the user status panel
+                    Sphodro.Calls.init(); // initialize calls panel
+                    Sphodro.User.Status.init(); // initialize the user status panel
                     // initialises the manage users panel
-                    if (Mantis.ManageUsers !== undefined) {
-                        Mantis.ManageUsers.init ();
+                    if (Sphodro.ManageUsers !== undefined) {
+                        Sphodro.ManageUsers.init ();
                     }
                     
                     // set the right ('user') menu items
                     // initialise the system settings panel
-                    if (Mantis.SystemSettings !== undefined) {
-                        Mantis.SystemSettings.init ();
+                    if (Sphodro.SystemSettings !== undefined) {
+                        Sphodro.SystemSettings.init ();
                     }
-                    Mantis.User.Preferences.init(); // initialize the user preferences panel
+                    Sphodro.User.Preferences.init(); // initialize the user preferences panel
                     // add the user logout menu item
-                    Mantis.SystemMenu.addItem('Log out','Mantis.User.logout()','user');
+                    Sphodro.SystemMenu.addItem('Log out','Sphodro.User.logout()','user');
                 }
             }
         },
@@ -117,5 +117,5 @@ Mantis.Application = function () {
 
 // When ExtJS is ready, initialize the application
 Ext.onReady (function () {
-    Mantis.Application.init ();
+    Sphodro.Application.init ();
 });

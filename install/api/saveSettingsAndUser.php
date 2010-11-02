@@ -113,7 +113,7 @@ if (!defined('CONFIGURED')) {
             $message .= "Simple cron must be either true or false.";
         }
         
-        // mantis version
+        // sphodro version
         if (defined('MANTIS_VERSION')) {
             // if the setting is different, save it
             if (Settings::get_default('MANTIS_VERSION',null)!==MANTIS_VERSION) {
@@ -208,7 +208,7 @@ if (!defined('CONFIGURED')) {
     }
 } else {
     $success = false;
-    $message .= "Mantis has already been installed.";
+    $message .= "Sphodro has already been installed.";
 }
 
 // return the response

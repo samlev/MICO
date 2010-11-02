@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.SystemMenu.js
+ ** File: js/Sphodro.SystemMenu.js
  ** 
  ** Description: A simple container for the top/system menu
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.SystemMenu = function () {
+Sphodro.SystemMenu = function () {
     var menuSystem;
     var menuUser;
     var selected;
@@ -35,7 +35,7 @@ Mantis.SystemMenu = function () {
                 
                 // system menu is the left side - it is for tabs which are system related
                 this.menuSystem = new Ext.Panel ({
-                    id:'Mantis.SystemMenu.menuSystem',
+                    id:'Sphodro.SystemMenu.menuSystem',
                     layout:'hbox',
                     applyTo:'systemMenu',
                     bodyStyle:'background:none;'
@@ -43,7 +43,7 @@ Mantis.SystemMenu = function () {
                 
                 // user menu is the right side - it is for tabs which are user related
                 this.menuUser = new Ext.Panel ({
-                    id:'Mantis.SystemMenu.menuUser',
+                    id:'Sphodro.SystemMenu.menuUser',
                     layout:'hbox',
                     layoutConfig:{
                         pack:'end'
@@ -65,7 +65,7 @@ Mantis.SystemMenu = function () {
             // add it to the items array
             this.items[id] = new Ext.Panel({
                 id:'menu-item-'+id,
-                html:'<div class="menu-item" onclick="Mantis.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>',
+                html:'<div class="menu-item" onclick="Sphodro.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>',
                 bodyStyle:'background:none;'
             });
             // add it to the menu

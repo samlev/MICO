@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/manager/Mantis.ManageUsers.js
+ ** File: js/manager/Sphodro.ManageUsers.js
  ** 
  ** Description: The main 'calls' section of the system
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.ManageUsers = function () {
+Sphodro.ManageUsers = function () {
     // menu id
     var menuId;
     
@@ -33,7 +33,7 @@ Mantis.ManageUsers = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('Manage Users', 'Mantis.ManageUsers.show()','system');
+                this.menuId = Sphodro.SystemMenu.addItem('Manage Users', 'Sphodro.ManageUsers.show()','system');
             }
         },
         /** Shows the panel */
@@ -59,7 +59,7 @@ Mantis.ManageUsers = function () {
                         {name: "role", mapping: "role"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     }
                 });
                 
@@ -67,7 +67,7 @@ Mantis.ManageUsers = function () {
                 this.userGridStore.on ('beforeload', function () {
                     // add the filter field as a parameter
                     this.userGridStore.baseParams = {
-                        session: Mantis.User.getSession(),
+                        session: Sphodro.User.getSession(),
                         filter: this.userFilterField.getValue()
                     }
                 }, this)
@@ -96,7 +96,7 @@ Mantis.ManageUsers = function () {
                     listeners: {
                         scope:this,
                         'select': function () {
-                            this.userGridStore.load({params:{start:0,limit:parseInt(Mantis.User.getVarDefault('callsperpage',30),10)}})
+                            this.userGridStore.load({params:{start:0,limit:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)}})
                         }
                     }
                 });
@@ -114,12 +114,12 @@ Mantis.ManageUsers = function () {
                 // the pager
                 this.pager = new Ext.PagingToolbar({
                     store: this.userGridStore,
-                    pageSize:parseInt(Mantis.User.getVarDefault('callsperpage',30),10)
+                    pageSize:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)
                 });
                 
                 // user grid
                 this.userGrid = new Ext.grid.EditorGridPanel({
-                    id:'Mantis.ManageUsers.userGrid',
+                    id:'Sphodro.ManageUsers.userGrid',
                     store: this.userGridStore,
                     sm: new Ext.grid.RowSelectionModel({singleSelect:true}),
                     autoSizeColumns: false,
@@ -143,7 +143,7 @@ Mantis.ManageUsers = function () {
                             name:'role',
                             store: new Ext.data.ArrayStore ({
                                 fields:['display','role'],
-                                data: Mantis.Utils.CommonStores.userTypesAll
+                                data: Sphodro.Utils.CommonStores.userTypesAll
                             }),
                             displayField:'display',
                             valueField:'role',
@@ -171,12 +171,12 @@ Mantis.ManageUsers = function () {
                     }
                     
                     // if the user isnt' an administrator, don't allow them to edit administrators
-                    if (Mantis.User.role != 'admin' && e.record.get('role') == 'admin') {
+                    if (Sphodro.User.role != 'admin' && e.record.get('role') == 'admin') {
                         allowedit = false;
                     }
                     
                     // don't allow the user to edit their own role
-                    if (Mantis.User.user_id == e.record.get('id') && e.field == 'role') {
+                    if (Sphodro.User.user_id == e.record.get('id') && e.field == 'role') {
                         allowedit = false;
                     }
                     
@@ -191,7 +191,7 @@ Mantis.ManageUsers = function () {
                     conn.request({
                         url:APP_ROOT+'/api.php?f=updateUser',
                         params: {
-                            session: Mantis.User.getSession(),
+                            session: Sphodro.User.getSession(),
                             id: e.record.get('id'),
                             field: e.field,
                             value: e.value
@@ -224,7 +224,7 @@ Mantis.ManageUsers = function () {
                 
                 // set up the panel
                 this.panel = new Ext.Panel({
-                    id:'Mantis.ManageUsers.panel',
+                    id:'Sphodro.ManageUsers.panel',
                     layout: 'fit',
                     items: [
                         this.userGrid
@@ -232,15 +232,15 @@ Mantis.ManageUsers = function () {
                 });
                 
                 // Add to the main panel
-                Mantis.Application.addPanel(this.panel);
+                Sphodro.Application.addPanel(this.panel);
             }
             
             // mark this panel as selected
-            Mantis.SystemMenu.markSelected(this.menuId);
-            Mantis.Application.showPanel('Mantis.ManageUsers.panel');
+            Sphodro.SystemMenu.markSelected(this.menuId);
+            Sphodro.Application.showPanel('Sphodro.ManageUsers.panel');
             
             // load the store
-            this.userGridStore.load({params:{start:0,limit:parseInt(Mantis.User.getVarDefault('callsperpage',30),10)}})
+            this.userGridStore.load({params:{start:0,limit:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)}})
         },
         /** Sends a user a 'reset password' request
          * @param id {int} The user ID
@@ -252,7 +252,7 @@ Mantis.ManageUsers = function () {
             conn.request({
                 url:APP_ROOT+'/api.php?f=resetPassword',
                 params: {
-                    session: Mantis.User.getSession(),
+                    session: Sphodro.User.getSession(),
                     id: id
                 },
                 callback: function (options, success, response) {
@@ -303,7 +303,7 @@ Mantis.ManageUsers = function () {
                     required:true,
                     store: new Ext.data.ArrayStore ({
                         fields:['display','role'],
-                        data: Mantis.Utils.CommonStores.userTypesActive
+                        data: Sphodro.Utils.CommonStores.userTypesActive
                     }),
                     displayField:'display',
                     valueField:'role',
@@ -323,7 +323,7 @@ Mantis.ManageUsers = function () {
                         conn.request({
                             url:APP_ROOT+'/api.php?f=addUser',
                             params: {
-                                session: Mantis.User.getSession(),
+                                session: Sphodro.User.getSession(),
                                 username: this.usernameField.getValue(),
                                 name: this.nameField.getValue(),
                                 email: this.emailField.getValue(),
@@ -380,7 +380,7 @@ Mantis.ManageUsers = function () {
                 
                 // build the panel
                 this.addUsersPanel = new Ext.Window({
-                    id:'Mantis.ManageUsers.addUsersPanel',
+                    id:'Sphodro.ManageUsers.addUsersPanel',
                     closeAction:'hide',
                     layout:'form',
                     title:'Add Users',
@@ -420,7 +420,7 @@ Mantis.ManageUsers = function () {
         if (rec.get('role')=='disabled') {
             value = 'User disabled';
         } else {
-            value = '<a href="#" onclick="Mantis.ManageUsers.resetPassword('+rec.get('id')+')">Reset Password</a>';
+            value = '<a href="#" onclick="Sphodro.ManageUsers.resetPassword('+rec.get('id')+')">Reset Password</a>';
         }
         
         // set the CSS class

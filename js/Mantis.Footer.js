@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Footer.js
+ ** File: js/Sphodro.Footer.js
  ** 
  ** Description: A simple footer for the application with version, about page,
  **              and some other items.
@@ -23,7 +23,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.Footer = function () {
+Sphodro.Footer = function () {
     var bar;
     
     var aboutWindow;
@@ -39,7 +39,7 @@ Mantis.Footer = function () {
                     items: [
                         "Sphodro",
                         '-',
-                        { html: '<a href="#" onclick="Mantis.Footer.showAbout();">About Mantis</a>'},
+                        { html: '<a href="#" onclick="Sphodro.Footer.showAbout();">About Sphodro</a>'},
                         "->",
                         "Version: "+MANTIS_VERSION
                     ]
@@ -48,15 +48,15 @@ Mantis.Footer = function () {
             
             return this.bar;
         },
-        /** Shows the 'About Mantis' window */
+        /** Shows the 'About Sphodro' window */
         showAbout: function () {
             if (this.aboutWindow === undefined) {
-                // build the 'About Mantis' HTML 
+                // build the 'About Sphodro' HTML 
                 var aboutHTML = '<h1>Sphodro</h1>'; // Title
                 // Version
                 aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MANTIS_VERSION+'</p>';
                 // Licence
-                aboutHTML += '<p>Mantis is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
+                aboutHTML += '<p>Sphodro is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
                              'licence version 3.0, and is available for free, without warranty.</p>';
                 // Acknowledgements
                 aboutHTML += '<p>Icons from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_new">silk icon set</a> '+
@@ -66,7 +66,7 @@ Mantis.Footer = function () {
                 
                 // build the window
                 this.aboutWindow = new Ext.Window({
-                    title:'About Mantis',
+                    title:'About Sphodro',
                     modal:false,
                     closeAction:'hide',
                     width: 700,
@@ -74,9 +74,9 @@ Mantis.Footer = function () {
                     bodyStyle: 'background: #f0fff0 url('+APP_ROOT+'/skin/static/about_bg.png) repeat-y;',
                     layout:'hbox',
                     items: [
-                        // Large Mantis logo on the left
+                        // Large Sphodro logo on the left
                         {
-                            html:'<img src="'+APP_ROOT+'/skin/static/mantis_large.png" alt="Mantis Large" />',
+                            html:'<img src="'+APP_ROOT+'/skin/static/sphodro_large.png" alt="Sphodro Large" />',
                             width: 250,
                             height: 510,
                             bodyStyle:'background:none;padding-top:10px;'
@@ -86,13 +86,13 @@ Mantis.Footer = function () {
                             width:100,
                             bodyStyle:'background:none'
                         },
-                        // about mantis text
+                        // about sphodro text
                         {
                             html: aboutHTML,
                             width: 340,
                             height: 500,
                             bodyStyle:'background:none;padding:10px;',
-                            cls: 'about-mantis'
+                            cls: 'about-sphodro'
                         }
                     ]
                 });

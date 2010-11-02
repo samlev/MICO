@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/admin/Mantis.Utils.CommonStores.js
+ ** File: js/admin/Sphodro.Utils.CommonStores.js
  ** 
  ** Description: Common store data for administrative users
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.Utils.CommonStores = function () {
+Sphodro.Utils.CommonStores = function () {
     return {
         // search options for calls; admin users can see all calls in the system
         callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All Calls','all']],

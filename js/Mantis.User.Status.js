@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.User.Status.js
+ ** File: js/Sphodro.User.Status.js
  ** 
  ** Description: Allows the user to change their status
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.User.Status = function () {
+Sphodro.User.Status = function () {
     // menu id
     var menuId;
     
@@ -33,7 +33,7 @@ Mantis.User.Status = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('Set Status', 'Mantis.User.Status.show()','system');
+                this.menuId = Sphodro.SystemMenu.addItem('Set Status', 'Sphodro.User.Status.show()','system');
             }
         },
         /** Shows the panel */
@@ -61,7 +61,7 @@ Mantis.User.Status = function () {
                     valueField:'status',
                     mode:'local',
                     triggerAction:'all',
-                    tpl:Mantis.Utils.userTemplate(),
+                    tpl:Sphodro.Utils.userTemplate(),
                     listeners: {
                         scope:this,
                         'select': function () {
@@ -85,7 +85,7 @@ Mantis.User.Status = function () {
                 // store
                 this.statusTextStore = new Ext.data.ArrayStore ({
                     fields:['text'],
-                    data: this.statusText(Mantis.User.getVarDefault('status','available'))
+                    data: this.statusText(Sphodro.User.getVarDefault('status','available'))
                 });
                 
                 // status text
@@ -116,10 +116,10 @@ Mantis.User.Status = function () {
                     scope:this,
                     handler: function() {
                         // set the variables in the user
-                        Mantis.User.setVar('status',this.statusField.getValue());
-                        Mantis.User.setVar('statustext',this.statusTextField.getValue());
+                        Sphodro.User.setVar('status',this.statusField.getValue());
+                        Sphodro.User.setVar('statustext',this.statusTextField.getValue());
                         // commit the changes
-                        Mantis.User.commit();
+                        Sphodro.User.commit();
                         this.panel.hide();
                     }
                 });
@@ -135,7 +135,7 @@ Mantis.User.Status = function () {
                 
                 // set up the main panel
                 this.panel = new Ext.Window({
-                    id:'Mantis.User.Status.panel',
+                    id:'Sphodro.User.Status.panel',
                     layout:'form',
                     modal:true,
                     closable:false,
@@ -155,7 +155,7 @@ Mantis.User.Status = function () {
                         scope: this,
                         'hide': function () {
                             // show the call panel when this dialog hides
-                            Mantis.Calls.show();
+                            Sphodro.Calls.show();
                         }
                     }
                 });
@@ -164,8 +164,8 @@ Mantis.User.Status = function () {
             // show the panel
             this.panel.show();
             // set the values
-            this.statusField.setValue(Mantis.User.getVarDefault('status','available'));
-            this.statusTextField.setValue(Mantis.User.getVarDefault('statustext','Available'));
+            this.statusField.setValue(Sphodro.User.getVarDefault('status','available'));
+            this.statusTextField.setValue(Sphodro.User.getVarDefault('statustext','Available'));
             // Disable the 'statustext' field if the status is 'offline'
             if (this.statusField.getValue() == "offline") {
                 this.statusTextField.setValue('Offline');

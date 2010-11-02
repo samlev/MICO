@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.PasswordSet.js
+ ** File: js/Sphodro.PasswordSet.js
  ** 
  ** Description: The 'password set' form for the application
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.PasswordSet = function () {
+Sphodro.PasswordSet = function () {
     var usernameField;
     var passwordField;
     var passwordStrengthIndicator;
@@ -55,7 +55,7 @@ Mantis.PasswordSet = function () {
                 // check the strength of the password
                 this.passwordField.on('keyup', function() {
                     var pass = this.passwordField.getValue();
-                    var points = Mantis.Utils.passwordStrength(pass);
+                    var points = Sphodro.Utils.passwordStrength(pass);
                     
                     // password strength
                     var text = 'Weak';
@@ -101,7 +101,7 @@ Mantis.PasswordSet = function () {
                 
                 // set up form
                 this.setPasswordForm = new Ext.form.FormPanel({
-                    id: "Mantis.PasswordSet.setPasswordForm", 
+                    id: "Sphodro.PasswordSet.setPasswordForm", 
                     url: APP_ROOT+"/api.php?f=setPassword", 
                     method: "POST",
                     region:"center",

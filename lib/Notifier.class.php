@@ -173,7 +173,7 @@ class Notifier {
                     $body .= "You can change your notification settings in the 'Preferences' area.";
                     
                     // some other meta fields
-                    $subject = 'Mantis notification - '.$up_text;
+                    $subject = 'Sphodro notification - '.$up_text;
                     
                     // and headers
                     $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";

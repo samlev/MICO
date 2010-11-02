@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.User.Preferences.js
+ ** File: js/Sphodro.User.Preferences.js
  ** 
  ** Description: The main 'user preferences' section of the system
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.User.Preferences = function () {
+Sphodro.User.Preferences = function () {
     // menu id
     var menuId;
     
@@ -61,7 +61,7 @@ Mantis.User.Preferences = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('My Preferences', 'Mantis.User.Preferences.show()','user');
+                this.menuId = Sphodro.SystemMenu.addItem('My Preferences', 'Sphodro.User.Preferences.show()','user');
             }
         },
         /** Shows the panel */
@@ -78,7 +78,7 @@ Mantis.User.Preferences = function () {
                     width: 135, 
                     allowBlank: false,
                     required: true,
-                    value: Mantis.User.getVar('name'),
+                    value: Sphodro.User.getVar('name'),
                     blankText: "You must enter your name"
                 });
                 
@@ -88,7 +88,7 @@ Mantis.User.Preferences = function () {
                     width: 135, 
                     allowBlank: false,
                     required: true,
-                    value: Mantis.User.getVar('email'),
+                    value: Sphodro.User.getVar('email'),
                     blankText: "You must enter your email address"
                 });
                 
@@ -126,7 +126,7 @@ Mantis.User.Preferences = function () {
                     displayField:'dispaly',
                     valueField:'format',
                     mode:'local',
-                    value: Mantis.User.getVarDefault('timeformat','g:ia'),
+                    value: Sphodro.User.getVarDefault('timeformat','g:ia'),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -149,7 +149,7 @@ Mantis.User.Preferences = function () {
                     displayField:'dispaly',
                     valueField:'format',
                     mode:'local',
-                    value: Mantis.User.getVarDefault('dateformat','jS M, Y'),
+                    value: Sphodro.User.getVarDefault('dateformat','jS M, Y'),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -172,7 +172,7 @@ Mantis.User.Preferences = function () {
                     displayField:'calls',
                     valueField:'calls',
                     mode:'local',
-                    value: Mantis.User.getVarDefault('callsperpage','30'),
+                    value: Sphodro.User.getVarDefault('callsperpage','30'),
                     triggerAction:'all'
                 });
                 
@@ -182,11 +182,11 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Show',
-                    store: Mantis.Utils.CommonStores.callsSearchFilter,
+                    store: Sphodro.Utils.CommonStores.callsSearchFilter,
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
-                    value: Mantis.User.getVarDefault('showcalls','assigned'),
+                    value: Sphodro.User.getVarDefault('showcalls','assigned'),
                     triggerAction:'all'
                 });
                 
@@ -196,18 +196,18 @@ Mantis.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Order',
-                    store: Mantis.Utils.CommonStores.callsOrderFilter,
+                    store: Sphodro.Utils.CommonStores.callsOrderFilter,
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
-                    value: Mantis.User.getVarDefault('ordercalls','recent'),
+                    value: Sphodro.User.getVarDefault('ordercalls','recent'),
                     triggerAction:'all'
                 });
                 
                 // show closed field
                 this.showClosedField = new Ext.form.Checkbox({
                     fieldLabel:'Show closed calls',
-                    checked: Mantis.User.getVar('showclosed')
+                    checked: Sphodro.User.getVar('showclosed')
                 });
                 
                 // comment order field
@@ -225,7 +225,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Mantis.User.getVarDefault('commentorder','newest'),
+                    value:Sphodro.User.getVarDefault('commentorder','newest'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -272,18 +272,18 @@ Mantis.User.Preferences = function () {
                             var commentorder = String(this.commentOrderField.getValue()).trim();
                             
                             // set the values that we can
-                            if (name.length) { Mantis.User.setVar('name',name); }
-                            if (email.length) { Mantis.User.setVar('email',email); }
-                            Mantis.User.setVar('timeformat',timeformat);
-                            Mantis.User.setVar('dateformat',dateformat);
-                            Mantis.User.setVar('callsperpage',callsperpage);
-                            Mantis.User.setVar('showcalls',showcalls);
-                            Mantis.User.setVar('ordercalls',ordercalls);
-                            Mantis.User.setVar('showclosed',showclosed);
-                            Mantis.User.setVar('commentorder',commentorder);
+                            if (name.length) { Sphodro.User.setVar('name',name); }
+                            if (email.length) { Sphodro.User.setVar('email',email); }
+                            Sphodro.User.setVar('timeformat',timeformat);
+                            Sphodro.User.setVar('dateformat',dateformat);
+                            Sphodro.User.setVar('callsperpage',callsperpage);
+                            Sphodro.User.setVar('showcalls',showcalls);
+                            Sphodro.User.setVar('ordercalls',ordercalls);
+                            Sphodro.User.setVar('showclosed',showclosed);
+                            Sphodro.User.setVar('commentorder',commentorder);
                             
                             // and commit the changes
-                            Mantis.User.commit();
+                            Sphodro.User.commit();
                         }
                     }, 
                     scope: this
@@ -294,22 +294,22 @@ Mantis.User.Preferences = function () {
                     text: "Reset", 
                     handler: function () {
                         // reset all the variables from the user object
-                        this.nameField.setValue(Mantis.User.getVar('name'));
-                        this.emailField.setValue(Mantis.User.getVar('email'));
-                        this.timeFormatField.setValue(Mantis.User.getVarDefault('timeformat','g:ia'));
-                        this.dateFormatField.setValue(Mantis.User.getVarDefault('dateformat','jS M, Y'));
-                        this.callsPerPageField.setValue(Mantis.User.getVarDefault('callsperpage','30'));
-                        this.showCallsField.setValue(Mantis.User.getVarDefault('showcalls','assigned'));
-                        this.orderCallsField.setValue(Mantis.User.getVarDefault('ordercalls','recent'));
-                        this.showClosedField.setValue(Mantis.User.getVarDefault('showclosed',false));
-                        this.commentOrderField.setValue(Mantis.User.getVarDefault('commentorder','newest'));
+                        this.nameField.setValue(Sphodro.User.getVar('name'));
+                        this.emailField.setValue(Sphodro.User.getVar('email'));
+                        this.timeFormatField.setValue(Sphodro.User.getVarDefault('timeformat','g:ia'));
+                        this.dateFormatField.setValue(Sphodro.User.getVarDefault('dateformat','jS M, Y'));
+                        this.callsPerPageField.setValue(Sphodro.User.getVarDefault('callsperpage','30'));
+                        this.showCallsField.setValue(Sphodro.User.getVarDefault('showcalls','assigned'));
+                        this.orderCallsField.setValue(Sphodro.User.getVarDefault('ordercalls','recent'));
+                        this.showClosedField.setValue(Sphodro.User.getVarDefault('showclosed',false));
+                        this.commentOrderField.setValue(Sphodro.User.getVarDefault('commentorder','newest'));
                     }, 
                     scope: this
                 });
                 
                 // perferences form
                 this.settingsPanel = new Ext.form.FormPanel({
-                    id: "Mantis.User.Preferences.settingsPanel",
+                    id: "Sphodro.User.Preferences.settingsPanel",
                     title:'Settings and Preferences',
                     labelWidth:140,
                     layout:'form',
@@ -351,7 +351,7 @@ Mantis.User.Preferences = function () {
                 // check the strength of the password
                 this.passwordField.on('keyup', function() {
                     var pass = this.passwordField.getValue();
-                    var points = Mantis.Utils.passwordStrength(pass);
+                    var points = Sphodro.Utils.passwordStrength(pass);
                     
                     // password strength
                     var text = 'Weak';
@@ -414,7 +414,7 @@ Mantis.User.Preferences = function () {
                         conn.request({
                             url:APP_ROOT+'/api.php?f=changePassword',
                             params: {
-                                session: Mantis.User.getSession(),
+                                session: Sphodro.User.getSession(),
                                 oldpass: this.oldPasswordField.getValue(),
                                 password1: this.passwordField.getValue(),
                                 password2: this.passwordConfirmField.getValue()
@@ -457,7 +457,7 @@ Mantis.User.Preferences = function () {
                 
                 // set up form
                 this.changePasswordForm = new Ext.form.FormPanel({
-                    id: "Mantis.User.Preferences.changePasswordForm",
+                    id: "Sphodro.User.Preferences.changePasswordForm",
                     title:'Change Password',
                     labelWidth:140,
                     layout:'form',
@@ -483,7 +483,7 @@ Mantis.User.Preferences = function () {
                 // Send notifications field
                 this.sendNotificationsField = new Ext.form.Checkbox({
                     fieldLabel:'Send me email notifications',
-                    checked: Mantis.User.getVar('sendnotifications')
+                    checked: Sphodro.User.getVar('sendnotifications')
                 });
                 
                 // critical calls
@@ -503,7 +503,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('criticalnotifytime','immediate'),
+                    value:Sphodro.User.getVarDefault('criticalnotifytime','immediate'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -521,7 +521,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('criticalnotifyreason','updated'),
+                    value:Sphodro.User.getVarDefault('criticalnotifyreason','updated'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -552,7 +552,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('urgentnotifytime','30mins'),
+                    value:Sphodro.User.getVarDefault('urgentnotifytime','30mins'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -570,7 +570,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('urgentnotifyreason','updated'),
+                    value:Sphodro.User.getVarDefault('urgentnotifyreason','updated'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -601,7 +601,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('moderatenotifytime','60mins'),
+                    value:Sphodro.User.getVarDefault('moderatenotifytime','60mins'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -619,7 +619,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('moderatenotifyreason','updated'),
+                    value:Sphodro.User.getVarDefault('moderatenotifyreason','updated'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -650,7 +650,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('minornotifytime','60mins'),
+                    value:Sphodro.User.getVarDefault('minornotifytime','60mins'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -668,7 +668,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('minornotifyreason','assigned'),
+                    value:Sphodro.User.getVarDefault('minornotifyreason','assigned'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -699,7 +699,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('negligiblenotifytime','never'),
+                    value:Sphodro.User.getVarDefault('negligiblenotifytime','never'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -717,7 +717,7 @@ Mantis.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Mantis.User.getVarDefault('negligiblenotifyreason','assigned'),
+                    value:Sphodro.User.getVarDefault('negligiblenotifyreason','assigned'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -770,20 +770,20 @@ Mantis.User.Preferences = function () {
                             var negligiblenotifyreason = String(this.negligibleNotifyReason.getValue()).trim();
                             
                             // set the values that we can
-                            Mantis.User.setVar('sendnotifications',sendnotifications);
-                            Mantis.User.setVar('criticalnotifytime',criticalnotifytime);
-                            Mantis.User.setVar('criticalnotifyreason',criticalnotifyreason);
-                            Mantis.User.setVar('urgentnotifytime',urgentnotifytime);
-                            Mantis.User.setVar('urgentnotifyreason',urgentnotifyreason);
-                            Mantis.User.setVar('moderatenotifytime',moderatenotifytime);
-                            Mantis.User.setVar('moderatenotifyreason',moderatenotifyreason);
-                            Mantis.User.setVar('minornotifytime',minornotifytime);
-                            Mantis.User.setVar('minornotifyreason',minornotifyreason);
-                            Mantis.User.setVar('negligiblenotifytime',negligiblenotifytime);
-                            Mantis.User.setVar('negligiblenotifyreason',negligiblenotifyreason);
+                            Sphodro.User.setVar('sendnotifications',sendnotifications);
+                            Sphodro.User.setVar('criticalnotifytime',criticalnotifytime);
+                            Sphodro.User.setVar('criticalnotifyreason',criticalnotifyreason);
+                            Sphodro.User.setVar('urgentnotifytime',urgentnotifytime);
+                            Sphodro.User.setVar('urgentnotifyreason',urgentnotifyreason);
+                            Sphodro.User.setVar('moderatenotifytime',moderatenotifytime);
+                            Sphodro.User.setVar('moderatenotifyreason',moderatenotifyreason);
+                            Sphodro.User.setVar('minornotifytime',minornotifytime);
+                            Sphodro.User.setVar('minornotifyreason',minornotifyreason);
+                            Sphodro.User.setVar('negligiblenotifytime',negligiblenotifytime);
+                            Sphodro.User.setVar('negligiblenotifyreason',negligiblenotifyreason);
                             
                             // and commit the changes
-                            Mantis.User.commit();
+                            Sphodro.User.commit();
                         }
                     }, 
                     scope: this
@@ -794,24 +794,24 @@ Mantis.User.Preferences = function () {
                     text: "Reset", 
                     handler: function () {
                         // reset all the variables from the user object
-                        this.sendNotificationsField.setValue(Mantis.User.getVar('sendnotifications'));
-                        this.criticalNotifyTime.setValue(Mantis.User.getVarDefault('criticalnotifytime','immediate'));
-                        this.criticalNotifyReason.setValue(Mantis.User.getVarDefault('criticalnotifyreason','updated'));
-                        this.urgentNotifyTime.setValue(Mantis.User.getVarDefault('urgentnotifytime','30mins'));
-                        this.urgentNotifyReason.setValue(Mantis.User.getVarDefault('urgentnotifyreason','updated'));
-                        this.moderateNotifyTime.setValue(Mantis.User.getVarDefault('moderatenotifytime','60mins'));
-                        this.moderateNotifyReason.setValue(Mantis.User.getVarDefault('moderatenotifyreason','updated'));
-                        this.minorNotifyTime.setValue(Mantis.User.getVarDefault('minornotifytime','60mins'));
-                        this.minorNotifyReason.setValue(Mantis.User.getVarDefault('minornotifyreason','assigned'));
-                        this.negligibleNotifyTime.setValue(Mantis.User.getVarDefault('negligiblenotifytime','never'));
-                        this.negligibleNotifyReason.setValue(Mantis.User.getVarDefault('negligiblenotifyreason','assigned'));
+                        this.sendNotificationsField.setValue(Sphodro.User.getVar('sendnotifications'));
+                        this.criticalNotifyTime.setValue(Sphodro.User.getVarDefault('criticalnotifytime','immediate'));
+                        this.criticalNotifyReason.setValue(Sphodro.User.getVarDefault('criticalnotifyreason','updated'));
+                        this.urgentNotifyTime.setValue(Sphodro.User.getVarDefault('urgentnotifytime','30mins'));
+                        this.urgentNotifyReason.setValue(Sphodro.User.getVarDefault('urgentnotifyreason','updated'));
+                        this.moderateNotifyTime.setValue(Sphodro.User.getVarDefault('moderatenotifytime','60mins'));
+                        this.moderateNotifyReason.setValue(Sphodro.User.getVarDefault('moderatenotifyreason','updated'));
+                        this.minorNotifyTime.setValue(Sphodro.User.getVarDefault('minornotifytime','60mins'));
+                        this.minorNotifyReason.setValue(Sphodro.User.getVarDefault('minornotifyreason','assigned'));
+                        this.negligibleNotifyTime.setValue(Sphodro.User.getVarDefault('negligiblenotifytime','never'));
+                        this.negligibleNotifyReason.setValue(Sphodro.User.getVarDefault('negligiblenotifyreason','assigned'));
                     }, 
                     scope: this
                 });
                 
                 // notifications panel
                 this.notificationsForm = new Ext.form.FormPanel({
-                    id: "Mantis.User.Preferences.notificationsForm",
+                    id: "Sphodro.User.Preferences.notificationsForm",
                     title:'Notification Settings',
                     labelWidth:160,
                     layout:'form',
@@ -837,7 +837,7 @@ Mantis.User.Preferences = function () {
                 
                 // set up the main panel
                 this.panel = new Ext.TabPanel({
-                    id:'Mantis.User.Preferences.panel',
+                    id:'Sphodro.User.Preferences.panel',
                     items: [
                         this.settingsPanel,
                         this.changePasswordForm,
@@ -847,11 +847,11 @@ Mantis.User.Preferences = function () {
                 });
                 
                 // Add to the main panel
-                Mantis.Application.addPanel(this.panel);
+                Sphodro.Application.addPanel(this.panel);
             }
             
             // show the preferences panel
-            Mantis.Application.showPanel('Mantis.User.Preferences.panel');
+            Sphodro.Application.showPanel('Sphodro.User.Preferences.panel');
         }
     };
 } ();

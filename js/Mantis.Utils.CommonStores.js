@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Utils.CommonStores.js
+ ** File: js/Sphodro.Utils.CommonStores.js
  ** 
  ** Description: Common store data for regular users
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.Utils.CommonStores = function () {
+Sphodro.Utils.CommonStores = function () {
     return {
         // search options for calls; standard users can only see calls opened by or assigned to them
         searchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened']],

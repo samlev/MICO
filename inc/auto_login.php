@@ -46,9 +46,9 @@ if (defined('USER_ID') && defined('SESSION')) {
     /** Sets up the user then shows the main panel */
     function setup_user() {
         // Check if the user object has been defined yet
-        if (Mantis.User !== undefined) {
+        if (Sphodro.User !== undefined) {
             // Set up the user object
-            Mantis.User.init (userid, session, role, vars);
+            Sphodro.User.init (userid, session, role, vars);
             // Show the main area
             page_show();
         } else {
@@ -60,9 +60,9 @@ if (defined('USER_ID') && defined('SESSION')) {
     /** Show the main panel */
     function page_show() {
         // Check if the application panel has been defined yet
-        if (Mantis.Application.panel !== undefined) {
+        if (Sphodro.Application.panel !== undefined) {
             // show the main panel
-            Mantis.Calls.show ();
+            Sphodro.Calls.show ();
             // hide the 'you are being logged in' message
             Ext.Msg.hide();
         } else {

@@ -108,7 +108,7 @@ if (isset($_COOKIE['session'])) {
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title>Mantis - Simple Call Centre</title>
+    <title>Sphodro</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
@@ -128,7 +128,7 @@ if (isset($_COOKIE['session'])) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=APP_ROOT?>/skin/static/mantis.png" alt="Sphodro" id="mantisLogo" />
+      <img src="<?=APP_ROOT?>/skin/static/sphodro.png" alt="Sphodro" id="sphodroLogo" />
       <div class="visual-clear"></div>
       <div id="userMenu"></div>
       <div id="systemMenu"></div>

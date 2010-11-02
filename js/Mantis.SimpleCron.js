@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.SimpleCron.js
+ ** File: js/Sphodro.SimpleCron.js
  ** 
  ** Description: A simple cron script which polls the 'notify'
  **
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Mantis.SimpleCron = function () {
+Sphodro.SimpleCron = function () {
     return {
         /** Runs the cron */
         run: function () {
@@ -37,5 +37,5 @@ Mantis.SimpleCron = function () {
 
 Ext.onReady (function () {
     // run the cron every 2 minutes
-    setInterval('Mantis.SimpleCron.run()',120000);
+    setInterval('Sphodro.SimpleCron.run()',120000);
 });

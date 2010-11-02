@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Mantis.Calls.AddCall.js
+ ** File: js/Sphodro.Calls.AddCall.js
  ** 
  ** Description: Defines the 'Add Call' functionality
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.Calls.AddCall = function () {
+Sphodro.Calls.AddCall = function () {
     // caller form
     var callerForm;
     var callerNameStore;
@@ -72,7 +72,7 @@ Mantis.Calls.AddCall = function () {
                         {name: "match", mapping: "match"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -106,7 +106,7 @@ Mantis.Calls.AddCall = function () {
                     autoSelect:false,
                     valueField:'name',
                     displayField:'name',
-                    tpl:Mantis.Utils.callerTemplate('name'),
+                    tpl:Sphodro.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's name",
@@ -154,7 +154,7 @@ Mantis.Calls.AddCall = function () {
                         {name: "match", mapping: "match"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -188,7 +188,7 @@ Mantis.Calls.AddCall = function () {
                     autoSelect:false,
                     valueField:'name',
                     displayField:'name',
-                    tpl:Mantis.Utils.callerTemplate('name'),
+                    tpl:Sphodro.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's company",
@@ -238,7 +238,7 @@ Mantis.Calls.AddCall = function () {
                         {name: "statustext", mapping: "statustext"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -253,7 +253,7 @@ Mantis.Calls.AddCall = function () {
                     editable:false,
                     valueField:'id',
                     displayField:'name',
-                    tpl:Mantis.Utils.userTemplate(),
+                    tpl:Sphodro.Utils.userTemplate(),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Select recipient",
@@ -277,7 +277,7 @@ Mantis.Calls.AddCall = function () {
                 
                 // and the caller form
                 this.callerForm = new Ext.Panel({
-                    id:'Mantis.Calls.callerForm',
+                    id:'Sphodro.Calls.callerForm',
                     layout:'form',
                     width:300,
                     items:[
@@ -341,7 +341,7 @@ Mantis.Calls.AddCall = function () {
                         {name: "match", mapping: "match"}
                     ]), 
                     baseParams: {
-                        session: Mantis.User.getSession()
+                        session: Sphodro.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -357,7 +357,7 @@ Mantis.Calls.AddCall = function () {
                     autoSelect:false,
                     valueField:'contact',
                     displayField:'contact',
-                    tpl:Mantis.Utils.callerTemplate('contact'),
+                    tpl:Sphodro.Utils.callerTemplate('contact'),
                     mode:'local',
                     enableKeyEvents: true,
                     emptyText:"Caller's Phone Number/Email",
@@ -383,7 +383,7 @@ Mantis.Calls.AddCall = function () {
                 
                 // and the form to hold it
                 this.callerMessageForm = new Ext.Panel({
-                    id:'Mantis.Calls.callerMessageForm',
+                    id:'Sphodro.Calls.callerMessageForm',
                     layout:'form',
                     width:300,
                     items:[
@@ -420,14 +420,14 @@ Mantis.Calls.AddCall = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['priority','view'],
-                        data: Mantis.Utils.CommonStores.callPriority
+                        data: Sphodro.Utils.CommonStores.callPriority
                     }),
                     displayField:'view',
                     valueField:'priority',
                     value:'moderate',
                     mode:'local',
                     triggerAction:'all',
-                    tpl:Mantis.Utils.priorityTemplate(),
+                    tpl:Sphodro.Utils.priorityTemplate(),
                     lazyInit:false,
                     listeners: {
                         scope:this,
@@ -465,7 +465,7 @@ Mantis.Calls.AddCall = function () {
                 
                 // and the form to hold the action and priority
                 this.priorityForm = new Ext.Panel({
-                    id:'Mantis.Calls.priorityForm',
+                    id:'Sphodro.Calls.priorityForm',
                     layout:'form',
                     width:300,
                     items:[
@@ -508,7 +508,7 @@ Mantis.Calls.AddCall = function () {
                 
                 // and build the panel
                 this.panel = new Ext.Panel ({
-                    id: "Mantis.Calls.AddCall.panel", 
+                    id: "Sphodro.Calls.AddCall.panel", 
                     region:'west',
                     width: 300,
                     collapsible: false,
@@ -526,7 +526,7 @@ Mantis.Calls.AddCall = function () {
                 });
                 
                 // and add it to the main 'calls' section
-                Mantis.Calls.addPanel(this.panel);
+                Sphodro.Calls.addPanel(this.panel);
             }
         },
         /** Adds a new recipient dropdown to the 'add call' form */
@@ -542,7 +542,7 @@ Mantis.Calls.AddCall = function () {
                 editable:false,
                 valueField:'id',
                 displayField:'name',
-                tpl:Mantis.Utils.userTemplate(),
+                tpl:Sphodro.Utils.userTemplate(),
                 mode:'remote',
                 enableKeyEvents: true,
                 emptyText:"Select recipient",
@@ -586,7 +586,7 @@ Mantis.Calls.AddCall = function () {
                 autoSelect:false,
                 valueField:'contact',
                 displayField:'contact',
-                tpl:Mantis.Utils.callerTemplate('contact'),
+                tpl:Sphodro.Utils.callerTemplate('contact'),
                 mode:'local',
                 emptyText:"Caller's Phone Number/Email",
                 width: 175,
@@ -695,12 +695,12 @@ Mantis.Calls.AddCall = function () {
                 conn.request({
                     url:APP_ROOT+'/api.php?f=addCall',
                     params: {
-                        session: Mantis.User.getSession(),
+                        session: Sphodro.User.getSession(),
                         caller: caller,
                         company: company,
-                        users: Mantis.Utils.serialiseArray(users),
+                        users: Sphodro.Utils.serialiseArray(users),
                         message: message,
-                        contacts: Mantis.Utils.serialiseArray(contacts),
+                        contacts: Sphodro.Utils.serialiseArray(contacts),
                         priority:priority,
                         action:action
                     },
@@ -708,7 +708,7 @@ Mantis.Calls.AddCall = function () {
                         var res = Ext.decode(response.responseText);
                         if (success && res.success) {
                             this.clear();
-                            Mantis.Calls.ViewCalls.gridStore.reload();
+                            Sphodro.Calls.ViewCalls.gridStore.reload();
                         } else {
                             var msg = "Unknown system error";
                             if (res.info !== undefined) {

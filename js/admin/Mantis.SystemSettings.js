@@ -2,7 +2,7 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/admin/Mantis.SystemSettings.js
+ ** File: js/admin/Sphodro.SystemSettings.js
  ** 
  ** Description: The system settings section of the system
  **
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Mantis.SystemSettings = function () {
+Sphodro.SystemSettings = function () {
     // menu id
     var menuId;
     
@@ -47,7 +47,7 @@ Mantis.SystemSettings = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mantis.SystemMenu.addItem('System Settings', 'Mantis.SystemSettings.show()','user');
+                this.menuId = Sphodro.SystemMenu.addItem('System Settings', 'Sphodro.SystemSettings.show()','user');
             }
         },
         /** Shows the panel */
@@ -70,7 +70,7 @@ Mantis.SystemSettings = function () {
                     title: 'Debug Mode',
                     items: [
                         {
-                            html: 'Debug mode is useful for when you are working on the Mantis codebase, or '+
+                            html: 'Debug mode is useful for when you are working on the Sphodro codebase, or '+
                                   'if you are experiencing errors. For best performance, it is advised to leave '+
                                   'this option off.',
                             bodyStyle:'padding-bottom:3px;'
@@ -136,7 +136,7 @@ Mantis.SystemSettings = function () {
                     items: [
                         {
                             html: 'The session length is how long a session persists for while a user '+
-                                  'does not have Mantis open. Short sessions are more secure, but long '+
+                                  'does not have Sphodro open. Short sessions are more secure, but long '+
                                   'sessions mean that a user will not have to log in every time they '+
                                   'open the application.',
                             bodyStyle:'padding-bottom:3px;'
@@ -160,7 +160,7 @@ Mantis.SystemSettings = function () {
                         {
                             html: 'The cron is a recurring task which sends out notification emails.<br /><br />'+
                                   'The simple cron should only be used if you do not have access to '+
-                                  'a proper cron system. It will only run when a user has Mantis open.<br /><br />'+
+                                  'a proper cron system. It will only run when a user has Sphodro open.<br /><br />'+
                                   'If you have access to proper task scheduler, you can set it to call '+
                                   '<b>'+APP_ROOT+'/notify.php</b> using a command similar to the one below. The notify script '+
                                   'should be run at least every 5 minutes to ensure that notification emails '+
@@ -206,7 +206,7 @@ Mantis.SystemSettings = function () {
                 
                 // perferences form
                 this.panel = new Ext.form.FormPanel({
-                    id: "Mantis.SystemSettings.panel",
+                    id: "Sphodro.SystemSettings.panel",
                     items: [
                         this.debugModeFieldset,
                         this.mailFromFieldset,
@@ -226,10 +226,10 @@ Mantis.SystemSettings = function () {
                 });
                 
                 // Add to the main panel
-                Mantis.Application.addPanel(this.panel);
+                Sphodro.Application.addPanel(this.panel);
             }
             
-            Mantis.Application.showPanel('Mantis.SystemSettings.panel');
+            Sphodro.Application.showPanel('Sphodro.SystemSettings.panel');
             this.loadSettings();
         },
         /** Loads the settings from the database **/
@@ -252,7 +252,7 @@ Mantis.SystemSettings = function () {
             conn.request({
                 url:APP_ROOT+'/api.php?f=getSystemSettings',
                 params: {
-                    session: Mantis.User.getSession()
+                    session: Sphodro.User.getSession()
                 },
                 callback: function (options, success, response) {
                     var res = Ext.decode(response.responseText);
@@ -299,7 +299,7 @@ Mantis.SystemSettings = function () {
                 conn.request({
                     url:APP_ROOT+'/api.php?f=setSystemSettings',
                     params: {
-                        session: Mantis.User.getSession(),
+                        session: Sphodro.User.getSession(),
                         DEBUG_MODE: this.debugModeField.getValue(),
                         MAIL_FROM: this.mailFromField.getValue(),
                         SESSION_LENGTH: this.sessionLengthField.getValue(),

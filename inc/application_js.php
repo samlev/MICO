@@ -27,27 +27,27 @@
  ******************************************************************************/
 
 // public only need the 'login' page
-$public = array('Mantis.Application.js','Mantis.Footer.js','Mantis.Login.js');
+$public = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.Login.js');
 // standard scipts for users
-$authed = array('Mantis.Application.js','Mantis.Footer.js','Mantis.SystemMenu.js',
-                'Mantis.Calls.js','Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
-                'Mantis.Utils.js','Mantis.Utils.CommonStores.js','Mantis.User.js',
-                'Mantis.User.Preferences.js','Mantis.User.Status.js',
-                'Mantis.Calls.SearchBar.js');
+$authed = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.SystemMenu.js',
+                'Sphodro.Calls.js','Sphodro.Calls.AddCall.js','Sphodro.Calls.ViewCalls.js',
+                'Sphodro.Utils.js','Sphodro.Utils.CommonStores.js','Sphodro.User.js',
+                'Sphodro.User.Preferences.js','Sphodro.User.Status.js',
+                'Sphodro.Calls.SearchBar.js');
 // standard scipts for managers
-$manager = array('Mantis.Application.js','Mantis.Footer.js','Mantis.SystemMenu.js',
-                 'Mantis.Calls.js','Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
-                 'Mantis.Utils.js','manager/Mantis.Utils.CommonStores.js','Mantis.User.js',
-                 'Mantis.User.Preferences.js','Mantis.User.Status.js',
-                 'Mantis.Calls.SearchBar.js','manager/Mantis.ManageUsers.js');
+$manager = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.SystemMenu.js',
+                 'Sphodro.Calls.js','Sphodro.Calls.AddCall.js','Sphodro.Calls.ViewCalls.js',
+                 'Sphodro.Utils.js','manager/Sphodro.Utils.CommonStores.js','Sphodro.User.js',
+                 'Sphodro.User.Preferences.js','Sphodro.User.Status.js',
+                 'Sphodro.Calls.SearchBar.js','manager/Sphodro.ManageUsers.js');
 // administrators get more
-$admin = array('Mantis.Application.js','Mantis.Footer.js','Mantis.SystemMenu.js',
-               'Mantis.Calls.js','Mantis.Calls.AddCall.js','Mantis.Calls.ViewCalls.js',
-               'Mantis.Utils.js','admin/Mantis.Utils.CommonStores.js','Mantis.User.js',
-               'admin/Mantis.SystemSettings.js','Mantis.User.Preferences.js',
-               'Mantis.User.Status.js','Mantis.Calls.SearchBar.js','manager/Mantis.ManageUsers.js');
+$admin = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.SystemMenu.js',
+               'Sphodro.Calls.js','Sphodro.Calls.AddCall.js','Sphodro.Calls.ViewCalls.js',
+               'Sphodro.Utils.js','admin/Sphodro.Utils.CommonStores.js','Sphodro.User.js',
+               'admin/Sphodro.SystemSettings.js','Sphodro.User.Preferences.js',
+               'Sphodro.User.Status.js','Sphodro.Calls.SearchBar.js','manager/Sphodro.ManageUsers.js');
 // and an odd case for password reset
-$passreset = array('Mantis.Application.js','Mantis.Footer.js','Mantis.PasswordSet.js','Mantis.Utils.js');
+$passreset = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.PasswordSet.js','Sphodro.Utils.js');
 
 
 // decide on what javascript files to use
@@ -70,7 +70,7 @@ if (defined('PASSWORD_RESET')) {
 
 // add the simple cron (if required)
 if (Settings::get_default('simplecron',false)) {
-    $js_array[] = 'Mantis.SimpleCron.js';
+    $js_array[] = 'Sphodro.SimpleCron.js';
 }
 
 // and now output
