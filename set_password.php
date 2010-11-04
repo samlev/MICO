@@ -26,8 +26,9 @@ define ('PASSWORD_RESET',true);
     <title>Mico</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
-    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/js/ext/resources/css/ext-all.css" />
-    <link type="text/css" rel="stylesheet" href="<?=WEB_ROOT?>/skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/static/main.css" />
     
     <!-- set some system variables for the javascript to use -->
     <?php include_once(FS_ROOT.'/inc/system_vars.php'); ?>
@@ -36,8 +37,8 @@ define ('PASSWORD_RESET',true);
     <script type="text/javascript">var CONFIRMATION_KEY = '<?=$_GET['k']?>';</script>
     
     <!-- Link to the Javascript library files -->
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
-    <script type="text/javascript" src="<?=WEB_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
+    <script type="text/javascript" src="<?=APP_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
+    <script type="text/javascript" src="<?=APP_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
     <?php
     // pull in the required javascript
     include_once(FS_ROOT.'/inc/application_js.php');
@@ -45,7 +46,7 @@ define ('PASSWORD_RESET',true);
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=WEB_ROOT?>/skin/static/mico.png" alt="Mico" style="margin:0px; float:right;" />
+      <img src="<?=APP_ROOT?>/skin/static/mico.png" alt="Mico" style="margin:0px; float:right;" />
     </div>
   </body>
 </html>

@@ -37,6 +37,7 @@ if (!defined('CONFIGURED')) {
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="js/ext/resources/css/xtheme-gray.css" />
     <link type="text/css" rel="stylesheet" href="skin/static/main.css" />
     <link type="text/css" rel="stylesheet" href="skin/custom/skin.css" />
     <style>
@@ -112,6 +113,7 @@ if (isset($_COOKIE['session'])) {
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
     <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/static/main.css" />
     <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/custom/skin.css" />
     
