@@ -52,7 +52,7 @@ Mico.Footer = function () {
         showAbout: function () {
             if (this.aboutWindow === undefined) {
                 // build the 'About Mico' HTML 
-                var aboutHTML = '<h1>Mico</h1>'; // Title
+                var aboutHTML = '<h1>Mantis Inbound Call Organiser</h1>'; // Title
                 // Version
                 aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MICO_VERSION+'</p>';
                 // Licence
@@ -66,7 +66,7 @@ Mico.Footer = function () {
                 
                 // build the window
                 this.aboutWindow = new Ext.Window({
-                    title:'About Mico',
+                    title:'About MICO',
                     modal:false,
                     closeAction:'hide',
                     width: 700,
