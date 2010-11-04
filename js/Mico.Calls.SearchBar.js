@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.Calls.SearchBar.js
+ ** File: js/Mico.Calls.SearchBar.js
  ** 
  ** Description: Defines the 'calls' searchbar
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Sphodro.Calls.SearchBar = function () {
+Mico.Calls.SearchBar = function () {
     var toolbar;
     var filterField;
     var orderFilter;
@@ -40,18 +40,18 @@ Sphodro.Calls.SearchBar = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: Sphodro.Utils.CommonStores.callsSearchFilter
+                        data: Mico.Utils.CommonStores.callsSearchFilter
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Sphodro.User.getVarDefault('showcalls','assigned'),
+                    value:Mico.User.getVarDefault('showcalls','assigned'),
                     mode:'local',
                     triggerAction:'all',
                     width:130
                 });
                 
                 this.filterField.on('select', function () {
-                    Sphodro.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
+                    Mico.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mico.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // the order
@@ -60,28 +60,28 @@ Sphodro.Calls.SearchBar = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: Sphodro.Utils.CommonStores.callsOrderFilter
+                        data: Mico.Utils.CommonStores.callsOrderFilter
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Sphodro.User.getVarDefault('ordercalls','recent'),
+                    value:Mico.User.getVarDefault('ordercalls','recent'),
                     mode:'local',
                     triggerAction:'all',
                     width:100
                 });
                 
                 this.orderField.on('select', function () {
-                    Sphodro.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
+                    Mico.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mico.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // whether to show closed or not
                 this.showClosedField = new Ext.form.Checkbox({
                     checked:false
                 });
-                this.showClosedField.setValue(Sphodro.User.getVar('showclosed'));
+                this.showClosedField.setValue(Mico.User.getVar('showclosed'));
                 
                 this.showClosedField.on('check', function () {
-                    Sphodro.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Sphodro.User.getVarDefault('callsperpage',30)}});
+                    Mico.Calls.ViewCalls.gridStore.load({params:{start:0,limit:Mico.User.getVarDefault('callsperpage',30)}});
                 }, this);
                 
                 // and build the toolbar
@@ -108,9 +108,9 @@ Sphodro.Calls.SearchBar = function () {
             
             if (this.toolbar == undefined) {
                 filter = [
-                    {name:'filter',value:Sphodro.User.getVarDefault('showcalls','assigned')},
-                    {name:'order',value:Sphodro.User.getVarDefault('ordercalls','recent')},
-                    {name:'closed',value:Sphodro.User.getVarDefault('showclosed',false)}
+                    {name:'filter',value:Mico.User.getVarDefault('showcalls','assigned')},
+                    {name:'order',value:Mico.User.getVarDefault('ordercalls','recent')},
+                    {name:'closed',value:Mico.User.getVarDefault('showclosed',false)}
                 ];
             } else {
                 filter = [

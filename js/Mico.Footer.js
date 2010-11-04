@@ -2,14 +2,14 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.Footer.js
+ ** File: js/Mico.Footer.js
  ** 
  ** Description: A simple footer for the application with version, about page,
  **              and some other items.
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -23,7 +23,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Sphodro.Footer = function () {
+Mico.Footer = function () {
     var bar;
     
     var aboutWindow;
@@ -37,26 +37,26 @@ Sphodro.Footer = function () {
                 this.bar = new Ext.Toolbar({
                     cls:'footer-bar',
                     items: [
-                        "Sphodro",
+                        "Mico",
                         '-',
-                        { html: '<a href="#" onclick="Sphodro.Footer.showAbout();">About Sphodro</a>'},
+                        { html: '<a href="#" onclick="Mico.Footer.showAbout();">About Mico</a>'},
                         "->",
-                        "Version: "+SPHODRO_VERSION
+                        "Version: "+MICO_VERSION
                     ]
                 });
             }
             
             return this.bar;
         },
-        /** Shows the 'About Sphodro' window */
+        /** Shows the 'About Mico' window */
         showAbout: function () {
             if (this.aboutWindow === undefined) {
-                // build the 'About Sphodro' HTML 
-                var aboutHTML = '<h1>Sphodro</h1>'; // Title
+                // build the 'About Mico' HTML 
+                var aboutHTML = '<h1>Mico</h1>'; // Title
                 // Version
-                aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+SPHODRO_VERSION+'</p>';
+                aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MICO_VERSION+'</p>';
                 // Licence
-                aboutHTML += '<p>Sphodro is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
+                aboutHTML += '<p>Mico is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
                              'licence version 3.0, and is available for free, without warranty.</p>';
                 // Acknowledgements
                 aboutHTML += '<p>Icons from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_new">silk icon set</a> '+
@@ -66,7 +66,7 @@ Sphodro.Footer = function () {
                 
                 // build the window
                 this.aboutWindow = new Ext.Window({
-                    title:'About Sphodro',
+                    title:'About Mico',
                     modal:false,
                     closeAction:'hide',
                     width: 700,
@@ -74,9 +74,9 @@ Sphodro.Footer = function () {
                     bodyStyle: 'background: #f0fff0 url('+APP_ROOT+'/skin/static/about_bg.png) repeat-y;',
                     layout:'hbox',
                     items: [
-                        // Large Sphodro logo on the left
+                        // Large Mico logo on the left
                         {
-                            html:'<img src="'+APP_ROOT+'/skin/static/sphodro_large.png" alt="Sphodro Large" />',
+                            html:'<img src="'+APP_ROOT+'/skin/static/mico_large.png" alt="Mico Large" />',
                             width: 250,
                             height: 510,
                             bodyStyle:'background:none;padding-top:10px;'
@@ -86,13 +86,13 @@ Sphodro.Footer = function () {
                             width:100,
                             bodyStyle:'background:none'
                         },
-                        // about sphodro text
+                        // about mico text
                         {
                             html: aboutHTML,
                             width: 340,
                             height: 500,
                             bodyStyle:'background:none;padding:10px;',
-                            cls: 'about-sphodro'
+                            cls: 'about-mico'
                         }
                     ]
                 });

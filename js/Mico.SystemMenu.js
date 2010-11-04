@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.SystemMenu.js
+ ** File: js/Mico.SystemMenu.js
  ** 
  ** Description: A simple container for the top/system menu
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Sphodro.SystemMenu = function () {
+Mico.SystemMenu = function () {
     var menuSystem;
     var menuUser;
     var selected;
@@ -35,7 +35,7 @@ Sphodro.SystemMenu = function () {
                 
                 // system menu is the left side - it is for tabs which are system related
                 this.menuSystem = new Ext.Panel ({
-                    id:'Sphodro.SystemMenu.menuSystem',
+                    id:'Mico.SystemMenu.menuSystem',
                     layout:'hbox',
                     applyTo:'systemMenu',
                     bodyStyle:'background:none;'
@@ -43,7 +43,7 @@ Sphodro.SystemMenu = function () {
                 
                 // user menu is the right side - it is for tabs which are user related
                 this.menuUser = new Ext.Panel ({
-                    id:'Sphodro.SystemMenu.menuUser',
+                    id:'Mico.SystemMenu.menuUser',
                     layout:'hbox',
                     layoutConfig:{
                         pack:'end'
@@ -65,7 +65,7 @@ Sphodro.SystemMenu = function () {
             // add it to the items array
             this.items[id] = new Ext.Panel({
                 id:'menu-item-'+id,
-                html:'<div class="menu-item" onclick="Sphodro.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>',
+                html:'<div class="menu-item" onclick="Mico.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>',
                 bodyStyle:'background:none;'
             });
             // add it to the menu

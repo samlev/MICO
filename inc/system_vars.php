@@ -10,7 +10,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -28,5 +28,5 @@
 var WEB_DOMAIN='<?=WEB_DOMAIN?>';
 var WEB_ROOT='<?=WEB_ROOT?>';
 var APP_ROOT='<?=APP_ROOT?>';
-var SPHODRO_VERSION='<?=Settings::get_default('SPHODRO_VERSION','unknown')?>';
+var MICO_VERSION='<?=Settings::get_default('MICO_VERSION','unknown')?>';
 </script>

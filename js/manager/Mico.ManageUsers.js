@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/manager/Sphodro.ManageUsers.js
+ ** File: js/manager/Mico.ManageUsers.js
  ** 
  ** Description: The main 'calls' section of the system
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Sphodro.ManageUsers = function () {
+Mico.ManageUsers = function () {
     // menu id
     var menuId;
     
@@ -33,7 +33,7 @@ Sphodro.ManageUsers = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Sphodro.SystemMenu.addItem('Manage Users', 'Sphodro.ManageUsers.show()','system');
+                this.menuId = Mico.SystemMenu.addItem('Manage Users', 'Mico.ManageUsers.show()','system');
             }
         },
         /** Shows the panel */
@@ -59,7 +59,7 @@ Sphodro.ManageUsers = function () {
                         {name: "role", mapping: "role"}
                     ]), 
                     baseParams: {
-                        session: Sphodro.User.getSession()
+                        session: Mico.User.getSession()
                     }
                 });
                 
@@ -67,7 +67,7 @@ Sphodro.ManageUsers = function () {
                 this.userGridStore.on ('beforeload', function () {
                     // add the filter field as a parameter
                     this.userGridStore.baseParams = {
-                        session: Sphodro.User.getSession(),
+                        session: Mico.User.getSession(),
                         filter: this.userFilterField.getValue()
                     }
                 }, this)
@@ -96,7 +96,7 @@ Sphodro.ManageUsers = function () {
                     listeners: {
                         scope:this,
                         'select': function () {
-                            this.userGridStore.load({params:{start:0,limit:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)}})
+                            this.userGridStore.load({params:{start:0,limit:parseInt(Mico.User.getVarDefault('callsperpage',30),10)}})
                         }
                     }
                 });
@@ -114,12 +114,12 @@ Sphodro.ManageUsers = function () {
                 // the pager
                 this.pager = new Ext.PagingToolbar({
                     store: this.userGridStore,
-                    pageSize:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)
+                    pageSize:parseInt(Mico.User.getVarDefault('callsperpage',30),10)
                 });
                 
                 // user grid
                 this.userGrid = new Ext.grid.EditorGridPanel({
-                    id:'Sphodro.ManageUsers.userGrid',
+                    id:'Mico.ManageUsers.userGrid',
                     store: this.userGridStore,
                     sm: new Ext.grid.RowSelectionModel({singleSelect:true}),
                     autoSizeColumns: false,
@@ -143,7 +143,7 @@ Sphodro.ManageUsers = function () {
                             name:'role',
                             store: new Ext.data.ArrayStore ({
                                 fields:['display','role'],
-                                data: Sphodro.Utils.CommonStores.userTypesAll
+                                data: Mico.Utils.CommonStores.userTypesAll
                             }),
                             displayField:'display',
                             valueField:'role',
@@ -171,12 +171,12 @@ Sphodro.ManageUsers = function () {
                     }
                     
                     // if the user isnt' an administrator, don't allow them to edit administrators
-                    if (Sphodro.User.role != 'admin' && e.record.get('role') == 'admin') {
+                    if (Mico.User.role != 'admin' && e.record.get('role') == 'admin') {
                         allowedit = false;
                     }
                     
                     // don't allow the user to edit their own role
-                    if (Sphodro.User.user_id == e.record.get('id') && e.field == 'role') {
+                    if (Mico.User.user_id == e.record.get('id') && e.field == 'role') {
                         allowedit = false;
                     }
                     
@@ -191,7 +191,7 @@ Sphodro.ManageUsers = function () {
                     conn.request({
                         url:APP_ROOT+'/api.php?f=updateUser',
                         params: {
-                            session: Sphodro.User.getSession(),
+                            session: Mico.User.getSession(),
                             id: e.record.get('id'),
                             field: e.field,
                             value: e.value
@@ -224,7 +224,7 @@ Sphodro.ManageUsers = function () {
                 
                 // set up the panel
                 this.panel = new Ext.Panel({
-                    id:'Sphodro.ManageUsers.panel',
+                    id:'Mico.ManageUsers.panel',
                     layout: 'fit',
                     items: [
                         this.userGrid
@@ -232,15 +232,15 @@ Sphodro.ManageUsers = function () {
                 });
                 
                 // Add to the main panel
-                Sphodro.Application.addPanel(this.panel);
+                Mico.Application.addPanel(this.panel);
             }
             
             // mark this panel as selected
-            Sphodro.SystemMenu.markSelected(this.menuId);
-            Sphodro.Application.showPanel('Sphodro.ManageUsers.panel');
+            Mico.SystemMenu.markSelected(this.menuId);
+            Mico.Application.showPanel('Mico.ManageUsers.panel');
             
             // load the store
-            this.userGridStore.load({params:{start:0,limit:parseInt(Sphodro.User.getVarDefault('callsperpage',30),10)}})
+            this.userGridStore.load({params:{start:0,limit:parseInt(Mico.User.getVarDefault('callsperpage',30),10)}})
         },
         /** Sends a user a 'reset password' request
          * @param id {int} The user ID
@@ -252,7 +252,7 @@ Sphodro.ManageUsers = function () {
             conn.request({
                 url:APP_ROOT+'/api.php?f=resetPassword',
                 params: {
-                    session: Sphodro.User.getSession(),
+                    session: Mico.User.getSession(),
                     id: id
                 },
                 callback: function (options, success, response) {
@@ -303,7 +303,7 @@ Sphodro.ManageUsers = function () {
                     required:true,
                     store: new Ext.data.ArrayStore ({
                         fields:['display','role'],
-                        data: Sphodro.Utils.CommonStores.userTypesActive
+                        data: Mico.Utils.CommonStores.userTypesActive
                     }),
                     displayField:'display',
                     valueField:'role',
@@ -323,7 +323,7 @@ Sphodro.ManageUsers = function () {
                         conn.request({
                             url:APP_ROOT+'/api.php?f=addUser',
                             params: {
-                                session: Sphodro.User.getSession(),
+                                session: Mico.User.getSession(),
                                 username: this.usernameField.getValue(),
                                 name: this.nameField.getValue(),
                                 email: this.emailField.getValue(),
@@ -380,7 +380,7 @@ Sphodro.ManageUsers = function () {
                 
                 // build the panel
                 this.addUsersPanel = new Ext.Window({
-                    id:'Sphodro.ManageUsers.addUsersPanel',
+                    id:'Mico.ManageUsers.addUsersPanel',
                     closeAction:'hide',
                     layout:'form',
                     title:'Add Users',
@@ -420,7 +420,7 @@ Sphodro.ManageUsers = function () {
         if (rec.get('role')=='disabled') {
             value = 'User disabled';
         } else {
-            value = '<a href="#" onclick="Sphodro.ManageUsers.resetPassword('+rec.get('id')+')">Reset Password</a>';
+            value = '<a href="#" onclick="Mico.ManageUsers.resetPassword('+rec.get('id')+')">Reset Password</a>';
         }
         
         // set the CSS class

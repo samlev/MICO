@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.Login.js
+ ** File: js/Mico.Login.js
  ** 
  ** Description: The login form for the application
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Sphodro.Login = function () {
+Mico.Login = function () {
     var dlgLogin;
     var usernameField;
     var passwordField;
@@ -63,7 +63,7 @@ Sphodro.Login = function () {
                 
                 // login form
                 this.loginForm = new Ext.form.FormPanel({
-                    id: "Sphodro.Login.loginForm", 
+                    id: "Mico.Login.loginForm", 
                     url: APP_ROOT+"/api.php?f=login", 
                     method: "POST",
                     region:"center",
@@ -86,7 +86,7 @@ Sphodro.Login = function () {
                     ], 
                     buttons: [
                         new Ext.Panel({
-                            html: '<a href="#" onclick="Sphodro.Login.dlgLogin.layout.setActiveItem(\'Sphodro.Login.resetPasswordForm\')">Forgotten Password?</a>',
+                            html: '<a href="#" onclick="Mico.Login.dlgLogin.layout.setActiveItem(\'Mico.Login.resetPasswordForm\')">Forgotten Password?</a>',
                             layout: 'fit',
                             bodyStyle: "background-color:#dfe8f6;",
                             region: 'south'
@@ -106,7 +106,7 @@ Sphodro.Login = function () {
                 
                 // forgotten password form
                 this.resetPasswordForm = new Ext.form.FormPanel({
-                    id: "Sphodro.Login.resetPasswordForm", 
+                    id: "Mico.Login.resetPasswordForm", 
                     url: APP_ROOT+"/api.php?f=resetPassword", 
                     method: "POST",
                     region:"center",
@@ -134,7 +134,7 @@ Sphodro.Login = function () {
                         {
                             text: "Cancel", 
                             handler: function () {
-                                this.dlgLogin.layout.setActiveItem('Sphodro.Login.loginForm');
+                                this.dlgLogin.layout.setActiveItem('Mico.Login.loginForm');
                             }, 
                             scope: this,
                             width:120
@@ -206,7 +206,7 @@ Sphodro.Login = function () {
                 this.resetPasswordForm.getForm().submit({
                     success: function (form, action) {
                         // go back to the login form
-                        this.dlgLogin.layout.setActiveItem('Sphodro.Login.loginForm');
+                        this.dlgLogin.layout.setActiveItem('Mico.Login.loginForm');
                         // notify the user
                         Ext.Msg.alert("Password reset", 'Further instructions have been sent to your email address.');
                         

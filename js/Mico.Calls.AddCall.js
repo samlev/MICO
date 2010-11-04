@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.Calls.AddCall.js
+ ** File: js/Mico.Calls.AddCall.js
  ** 
  ** Description: Defines the 'Add Call' functionality
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Sphodro.Calls.AddCall = function () {
+Mico.Calls.AddCall = function () {
     // caller form
     var callerForm;
     var callerNameStore;
@@ -72,7 +72,7 @@ Sphodro.Calls.AddCall = function () {
                         {name: "match", mapping: "match"}
                     ]), 
                     baseParams: {
-                        session: Sphodro.User.getSession()
+                        session: Mico.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -106,7 +106,7 @@ Sphodro.Calls.AddCall = function () {
                     autoSelect:false,
                     valueField:'name',
                     displayField:'name',
-                    tpl:Sphodro.Utils.callerTemplate('name'),
+                    tpl:Mico.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's name",
@@ -154,7 +154,7 @@ Sphodro.Calls.AddCall = function () {
                         {name: "match", mapping: "match"}
                     ]), 
                     baseParams: {
-                        session: Sphodro.User.getSession()
+                        session: Mico.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -188,7 +188,7 @@ Sphodro.Calls.AddCall = function () {
                     autoSelect:false,
                     valueField:'name',
                     displayField:'name',
-                    tpl:Sphodro.Utils.callerTemplate('name'),
+                    tpl:Mico.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Caller's company",
@@ -238,7 +238,7 @@ Sphodro.Calls.AddCall = function () {
                         {name: "statustext", mapping: "statustext"}
                     ]), 
                     baseParams: {
-                        session: Sphodro.User.getSession()
+                        session: Mico.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -253,7 +253,7 @@ Sphodro.Calls.AddCall = function () {
                     editable:false,
                     valueField:'id',
                     displayField:'name',
-                    tpl:Sphodro.Utils.userTemplate(),
+                    tpl:Mico.Utils.userTemplate(),
                     mode:'remote',
                     enableKeyEvents: true,
                     emptyText:"Select recipient",
@@ -277,7 +277,7 @@ Sphodro.Calls.AddCall = function () {
                 
                 // and the caller form
                 this.callerForm = new Ext.Panel({
-                    id:'Sphodro.Calls.callerForm',
+                    id:'Mico.Calls.callerForm',
                     layout:'form',
                     width:300,
                     items:[
@@ -341,7 +341,7 @@ Sphodro.Calls.AddCall = function () {
                         {name: "match", mapping: "match"}
                     ]), 
                     baseParams: {
-                        session: Sphodro.User.getSession()
+                        session: Mico.User.getSession()
                     },
                     disableCaching:true
                 });
@@ -357,7 +357,7 @@ Sphodro.Calls.AddCall = function () {
                     autoSelect:false,
                     valueField:'contact',
                     displayField:'contact',
-                    tpl:Sphodro.Utils.callerTemplate('contact'),
+                    tpl:Mico.Utils.callerTemplate('contact'),
                     mode:'local',
                     enableKeyEvents: true,
                     emptyText:"Caller's Phone Number/Email",
@@ -383,7 +383,7 @@ Sphodro.Calls.AddCall = function () {
                 
                 // and the form to hold it
                 this.callerMessageForm = new Ext.Panel({
-                    id:'Sphodro.Calls.callerMessageForm',
+                    id:'Mico.Calls.callerMessageForm',
                     layout:'form',
                     width:300,
                     items:[
@@ -420,14 +420,14 @@ Sphodro.Calls.AddCall = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['priority','view'],
-                        data: Sphodro.Utils.CommonStores.callPriority
+                        data: Mico.Utils.CommonStores.callPriority
                     }),
                     displayField:'view',
                     valueField:'priority',
                     value:'moderate',
                     mode:'local',
                     triggerAction:'all',
-                    tpl:Sphodro.Utils.priorityTemplate(),
+                    tpl:Mico.Utils.priorityTemplate(),
                     lazyInit:false,
                     listeners: {
                         scope:this,
@@ -465,7 +465,7 @@ Sphodro.Calls.AddCall = function () {
                 
                 // and the form to hold the action and priority
                 this.priorityForm = new Ext.Panel({
-                    id:'Sphodro.Calls.priorityForm',
+                    id:'Mico.Calls.priorityForm',
                     layout:'form',
                     width:300,
                     items:[
@@ -508,7 +508,7 @@ Sphodro.Calls.AddCall = function () {
                 
                 // and build the panel
                 this.panel = new Ext.Panel ({
-                    id: "Sphodro.Calls.AddCall.panel", 
+                    id: "Mico.Calls.AddCall.panel", 
                     region:'west',
                     width: 300,
                     collapsible: false,
@@ -526,7 +526,7 @@ Sphodro.Calls.AddCall = function () {
                 });
                 
                 // and add it to the main 'calls' section
-                Sphodro.Calls.addPanel(this.panel);
+                Mico.Calls.addPanel(this.panel);
             }
         },
         /** Adds a new recipient dropdown to the 'add call' form */
@@ -542,7 +542,7 @@ Sphodro.Calls.AddCall = function () {
                 editable:false,
                 valueField:'id',
                 displayField:'name',
-                tpl:Sphodro.Utils.userTemplate(),
+                tpl:Mico.Utils.userTemplate(),
                 mode:'remote',
                 enableKeyEvents: true,
                 emptyText:"Select recipient",
@@ -586,7 +586,7 @@ Sphodro.Calls.AddCall = function () {
                 autoSelect:false,
                 valueField:'contact',
                 displayField:'contact',
-                tpl:Sphodro.Utils.callerTemplate('contact'),
+                tpl:Mico.Utils.callerTemplate('contact'),
                 mode:'local',
                 emptyText:"Caller's Phone Number/Email",
                 width: 175,
@@ -695,12 +695,12 @@ Sphodro.Calls.AddCall = function () {
                 conn.request({
                     url:APP_ROOT+'/api.php?f=addCall',
                     params: {
-                        session: Sphodro.User.getSession(),
+                        session: Mico.User.getSession(),
                         caller: caller,
                         company: company,
-                        users: Sphodro.Utils.serialiseArray(users),
+                        users: Mico.Utils.serialiseArray(users),
                         message: message,
-                        contacts: Sphodro.Utils.serialiseArray(contacts),
+                        contacts: Mico.Utils.serialiseArray(contacts),
                         priority:priority,
                         action:action
                     },
@@ -708,7 +708,7 @@ Sphodro.Calls.AddCall = function () {
                         var res = Ext.decode(response.responseText);
                         if (success && res.success) {
                             this.clear();
-                            Sphodro.Calls.ViewCalls.gridStore.reload();
+                            Mico.Calls.ViewCalls.gridStore.reload();
                         } else {
                             var msg = "Unknown system error";
                             if (res.info !== undefined) {

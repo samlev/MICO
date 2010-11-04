@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.PasswordSet.js
+ ** File: js/Mico.PasswordSet.js
  ** 
  ** Description: The 'password set' form for the application
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Sphodro.PasswordSet = function () {
+Mico.PasswordSet = function () {
     var usernameField;
     var passwordField;
     var passwordStrengthIndicator;
@@ -55,7 +55,7 @@ Sphodro.PasswordSet = function () {
                 // check the strength of the password
                 this.passwordField.on('keyup', function() {
                     var pass = this.passwordField.getValue();
-                    var points = Sphodro.Utils.passwordStrength(pass);
+                    var points = Mico.Utils.passwordStrength(pass);
                     
                     // password strength
                     var text = 'Weak';
@@ -101,7 +101,7 @@ Sphodro.PasswordSet = function () {
                 
                 // set up form
                 this.setPasswordForm = new Ext.form.FormPanel({
-                    id: "Sphodro.PasswordSet.setPasswordForm", 
+                    id: "Mico.PasswordSet.setPasswordForm", 
                     url: APP_ROOT+"/api.php?f=setPassword", 
                     method: "POST",
                     region:"center",

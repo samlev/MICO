@@ -9,7 +9,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -33,7 +33,7 @@ if (defined('CONFIGURED')) {
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>Sphodro</title>
+    <title>Mico</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/ext-all.css" />
@@ -50,12 +50,12 @@ if (defined('CONFIGURED')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="../skin/static/sphodro.png" alt="Sphodro" id="sphodroLogo" />
+      <img src="../skin/static/mico.png" alt="Mico" id="micoLogo" />
     </div>
     <div style="padding:8px;">
       <h2 style="font-size:16pt;margin-bottom:8px;">Installation</h2>
       <p style="margin-bottom:8px;">
-        Sphodro is installed. Please delete the 'install' directory and all of
+        Mico is installed. Please delete the 'install' directory and all of
         its contents.
       </p>
       <p style="margin-bottom:8px;">
@@ -76,13 +76,13 @@ if (defined('FS_ROOT')) {
     $config_written = true;
 }
 
-?>
+?> 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title>Sphodro</title>
+    <title>Mico</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
     <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/ext-all.css" />
@@ -93,18 +93,18 @@ if (defined('FS_ROOT')) {
     <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
         
-    <script type="text/javascript" src="../js/Sphodro.Application.js"></script>
-    <script type="text/javascript" src="../js/Sphodro.Utils.js"></script>
+    <script type="text/javascript" src="../js/Mico.Application.js"></script>
+    <script type="text/javascript" src="../js/Mico.Utils.js"></script>
     <!-- pull in the appropriate installer files -->
-    <script type="text/javascript" src="js/Sphodro.ConfigSetup.js"></script>
-    <script type="text/javascript" src="js/Sphodro.SystemSetup.js"></script>
+    <script type="text/javascript" src="js/Mico.ConfigSetup.js"></script>
+    <script type="text/javascript" src="js/Mico.SystemSetup.js"></script>
     <script type="text/javascript" defer="defer">
     <!--
     <?php
     if ($config_written) {
         // display the 'system setup' page
         ?>
-        setTimeout("Sphodro.SystemSetup.show()",200);
+        setTimeout("Mico.SystemSetup.show()",200);
         <?php
     } else {
         // get the default values
@@ -120,7 +120,7 @@ if (defined('FS_ROOT')) {
         var WEB_ROOT = '<?=addslashes($WEB_ROOT)?>';
         var APP_ROOT = '<?=addslashes($APP_ROOT)?>';
         
-        setTimeout("Sphodro.ConfigSetup.show();",200);
+        setTimeout("Mico.ConfigSetup.show();",200);
         <?php
     }?>
     -->
@@ -128,7 +128,7 @@ if (defined('FS_ROOT')) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="../skin/static/sphodro.png" alt="Sphodro" id="sphodroLogo" />
+      <img src="../skin/static/mico.png" alt="Mico" id="micoLogo" />
     </div>
   </body>
 </html>

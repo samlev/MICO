@@ -12,7 +12,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -27,27 +27,27 @@
  ******************************************************************************/
 
 // public only need the 'login' page
-$public = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.Login.js');
+$public = array('Mico.Application.js','Mico.Footer.js','Mico.Login.js');
 // standard scipts for users
-$authed = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.SystemMenu.js',
-                'Sphodro.Calls.js','Sphodro.Calls.AddCall.js','Sphodro.Calls.ViewCalls.js',
-                'Sphodro.Utils.js','Sphodro.Utils.CommonStores.js','Sphodro.User.js',
-                'Sphodro.User.Preferences.js','Sphodro.User.Status.js',
-                'Sphodro.Calls.SearchBar.js');
+$authed = array('Mico.Application.js','Mico.Footer.js','Mico.SystemMenu.js',
+                'Mico.Calls.js','Mico.Calls.AddCall.js','Mico.Calls.ViewCalls.js',
+                'Mico.Utils.js','Mico.Utils.CommonStores.js','Mico.User.js',
+                'Mico.User.Preferences.js','Mico.User.Status.js',
+                'Mico.Calls.SearchBar.js');
 // standard scipts for managers
-$manager = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.SystemMenu.js',
-                 'Sphodro.Calls.js','Sphodro.Calls.AddCall.js','Sphodro.Calls.ViewCalls.js',
-                 'Sphodro.Utils.js','manager/Sphodro.Utils.CommonStores.js','Sphodro.User.js',
-                 'Sphodro.User.Preferences.js','Sphodro.User.Status.js',
-                 'Sphodro.Calls.SearchBar.js','manager/Sphodro.ManageUsers.js');
+$manager = array('Mico.Application.js','Mico.Footer.js','Mico.SystemMenu.js',
+                 'Mico.Calls.js','Mico.Calls.AddCall.js','Mico.Calls.ViewCalls.js',
+                 'Mico.Utils.js','manager/Mico.Utils.CommonStores.js','Mico.User.js',
+                 'Mico.User.Preferences.js','Mico.User.Status.js',
+                 'Mico.Calls.SearchBar.js','manager/Mico.ManageUsers.js');
 // administrators get more
-$admin = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.SystemMenu.js',
-               'Sphodro.Calls.js','Sphodro.Calls.AddCall.js','Sphodro.Calls.ViewCalls.js',
-               'Sphodro.Utils.js','admin/Sphodro.Utils.CommonStores.js','Sphodro.User.js',
-               'admin/Sphodro.SystemSettings.js','Sphodro.User.Preferences.js',
-               'Sphodro.User.Status.js','Sphodro.Calls.SearchBar.js','manager/Sphodro.ManageUsers.js');
+$admin = array('Mico.Application.js','Mico.Footer.js','Mico.SystemMenu.js',
+               'Mico.Calls.js','Mico.Calls.AddCall.js','Mico.Calls.ViewCalls.js',
+               'Mico.Utils.js','admin/Mico.Utils.CommonStores.js','Mico.User.js',
+               'admin/Mico.SystemSettings.js','Mico.User.Preferences.js',
+               'Mico.User.Status.js','Mico.Calls.SearchBar.js','manager/Mico.ManageUsers.js');
 // and an odd case for password reset
-$passreset = array('Sphodro.Application.js','Sphodro.Footer.js','Sphodro.PasswordSet.js','Sphodro.Utils.js');
+$passreset = array('Mico.Application.js','Mico.Footer.js','Mico.PasswordSet.js','Mico.Utils.js');
 
 
 // decide on what javascript files to use
@@ -70,7 +70,7 @@ if (defined('PASSWORD_RESET')) {
 
 // add the simple cron (if required)
 if (Settings::get_default('simplecron',false)) {
-    $js_array[] = 'Sphodro.SimpleCron.js';
+    $js_array[] = 'Mico.SimpleCron.js';
 }
 
 // and now output

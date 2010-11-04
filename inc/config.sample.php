@@ -11,7 +11,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -31,7 +31,7 @@ define ("FS_ROOT", "/absolute/path/to/application/root"); // Filesystem root
 // Web paths
 define ("WEB_DOMAIN", "www.example.com"); // Base domain - best option is to use $_SERVER['HTTP_HOST'] which will avoid javascript cross-domain issues
 define ("WEB_ROOT", "http://".WEB_DOMAIN); // Base URL
-define ("APP_ROOT", WEB_ROOT."/sphodro"); // Web path to application root
+define ("APP_ROOT", WEB_ROOT."/mico"); // Web path to application root
 
 // database connection variables
 $DB_HOST = "localhost";     // MySQL hostname
@@ -40,4 +40,4 @@ $DB_PASS = "password";      // MySQL password
 $DB_NAME = "database_name"; // Database name
 
 // database assistance variables
-define ("DB_PREFIX", "sphodro_"); // (optional) prefix for tables - use this if you are using the database for other uses
+define ("DB_PREFIX", "mico_"); // (optional) prefix for tables - use this if you are using the database for other uses

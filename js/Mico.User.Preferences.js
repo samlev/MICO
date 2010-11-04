@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.User.Preferences.js
+ ** File: js/Mico.User.Preferences.js
  ** 
  ** Description: The main 'user preferences' section of the system
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Sphodro.User.Preferences = function () {
+Mico.User.Preferences = function () {
     // menu id
     var menuId;
     
@@ -61,7 +61,7 @@ Sphodro.User.Preferences = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Sphodro.SystemMenu.addItem('My Preferences', 'Sphodro.User.Preferences.show()','user');
+                this.menuId = Mico.SystemMenu.addItem('My Preferences', 'Mico.User.Preferences.show()','user');
             }
         },
         /** Shows the panel */
@@ -78,7 +78,7 @@ Sphodro.User.Preferences = function () {
                     width: 135, 
                     allowBlank: false,
                     required: true,
-                    value: Sphodro.User.getVar('name'),
+                    value: Mico.User.getVar('name'),
                     blankText: "You must enter your name"
                 });
                 
@@ -88,7 +88,7 @@ Sphodro.User.Preferences = function () {
                     width: 135, 
                     allowBlank: false,
                     required: true,
-                    value: Sphodro.User.getVar('email'),
+                    value: Mico.User.getVar('email'),
                     blankText: "You must enter your email address"
                 });
                 
@@ -126,7 +126,7 @@ Sphodro.User.Preferences = function () {
                     displayField:'dispaly',
                     valueField:'format',
                     mode:'local',
-                    value: Sphodro.User.getVarDefault('timeformat','g:ia'),
+                    value: Mico.User.getVarDefault('timeformat','g:ia'),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -149,7 +149,7 @@ Sphodro.User.Preferences = function () {
                     displayField:'dispaly',
                     valueField:'format',
                     mode:'local',
-                    value: Sphodro.User.getVarDefault('dateformat','jS M, Y'),
+                    value: Mico.User.getVarDefault('dateformat','jS M, Y'),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -172,7 +172,7 @@ Sphodro.User.Preferences = function () {
                     displayField:'calls',
                     valueField:'calls',
                     mode:'local',
-                    value: Sphodro.User.getVarDefault('callsperpage','30'),
+                    value: Mico.User.getVarDefault('callsperpage','30'),
                     triggerAction:'all'
                 });
                 
@@ -182,11 +182,11 @@ Sphodro.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Show',
-                    store: Sphodro.Utils.CommonStores.callsSearchFilter,
+                    store: Mico.Utils.CommonStores.callsSearchFilter,
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
-                    value: Sphodro.User.getVarDefault('showcalls','assigned'),
+                    value: Mico.User.getVarDefault('showcalls','assigned'),
                     triggerAction:'all'
                 });
                 
@@ -196,18 +196,18 @@ Sphodro.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Order',
-                    store: Sphodro.Utils.CommonStores.callsOrderFilter,
+                    store: Mico.Utils.CommonStores.callsOrderFilter,
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
-                    value: Sphodro.User.getVarDefault('ordercalls','recent'),
+                    value: Mico.User.getVarDefault('ordercalls','recent'),
                     triggerAction:'all'
                 });
                 
                 // show closed field
                 this.showClosedField = new Ext.form.Checkbox({
                     fieldLabel:'Show closed calls',
-                    checked: Sphodro.User.getVar('showclosed')
+                    checked: Mico.User.getVar('showclosed')
                 });
                 
                 // comment order field
@@ -225,7 +225,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'type',
                     valueField:'filter',
-                    value:Sphodro.User.getVarDefault('commentorder','newest'),
+                    value:Mico.User.getVarDefault('commentorder','newest'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -272,18 +272,18 @@ Sphodro.User.Preferences = function () {
                             var commentorder = String(this.commentOrderField.getValue()).trim();
                             
                             // set the values that we can
-                            if (name.length) { Sphodro.User.setVar('name',name); }
-                            if (email.length) { Sphodro.User.setVar('email',email); }
-                            Sphodro.User.setVar('timeformat',timeformat);
-                            Sphodro.User.setVar('dateformat',dateformat);
-                            Sphodro.User.setVar('callsperpage',callsperpage);
-                            Sphodro.User.setVar('showcalls',showcalls);
-                            Sphodro.User.setVar('ordercalls',ordercalls);
-                            Sphodro.User.setVar('showclosed',showclosed);
-                            Sphodro.User.setVar('commentorder',commentorder);
+                            if (name.length) { Mico.User.setVar('name',name); }
+                            if (email.length) { Mico.User.setVar('email',email); }
+                            Mico.User.setVar('timeformat',timeformat);
+                            Mico.User.setVar('dateformat',dateformat);
+                            Mico.User.setVar('callsperpage',callsperpage);
+                            Mico.User.setVar('showcalls',showcalls);
+                            Mico.User.setVar('ordercalls',ordercalls);
+                            Mico.User.setVar('showclosed',showclosed);
+                            Mico.User.setVar('commentorder',commentorder);
                             
                             // and commit the changes
-                            Sphodro.User.commit();
+                            Mico.User.commit();
                         }
                     }, 
                     scope: this
@@ -294,22 +294,22 @@ Sphodro.User.Preferences = function () {
                     text: "Reset", 
                     handler: function () {
                         // reset all the variables from the user object
-                        this.nameField.setValue(Sphodro.User.getVar('name'));
-                        this.emailField.setValue(Sphodro.User.getVar('email'));
-                        this.timeFormatField.setValue(Sphodro.User.getVarDefault('timeformat','g:ia'));
-                        this.dateFormatField.setValue(Sphodro.User.getVarDefault('dateformat','jS M, Y'));
-                        this.callsPerPageField.setValue(Sphodro.User.getVarDefault('callsperpage','30'));
-                        this.showCallsField.setValue(Sphodro.User.getVarDefault('showcalls','assigned'));
-                        this.orderCallsField.setValue(Sphodro.User.getVarDefault('ordercalls','recent'));
-                        this.showClosedField.setValue(Sphodro.User.getVarDefault('showclosed',false));
-                        this.commentOrderField.setValue(Sphodro.User.getVarDefault('commentorder','newest'));
+                        this.nameField.setValue(Mico.User.getVar('name'));
+                        this.emailField.setValue(Mico.User.getVar('email'));
+                        this.timeFormatField.setValue(Mico.User.getVarDefault('timeformat','g:ia'));
+                        this.dateFormatField.setValue(Mico.User.getVarDefault('dateformat','jS M, Y'));
+                        this.callsPerPageField.setValue(Mico.User.getVarDefault('callsperpage','30'));
+                        this.showCallsField.setValue(Mico.User.getVarDefault('showcalls','assigned'));
+                        this.orderCallsField.setValue(Mico.User.getVarDefault('ordercalls','recent'));
+                        this.showClosedField.setValue(Mico.User.getVarDefault('showclosed',false));
+                        this.commentOrderField.setValue(Mico.User.getVarDefault('commentorder','newest'));
                     }, 
                     scope: this
                 });
                 
                 // perferences form
                 this.settingsPanel = new Ext.form.FormPanel({
-                    id: "Sphodro.User.Preferences.settingsPanel",
+                    id: "Mico.User.Preferences.settingsPanel",
                     title:'Settings and Preferences',
                     labelWidth:140,
                     layout:'form',
@@ -351,7 +351,7 @@ Sphodro.User.Preferences = function () {
                 // check the strength of the password
                 this.passwordField.on('keyup', function() {
                     var pass = this.passwordField.getValue();
-                    var points = Sphodro.Utils.passwordStrength(pass);
+                    var points = Mico.Utils.passwordStrength(pass);
                     
                     // password strength
                     var text = 'Weak';
@@ -414,7 +414,7 @@ Sphodro.User.Preferences = function () {
                         conn.request({
                             url:APP_ROOT+'/api.php?f=changePassword',
                             params: {
-                                session: Sphodro.User.getSession(),
+                                session: Mico.User.getSession(),
                                 oldpass: this.oldPasswordField.getValue(),
                                 password1: this.passwordField.getValue(),
                                 password2: this.passwordConfirmField.getValue()
@@ -457,7 +457,7 @@ Sphodro.User.Preferences = function () {
                 
                 // set up form
                 this.changePasswordForm = new Ext.form.FormPanel({
-                    id: "Sphodro.User.Preferences.changePasswordForm",
+                    id: "Mico.User.Preferences.changePasswordForm",
                     title:'Change Password',
                     labelWidth:140,
                     layout:'form',
@@ -483,7 +483,7 @@ Sphodro.User.Preferences = function () {
                 // Send notifications field
                 this.sendNotificationsField = new Ext.form.Checkbox({
                     fieldLabel:'Send me email notifications',
-                    checked: Sphodro.User.getVar('sendnotifications')
+                    checked: Mico.User.getVar('sendnotifications')
                 });
                 
                 // critical calls
@@ -503,7 +503,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('criticalnotifytime','immediate'),
+                    value:Mico.User.getVarDefault('criticalnotifytime','immediate'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -521,7 +521,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('criticalnotifyreason','updated'),
+                    value:Mico.User.getVarDefault('criticalnotifyreason','updated'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -552,7 +552,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('urgentnotifytime','30mins'),
+                    value:Mico.User.getVarDefault('urgentnotifytime','30mins'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -570,7 +570,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('urgentnotifyreason','updated'),
+                    value:Mico.User.getVarDefault('urgentnotifyreason','updated'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -601,7 +601,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('moderatenotifytime','60mins'),
+                    value:Mico.User.getVarDefault('moderatenotifytime','60mins'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -619,7 +619,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('moderatenotifyreason','updated'),
+                    value:Mico.User.getVarDefault('moderatenotifyreason','updated'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -650,7 +650,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('minornotifytime','60mins'),
+                    value:Mico.User.getVarDefault('minornotifytime','60mins'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -668,7 +668,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('minornotifyreason','assigned'),
+                    value:Mico.User.getVarDefault('minornotifyreason','assigned'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -699,7 +699,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('negligiblenotifytime','never'),
+                    value:Mico.User.getVarDefault('negligiblenotifytime','never'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -717,7 +717,7 @@ Sphodro.User.Preferences = function () {
                     }),
                     displayField:'view',
                     valueField:'notify',
-                    value:Sphodro.User.getVarDefault('negligiblenotifyreason','assigned'),
+                    value:Mico.User.getVarDefault('negligiblenotifyreason','assigned'),
                     mode:'local',
                     triggerAction:'all'
                 });
@@ -770,20 +770,20 @@ Sphodro.User.Preferences = function () {
                             var negligiblenotifyreason = String(this.negligibleNotifyReason.getValue()).trim();
                             
                             // set the values that we can
-                            Sphodro.User.setVar('sendnotifications',sendnotifications);
-                            Sphodro.User.setVar('criticalnotifytime',criticalnotifytime);
-                            Sphodro.User.setVar('criticalnotifyreason',criticalnotifyreason);
-                            Sphodro.User.setVar('urgentnotifytime',urgentnotifytime);
-                            Sphodro.User.setVar('urgentnotifyreason',urgentnotifyreason);
-                            Sphodro.User.setVar('moderatenotifytime',moderatenotifytime);
-                            Sphodro.User.setVar('moderatenotifyreason',moderatenotifyreason);
-                            Sphodro.User.setVar('minornotifytime',minornotifytime);
-                            Sphodro.User.setVar('minornotifyreason',minornotifyreason);
-                            Sphodro.User.setVar('negligiblenotifytime',negligiblenotifytime);
-                            Sphodro.User.setVar('negligiblenotifyreason',negligiblenotifyreason);
+                            Mico.User.setVar('sendnotifications',sendnotifications);
+                            Mico.User.setVar('criticalnotifytime',criticalnotifytime);
+                            Mico.User.setVar('criticalnotifyreason',criticalnotifyreason);
+                            Mico.User.setVar('urgentnotifytime',urgentnotifytime);
+                            Mico.User.setVar('urgentnotifyreason',urgentnotifyreason);
+                            Mico.User.setVar('moderatenotifytime',moderatenotifytime);
+                            Mico.User.setVar('moderatenotifyreason',moderatenotifyreason);
+                            Mico.User.setVar('minornotifytime',minornotifytime);
+                            Mico.User.setVar('minornotifyreason',minornotifyreason);
+                            Mico.User.setVar('negligiblenotifytime',negligiblenotifytime);
+                            Mico.User.setVar('negligiblenotifyreason',negligiblenotifyreason);
                             
                             // and commit the changes
-                            Sphodro.User.commit();
+                            Mico.User.commit();
                         }
                     }, 
                     scope: this
@@ -794,24 +794,24 @@ Sphodro.User.Preferences = function () {
                     text: "Reset", 
                     handler: function () {
                         // reset all the variables from the user object
-                        this.sendNotificationsField.setValue(Sphodro.User.getVar('sendnotifications'));
-                        this.criticalNotifyTime.setValue(Sphodro.User.getVarDefault('criticalnotifytime','immediate'));
-                        this.criticalNotifyReason.setValue(Sphodro.User.getVarDefault('criticalnotifyreason','updated'));
-                        this.urgentNotifyTime.setValue(Sphodro.User.getVarDefault('urgentnotifytime','30mins'));
-                        this.urgentNotifyReason.setValue(Sphodro.User.getVarDefault('urgentnotifyreason','updated'));
-                        this.moderateNotifyTime.setValue(Sphodro.User.getVarDefault('moderatenotifytime','60mins'));
-                        this.moderateNotifyReason.setValue(Sphodro.User.getVarDefault('moderatenotifyreason','updated'));
-                        this.minorNotifyTime.setValue(Sphodro.User.getVarDefault('minornotifytime','60mins'));
-                        this.minorNotifyReason.setValue(Sphodro.User.getVarDefault('minornotifyreason','assigned'));
-                        this.negligibleNotifyTime.setValue(Sphodro.User.getVarDefault('negligiblenotifytime','never'));
-                        this.negligibleNotifyReason.setValue(Sphodro.User.getVarDefault('negligiblenotifyreason','assigned'));
+                        this.sendNotificationsField.setValue(Mico.User.getVar('sendnotifications'));
+                        this.criticalNotifyTime.setValue(Mico.User.getVarDefault('criticalnotifytime','immediate'));
+                        this.criticalNotifyReason.setValue(Mico.User.getVarDefault('criticalnotifyreason','updated'));
+                        this.urgentNotifyTime.setValue(Mico.User.getVarDefault('urgentnotifytime','30mins'));
+                        this.urgentNotifyReason.setValue(Mico.User.getVarDefault('urgentnotifyreason','updated'));
+                        this.moderateNotifyTime.setValue(Mico.User.getVarDefault('moderatenotifytime','60mins'));
+                        this.moderateNotifyReason.setValue(Mico.User.getVarDefault('moderatenotifyreason','updated'));
+                        this.minorNotifyTime.setValue(Mico.User.getVarDefault('minornotifytime','60mins'));
+                        this.minorNotifyReason.setValue(Mico.User.getVarDefault('minornotifyreason','assigned'));
+                        this.negligibleNotifyTime.setValue(Mico.User.getVarDefault('negligiblenotifytime','never'));
+                        this.negligibleNotifyReason.setValue(Mico.User.getVarDefault('negligiblenotifyreason','assigned'));
                     }, 
                     scope: this
                 });
                 
                 // notifications panel
                 this.notificationsForm = new Ext.form.FormPanel({
-                    id: "Sphodro.User.Preferences.notificationsForm",
+                    id: "Mico.User.Preferences.notificationsForm",
                     title:'Notification Settings',
                     labelWidth:160,
                     layout:'form',
@@ -837,7 +837,7 @@ Sphodro.User.Preferences = function () {
                 
                 // set up the main panel
                 this.panel = new Ext.TabPanel({
-                    id:'Sphodro.User.Preferences.panel',
+                    id:'Mico.User.Preferences.panel',
                     items: [
                         this.settingsPanel,
                         this.changePasswordForm,
@@ -847,11 +847,11 @@ Sphodro.User.Preferences = function () {
                 });
                 
                 // Add to the main panel
-                Sphodro.Application.addPanel(this.panel);
+                Mico.Application.addPanel(this.panel);
             }
             
             // show the preferences panel
-            Sphodro.Application.showPanel('Sphodro.User.Preferences.panel');
+            Mico.Application.showPanel('Mico.User.Preferences.panel');
         }
     };
 } ();

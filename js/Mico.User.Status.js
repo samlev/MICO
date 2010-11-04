@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.User.Status.js
+ ** File: js/Mico.User.Status.js
  ** 
  ** Description: Allows the user to change their status
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Sphodro.User.Status = function () {
+Mico.User.Status = function () {
     // menu id
     var menuId;
     
@@ -33,7 +33,7 @@ Sphodro.User.Status = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Sphodro.SystemMenu.addItem('Set Status', 'Sphodro.User.Status.show()','system');
+                this.menuId = Mico.SystemMenu.addItem('Set Status', 'Mico.User.Status.show()','system');
             }
         },
         /** Shows the panel */
@@ -61,7 +61,7 @@ Sphodro.User.Status = function () {
                     valueField:'status',
                     mode:'local',
                     triggerAction:'all',
-                    tpl:Sphodro.Utils.userTemplate(),
+                    tpl:Mico.Utils.userTemplate(),
                     listeners: {
                         scope:this,
                         'select': function () {
@@ -85,7 +85,7 @@ Sphodro.User.Status = function () {
                 // store
                 this.statusTextStore = new Ext.data.ArrayStore ({
                     fields:['text'],
-                    data: this.statusText(Sphodro.User.getVarDefault('status','available'))
+                    data: this.statusText(Mico.User.getVarDefault('status','available'))
                 });
                 
                 // status text
@@ -116,10 +116,10 @@ Sphodro.User.Status = function () {
                     scope:this,
                     handler: function() {
                         // set the variables in the user
-                        Sphodro.User.setVar('status',this.statusField.getValue());
-                        Sphodro.User.setVar('statustext',this.statusTextField.getValue());
+                        Mico.User.setVar('status',this.statusField.getValue());
+                        Mico.User.setVar('statustext',this.statusTextField.getValue());
                         // commit the changes
-                        Sphodro.User.commit();
+                        Mico.User.commit();
                         this.panel.hide();
                     }
                 });
@@ -135,7 +135,7 @@ Sphodro.User.Status = function () {
                 
                 // set up the main panel
                 this.panel = new Ext.Window({
-                    id:'Sphodro.User.Status.panel',
+                    id:'Mico.User.Status.panel',
                     layout:'form',
                     modal:true,
                     closable:false,
@@ -155,7 +155,7 @@ Sphodro.User.Status = function () {
                         scope: this,
                         'hide': function () {
                             // show the call panel when this dialog hides
-                            Sphodro.Calls.show();
+                            Mico.Calls.show();
                         }
                     }
                 });
@@ -164,8 +164,8 @@ Sphodro.User.Status = function () {
             // show the panel
             this.panel.show();
             // set the values
-            this.statusField.setValue(Sphodro.User.getVarDefault('status','available'));
-            this.statusTextField.setValue(Sphodro.User.getVarDefault('statustext','Available'));
+            this.statusField.setValue(Mico.User.getVarDefault('status','available'));
+            this.statusTextField.setValue(Mico.User.getVarDefault('statustext','Available'));
             // Disable the 'statustext' field if the status is 'offline'
             if (this.statusField.getValue() == "offline") {
                 this.statusTextField.setValue('Offline');

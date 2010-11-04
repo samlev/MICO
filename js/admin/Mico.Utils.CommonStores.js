@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/admin/Sphodro.Utils.CommonStores.js
+ ** File: js/admin/Mico.Utils.CommonStores.js
  ** 
  ** Description: Common store data for administrative users
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -21,7 +21,7 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Sphodro.Utils.CommonStores = function () {
+Mico.Utils.CommonStores = function () {
     return {
         // search options for calls; admin users can see all calls in the system
         callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All Calls','all']],

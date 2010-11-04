@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.User.js
+ ** File: js/Mico.User.js
  ** 
  ** Description: Defines a simple user object
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -21,9 +21,9 @@
  ** You should have received a copy of the GNU Lesser General Public License
  *******************************************************************************
  ******************************************************************************/
-Ext.namespace('Sphodro.User');
+Ext.namespace('Mico.User');
 
-Sphodro.User = function () {
+Mico.User = function () {
     var user_id;
     var session;
     var role;
@@ -84,8 +84,8 @@ Sphodro.User = function () {
                     conn.request({
                         url:APP_ROOT+'/api.php?f=saveUserVars',
                         params: {
-                            session: Sphodro.User.getSession(),
-                            vars: Sphodro.Utils.serialiseArray(this.vars)
+                            session: Mico.User.getSession(),
+                            vars: Mico.Utils.serialiseArray(this.vars)
                         },
                         callback: function (options, success, response) {
                             var res = Ext.decode(response.responseText);
@@ -129,7 +129,7 @@ Sphodro.User = function () {
             conn.request({
                 url:APP_ROOT+'/api.php?f=logout',
                 params: {
-                    session: Sphodro.User.getSession()
+                    session: Mico.User.getSession()
                 },
                 callback: function (options, success, response) {
                     var res = Ext.decode(response.responseText);

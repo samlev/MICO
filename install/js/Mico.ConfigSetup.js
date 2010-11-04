@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: install/js/Sphodro.ConfigSetup.js
+ ** File: install/js/Mico.ConfigSetup.js
  ** 
  ** Description: The configuration settings section of the system
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -22,7 +22,7 @@
  *******************************************************************************
  ******************************************************************************/
 
-Sphodro.ConfigSetup = function () {
+Mico.ConfigSetup = function () {
     // Path settings fields
     var automaticPathField;
     var FS_ROOT_Field;
@@ -116,7 +116,7 @@ Sphodro.ConfigSetup = function () {
                     title:'Filesystem and path settings',
                     items: [
                         {
-                            html: 'The following settings define where Sphodro is on your server, '+
+                            html: 'The following settings define where Mico is on your server, '+
                                   'and how you access it over the internet. The advanced settings '+
                                   'are only advisable if you know exactly what you are doing.',
                             bodyStyle:'padding-bottom:3px;'
@@ -161,7 +161,7 @@ Sphodro.ConfigSetup = function () {
                     width: 200, 
                     allowBlank: true,
                     required: false,
-                    value: 'sphodro_',
+                    value: 'mico_',
                     fieldLabel: 'Table prefix'
                 });
                 
@@ -171,8 +171,8 @@ Sphodro.ConfigSetup = function () {
                     items: [
                         {
                             html: 'The following settings are for your MySQL database. '+
-                                  'The table prefix will keep Sphodro data separate from '+
-                                  'other tables if Sphodro is sharing a database with '+
+                                  'The table prefix will keep Mico data separate from '+
+                                  'other tables if Mico is sharing a database with '+
                                   'other applications.',
                             bodyStyle:'padding-bottom:3px;'
                         },
@@ -214,14 +214,14 @@ Sphodro.ConfigSetup = function () {
                         this.userField.setValue('');
                         this.passField.setValue('');
                         this.nameField.setValue('');
-                        this.prefField.setValue('sphodro_');
+                        this.prefField.setValue('mico_');
                     }, 
                     scope: this
                 });
                 
                 // perferences form
                 this.panel = new Ext.form.FormPanel({
-                    id: "Sphodro.ConfigSetup.panel",
+                    id: "Mico.ConfigSetup.panel",
                     items: [
                         {
                             html:'<h1>Step 1: set up the database</h1>'
@@ -242,10 +242,10 @@ Sphodro.ConfigSetup = function () {
                 });
                 
                 // Add to the main panel
-                Sphodro.Application.addPanel(this.panel);
+                Mico.Application.addPanel(this.panel);
             }
             
-            Sphodro.Application.showPanel('Sphodro.ConfigSetup.panel');
+            Mico.Application.showPanel('Mico.ConfigSetup.panel');
         },
         /** Saves the settings */
         saveSettings: function() {
@@ -274,7 +274,7 @@ Sphodro.ConfigSetup = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             // open another wait box
-                            Ext.Msg.wait('Installing','Installing Sphodro',{
+                            Ext.Msg.wait('Installing','Installing Mico',{
                                 closable:false,
                                 modal:true
                             });
@@ -304,7 +304,7 @@ Sphodro.ConfigSetup = function () {
                                         Ext.Msg.hide();
                                         
                                         // next step - configuring the first user
-                                        Ext.Msg.alert('Installing','Step 1 complete. Next step is to set up system configuration.', function () { Sphodro.SystemSetup.show() });
+                                        Ext.Msg.alert('Installing','Step 1 complete. Next step is to set up system configuration.', function () { Mico.SystemSetup.show() });
                                     } else {
                                         Ext.Msg.hide();
                                         var msg = "Unknown system error";

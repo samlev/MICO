@@ -9,7 +9,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -113,15 +113,15 @@ if (!defined('CONFIGURED')) {
             $message .= "Simple cron must be either true or false.";
         }
         
-        // sphodro version
-        if (defined('SPHODRO_VERSION')) {
+        // mico version
+        if (defined('MICO_VERSION')) {
             // if the setting is different, save it
-            if (Settings::get_default('SPHODRO_VERSION',null)!==SPHODRO_VERSION) {
-                Settings::set('SPHODRO_VERSION',SPHODRO_VERSION);
+            if (Settings::get_default('MICO_VERSION',null)!==MICO_VERSION) {
+                Settings::set('MICO_VERSION',MICO_VERSION);
             }
         } else {
-            if (Settings::get_default('SPHODRO_VERSION',null)!=="unknown") {
-                Settings::set('SPHODRO_VERSION',"unknown");
+            if (Settings::get_default('MICO_VERSION',null)!=="unknown") {
+                Settings::set('MICO_VERSION',"unknown");
             }
         }
         
@@ -208,7 +208,7 @@ if (!defined('CONFIGURED')) {
     }
 } else {
     $success = false;
-    $message .= "Sphodro has already been installed.";
+    $message .= "Mico has already been installed.";
 }
 
 // return the response

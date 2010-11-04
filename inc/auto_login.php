@@ -10,7 +10,7 @@
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -46,9 +46,9 @@ if (defined('USER_ID') && defined('SESSION')) {
     /** Sets up the user then shows the main panel */
     function setup_user() {
         // Check if the user object has been defined yet
-        if (Sphodro.User !== undefined) {
+        if (Mico.User !== undefined) {
             // Set up the user object
-            Sphodro.User.init (userid, session, role, vars);
+            Mico.User.init (userid, session, role, vars);
             // Show the main area
             page_show();
         } else {
@@ -60,9 +60,9 @@ if (defined('USER_ID') && defined('SESSION')) {
     /** Show the main panel */
     function page_show() {
         // Check if the application panel has been defined yet
-        if (Sphodro.Application.panel !== undefined) {
+        if (Mico.Application.panel !== undefined) {
             // show the main panel
-            Sphodro.Calls.show ();
+            Mico.Calls.show ();
             // hide the 'you are being logged in' message
             Ext.Msg.hide();
         } else {

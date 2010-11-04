@@ -2,13 +2,13 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: js/Sphodro.Application.js
+ ** File: js/Mico.Application.js
  ** 
  ** Description: The main application/page framework that everything else uses
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
- ** Sphodro is free software: you can redistribute it and/or
+ ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
  ** published by the Free Software Foundation, either version 3 of the License,
  ** or (at your option) any later version.
@@ -25,9 +25,9 @@ Ext.QuickTips.init ();
 
 Ext.BLANK_IMAGE_URL = "skin/static/s.gif";
 
-Ext.namespace ("Sphodro");
+Ext.namespace ("Mico");
 
-Sphodro.Application = function () {
+Mico.Application = function () {
     var viewport;
     
     var panel;
@@ -40,13 +40,13 @@ Sphodro.Application = function () {
             if (this.viewport === undefined) {
                 // get the footer if it's defined (it won't be for the installer)
                 var footer;
-                if (Sphodro.Footer !== undefined) {
-                    footer = Sphodro.Footer.getFooter();
+                if (Mico.Footer !== undefined) {
+                    footer = Mico.Footer.getFooter();
                 }
                 
                 // Set up the holder panel
                 this.panel = new Ext.Panel ({
-                    id: "Sphodro.Application.panel", 
+                    id: "Mico.Application.panel", 
                     region: "center", 
                     layout: "card",
                     items: [
@@ -60,7 +60,7 @@ Sphodro.Application = function () {
                 
                 // Set up the viewport!
                 this.viewport = new Ext.Viewport ({
-                    id: "Sphodro.Application.viewport", 
+                    id: "Mico.Application.viewport", 
                     layout: "border",
                     enableTabScroll:true,
                     items: [{
@@ -73,30 +73,30 @@ Sphodro.Application = function () {
                     ]
                 });
                 
-                if (Sphodro.Login !== undefined) { // if the login page is defined, show it
-                    Sphodro.Login.show();
-                } else if (Sphodro.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
-                    Sphodro.PasswordSet.show();
-                } else if (Sphodro.Calls !== undefined) { // if the main 'calls' section is defined, show it
+                if (Mico.Login !== undefined) { // if the login page is defined, show it
+                    Mico.Login.show();
+                } else if (Mico.PasswordSet !== undefined) { // if the 'password set' form is defined, show it.
+                    Mico.PasswordSet.show();
+                } else if (Mico.Calls !== undefined) { // if the main 'calls' section is defined, show it
                     // show standard application components
-                    Sphodro.SystemMenu.show(); // system and user menus
+                    Mico.SystemMenu.show(); // system and user menus
                     
                     // Set the left ('system') menu items
-                    Sphodro.Calls.init(); // initialize calls panel
-                    Sphodro.User.Status.init(); // initialize the user status panel
+                    Mico.Calls.init(); // initialize calls panel
+                    Mico.User.Status.init(); // initialize the user status panel
                     // initialises the manage users panel
-                    if (Sphodro.ManageUsers !== undefined) {
-                        Sphodro.ManageUsers.init ();
+                    if (Mico.ManageUsers !== undefined) {
+                        Mico.ManageUsers.init ();
                     }
                     
                     // set the right ('user') menu items
                     // initialise the system settings panel
-                    if (Sphodro.SystemSettings !== undefined) {
-                        Sphodro.SystemSettings.init ();
+                    if (Mico.SystemSettings !== undefined) {
+                        Mico.SystemSettings.init ();
                     }
-                    Sphodro.User.Preferences.init(); // initialize the user preferences panel
+                    Mico.User.Preferences.init(); // initialize the user preferences panel
                     // add the user logout menu item
-                    Sphodro.SystemMenu.addItem('Log out','Sphodro.User.logout()','user');
+                    Mico.SystemMenu.addItem('Log out','Mico.User.logout()','user');
                 }
             }
         },
@@ -117,5 +117,5 @@ Sphodro.Application = function () {
 
 // When ExtJS is ready, initialize the application
 Ext.onReady (function () {
-    Sphodro.Application.init ();
+    Mico.Application.init ();
 });
