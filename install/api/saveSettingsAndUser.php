@@ -38,7 +38,7 @@ if (!defined('CONFIGURED')) {
         $SIMPLE_CRON = boolval($_POST['SIMPLE_CRON'],true);
         
         // get the version
-        include_once(FS_ROOT.'/install/version.php');
+        include_once(FS_ROOT.'/version.php');
         
         $success = true;
         
