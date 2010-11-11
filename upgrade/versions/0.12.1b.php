@@ -3,9 +3,9 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: version.php
+ ** File: upgrade/versions/0.12.1b.php
  ** 
- ** Description: Simple file to define the software version
+ ** Description: DB upgrader for version 0.12.1b
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
@@ -23,6 +23,21 @@
  *******************************************************************************
  ******************************************************************************/
 
-// include the configuration file
-define('MICO_VERSION', '0.12.1b');
-?>
+/*******************************************************************************
+ *******************************************************************************
+ ** CHANGELOG
+ **
+ ** - Added 'upgrader' logic and files
+ *******************************************************************************
+ ******************************************************************************/
+
+// If we're not accessed in the correct way, die
+if (defined('CONFIGURED')) {
+    // Set the version number
+    $VERSION = '0.12.1b';
+    
+    // Do not change this line - it's what tells the system that the upgrade is complete
+    Settings::set('MICO_VERSION',$VERSION);
+} else {
+    die ("No direct access allowed");
+}

@@ -84,6 +84,47 @@ if (!defined('CONFIGURED')) {
 // Connects to the database, and brings in the standard library
 include_once(FS_ROOT.'/inc/connect.php');
 
+// Check if we have the latest version of the database
+if (Settings::get_default('MICO_VERSION','unknown') != MICO_VERSION) {
+    ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Mico</title>
+    <link rel="SHORTCUT ICON" href="favicon.ico" />
+    <!-- Link to the CSS files -->
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/custom/skin.css" />
+    <style>
+        html {
+            height:100%;
+        }
+        body {
+            background-color: #f0fff0;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="pageHeader">
+      <img src="<?=APP_ROOT?>/skin/static/mico.png" alt="Mico" id="micoLogo" />
+    </div>
+    <div style="padding:8px;">
+      <h2 style="font-size:16pt;margin-bottom:8px;">Upgrade Instructions</h2>
+      <p style="margin-bottom:8px;">
+        MICO's code has been upgraded from version <?=Settings::get_default('MICO_VERSION','unknown')?>
+        to version <?=MICO_VERSION?>. To complete the upgrade process,
+        <a href="<?=APP_ROOT?>/upgrade/">click here</a>.
+      </p>
+    </div>
+  </body>
+</html>
+    <?php
+    exit();
+}
+
 // check if we are logged in already
 $loggedin = false;
 // check for the cookie

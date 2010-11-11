@@ -3,9 +3,10 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: version.php
+ ** File: upgrade/versions/template.php
  ** 
- ** Description: Simple file to define the software version
+ ** Description: Template for upgrade file - change 'file', 'copyright' and
+ **              'author' as appropriate.
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
@@ -23,6 +24,25 @@
  *******************************************************************************
  ******************************************************************************/
 
-// include the configuration file
-define('MICO_VERSION', '0.12.1b');
-?>
+/*******************************************************************************
+ *******************************************************************************
+ ** CHANGELOG
+ **
+ ** - Describe changes made in version upgrade here
+ *******************************************************************************
+ ******************************************************************************/
+
+// If we're not accessed in the correct way, die
+if (defined('CONFIGURED')) {
+    // Set the version number
+    $VERSION = 'version_number';
+    
+    /*
+     Do any database upgrades required here
+    */
+    
+    // Do not change this line - it's what tells the system that the upgrade is complete
+    Settings::set('MICO_VERSION',$VERSION);
+} else {
+    die ("No direct access allowed");
+}
