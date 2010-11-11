@@ -69,17 +69,18 @@ Mico.Footer = function () {
                     title:'About MICO',
                     modal:false,
                     closeAction:'hide',
-                    width: 700,
-                    height: 550,
+                    width: 650,
+                    height: 350,
+                    resizable:false,
                     bodyStyle: 'background: #f0fff0 url('+APP_ROOT+'/skin/static/about_bg.png) repeat-y;',
                     layout:'hbox',
                     items: [
                         // Large Mico logo on the left
                         {
                             html:'<img src="'+APP_ROOT+'/skin/static/mico_large.png" alt="Mico Large" />',
-                            width: 250,
-                            height: 510,
-                            bodyStyle:'background:none;padding-top:10px;'
+                            width: 200,
+                            height: 310,
+                            bodyStyle:'background:none;padding-top:10px;padding-left:25px;'
                         },
                         // Spacer to get over the transition gradient
                         {
@@ -90,7 +91,7 @@ Mico.Footer = function () {
                         {
                             html: aboutHTML,
                             width: 340,
-                            height: 500,
+                            height: 300,
                             bodyStyle:'background:none;padding:10px;',
                             cls: 'about-mico'
                         }

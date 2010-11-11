@@ -376,11 +376,11 @@ Mico.Calls.ViewCalls = function () {
                     bodyStyle:'padding-left:8px;border-left:2px solid #BBBBBB;',
                     items: [
                         this.reopenCallCheck,
-                        this.closeCallRadio,
+                        this.justCommentRadio,
                         this.escalateCallRadio,
                         this.priorityCombo,
                         this.userCombo,
-                        this.justCommentRadio,
+                        this.closeCallRadio,
                         {html:'<hr />',width:180,bodyStyle:'padding-left:10px;'},
                         this.commentText,
                         {
@@ -556,11 +556,11 @@ Mico.Calls.ViewCalls = function () {
                 this.reopenCallCheck.hide();
                 // show the fields for open calls
                 this.closeCallRadio.show();
-                this.closeCallRadio.setValue(true);
                 this.escalateCallRadio.show();
                 this.priorityCombo.show();
                 this.userCombo.show();
                 this.justCommentRadio.show();
+                this.justCommentRadio.setValue(true);
                 // enable the comment text
                 this.commentText.setValue('');
                 this.commentText.enable();

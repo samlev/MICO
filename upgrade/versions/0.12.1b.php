@@ -28,6 +28,9 @@
  ** CHANGELOG
  **
  ** - Added 'upgrader' logic and files
+ ** - Changed order of options when updating a call - 'close' is now last, no
+ **     longer default
+ ** - Reduced size of 'about' dialog
  *******************************************************************************
  ******************************************************************************/
 
