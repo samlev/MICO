@@ -549,6 +549,11 @@ Mico.Calls.ViewCalls = function () {
                 this.addCallButton.disable();
                 this.clearFormButton.disable();
                 
+                // set the priority field
+                this.priorityCombo.setValue(rec.get('priority'));
+                this.userCombo.reset();
+                this.justCommentRadio.setValue(true);
+                
                 // layout the panel
                 this.callUpdatePanel.doLayout();
             } else {

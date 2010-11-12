@@ -31,6 +31,8 @@
  ** - Changed order of options when updating a call - 'close' is now last, no
  **     longer default
  ** - Reduced size of 'about' dialog
+ ** - When a call is updated or assigned to you and you are viewing a call, the
+ **     call list now reloads, but keeps any data you are entering
  *******************************************************************************
  ******************************************************************************/
 

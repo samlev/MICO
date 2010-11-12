@@ -134,6 +134,41 @@ Mico.Calls = function () {
                                 Mico.User.setVar('lastupdate',res.lastupdate);
                                 // commit the changes locally
                                 Mico.User.commit(true);
+                            } else {
+                                // Get the options selected/text
+                                var justcomment = Mico.Calls.ViewCalls.justCommentRadio.getValue();
+                                var escalate = Mico.Calls.ViewCalls.escalateCallRadio.getValue();
+                                var closecall = Mico.Calls.ViewCalls.closeCallRadio.getValue();
+                                
+                                var commenttext = Mico.Calls.ViewCalls.commentText.getValue();
+                                
+                                var user = Mico.Calls.ViewCalls.userCombo.getValue();
+                                var priority = Mico.Calls.ViewCalls.priorityCombo.getValue();
+                                
+                                // block the user momentarily
+                                Ext.Msg.wait('Loading updated calls','Call updated');
+                                
+                                Mico.Calls.ViewCalls.gridStore.reload({
+                                    callback:function() {
+                                        // reset the values
+                                        Mico.Calls.ViewCalls.justCommentRadio.setValue(justcomment);
+                                        Mico.Calls.ViewCalls.escalateCallRadio.setValue(escalate);
+                                        Mico.Calls.ViewCalls.closeCallRadio.setValue(closecall);
+                                        Mico.Calls.ViewCalls.commentText.setValue(commenttext);
+                                        Mico.Calls.ViewCalls.userCombo.setValue(user);
+                                        Mico.Calls.ViewCalls.priorityCombo.setValue(priority);
+                                        
+                                        // hide the box
+                                        Ext.Msg.hide();
+                                    },
+                                    scope: this
+                                });
+                                
+                                dirty = Mico.User.dirty;
+                                // set the variable
+                                Mico.User.setVar('lastupdate',res.lastupdate);
+                                // commit the changes locally
+                                Mico.User.commit(true);
                             }
                         }
                     } else {
