@@ -57,15 +57,16 @@ Mico.SystemMenu = function () {
          * @param text {string} The text of the item
          * @param func {string} The function to call when clicked as a string
          * @param menu {string} Which menu ('user' or 'system') to add the item to (default is 'system')
+         * @param button {bool} Whether to render the item as a button or a link (buttons don't change the 'selected' focus)
          * @returns {int} The item ID
          */
-        addItem: function (text,func,menu) {
+        addItem: function (text,func,menu,button) {
             // get the item
             var id = this.items.length;
             // add it to the items array
             this.items[id] = new Ext.Panel({
                 id:'menu-item-'+id,
-                html:'<div class="menu-item" onclick="Mico.SystemMenu.markSelected('+id+');'+func+';">'+text+'</a>',
+                html:'<div class="menu-item" onclick="'+(button?'':'Mico.SystemMenu.markSelected('+id+');')+func+';">'+text+'</a>',
                 bodyStyle:'background:none;'
             });
             // add it to the menu

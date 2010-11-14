@@ -135,7 +135,7 @@ Mico.PasswordSet = function () {
                             width:135
                         }
                     ], 
-                    bodyStyle: "padding:5px;background-color:#dfe8f6;",
+                    bodyStyle: "padding:5px;background:none;",
                     buttonAlign:'center'
                 });
                 

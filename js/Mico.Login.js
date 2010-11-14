@@ -88,7 +88,7 @@ Mico.Login = function () {
                         new Ext.Panel({
                             html: '<a href="#" onclick="Mico.Login.dlgLogin.layout.setActiveItem(\'Mico.Login.resetPasswordForm\')">Forgotten Password?</a>',
                             layout: 'fit',
-                            bodyStyle: "background-color:#dfe8f6;",
+                            bodyStyle: "background:none;",
                             region: 'south'
                         }),
                         {
@@ -100,7 +100,7 @@ Mico.Login = function () {
                             width:135
                         }
                     ], 
-                    bodyStyle: "padding:5px;background-color:#dfe8f6;",
+                    bodyStyle: "padding:5px;background:none;",
                     buttonAlign:'right'
                 });
                 
@@ -116,7 +116,7 @@ Mico.Login = function () {
                         this.resetPasswordUsernameField,
                         {
                             html:'Enter your username and further isntructions will be emailed to you.',
-                            bodyStyle:'background-color:#dfe8f6;'
+                            bodyStyle:'background:none;'
                         }
                     ], 
                     keys: [
@@ -148,7 +148,7 @@ Mico.Login = function () {
                             width:120
                         }
                     ], 
-                    bodyStyle: "padding:5px;background-color:#dfe8f6;",
+                    bodyStyle: "padding:5px;background:none;",
                     buttonAlign:'center'
                 });
                 

@@ -33,7 +33,7 @@ Mico.User.Status = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mico.SystemMenu.addItem('Set Status', 'Mico.User.Status.show()','system');
+                this.menuId = Mico.SystemMenu.addItem('Set Status', 'Mico.User.Status.show()','system',true);
             }
         },
         /** Shows the panel */
@@ -137,10 +137,12 @@ Mico.User.Status = function () {
                 this.panel = new Ext.Window({
                     id:'Mico.User.Status.panel',
                     layout:'form',
+                    title:'Set Status',
                     modal:true,
                     closable:false,
+                    resizable:false,
                     closeAction:'hide',
-                    height:110,
+                    height:120,
                     width:300,
                     bodyStyle:'padding:8px;',
                     items: [
@@ -150,14 +152,7 @@ Mico.User.Status = function () {
                     buttons: [
                         this.setStatusButton,
                         this.cancelButton
-                    ],
-                    listeners:{
-                        scope: this,
-                        'hide': function () {
-                            // show the call panel when this dialog hides
-                            Mico.Calls.show();
-                        }
-                    }
+                    ]
                 });
             }
             

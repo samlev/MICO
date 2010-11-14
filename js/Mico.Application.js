@@ -96,7 +96,7 @@ Mico.Application = function () {
                     }
                     Mico.User.Preferences.init(); // initialize the user preferences panel
                     // add the user logout menu item
-                    Mico.SystemMenu.addItem('Log out','Mico.User.logout()','user');
+                    Mico.SystemMenu.addItem('Log out','Mico.User.logout()','user',true);
                 }
             }
         },

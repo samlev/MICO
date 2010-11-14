@@ -106,9 +106,6 @@ Mico.User.Preferences = function () {
                     ]
                 });
                 
-                // get the current date/time
-                var now = new Date();
-                
                 // the time format field
                 this.timeFormatField = new Ext.form.ComboBox ({
                     allowBlank:false,
@@ -116,17 +113,18 @@ Mico.User.Preferences = function () {
                     required:true,
                     fieldLabel:'Time format',
                     store: new Ext.data.ArrayStore ({
-                        fields:['format','dispaly'],
+                        fields:['format','display','example'],
                         data: [
-                            ['g:ia','12 hour with am/pm ('+now.format('g:ia')+')'],
-                            ['H:i','24 hour with leading zeros ('+now.format('H:i')+')'],
-                            ['G:i','24 hour without leading zeros ('+now.format('G:i')+')']
+                            ['g:ia','12 hour with am/pm','9:30am/9:30pm'],
+                            ['H:i','24 hour, leading zeros','09:30/21:30'],
+                            ['G:i','24 hour, no leading zeros','9:30/21:30']
                         ]
                     }),
-                    displayField:'dispaly',
+                    displayField:'display',
                     valueField:'format',
                     mode:'local',
                     value: Mico.User.getVarDefault('timeformat','g:ia'),
+                    tpl:Mico.Utils.timedateTemplate(),
                     triggerAction:'all',
                     listWidth:250
                 });
@@ -138,18 +136,19 @@ Mico.User.Preferences = function () {
                     required:true,
                     fieldLabel:'Date format',
                     store: new Ext.data.ArrayStore ({
-                        fields:['format','dispaly'],
+                        fields:['format','display','example'],
                         data: [
-                            ['jS M, Y','Textual ('+now.format('jS M, Y')+')'],
-                            ['d-m-Y','UK ('+now.format('d/m/Y')+')'],
-                            ['m-d-Y','US ('+now.format('m/d/Y')+')'],
-                            ['Y-m-d','Year-Month-Day ('+now.format('Y-m-d')+')']
+                            ['jS M, Y','Textual','21st Feb, 2010'],
+                            ['d-m-Y','UK (Day/Month/Year)','21/02/2010'],
+                            ['m-d-Y','US (Month/Day/Year)','02/21/2010'],
+                            ['Y-m-d','Year-Month-Day','2010-02-21']
                         ]
                     }),
-                    displayField:'dispaly',
+                    displayField:'display',
                     valueField:'format',
                     mode:'local',
                     value: Mico.User.getVarDefault('dateformat','jS M, Y'),
+                    tpl:Mico.Utils.timedateTemplate(),
                     triggerAction:'all',
                     listWidth:250
                 });

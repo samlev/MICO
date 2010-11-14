@@ -33,6 +33,10 @@
  ** - Reduced size of 'about' dialog
  ** - When a call is updated or assigned to you and you are viewing a call, the
  **     call list now reloads, but keeps any data you are entering
+ ** - 'Set status' dialog no longer returns you to 'view calls' when closed
+ ** - Multiple minor visual updates to better fit with the 'gray' theme
+ ** - Minor changes to user preferences - date/time preferences no longer based
+ **     on the actual time
  *******************************************************************************
  ******************************************************************************/
 

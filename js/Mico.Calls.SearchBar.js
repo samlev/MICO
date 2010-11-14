@@ -47,7 +47,7 @@ Mico.Calls.SearchBar = function () {
                     value:Mico.User.getVarDefault('showcalls','assigned'),
                     mode:'local',
                     triggerAction:'all',
-                    width:130
+                    width:140
                 });
                 
                 this.filterField.on('select', function () {
@@ -76,7 +76,8 @@ Mico.Calls.SearchBar = function () {
                 
                 // whether to show closed or not
                 this.showClosedField = new Ext.form.Checkbox({
-                    checked:false
+                    checked:false,
+                    bodyStyle:'margin-top:2px;'
                 });
                 this.showClosedField.setValue(Mico.User.getVar('showclosed'));
                 

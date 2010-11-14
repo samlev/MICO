@@ -101,6 +101,10 @@ Mico.Utils = function () {
         /** Returns the template for 'priority' fields */
         priorityTemplate: function () {
             return '<tpl for="."><div class="x-combo-list-item priority-{priority}">{view}</div></tpl>';
+        },
+        /** Returns the template for time/date fields */
+        timedateTemplate: function () {
+            return '<tpl for="."><div class="x-combo-list-item">{display} e.g: {example}</div></tpl>';
         }
     };
 } ();
