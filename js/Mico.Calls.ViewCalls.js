@@ -432,9 +432,7 @@ Mico.Calls.ViewCalls = function () {
             
             // load the store
             this.gridStore.load({params:{start:0,limit:Mico.User.getVarDefault('callsperpage',30)}});
-            if (this.grid.getSelectionModel().hasSelection()) {
-                this.grid.getSelectionModel().clearSelections();
-            }
+            
             this.callDetailPanel.hide();
         },
         /** Show the call detail panel
