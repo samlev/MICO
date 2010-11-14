@@ -37,6 +37,7 @@
  ** - Multiple minor visual updates to better fit with the 'gray' theme
  ** - Minor changes to user preferences - date/time preferences no longer based
  **     on the actual time
+ ** - Notifications now show the actor's name
  *******************************************************************************
  ******************************************************************************/
 

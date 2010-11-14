@@ -42,7 +42,8 @@ class Notifier {
                                  un.`type`,un.`notify_after`,un.`comment_id`,
                                  cc.`user_id` AS `comment_user`,cc.`date` AS `comment_date`,
                                  cc.`action` AS `comment_action`,cc.`comment`,
-                                 COALESCE(cc.`date`,c.`date`) AS `action_date`
+                                 COALESCE(cc.`date`,c.`date`) AS `action_date`,
+                                 COALESCE(cc.`user_id`,c.`user_id`) AS `actor_id`
                           FROM `".DB_PREFIX."user_notifications` un
                           INNER JOIN `".DB_PREFIX."calls` c ON c.`id` = un.`call_id`
                           LEFT JOIN `".DB_PREFIX."call_comments` cc ON cc.`id` = un.`comment_id`
@@ -53,15 +54,20 @@ class Notifier {
                 
                 // set up some variables
                 $users = array();
+                $actors = array();
                 
                 // now pull out the notifications
                 while ($row = mysql_fetch_assoc($res)) {
                     // set up the in the array (if it doesn't exist yet)
                     if (!isset($users[$row['user_id']])) {
                         $users[$row['user_id']] = array('user'=>User::by_id($row['user_id']),
-                                                       'notifications'=>array(),
-                                                       'newcalls'=>false,
-                                                       'updatedcalls'=>false);
+                                                        'notifications'=>array(),
+                                                        'newcalls'=>false,
+                                                        'updatedcalls'=>false);
+                    }
+                    
+                    if (!isset($actors[$row['actor_id']])) {
+                        $actors[$row['actor_id']] = User::by_id($row['actor_id']);
                     }
                     
                     // add to the user's notifications array
@@ -110,7 +116,7 @@ class Notifier {
                         $d = date($u['user']->get_var_default('timeformat','g:ia'),strtotime($n['action_date']));
                         
                         // build the call information
-                        $body .= $d.' - Call '.($n['type']=='assigned'?'assigned to you.':'updated.')."\r\n";
+                        $body .= $d.' - Call '.($n['type']=='assigned'?'assigned to you':'updated').' by '.$actors[$u['actor_id']]->get_var('name')."\r\n";
                         $body .= str_repeat(' ',5); // indent
                         $body .= (strlen($n['caller_name'])?$n['caller_name']:'Someone'); // caller name (or someone)
                         $body .= (strlen($n['caller_company'])?' from '.$n['caller_name']:''); // caller company
