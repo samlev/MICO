@@ -24,7 +24,7 @@
 Mico.Utils.CommonStores = function () {
     return {
         // search options for calls; standard users can only see calls opened by or assigned to them
-        searchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened']],
+        callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened']],
         // order options for calls
         callsOrderFilter:[['Most recent','recent'],['Most urgent','urgent']],
         // call priority
