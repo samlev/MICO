@@ -24,7 +24,7 @@
 Mico.Utils.CommonStores = function () {
     return {
         // search options for calls; admin users can see all calls in the system
-        callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All Calls','all']],
+        callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All calls','all']],
         // order options for calls
         callsOrderFilter:[['Most recent','recent'],['Most urgent','urgent']],
         // call priority

@@ -410,10 +410,11 @@ class User {
         
         run_query($query);
         
-        if (mysql_affected_rows()) {
+        if (mysql_affected_rows() && $this->dirty) {
             // mark as clean (we're in sync with the database now)
             $this->dirty = false;
-        } else {
+        } else if ($this->dirty) {
+            // if this object was 'dirty' but we didn't affect any rows, then the user must not have existed.
             throw new UserNotFoundException("Cannot save user information");
         }
     }

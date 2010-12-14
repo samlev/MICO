@@ -181,7 +181,10 @@ Mico.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Show',
-                    store: Mico.Utils.CommonStores.callsSearchFilter,
+                    store: new Ext.data.ArrayStore ({
+                        fields:['type','filter'],
+                        data: Mico.Utils.CommonStores.callsSearchFilter
+                    }),
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
@@ -195,7 +198,10 @@ Mico.User.Preferences = function () {
                     required:true,
                     editable:false,
                     fieldLabel:'Order',
-                    store: Mico.Utils.CommonStores.callsOrderFilter,
+                    store:  new Ext.data.ArrayStore ({
+                        fields:['type','filter'],
+                        data: Mico.Utils.CommonStores.callsOrderFilter
+                    }),
                     displayField:'type',
                     valueField:'filter',
                     mode:'local',
