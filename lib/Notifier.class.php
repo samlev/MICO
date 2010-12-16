@@ -116,7 +116,7 @@ class Notifier {
                         $d = date($u['user']->get_var_default('timeformat','g:ia'),strtotime($n['action_date']));
                         
                         // build the call information
-                        $body .= $d.' - Call '.($n['type']=='assigned'?'assigned to you':'updated').' by '.$actors[$u['actor_id']]->get_var('name')."\r\n";
+                        $body .= $d.' - Call '.($n['type']=='assigned'?'assigned to you':'updated').' by '.$actors[$n['actor_id']]->get_var('name')."\r\n";
                         $body .= str_repeat(' ',5); // indent
                         $body .= (strlen($n['caller_name'])?$n['caller_name']:'Someone'); // caller name (or someone)
                         $body .= (strlen($n['caller_company'])?' from '.$n['caller_name']:''); // caller company
