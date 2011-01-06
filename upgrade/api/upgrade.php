@@ -31,7 +31,8 @@ include_once(FS_ROOT.'/inc/connect.php');
 $versions = array('0.11.1b',
                   '0.12.1b',
                   '0.12.2b',
-                  '0.12.3b');
+                  '0.12.3b',
+                  '0.12.4b');
 
 // get the old and new versions
 $old = Settings::get_default('MICO_VERSION','unknown');

@@ -24,5 +24,5 @@
  ******************************************************************************/
 
 // include the configuration file
-define('MICO_VERSION', '0.12.3b');
+define('MICO_VERSION', '0.12.4b');
 ?>

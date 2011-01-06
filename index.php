@@ -94,10 +94,10 @@ if (Settings::get_default('MICO_VERSION','unknown') != MICO_VERSION) {
     <title>Mico</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/static/main.css" />
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/custom/skin.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/skin/custom/skin.css" />
     <style>
         html {
             height:100%;
@@ -109,14 +109,14 @@ if (Settings::get_default('MICO_VERSION','unknown') != MICO_VERSION) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=APP_ROOT?>/skin/static/mico.png" alt="Mico" id="micoLogo" />
+      <img src="<?php echo APP_ROOT?>/skin/static/mico.png" alt="Mico" id="micoLogo" />
     </div>
     <div style="padding:8px;">
       <h2 style="font-size:16pt;margin-bottom:8px;">Upgrade Instructions</h2>
       <p style="margin-bottom:8px;">
-        MICO's code has been upgraded from version <?=Settings::get_default('MICO_VERSION','unknown')?>
-        to version <?=MICO_VERSION?>. To complete the upgrade process,
-        <a href="<?=APP_ROOT?>/upgrade/">click here</a>.
+        MICO's code has been upgraded from version <?php echo Settings::get_default('MICO_VERSION','unknown')?>
+        to version <?php echo MICO_VERSION?>. To complete the upgrade process,
+        <a href="<?php echo APP_ROOT?>/upgrade/">click here</a>.
       </p>
     </div>
   </body>
@@ -153,17 +153,17 @@ if (isset($_COOKIE['session'])) {
     <title>Mico</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
     <!-- Link to the CSS files -->
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/ext-all.css" />
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/static/main.css" />
-    <link type="text/css" rel="stylesheet" href="<?=APP_ROOT?>/skin/custom/skin.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/js/ext/resources/css/ext-all.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/js/ext/resources/css/xtheme-gray.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/skin/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo APP_ROOT?>/skin/custom/skin.css" />
     
     <!-- set some system variables for the javascript to use -->
     <?php include_once(FS_ROOT.'/inc/system_vars.php'); ?>
    
     <!-- Link to the Javascript library files -->
-    <script type="text/javascript" src="<?=APP_ROOT?>/js/ext/adapter/ext/<?=(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
-    <script type="text/javascript" src="<?=APP_ROOT?>/js/ext/<?=(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
+    <script type="text/javascript" src="<?php echo APP_ROOT?>/js/ext/adapter/ext/<?php echo(Settings::get('DEBUG_MODE')?'ext-base-debug-w-comments.js':'ext-base.js')?>"></script>
+    <script type="text/javascript" src="<?php echo APP_ROOT?>/js/ext/<?php echo(Settings::get('DEBUG_MODE')?'ext-all-debug-w-comments.js':'ext-all.js')?>"></script>
     <?php
     // pull in the required javascript
     include_once(FS_ROOT.'/inc/application_js.php');
@@ -171,7 +171,7 @@ if (isset($_COOKIE['session'])) {
   </head>
   <body>
     <div id="pageHeader">
-      <img src="<?=APP_ROOT?>/skin/static/mico.png" alt="Mico" id="micoLogo" />
+      <img src="<?php echo APP_ROOT?>/skin/static/mico.png" alt="Mico" id="micoLogo" />
       <div class="visual-clear"></div>
       <div id="userMenu"></div>
       <div id="systemMenu"></div>

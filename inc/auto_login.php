@@ -29,11 +29,11 @@ if (defined('USER_ID') && defined('SESSION')) {
 ?>
 <script type="text/javascript" defer="defer">
 <!--
-    var userid = <?=USER_ID?>;
-    var session = '<?=SESSION?>';
-    var name = '<?=$user->get_var('name')?>';
-    var role = '<?=$user->get_role()?>';
-    var vars = <?=json_encode($user->get_vars())?>;
+    var userid = <?php echo USER_ID?>;
+    var session = '<?php echo SESSION?>';
+    var name = '<?php echo $user->get_var('name')?>';
+    var role = '<?php echo $user->get_role()?>';
+    var vars = <?php echo json_encode($user->get_vars())?>;
     
     // Keep the user informed (also block their actions)
     Ext.Msg.wait('You are being logged into the system. Please wait.','Logging in',{

@@ -46,4 +46,4 @@ if (mysql_connect($host,$user,$pass)) {
 // return the response
 header("Content-Type: text/javascript");
 ?>
-{success:<?=($success?'true':'false')?>,info:<?=($success?"'Settings correct'":"'".addslashes($message)."'")?>}
+{success:<?php echo ($success?'true':'false')?>,info:<?php echo ($success?"'Settings correct'":"'".addslashes($message)."'")?>}

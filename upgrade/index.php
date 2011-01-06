@@ -53,8 +53,8 @@ include_once(FS_ROOT.'/inc/connect.php');
     <script type="text/javascript" src="js/Mico.Upgrader.js"></script>
     <script type="text/javascript" defer="defer">
     <!--
-    var OLD_VERSION = '<?=addslashes(Settings::get_default('MICO_VERSION','unknown'))?>';
-    var NEW_VERSION = '<?=addslashes(MICO_VERSION)?>';
+    var OLD_VERSION = '<?php echo addslashes(Settings::get_default('MICO_VERSION','unknown'))?>';
+    var NEW_VERSION = '<?php echo addslashes(MICO_VERSION)?>';
     
     setTimeout("Mico.Upgrader.show();",200);
     -->

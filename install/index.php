@@ -59,7 +59,7 @@ if (defined('CONFIGURED')) {
         its contents.
       </p>
       <p style="margin-bottom:8px;">
-        <a href="<?=APP_ROOT?>">Click here</a> to go to the login page.
+        <a href="<?php echo APP_ROOT?>">Click here</a> to go to the login page.
       </p>
     </div>
   </body>
@@ -116,10 +116,10 @@ if (defined('FS_ROOT')) {
         
         // add them into the javascript
         ?>
-        var FS_ROOT = '<?=addslashes($FS_ROOT)?>';
-        var WEB_DOMAIN = '<?=addslashes($WEB_DOMAIN)?>';
-        var WEB_ROOT = '<?=addslashes($WEB_ROOT)?>';
-        var APP_ROOT = '<?=addslashes($APP_ROOT)?>';
+        var FS_ROOT = '<?php echo addslashes($FS_ROOT)?>';
+        var WEB_DOMAIN = '<?php echo addslashes($WEB_DOMAIN)?>';
+        var WEB_ROOT = '<?php echo addslashes($WEB_ROOT)?>';
+        var APP_ROOT = '<?php echo addslashes($APP_ROOT)?>';
         
         setTimeout("Mico.ConfigSetup.show();",200);
         <?php

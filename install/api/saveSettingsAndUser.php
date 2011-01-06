@@ -214,4 +214,4 @@ if (!defined('CONFIGURED')) {
 // return the response
 header("Content-Type: text/javascript");
 ?>
-{success:<?=($success?'true':'false')?>,info:<?=($success?"'Configuration file created, and database installed.'":"'".addslashes($message)."'")?>}
+{success:<?php echo($success?'true':'false')?>,info:<?php echo($success?"'Configuration file created, and database installed.'":"'".addslashes($message)."'")?>}

@@ -77,7 +77,7 @@ if (Settings::get_default('simplecron',false)) {
 if (Settings::get('DEBUG_MODE')) {
     // output a link to each javascript file
     foreach ($js_array as $js) {
-        echo '<script type="text/javascript" src="'.WEB_ROOT.'/js/'.$js.'"></script>'."\n";
+        echo '<script type="text/javascript" src="'.APP_ROOT.'/js/'.$js.'"></script>'."\n";
     }
 } else {
     // pull in the JS min library

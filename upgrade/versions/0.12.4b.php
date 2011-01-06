@@ -3,9 +3,9 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: upgrade/versions/0.12.3b.php
+ ** File: upgrade/versions/0.12.4b.php
  ** 
- ** Description: DB upgrader for version 0.12.3b
+ ** Description: DB upgrader for version 0.12.4b
  **
  ** Copyright (c) 2010 Samuel Levy
  ** 
@@ -27,17 +27,15 @@
  *******************************************************************************
  ** CHANGELOG
  **
- ** - Fixed notifier bug
+ ** - Multiple fixes for systems where php_short_open_tags is disabled
+ ** - Fixed issue with js includes in debug mode (used WEB_ROOT instead of APP_ROOT)
  *******************************************************************************
  ******************************************************************************/
 
 // If we're not accessed in the correct way, die
 if (defined('CONFIGURED')) {
     // Set the version number
-    $VERSION = '0.12.3b';
-    
-    // ensure that the notifier isn't locked
-    Settings::override('NOTIFY_LOCK',false);
+    $VERSION = '0.12.4b';
     
     // Do not change this line - it's what tells the system that the upgrade is complete
     Settings::set('MICO_VERSION',$VERSION);
