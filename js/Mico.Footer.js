@@ -39,7 +39,7 @@ Mico.Footer = function () {
                     items: [
                         "Mico",
                         '-',
-                        { html: '<a href="#" onclick="Mico.Footer.showAbout();">About Mico</a>'},
+                        { xtype:'box', html: '<a href="#" onclick="Mico.Footer.showAbout();">About Mico</a>'},
                         "->",
                         "Version: "+MICO_VERSION
                     ]
