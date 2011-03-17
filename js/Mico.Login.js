@@ -36,29 +36,29 @@ Mico.Login = function () {
                 // login form 'username' field
                 this.usernameField = new Ext.form.TextField ({
                     name: "username", 
-                    fieldLabel: "&nbsp;Username", 
+                    fieldLabel: "&nbsp;"+Mico.Lang.Login.usernameField_fieldLabel, 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your username"
+                    blankText: Mico.Lang.Login.usernameField_blankText
                 });
                 
                 // login form 'password' field
                 this.passwordField = new Ext.form.TextField ({
                     name: "password", 
-                    fieldLabel: "&nbsp;Password", 
+                    fieldLabel: "&nbsp;"+Mico.Lang.Login.passwordField_fieldLabel, 
                     inputType: "password", 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your password"
+                    blankText: Mico.Lang.Login.passwordField_blankText
                 });
                 
                 // forgotten password 'username' field
                 this.resetPasswordUsernameField = new Ext.form.TextField ({
                     name: "username", 
-                    fieldLabel: "Username", 
+                    fieldLabel: Mico.Lang.Login.resetPasswordUsernameField_fieldLabel, 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your username"
+                    blankText: Mico.Lang.Login.resetPasswordUsernameField_blankText
                 });
                 
                 // login form
@@ -86,13 +86,13 @@ Mico.Login = function () {
                     ], 
                     buttons: [
                         new Ext.Panel({
-                            html: '<a href="#" onclick="Mico.Login.dlgLogin.layout.setActiveItem(\'Mico.Login.resetPasswordForm\')">Forgotten Password?</a>',
+                            html: '<a href="#" onclick="Mico.Login.dlgLogin.layout.setActiveItem(\'Mico.Login.resetPasswordForm\')">'+Mico.Lang.Login.forgottenPasswordLink+'</a>',
                             layout: 'fit',
                             bodyStyle: "background:none;",
                             region: 'south'
                         }),
                         {
-                            text: "Login", 
+                            text: Mico.Lang.Login.loginButton, 
                             handler: function () {
                                 this.doLogin();
                             }, 
@@ -115,7 +115,7 @@ Mico.Login = function () {
                     items: [
                         this.resetPasswordUsernameField,
                         {
-                            html:'Enter your username and further isntructions will be emailed to you.',
+                            html:Mico.Lang.Login.resetPasswordInstruction,
                             bodyStyle:'background:none;'
                         }
                     ], 
@@ -132,7 +132,7 @@ Mico.Login = function () {
                     ], 
                     buttons: [
                         {
-                            text: "Cancel", 
+                            text: Mico.Lang.Login.cancelButton, 
                             handler: function () {
                                 this.dlgLogin.layout.setActiveItem('Mico.Login.loginForm');
                             }, 
@@ -140,7 +140,7 @@ Mico.Login = function () {
                             width:120
                         },
                         {
-                            text: "Reset Password", 
+                            text: Mico.Lang.Login.resetPasswordButton, 
                             handler: function () {
                                 this.doPasswordReset();
                             }, 
@@ -196,7 +196,7 @@ Mico.Login = function () {
                     scope:this
                 });
             } else {
-                Ext.Msg.alert("Error", "Please check the marked fields");
+                Ext.Msg.alert(Mico.Lang.Login.loginInvalidErrorAlert_title, Mico.Lang.Login.loginInvalidErrorAlert_text);
             }
         },
         /** Check and submit the 'reset password' form */
@@ -208,7 +208,7 @@ Mico.Login = function () {
                         // go back to the login form
                         this.dlgLogin.layout.setActiveItem('Mico.Login.loginForm');
                         // notify the user
-                        Ext.Msg.alert("Password reset", 'Further instructions have been sent to your email address.');
+                        Ext.Msg.alert(Mico.Lang.Login.resetPasswordSuccess_title, Mico.Lang.Login.resetPasswordSuccess_text);
                         
                         // reset the forms
                         this.loginForm.getForm().reset();
@@ -224,7 +224,7 @@ Mico.Login = function () {
                     scope:this
                 });
             } else {
-                Ext.Msg.alert("Error", "Please check the marked fields");
+                Ext.Msg.alert(Mico.Lang.Login.resetPasswordError_title, Mico.Lang.Login.resetPasswordError_text);
             }
         }
     };
