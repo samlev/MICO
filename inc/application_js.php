@@ -26,31 +26,40 @@
  *******************************************************************************
  ******************************************************************************/
 
+// If the user is logged in, use their language settings, if not, just use the system's settings.
+if ($loggedin) {
+    // Get the user's language preference, or the system's language preference, or default to English
+    $lang = "lang/Mico.Lang.".($user->get_var_default('lang',Settings::get_default('LANGUAGE','EN'))).".js";
+} else {
+    // Get the system's language preference, or default to English
+    $lang = "lang/Mico.Lang.".Settings::get_default('LANGUAGE','EN').".js";
+}
+
 // public only need the 'login' page
-$public = array('Mico.Application.js','Mico.Footer.js','Mico.Login.js');
+$public = array('Mico.Application.js',$lang,'Mico.Footer.js','Mico.Login.js');
 // standard scipts for users
-$authed = array('Mico.Application.js','Mico.Footer.js','Mico.SystemMenu.js',
+$authed = array('Mico.Application.js',$lang,'Mico.Footer.js','Mico.SystemMenu.js',
                 'Mico.Calls.js','Mico.Calls.AddCall.js','Mico.Calls.ViewCalls.js',
                 'Mico.Utils.js','Mico.Utils.CommonStores.js','Mico.User.js',
                 'Mico.User.Preferences.js','Mico.User.Status.js',
                 'Mico.Calls.SearchBar.js');
 // standard scipts for managers
-$manager = array('Mico.Application.js','Mico.Footer.js','Mico.SystemMenu.js',
+$manager = array('Mico.Application.js',$lang,'Mico.Footer.js','Mico.SystemMenu.js',
                  'Mico.Calls.js','Mico.Calls.AddCall.js','Mico.Calls.ViewCalls.js',
                  'Mico.Utils.js','manager/Mico.Utils.CommonStores.js','Mico.User.js',
                  'Mico.User.Preferences.js','Mico.User.Status.js',
                  'Mico.Calls.SearchBar.js','manager/Mico.ManageUsers.js');
 // administrators get more
-$admin = array('Mico.Application.js','Mico.Footer.js','Mico.SystemMenu.js',
+$admin = array('Mico.Application.js',$lang,'Mico.Footer.js','Mico.SystemMenu.js',
                'Mico.Calls.js','Mico.Calls.AddCall.js','Mico.Calls.ViewCalls.js',
                'Mico.Utils.js','admin/Mico.Utils.CommonStores.js','Mico.User.js',
                'admin/Mico.SystemSettings.js','Mico.User.Preferences.js',
                'Mico.User.Status.js','Mico.Calls.SearchBar.js','manager/Mico.ManageUsers.js');
 // and an odd case for password reset
-$passreset = array('Mico.Application.js','Mico.Footer.js','Mico.PasswordSet.js','Mico.Utils.js');
+$passreset = array('Mico.Application.js',$lang,'Mico.Footer.js','Mico.PasswordSet.js','Mico.Utils.js');
 
 
-// decide on what javascript files to use
+// decide which set of javascript files to use
 $js_array = $public;
 
 if ($loggedin) {
