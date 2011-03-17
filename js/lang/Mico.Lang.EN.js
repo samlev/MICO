@@ -38,10 +38,10 @@ Mico.Lang = function () {
             resetPasswordInstruction: "Enter your username and further isntructions will be emailed to you.",
             cancelButton: "Cancel",
             resetPasswordButton: "Reset Password",
-            // Login function
+            // Login function alert
             loginInvalidErrorAlert_title: "Error",
             loginInvalidErrorAlert_text: "Please check the marked fields",
-            // Password reset function
+            // Password reset function alerts
             resetPasswordSuccess_title: "Password reset",
             resetPasswordSuccess_text: "Further instructions have been sent to your email address.",
             resetPasswordError_title: "Error",
