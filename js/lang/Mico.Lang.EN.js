@@ -23,6 +23,10 @@
  ******************************************************************************/
 Mico.Lang = function () {
     return {
+        // Language for Mico.Application.js
+        Application: {
+            logout: "Log out"
+        },
         // Language for Mico.Login.js
         Login: {
             // Login form
@@ -46,6 +50,20 @@ Mico.Lang = function () {
             resetPasswordSuccess_text: "Further instructions have been sent to your email address.",
             resetPasswordError_title: "Error",
             resetPasswordError_text: "Please check the marked fields"
+        },
+        // Language for Mico.PasswordSet.js
+        PasswordSet: {
+            // Login form
+            usernameField_fieldLabel: "Username",
+            usernameField_blankText: "You must enter your username",
+            passwordField_fieldLabel: "Password",
+            passwordField_blankText: "You must enter your password",
+            // Password strength
+            passwordStrength_blank: "Enter password",
+            passwordStrength_weak: "Weak",
+            passwordStrength_medium: "Medium",
+            passwordStrength_strong: "Strong",
+            passwordStrength_verystrong: "Very Strong"
         }
     };
 } ();
