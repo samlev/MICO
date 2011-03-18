@@ -35,20 +35,20 @@ Mico.PasswordSet = function () {
                 // set password form 'username' field
                 this.usernameField = new Ext.form.TextField ({
                     name: "username", 
-                    fieldLabel: "Username", 
+                    fieldLabel: Mico.Lang.PasswordSet.usernameField_fieldLabel, 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your username"
+                    blankText: Mico.Lang.PasswordSet.usernameField_blankText
                 });
                 
                 // set password form 'password' field
                 this.passwordField = new Ext.form.TextField ({
                     name: "password1", 
-                    fieldLabel: "Password", 
+                    fieldLabel: Mico.Lang.PasswordSet.passwordField_fieldLabel, 
                     inputType: "password", 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your password",
+                    blankText: Mico.Lang.PasswordSet.passwordField_blankText,
                     enableKeyEvents: true
                 });
                 
@@ -58,17 +58,17 @@ Mico.PasswordSet = function () {
                     var points = Mico.Utils.passwordStrength(pass);
                     
                     // password strength
-                    var text = 'Weak';
+                    var text = Mico.Lang.PasswordSet.passwordStrength_weak;
                     
                     // test the strength
                     if (points == 0) {
-                        text = 'Enter password';
+                        text = Mico.Lang.PasswordSet.passwordStrength_blank;
                     } else if (points > 35) {
-                        text = 'Very Strong';
+                        text = Mico.Lang.PasswordSet.passwordStrength_verystrong;
                     } else if (points > 25) {
-                        text = 'Strong';
+                        text = Mico.Lang.PasswordSet.passwordStrength_strong;
                     } else if (points > 10) {
-                        text = 'Medium';
+                        text = Mico.Lang.PasswordSet.passwordStrength_medium;
                     }
                     
                     // update the inidcator
@@ -77,8 +77,8 @@ Mico.PasswordSet = function () {
                 
                 // Simple password strength indicator
                 this.passwordStrengthIndicator = new Ext.ProgressBar({
-                    fieldLabel: 'Strength',
-                    text: 'Enter password',
+                    fieldLabel: Mico.Lang.PasswordSet.passwordStrengthIndicator_fieldLabel,
+                    text: Mico.Lang.PasswordSet.passwordStrength_blank,
                     value: 0,
                     width:135
                 })
@@ -86,11 +86,11 @@ Mico.PasswordSet = function () {
                 // reset password form 'password confirmation' field
                 this.passwordConfirmField = new Ext.form.TextField ({
                     name: "password2", 
-                    fieldLabel: "Confirm Password", 
+                    fieldLabel: Mico.Lang.PasswordSet.fieldLabel, 
                     inputType: "password", 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your password"
+                    blankText: Mico.Lang.PasswordSet.blankText
                 });
                 
                 // confirmation key (populated off the ?k= sent to set_password.php)
@@ -127,7 +127,7 @@ Mico.PasswordSet = function () {
                     ], 
                     buttons: [
                         {
-                            text: "Set Password", 
+                            text: Mico.Lang.PasswordSet.setPasswordButton, 
                             handler: function () {
                                 this.doSetPassword();
                             }, 
@@ -172,7 +172,7 @@ Mico.PasswordSet = function () {
                             // hide the 'set password' dialog
                             this.dlgSetPassword.hide();
                             // Notify the user, and send them to the login page
-                            Ext.Msg.alert('Password set','Your password has been set.<br /><br />You will now be redirected to the login page.',function () {window.location=APP_ROOT;}, this);
+                            Ext.Msg.alert(Mico.Lang.PasswordSet.setPasswordSuccess_title,Mico.Lang.PasswordSet.setPasswordSuccess_text,function () {window.location=APP_ROOT;}, this);
                         },
                         failure: function (form, action) {
                             var msg = "Unknown system error";
@@ -184,10 +184,11 @@ Mico.PasswordSet = function () {
                         scope:this
                     });
                 } else {
-                    this.passwordConfirmField.markInvalid('Passwords must match');
+                    // Notify the user that the passwords don't match
+                    this.passwordConfirmField.markInvalid(Mico.Lang.PasswordSet.setPasswordInvalidMatch_text);
                 }
             } else {
-                Ext.Msg.alert("Error", "Please check the marked fields");
+                Ext.Msg.alert(Mico.Lang.PasswordSet.setPasswordInvalid_title, Mico.Lang.PasswordSet.setPasswordInvalid_text);
             }
         }
     };
