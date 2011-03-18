@@ -53,17 +53,27 @@ Mico.Lang = function () {
         },
         // Language for Mico.PasswordSet.js
         PasswordSet: {
-            // Login form
+            // Password set form
             usernameField_fieldLabel: "Username",
             usernameField_blankText: "You must enter your username",
             passwordField_fieldLabel: "Password",
             passwordField_blankText: "You must enter your password",
+            passwordStrengthIndicator_fieldLabel: "Strength",
+            passwordConfirmField_fieldLabel: "Confirm Password",
+            passwordConfirmField_blankText: "You must enter your password",
+            setPasswordButton: "Set Password",
             // Password strength
             passwordStrength_blank: "Enter password",
             passwordStrength_weak: "Weak",
             passwordStrength_medium: "Medium",
             passwordStrength_strong: "Strong",
-            passwordStrength_verystrong: "Very Strong"
+            passwordStrength_verystrong: "Very Strong",
+            // Password set function alerts
+            setPasswordInvalid_title: "Error",
+            setPasswordInvalid_text: "Please check the marked fields",
+            setPasswordInvalidMatch_text: "Passwords must match",
+            setPasswordSuccess_title: "Password set",
+            setPasswordSuccess_text: "Your password has been set.<br /><br />You will now be redirected to the login page."
         }
     };
 } ();
