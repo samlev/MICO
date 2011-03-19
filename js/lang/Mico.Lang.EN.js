@@ -95,6 +95,15 @@ Mico.Lang = function () {
                 
                 return aboutHTML;
             }
+        },
+        // Language for Mico.Calls.js
+        Calls: {
+            menu_text: "Calls",
+            // Check Updates
+            sessionExpired_title: "Session Expired",
+            sessionExpired_text: "Your session has expired.<br /><br />You will now be redirected to the login page.",
+            loadUpdates_title: "Loading updated calls",
+            loadUpdated_text: "Call updated"
         }
     };
 } ();
