@@ -74,6 +74,27 @@ Mico.Lang = function () {
             setPasswordInvalidMatch_text: "Passwords must match",
             setPasswordSuccess_title: "Password set",
             setPasswordSuccess_text: "Your password has been set.<br /><br />You will now be redirected to the login page."
+        },
+        // Language for Mico.Footer.js
+        Footer: {
+            getFooterAbout_text: "About Mico",
+            getFooterVersion_text: function (version) { return "Version: "+version; },
+            showAboutBody_html: function (version) {
+                var aboutHTML = '<h1>Mantis Inbound Call Organiser</h1>'; // Title
+                // Version
+                aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+version+'</p>';
+                // Licence
+                aboutHTML += '<p>Mico is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
+                             'licence version 3.0, and is available for free, without warranty.</p>';
+                // Acknowledgements
+                aboutHTML += '<p>Icons from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_new">silk icon set</a> '+
+                             'were used in this system.</p>';
+                // Copyright
+                aboutHTML += '<p style="color:#88BB88;">All code and images are &copy; 2010 to <a href="http://www.samuellevy.com/" style="color:#88BB88;" target="_new">Samuel Levy</a>, unless otherwise noted.</p>';
+                
+                return aboutHTML;
+            },
+            aboutWindow_title: "About MICO"
         }
     };
 } ();
