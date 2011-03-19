@@ -103,7 +103,60 @@ Mico.Lang = function () {
             sessionExpired_title: "Session Expired",
             sessionExpired_text: "Your session has expired.<br /><br />You will now be redirected to the login page.",
             loadUpdates_title: "Loading updated calls",
-            loadUpdated_text: "Call updated"
+            loadUpdated_text: "Call updated",
+            // Language for Mico.Calls.AddCall.js
+            AddCall: {
+                title: "Take a call",
+                // Caller details
+                callerNameField_emptyText: "Caller's name",
+                callerNameField_hint: "caller",
+                callerCompanyField_emptyText: "Caller's company",
+                callerCompanyField_label: "From",
+                callerCompanyField_hint: "company",
+                // Recipient details
+                userField_emptyText: "Select recipient",
+                userField_label: "Called for",
+                userAddExtraButton_text: "Add",
+                userAddExtraButton_tooltip: "Add another recipient",
+                userFieldExtra_label: "OR",
+                // Message
+                callerMessageBox_emptyText: "Message for recipient(s)...",
+                callerMessageBox_label: "About",
+                // Contact details
+                callerContactField_emptyText: "Caller's Phone Number/Email",
+                callerContactField_label: "Contact them at",
+                callerContactAddExtraButton_text: "Add",
+                callerContactAddExtraButton_tooltip: "Add another contact method",
+                callerContactFieldExtra_label: "OR",
+                // Call Priority
+                callPriorityField_label: "This call is",
+                // Call Action
+                callActionField_data:[
+                    ['Call back ASAP'],
+                    ['Call back by Close Of Business'],
+                    ['Call back whenever you can'],
+                    ['Caller will email/call again later'],
+                    ['No need to call back']
+                ],
+                callActionField_default: "Call back ASAP",
+                callActionField_label: "Action required",
+                // Buttons
+                addCallButton_text: "Add Call",
+                clearFormButton_text: "Clear",
+                // Functions - add call
+                validateRecipientsError_title: "Error",
+                validateRecipientsError_text: "Please select a recipient for this call",
+                callerDetailsError_title: "Error",
+                callerDetailsError_text: "Please enter either a caller name, company name, message, or contact details"
+            },
+            // Language for Mico.Calls.SearchBar.js
+            SearchBar: {
+                
+            },
+            // Language for Mico.Calls.ViewCalls.js
+            ViewCalls: {
+                
+            }
         }
     };
 } ();
