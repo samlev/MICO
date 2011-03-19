@@ -34,7 +34,7 @@ Mico.Calls = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mico.SystemMenu.addItem('Calls', 'Mico.Calls.show()','system');
+                this.menuId = Mico.SystemMenu.addItem(Mico.Lang.Calls.menu_text, 'Mico.Calls.show()','system');
             }
         },
         /** Shows the panel */
@@ -146,7 +146,7 @@ Mico.Calls = function () {
                                 var priority = Mico.Calls.ViewCalls.priorityCombo.getValue();
                                 
                                 // block the user momentarily
-                                Ext.Msg.wait('Loading updated calls','Call updated');
+                                Ext.Msg.wait(Mico.Lang.Calls.loadUpdates_title,Mico.Lang.Calls.loadUpdated_text);
                                 
                                 Mico.Calls.ViewCalls.gridStore.reload({
                                     callback:function() {
@@ -174,7 +174,7 @@ Mico.Calls = function () {
                     } else {
                         // if the user's session has expired, block access to the system, and refresh
                         if (res.sessionexpired) {
-                            Ext.Msg.alert('Session Expired','Your session has expired.<br /><br />You will now be redirected to the login page.',function () {window.location=APP_ROOT;}, this);
+                            Ext.Msg.alert(Mico.Lang.Calls.sessionExpired_title,Mico.Lang.Calls.sessionExpired_text,function () {window.location=APP_ROOT;}, this);
                         }
                     }
                     
