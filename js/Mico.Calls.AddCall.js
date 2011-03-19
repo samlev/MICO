@@ -109,7 +109,7 @@ Mico.Calls.AddCall = function () {
                     tpl:Mico.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
-                    emptyText:"Caller's name",
+                    emptyText: Mico.Lang.Calls.AddCall.callerNameField_emptyText,
                     width:200,
                     value:''
                 });
@@ -191,7 +191,7 @@ Mico.Calls.AddCall = function () {
                     tpl:Mico.Utils.callerTemplate('name'),
                     mode:'remote',
                     enableKeyEvents: true,
-                    emptyText:"Caller's company",
+                    emptyText: Mico.Lang.Calls.AddCall.callerCompanyField_emptyText,
                     width:200,
                     value:''
                 });
@@ -256,7 +256,7 @@ Mico.Calls.AddCall = function () {
                     tpl:Mico.Utils.userTemplate(),
                     mode:'remote',
                     enableKeyEvents: true,
-                    emptyText:"Select recipient",
+                    emptyText: Mico.Lang.Calls.AddCall.userField_emptyText,
                     width:200
                 });
                 
@@ -266,8 +266,8 @@ Mico.Calls.AddCall = function () {
                 }, this);
                 
                 this.userAddExtraButton = new Ext.Button({
-                    text:'Add',
-                    tooltip:'Add another recipient',
+                    text: Mico.Lang.Calls.AddCall.userAddExtraButton_text,
+                    tooltip: Mico.Lang.Calls.AddCall.userAddExtraButton_tooltip,
                     icon: APP_ROOT+'/skin/static/icons/add.png',
                     scope:this,
                     handler: function() {
@@ -285,18 +285,18 @@ Mico.Calls.AddCall = function () {
                             layout:'hbox',
                             items:[
                                 this.callerNameField,
-                                {html:'&nbsp;&nbsp;(caller)',cls:'field-helper'}
+                                {html:'&nbsp;&nbsp;('+Mico.Lang.Calls.AddCall.callerNameField_hint+')',cls:'field-helper'}
                             ]
                         },
-                        {html:'From',cls:'field-label'},
+                        {html:Mico.Lang.Calls.AddCall.callerCompanyField_label,cls:'field-label'},
                         {
                             layout:'hbox',
                             items:[
                                 this.callerCompanyField,
-                                {html:'&nbsp;&nbsp;(company)',cls:'field-helper'}
+                                {html:'&nbsp;&nbsp;('+Mico.Lang.Calls.AddCall.callerCompanyField_hint+')',cls:'field-helper'}
                             ]
                         },
-                        {html:'Called for',cls:'field-label'},
+                        {html:Mico.Lang.Calls.AddCall.userField_label,cls:'field-label'},
                         {
                             layout:'hbox',
                             items:[
@@ -325,7 +325,7 @@ Mico.Calls.AddCall = function () {
                 this.callerMessageBox = new Ext.form.TextArea({
                     width:270,
                     height:120,
-                    emptyText:'Message for recipient(s)...',
+                    emptyText:Mico.Lang.Calls.AddCall.callerMessageBox_emptyText,
                     allowBlank:false,
                     required:true
                 });
@@ -360,7 +360,7 @@ Mico.Calls.AddCall = function () {
                     tpl:Mico.Utils.callerTemplate('contact'),
                     mode:'local',
                     enableKeyEvents: true,
-                    emptyText:"Caller's Phone Number/Email",
+                    emptyText:Mico.Lang.Calls.AddCall.callerContactField_emptyText,
                     width:200
                 });
                 
@@ -372,8 +372,8 @@ Mico.Calls.AddCall = function () {
                 }, this);
                 
                 this.callerContactAddExtraButton = new Ext.Button({
-                    text:'Add',
-                    tooltip:'Add another contact method',
+                    text:Mico.Lang.Calls.AddCall.callerContactAddExtraButton_text,
+                    tooltip:Mico.Lang.Calls.AddCall.callerContactAddExtraButton_tooltip,
                     icon: APP_ROOT+'/skin/static/icons/add.png',
                     scope:this,
                     handler: function() {
@@ -387,9 +387,9 @@ Mico.Calls.AddCall = function () {
                     layout:'form',
                     width:300,
                     items:[
-                        {html:'About',cls:'field-label'},
+                        {html:Mico.Lang.Calls.AddCall.callerMessageBox_label,cls:'field-label'},
                         this.callerMessageBox,
-                        {html:'Contact them at',cls:'field-label'},
+                        {html:Mico.Lang.Calls.AddCall.callerContactField_label,cls:'field-label'},
                         {
                             layout:'hbox',
                             items:[
@@ -441,17 +441,11 @@ Mico.Calls.AddCall = function () {
                     editable:true,
                     store: new Ext.data.ArrayStore ({
                         fields:['action'],
-                        data: [
-                            ['Call back ASAP'],
-                            ['Call back by Close Of Business'],
-                            ['Call back whenever you can'],
-                            ['Caller will email/call again later'],
-                            ['No need to call back']
-                        ]
+                        data: Mico.Lang.Calls.AddCall.callActionField_data
                     }),
                     displayField:'action',
                     valueField:'action',
-                    value:'Call back ASAP',
+                    value:Mico.Lang.Calls.AddCall.callActionField_default,
                     mode:'local',
                     triggerAction:'all',
                     hideTrigger:true,
@@ -469,9 +463,9 @@ Mico.Calls.AddCall = function () {
                     layout:'form',
                     width:300,
                     items:[
-                        {html:'This call is',cls:'field-label'},
+                        {html:Mico.Lang.Calls.AddCall.callPriorityField_label,cls:'field-label'},
                         this.callPriorityField,
-                        {html:'Action required',cls:'field-label'},
+                        {html:Mico.Lang.Calls.AddCall.callActionField_label,cls:'field-label'},
                         this.callActionField
                     ],
                     cls:'sub-form',
@@ -482,7 +476,7 @@ Mico.Calls.AddCall = function () {
                 
                 // add call button
                 this.addCallButton = new Ext.Button({
-                    text:'Add Call',
+                    text: Mico.Lang.Calls.AddCall.addCallButton_text,
                     scope:this,
                     handler: function() {
                         this.addCall();
@@ -491,7 +485,7 @@ Mico.Calls.AddCall = function () {
                 
                 // clear form button
                 this.clearFormButton = new Ext.Button({
-                    text:'Clear',
+                    text: Mico.Lang.Calls.AddCall.clearFormButton_text,
                     scope:this,
                     handler: function() {
                         this.clear();
@@ -522,7 +516,7 @@ Mico.Calls.AddCall = function () {
                         this.priorityForm,
                         this.buttonsForm
                     ],
-                    title:'Take a call'
+                    title:Mico.Lang.Calls.AddCall.title
                 });
                 
                 // and add it to the main 'calls' section
@@ -545,9 +539,9 @@ Mico.Calls.AddCall = function () {
                 tpl:Mico.Utils.userTemplate(),
                 mode:'remote',
                 enableKeyEvents: true,
-                emptyText:"Select recipient",
+                emptyText:Mico.Lang.Calls.AddCall.userField_emptyText,
                 width: 175,
-                fieldLabel:'OR'
+                fieldLabel:Mico.Lang.Calls.AddCall.userFieldExtra_label
             });
             
             tempUserField.on('focus',function () {
@@ -588,9 +582,9 @@ Mico.Calls.AddCall = function () {
                 displayField:'contact',
                 tpl:Mico.Utils.callerTemplate('contact'),
                 mode:'local',
-                emptyText:"Caller's Phone Number/Email",
+                emptyText:Mico.Lang.Calls.AddCall.callerContactField_emptyText,
                 width: 175,
-                fieldLabel:'OR'
+                fieldLabel:Mico.Lang.Calls.AddCall.callerContactFieldExtra_label
             });
             
             tempContactField.on('focus',function () {
@@ -683,11 +677,11 @@ Mico.Calls.AddCall = function () {
             if (users.length == 0) {
                 // Ensure we have at least one user selected
                 this.userField.focus(false,10);
-                Ext.Msg.alert('Error','Please select a recipient for this call');
+                Ext.Msg.alert(Mico.Lang.Calls.AddCall.validateRecipientsError_title,Mico.Lang.Calls.AddCall.validateRecipientsError_text);
             } else if (caller == '' && company == '' && contacts.length == 0 && message == '') {
                 // Ensure we have at least one piece of useful information
                 this.callerNameField.focus(false,10);
-                Ext.Msg.alert('Error','Please enter either a caller name, company name, message, or contact details');
+                Ext.Msg.alert(Mico.Lang.Calls.AddCall.callerDetailsError_title,Mico.Lang.Calls.AddCall.callerDetailsError_text);
             } else {
                 // passed our basic validation - add the call
                 var conn = new Ext.data.Connection();
