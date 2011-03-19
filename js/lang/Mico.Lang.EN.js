@@ -77,8 +77,9 @@ Mico.Lang = function () {
         },
         // Language for Mico.Footer.js
         Footer: {
-            getFooterAbout_text: "About Mico",
-            getFooterVersion_text: function (version) { return "Version: "+version; },
+            aboutLink_text: "About Mico",
+            version_text: function (version) { return "Version: "+version; },
+            aboutWindow_title: "About MICO",
             showAboutBody_html: function (version) {
                 var aboutHTML = '<h1>Mantis Inbound Call Organiser</h1>'; // Title
                 // Version
@@ -93,8 +94,7 @@ Mico.Lang = function () {
                 aboutHTML += '<p style="color:#88BB88;">All code and images are &copy; 2010 to <a href="http://www.samuellevy.com/" style="color:#88BB88;" target="_new">Samuel Levy</a>, unless otherwise noted.</p>';
                 
                 return aboutHTML;
-            },
-            aboutWindow_title: "About MICO"
+            }
         }
     };
 } ();

@@ -39,9 +39,9 @@ Mico.Footer = function () {
                     items: [
                         "Mico",
                         '-',
-                        { xtype:'box', html: '<a href="#" onclick="Mico.Footer.showAbout();">About Mico</a>'},
+                        { xtype:'box', html: '<a href="#" onclick="Mico.Footer.showAbout();">'+Mico.Lang.Footer.aboutLink_text+'</a>'},
                         "->",
-                        "Version: "+MICO_VERSION
+                        Mico.Lang.Footer.version_text(MICO_VERSION)
                     ]
                 });
             }
@@ -51,22 +51,9 @@ Mico.Footer = function () {
         /** Shows the 'About Mico' window */
         showAbout: function () {
             if (this.aboutWindow === undefined) {
-                // build the 'About Mico' HTML 
-                var aboutHTML = '<h1>Mantis Inbound Call Organiser</h1>'; // Title
-                // Version
-                aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+MICO_VERSION+'</p>';
-                // Licence
-                aboutHTML += '<p>Mico is released under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html" target="_new">GNU LGPL</a> '+
-                             'licence version 3.0, and is available for free, without warranty.</p>';
-                // Acknowledgements
-                aboutHTML += '<p>Icons from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_new">silk icon set</a> '+
-                             'were used in this system.</p>';
-                // Copyright
-                aboutHTML += '<p style="color:#88BB88;">All code and images are &copy; 2010 to <a href="http://www.samuellevy.com/" style="color:#88BB88;" target="_new">Samuel Levy</a>, unless otherwise noted.</p>';
-                
                 // build the window
                 this.aboutWindow = new Ext.Window({
-                    title:'About MICO',
+                    title:Mico.Lang.Footer.aboutWindow_title,
                     modal:false,
                     closeAction:'hide',
                     width: 650,
@@ -77,7 +64,7 @@ Mico.Footer = function () {
                     items: [
                         // Large Mico logo on the left
                         {
-                            html:'<img src="'+APP_ROOT+'/skin/static/mico_large.png" alt="Mico Large" />',
+                            html:'<img src="'+APP_ROOT+'/skin/static/mico_large.png" alt="Mico Logo" />',
                             width: 200,
                             height: 310,
                             bodyStyle:'background:none;padding-top:10px;padding-left:25px;'
@@ -89,7 +76,7 @@ Mico.Footer = function () {
                         },
                         // about mico text
                         {
-                            html: aboutHTML,
+                            html: Mico.Lang.Footer.showAboutBody_html(MICO_VERSION),
                             width: 340,
                             height: 300,
                             bodyStyle:'background:none;padding:10px;',
