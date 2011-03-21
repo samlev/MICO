@@ -256,12 +256,52 @@ Mico.Lang = function () {
                 }
             }
         },
-        // Language fpr Mico.User.js
+        // Language for Mico.User.js
         User: {
             logoutWait_title: "Log out",
             logoutWait_text: "Logging you out",
             logoutConfirmation_title: "Logged Out",
-            logoutConfirmation_text: "You have been logged out. Please wait while you are redirected."
+            logoutConfirmation_text: "You have been logged out. Please wait while you are redirected.",
+            // Language for Mico.User.Preferences.js
+            Preferences: {
+                menu_text: "My Preferences",
+                // User Settings and Preferences - Your Settings
+                settingsFieldset_title: "Your settings",
+                settingsFieldset_description: 'Your name and email address are '+
+                    'used to notify you of calls assigned to you, and for resetting '+
+                    'your passowrd. Please ensure that they are correct.',
+                nameField_fieldLabel: "Your name",
+                nameField_blankText: "You must enter your name",
+                emailField_fieldLabel: "Your email address",
+                emailField_blankText: "You must enter your email address",
+                // User Settings and Preferences - Display preferences
+                preferencesFieldset_title: "Display preferences",
+                preferencesFieldset_description: 'The date and time format '+
+                    'settings will take affect immediately, but the other '+
+                    'settings may not take affect until the next time you log in.',
+                timeFormatField_fieldLabel: "Time format",
+                timeFormatField_display: {
+                    gia:"12 hour with am/pm",
+                    Hi: "24 hour, leading zeros",
+                    Gi: "24 hour, no leading zeros"
+                },
+                dateFormatField_fieldLabel: "Date format",
+                dateFormatField_display: {
+                    jSMY:"Textual",
+                    dmY: "UK (Day/Month/Year)",
+                    mdY: "US (Month/Day/Year",
+                    Ymd: "Year-Month-Day"
+                },
+                callsPerPageField_fieldLabel: "Calls per page",
+                showCallsField_fieldLabel: "Show",
+                orderCallsField_fieldLabel: "Order",
+                showClosedField_fieldLabel: "Show closed calls",
+                commentOrderField_fieldLabel: "Call comment order",
+                saveSettingsButton_text: "Save Settings",
+                saveSettingsButtonWait_title: "Save Settings",
+                saveSettingsButtonWait_text: "Saving your settings",
+                resetSettingsButton_text: "Reset"
+            }
         }
     };
 } ();
