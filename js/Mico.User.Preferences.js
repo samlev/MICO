@@ -61,7 +61,7 @@ Mico.User.Preferences = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mico.SystemMenu.addItem('My Preferences', 'Mico.User.Preferences.show()','user');
+                this.menuId = Mico.SystemMenu.addItem(Mico.Lang.User.Preferences.menu_text, 'Mico.User.Preferences.show()','user');
             }
         },
         /** Shows the panel */
@@ -74,31 +74,30 @@ Mico.User.Preferences = function () {
                 
                 // User's name
                 this.nameField = new Ext.form.TextField ({
-                    fieldLabel: "Your name", 
+                    fieldLabel: Mico.Lang.User.Preferences.nameField_fieldLabel, 
                     width: 135, 
                     allowBlank: false,
                     required: true,
                     value: Mico.User.getVar('name'),
-                    blankText: "You must enter your name"
+                    blankText: Mico.Lang.User.Preferences.nameField_blankText
                 });
                 
                 // User's email
                 this.emailField = new Ext.form.TextField ({
-                    fieldLabel: "Your email address", 
+                    fieldLabel: Mico.Lang.User.Preferences.emailField_fieldLabel, 
                     width: 135, 
                     allowBlank: false,
                     required: true,
                     value: Mico.User.getVar('email'),
-                    blankText: "You must enter your email address"
+                    blankText: Mico.Lang.User.Preferences.emailField_blankText
                 });
                 
                 // settings fieldset
                 this.settingsFieldset = new Ext.form.FieldSet({
-                    title: 'Your settings',
+                    title: Mico.Lang.User.Preferences.settingsFieldset_title,
                     items: [
                         {
-                            html: 'Your name and email address are used to notify you of calls assigned to you, '+
-                                  'and for resetting your passowrd. Please ensure that they are correct.',
+                            html: Mico.Lang.User.Preferences.settingsFieldset_description,
                             bodyStyle:'padding-bottom:8px;'
                         },
                         this.nameField,
@@ -111,13 +110,13 @@ Mico.User.Preferences = function () {
                     allowBlank:false,
                     editable:false,
                     required:true,
-                    fieldLabel:'Time format',
+                    fieldLabel:Mico.Lang.User.Preferences.timeFormatField_fieldLabel,
                     store: new Ext.data.ArrayStore ({
                         fields:['format','display','example'],
                         data: [
-                            ['g:ia','12 hour with am/pm','9:30am/9:30pm'],
-                            ['H:i','24 hour, leading zeros','09:30/21:30'],
-                            ['G:i','24 hour, no leading zeros','9:30/21:30']
+                            ['g:ia',Mico.Lang.User.Preferences.timeFormatField_display.gia,'9:30am/9:30pm'],
+                            ['H:i',Mico.Lang.User.Preferences.timeFormatField_display.Hi,'09:30/21:30'],
+                            ['G:i',Mico.Lang.User.Preferences.timeFormatField_display.Gi,'9:30/21:30']
                         ]
                     }),
                     displayField:'display',
@@ -134,14 +133,14 @@ Mico.User.Preferences = function () {
                     allowBlank:false,
                     editable:false,
                     required:true,
-                    fieldLabel:'Date format',
+                    fieldLabel:Mico.Lang.User.Preferences.dateFormatField_fieldLabel,
                     store: new Ext.data.ArrayStore ({
                         fields:['format','display','example'],
                         data: [
-                            ['jS M, Y','Textual','21st Feb, 2010'],
-                            ['d-m-Y','UK (Day/Month/Year)','21/02/2010'],
-                            ['m-d-Y','US (Month/Day/Year)','02/21/2010'],
-                            ['Y-m-d','Year-Month-Day','2010-02-21']
+                            ['jS M, Y',Mico.Lang.User.Preferences.dateFormatField_display.jSMY,'21st Feb, 2010'],
+                            ['d-m-Y',Mico.Lang.User.Preferences.dateFormatField_display.dmY,'21/02/2010'],
+                            ['m-d-Y',Mico.Lang.User.Preferences.dateFormatField_display.mdY,'02/21/2010'],
+                            ['Y-m-d',Mico.Lang.User.Preferences.dateFormatField_display.Ymd,'2010-02-21']
                         ]
                     }),
                     displayField:'display',
@@ -158,7 +157,7 @@ Mico.User.Preferences = function () {
                     allowBlank:false,
                     editable:false,
                     required:true,
-                    fieldLabel:'Calls per page',
+                    fieldLabel:Mico.Lang.User.Preferences.callsPerPageField_fieldLabel,
                     store: new Ext.data.ArrayStore ({
                         fields:['calls'],
                         data: [
@@ -180,7 +179,7 @@ Mico.User.Preferences = function () {
                     allowBlank:false,
                     required:true,
                     editable:false,
-                    fieldLabel:'Show',
+                    fieldLabel:Mico.Lang.User.Preferences.showCallsField_fieldLabel,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: Mico.Utils.CommonStores.callsSearchFilter
@@ -197,7 +196,7 @@ Mico.User.Preferences = function () {
                     allowBlank:false,
                     required:true,
                     editable:false,
-                    fieldLabel:'Order',
+                    fieldLabel:Mico.Lang.User.Preferences.orderCallsField_fieldLabel,
                     store:  new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: Mico.Utils.CommonStores.callsOrderFilter
@@ -211,7 +210,7 @@ Mico.User.Preferences = function () {
                 
                 // show closed field
                 this.showClosedField = new Ext.form.Checkbox({
-                    fieldLabel:'Show closed calls',
+                    fieldLabel: Mico.Lang.User.Preferences.showClosedField_fieldLabel,
                     checked: Mico.User.getVar('showclosed')
                 });
                 
@@ -220,7 +219,7 @@ Mico.User.Preferences = function () {
                     allowBlank:false,
                     required:true,
                     editable:false,
-                    fieldLabel:'Call Comment Order',
+                    fieldLabel:Mico.Lang.User.Preferences.commentOrderField_fieldLabel,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: Mico.Utils.CommonStores.commentOrder
@@ -234,11 +233,10 @@ Mico.User.Preferences = function () {
                 
                 // preferences fieldset
                 this.preferencesFieldset = new Ext.form.FieldSet({
-                    title: 'Display preferences',
+                    title: Mico.Lang.User.Preferences.preferencesFieldset_title,
                     items: [
                         {
-                            html: 'The date and time format settings will take affect immediately, but the other '+
-                                  'settings may not take affect until the next time you log in.',
+                            html: Mico.Lang.User.Preferences.preferencesFieldset_description,
                             bodyStyle:'padding-bottom:8px;'
                         },
                         this.timeFormatField,
@@ -253,11 +251,11 @@ Mico.User.Preferences = function () {
                 
                 // The button for saving the user's settings
                 this.saveSettingsButton = new Ext.Button({
-                    text: "Save Settings", 
+                    text: Mico.Lang.User.Preferences.saveSettingsButton_text, 
                     handler: function () {
                         if (this.settingsPanel.getForm().isValid()) {
                             // notify the user that we're saving their settings
-                            Ext.Msg.wait('Save Settings','Saving your settings',{
+                            Ext.Msg.wait(Mico.Lang.User.Preferences.saveSettingsButtonWait_title,Mico.Lang.User.Preferences.saveSettingsButtonWait_text,{
                                 closable:false,
                                 modal:true
                             });
@@ -293,7 +291,7 @@ Mico.User.Preferences = function () {
                 
                 // the button for clearing the password change form
                 this.resetSettingsButton = new Ext.Button({
-                    text: "Reset", 
+                    text: Mico.Lang.User.Preferences.resetSettingsButton_text, 
                     handler: function () {
                         // reset all the variables from the user object
                         this.nameField.setValue(Mico.User.getVar('name'));
@@ -312,7 +310,7 @@ Mico.User.Preferences = function () {
                 // perferences form
                 this.settingsPanel = new Ext.form.FormPanel({
                     id: "Mico.User.Preferences.settingsPanel",
-                    title:'Settings and Preferences',
+                    title:Mico.Lang.User.Preferences.settingsPanel_title,
                     labelWidth:140,
                     layout:'form',
                     items: [

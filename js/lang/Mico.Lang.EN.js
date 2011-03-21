@@ -275,7 +275,7 @@ Mico.Lang = function () {
                 settingsFieldset_title: "Your settings",
                 settingsFieldset_description: 'Your name and email address are '+
                     'used to notify you of calls assigned to you, and for resetting '+
-                    'your passowrd. Please ensure that they are correct.',
+                    'your password. Please ensure that they are correct.',
                 nameField_fieldLabel: "Your name",
                 nameField_blankText: "You must enter your name",
                 emailField_fieldLabel: "Your email address",
