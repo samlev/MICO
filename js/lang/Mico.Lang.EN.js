@@ -157,7 +157,65 @@ Mico.Lang = function () {
             },
             // Language for Mico.Calls.ViewCalls.js
             ViewCalls: {
-                
+                // Grid headers
+                header_date: "At",
+                header_caller: "Caller",
+                header_company: "From",
+                header_message: "Message",
+                header_contact: "Contact",
+                header_priority: "Priority",
+                header_action: "Action",
+                header_close: "Mark as closed",
+                // Call details - comments
+                commentOrder_data: {
+                    oldest: "Oldest first",
+                    newest: "Newest first"
+                },
+                comment_blank: "No comments",
+                commentOrder_label: "View Comments",
+                // Call details - update
+                closeCallRadio_boxLabel: "Close call",
+                escalateCallRadio_boxLabel: "Escalate call",
+                justCommentRadio_boxLabel: "Just Comment",
+                reopenCallCheck_boxLabel: "Re-open call",
+                userCombo_emptyText: "Escalate to",
+                commentText_emptyText: "Comment",
+                addCallButton_text: "Update Call",
+                clearFormButton_text: "Clear",
+                // Show call detail panel
+                callInfo_date: function (date, time) { return date+" at "+time; },
+                callInfo_closed: "Closed",
+                callInfo_callTakerSelf: "Call taken by you",
+                callInfo_callTakerOther: function (taker) { return "Call taken by "+taker; },
+                callInfo_callerUnkown: "Someone",
+                callInfo_callerLine: function (caller, company) {
+                    // Caller's name
+                    line = caller;
+                    // Caller's company is included only if not empty
+                    if (company.length) {
+                        line += " from " + company;
+                    }
+                    return line + " called for";
+                },
+                callInfo_selfRecipient: "You",
+                callInfo_messageLable: "Message",
+                callInfo_noMessage: "No message was left.",
+                callInfo_contactLabelMulti: "Contact them via",
+                callInfo_contactLabelSingle: function (contact) { return "Contact them via "+contact; },
+                callInfo_contactNone: "No contact details were left.",
+                callInfo_actionRequired: "Action required",
+                // Show Comments function
+                showComments_today: "Today",
+                showComments_yesterday: "Yesterday",
+                showComments_commentHeader: function (action, name) { return action+" by "+name; },
+                showComments_selfComment: "You",
+                // grid renderers
+                renderDate_today: function (time) { return time; },
+                renderDate_yesterday: function (time) { return time+" Yesterday";},
+                renderDate_other: function (date) { return date;},
+                renderDate_quicktip: function (date, time) { return date+" at "+time; },
+                renderClose_open: "Close call",
+                renderClose_closed: "Call closed"
             }
         }
     };
