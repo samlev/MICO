@@ -265,6 +265,12 @@ Mico.Lang = function () {
             // Language for Mico.User.Preferences.js
             Preferences: {
                 menu_text: "My Preferences",
+                // User Settings and Preferences
+                settingsPanel: "Settings and Preferences",
+                saveSettingsButton_text: "Save Settings",
+                saveSettingsButtonWait_title: "Save Settings",
+                saveSettingsButtonWait_text: "Saving your settings",
+                resetSettingsButton_text: "Reset",
                 // User Settings and Preferences - Your Settings
                 settingsFieldset_title: "Your settings",
                 settingsFieldset_description: 'Your name and email address are '+
@@ -297,10 +303,51 @@ Mico.Lang = function () {
                 orderCallsField_fieldLabel: "Order",
                 showClosedField_fieldLabel: "Show closed calls",
                 commentOrderField_fieldLabel: "Call comment order",
-                saveSettingsButton_text: "Save Settings",
-                saveSettingsButtonWait_title: "Save Settings",
-                saveSettingsButtonWait_text: "Saving your settings",
-                resetSettingsButton_text: "Reset"
+                // Change Password
+                changePasswordForm_title: "Change Password",
+                changePasswordForm_description: 'There are no restrictions on your password, but a medium-strong password is advised',
+                passwordFieldset_title: "Change your password",
+                // Password fields
+                oldPasswordField_fieldLabel: "Current Password",
+                passwordField_blankText: "You must enter your current password",
+                passwordField_fieldLabel: "New Password",
+                passwordField_blankText: "You must enter a new password",
+                passwordStrengthIndicator_fieldLabel: "Strength",
+                passwordConfirmField_fieldLabel: "Confirm New Password",
+                passwordConfirmField_blankText: "You must enter your password",
+                // Password strength
+                passwordStrength_blank: "Enter password",
+                passwordStrength_weak: "Weak",
+                passwordStrength_medium: "Medium",
+                passwordStrength_strong: "Strong",
+                passwordStrength_verystrong: "Very Strong",
+                // Saving new password
+                passwordChangeButton_text: "Change Password",
+                passwordChangeButtonWait_title: "Change Password",
+                passwordChangeButtonWait_text: "Changing your password",
+                passwordChangeButtonConfirmation_title: "Password Changed",
+                passwordChangeButtonConfirmation_text: "Your password has successfully been changed",
+                // Notification settings
+                notificationsForm_title: "Notification Settings",
+                notificationsForm_description: 'This section allows you to manage '+
+                    'your email notification settings. Notifications are only '+
+                    'sent to you about calls that are assigned to you.',
+                notificationFieldset_title: "Email notification options",
+                sendNotificationsField_fieldLabel: "Send me email notifications",
+                criticalNotifyTime_label: "For <b>CRITICAL</B> calls, notify me",
+                criticalNotifyreason_label: "when they are",
+                urgentNotifyTime_label: "For <b>URGENT</B> calls, notify me",
+                urgentNotifyreason_label: "when they are",
+                moderateNotifyTime_label: "For <b>MODERATE</B> calls, notify me",
+                moderateNotifyreason_label: "when they are",
+                minorNotifyTime_label: "For <b>MINOR</B> calls, notify me",
+                minorNotifyreason_label: "when they are",
+                negligibleNotifyTime_label: "For <b>NEGLIGIBLE</B> calls, notify me",
+                negligibleNotifyreason_label: "when they are",
+                saveNotificationsButton_text: "Save Settings",
+                saveNotificationsButtonWait_title: "Save Settings",
+                saveNotificationsButtonWait_text: "Saving your notification settings",
+                resetNotificationsButton_text: 'Reset'
             }
         }
     };
