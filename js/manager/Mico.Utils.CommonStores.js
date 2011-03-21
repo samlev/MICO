@@ -36,6 +36,9 @@ Mico.Utils.CommonStores = function () {
                       ['moderate',Mico.Lang.Utils.CommonStores.callPriority.moderate],
                       ['minor',Mico.Lang.Utils.CommonStores.callPriority.minor],
                       ['negligible',Mico.Lang.Utils.CommonStores.callPriority.negligible]],
+        // order options for comments
+        commentOrder:[[Mico.Lang.Utils.CommonStores.commentOrder.oldest,'oldest'],
+                      [Mico.Lang.Utils.CommonStores.commentOrder.newest,'newest']],
         /** USER MANAGEMENT **/
         // user types for adding users; manager users can only add managers or standard users
         userTypesActive:[[Mico.Lang.Utils.CommonStores.userTypes.manager,'manager'],

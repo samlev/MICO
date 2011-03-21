@@ -167,10 +167,6 @@ Mico.Lang = function () {
                 header_action: "Action",
                 header_close: "Mark as closed",
                 // Call details - comments
-                commentOrder_data: {
-                    oldest: "Oldest first",
-                    newest: "Newest first"
-                },
                 comment_blank: "No comments",
                 commentOrder_label: "View Comments",
                 // Call details - update
@@ -243,6 +239,10 @@ Mico.Lang = function () {
                     manager: "Manager",
                     user: "Standard User",
                     disabled: "Disabled"
+                },
+                commentOrder: {
+                    oldest: "Oldest first",
+                    newest: "Newest first"
                 }
             }
         }

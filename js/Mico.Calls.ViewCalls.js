@@ -155,10 +155,7 @@ Mico.Calls.ViewCalls = function () {
                     editable:false,
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
-                        data: [
-                            ['Oldest First','oldest'],
-                            ['Newest First','newest']
-                        ]
+                        data: Mico.Utils.CommonStores.commentOrder
                     }),
                     displayField:'type',
                     valueField:'filter',
