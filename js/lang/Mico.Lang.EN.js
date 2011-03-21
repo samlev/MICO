@@ -245,6 +245,13 @@ Mico.Lang = function () {
                     newest: "Newest first"
                 }
             }
+        },
+        // Language fpr Mico.User.js
+        User: {
+            logoutWait_title: "Log out",
+            logoutWait_text: "Logging you out",
+            logoutConfirmation_title: "Logged Out",
+            logoutConfirmation_text: "You have been logged out. Please wait while you are redirected."
         }
     };
 } ();
