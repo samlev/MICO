@@ -39,6 +39,14 @@ Mico.Utils.CommonStores = function () {
         // order options for comments
         commentOrder:[[Mico.Lang.Utils.CommonStores.commentOrder.oldest,'oldest'],
                       [Mico.Lang.Utils.CommonStores.commentOrder.newest,'newest']],
+        // Notification timing
+        notifyTime:[['immediate',Mico.Lang.Utils.CommonStores.notifyTime.immediate],
+                    ['30mins',Mico.Lang.Utils.CommonStores.notifyTime.halfhour],
+                    ['60mins',Mico.Lang.Utils.CommonStores.notifyTime.hour],
+                    ['never',Mico.Lang.Utils.CommonStores.notifyTime.never]],
+        // Notification reasons
+        notifyReason:[['assigned',Mico.Lang.Utils.CommonStores.notifyReason.assigned],
+                      ['updated',Mico.Lang.Utils.CommonStores.notifyReason.updated]],
         /** USER MANAGEMENT **/
         // user types for adding users; admin users can set all user types
         userTypesActive:[[Mico.Lang.Utils.CommonStores.userTypes.admin,'admin'],

@@ -496,12 +496,7 @@ Mico.User.Preferences = function () {
                     width: 150,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['immediate','immediately'],
-                            ['30mins','once every half hour'],
-                            ['60mins','once every hour'],
-                            ['never','never']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyTime
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -516,10 +511,7 @@ Mico.User.Preferences = function () {
                     width: 120,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['assigned','assigned to me'],
-                            ['updated','updated']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyReason
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -537,6 +529,7 @@ Mico.User.Preferences = function () {
                     ],
                     bodyStyle:'padding-top:2px;'
                 };
+                
                 // urgent calls
                 this.urgentNotifyTime = new Ext.form.ComboBox ({
                     allowBlank:false,
@@ -545,12 +538,7 @@ Mico.User.Preferences = function () {
                     width: 150,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['immediate','immediately'],
-                            ['30mins','once every half hour'],
-                            ['60mins','once every hour'],
-                            ['never','never']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyTime
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -565,10 +553,7 @@ Mico.User.Preferences = function () {
                     width: 120,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['assigned','assigned to me'],
-                            ['updated','updated']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyReason
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -586,6 +571,7 @@ Mico.User.Preferences = function () {
                     ],
                     bodyStyle:'padding-top:2px;'
                 };
+                
                 // moderate calls
                 this.moderateNotifyTime = new Ext.form.ComboBox ({
                     allowBlank:false,
@@ -594,12 +580,7 @@ Mico.User.Preferences = function () {
                     width: 150,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['immediate','immediately'],
-                            ['30mins','once every half hour'],
-                            ['60mins','once every hour'],
-                            ['never','never']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyTime
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -614,10 +595,7 @@ Mico.User.Preferences = function () {
                     width: 120,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['assigned','assigned to me'],
-                            ['updated','updated']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyReason
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -635,6 +613,7 @@ Mico.User.Preferences = function () {
                     ],
                     bodyStyle:'padding-top:2px;'
                 };
+                
                 // minor calls
                 this.minorNotifyTime = new Ext.form.ComboBox ({
                     allowBlank:false,
@@ -643,12 +622,7 @@ Mico.User.Preferences = function () {
                     width: 150,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['immediate','immediately'],
-                            ['30mins','once every half hour'],
-                            ['60mins','once every hour'],
-                            ['never','never']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyTime
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -663,10 +637,7 @@ Mico.User.Preferences = function () {
                     width: 120,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['assigned','assigned to me'],
-                            ['updated','updated']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyReason
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -684,6 +655,7 @@ Mico.User.Preferences = function () {
                     ],
                     bodyStyle:'padding-top:2px;'
                 };
+                
                 // negligible calls
                 this.negligibleNotifyTime = new Ext.form.ComboBox ({
                     allowBlank:false,
@@ -692,12 +664,7 @@ Mico.User.Preferences = function () {
                     width: 150,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['immediate','immediately'],
-                            ['30mins','once every half hour'],
-                            ['60mins','once every hour'],
-                            ['never','never']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyTime
                     }),
                     displayField:'view',
                     valueField:'notify',
@@ -712,10 +679,7 @@ Mico.User.Preferences = function () {
                     width: 120,
                     store: new Ext.data.ArrayStore ({
                         fields:['notify','view'],
-                        data: [
-                            ['assigned','assigned to me'],
-                            ['updated','updated']
-                        ]
+                        data: Mico.Utils.CommonStores.notifyReason
                     }),
                     displayField:'view',
                     valueField:'notify',

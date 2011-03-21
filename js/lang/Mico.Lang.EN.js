@@ -243,6 +243,16 @@ Mico.Lang = function () {
                 commentOrder: {
                     oldest: "Oldest first",
                     newest: "Newest first"
+                },
+                notifyTime: {
+                    immediate:'immediately',
+                    halfhour:'once every half hour',
+                    hour:'once every hour',
+                    never:'never'
+                },
+                notifyReason:{
+                    assigned:'assigned to me',
+                    updated:'updated'
                 }
             }
         },
