@@ -110,14 +110,14 @@ Mico.Calls.ViewCalls = function () {
                     region:'center',
                     cm: new Ext.grid.ColumnModel ([
                         sm,
-                        {header: "At", dataIndex: "date", id: "date", width: 120, sortable: false, renderer: renderDate},
-                        {header: "Caller", dataIndex: "caller", id: "caller", width: 120, sortable: false, renderer: renderGeneric},
-                        {header: "From", dataIndex: "company", id: "company", width: 120, sortable: false, renderer: renderGeneric},
-                        {header: "Message", dataIndex: "message", id: "message", width: 200, sortable: false, renderer:renderMessage},
-                        {header: "Contact", dataIndex: "contact", id: "contact", width: 150, sortable: false, renderer: renderContact},
-                        {header: "Priority", dataIndex: "priority", id: "priority", width: 80, sortable: false, renderer: renderPriority},
-                        {header: "Action", dataIndex: "action", id: "action", width: 120, sortable: false, renderer: renderGeneric},
-                        {header: "Mark as closed", id: "close", width: 100, renderer: renderClose}
+                        {header: Mico.Lang.Calls.ViewCalls.header_date, dataIndex: "date", id: "date", width: 120, sortable: false, renderer: renderDate},
+                        {header: Mico.Lang.Calls.ViewCalls.header_caller, dataIndex: "caller", id: "caller", width: 120, sortable: false, renderer: renderGeneric},
+                        {header: Mico.Lang.Calls.ViewCalls.header_company, dataIndex: "company", id: "company", width: 120, sortable: false, renderer: renderGeneric},
+                        {header: Mico.Lang.Calls.ViewCalls.header_message, dataIndex: "message", id: "message", width: 200, sortable: false, renderer:renderMessage},
+                        {header: Mico.Lang.Calls.ViewCalls.header_contact, dataIndex: "contact", id: "contact", width: 150, sortable: false, renderer: renderContact},
+                        {header: Mico.Lang.Calls.ViewCalls.header_priority, dataIndex: "priority", id: "priority", width: 80, sortable: false, renderer: renderPriority},
+                        {header: Mico.Lang.Calls.ViewCalls.header_action, dataIndex: "action", id: "action", width: 120, sortable: false, renderer: renderGeneric},
+                        {header: Mico.Lang.Calls.ViewCalls.header_close, id: "close", width: 100, renderer: renderClose}
                     ]),
                     sm:sm,
                     store:this.gridStore,
@@ -181,35 +181,35 @@ Mico.Calls.ViewCalls = function () {
                     cls:'dynamic-panel-scroll-y',
                     bodyStyle:'padding:3px;border-left:2px solid #BBBBBB;',
                     items: [
-                        {html:'<i>No comments</i>'}
+                        {html:'<i>'+Mico.Lang.Calls.ViewCalls.comment_blank+'</i>'}
                     ],
                     tbar:[
                         '->',
-                        'View Comments:',
+                        Mico.Lang.Calls.ViewCalls.commentOrder_label+':',
                         this.commentOrder
                     ]
                 });
                 
                 // radio options ('new' or open call)
                 this.closeCallRadio = new Ext.form.Radio({
-                    boxLabel:'Close call',
+                    boxLabel:Mico.Lang.Calls.ViewCalls.closeCallRadio_boxLabel,
                     checked:true,
                     name:'action'
                 }); // when selected, closes the call
                 this.escalateCallRadio = new Ext.form.Radio({
-                    boxLabel:'Escalate call',
+                    boxLabel:Mico.Lang.Calls.ViewCalls.escalateCallRadio_boxLabel,
                     checked:false,
                     name:'action'
                 }); // when selected adds a user to the call (if selected), and changes the priority
                 this.justCommentRadio = new Ext.form.Radio({
-                    boxLabel:'Just Comment',
+                    boxLabel:Mico.Lang.Calls.ViewCalls.justCommentRadio_boxLabel,
                     checked:false,
                     name:'action'
                 }); // when selected, dows nothing
                 
                 // re-open call checkbox
                 this.reopenCallCheck = new Ext.form.Checkbox({
-                    boxLabel:'Re-open call',
+                    boxLabel:Mico.Lang.Calls.ViewCalls.reopenCallCheck_boxLabel,
                     checked:false,
                     listeners: {
                         scope:this,
@@ -279,7 +279,7 @@ Mico.Calls.ViewCalls = function () {
                     tpl:Mico.Utils.userTemplate(),
                     mode:'remote',
                     enableKeyEvents: true,
-                    emptyText:"Escalate to",
+                    emptyText:Mico.Lang.Calls.ViewCalls.userCombo_emptyText,
                     width:120,
                     listeners:{
                         scope:this,
@@ -292,14 +292,14 @@ Mico.Calls.ViewCalls = function () {
                 this.commentText = new Ext.form.TextArea({
                     width:200,
                     height:70,
-                    emptyText:'Comment',
+                    emptyText:Mico.Lang.Calls.ViewCalls.commentText_emptyText,
                     allowBlank:true,
                     required:false
                 });
                 
                 // buttons
                 this.addCallButton = new Ext.Button({
-                    text:'Update Call',
+                    text:Mico.Lang.Calls.ViewCalls.addCallButton_text,
                     scope:this,
                     handler: function() {
                         var rec = this.grid.getSelectionModel().getSelected();
@@ -357,7 +357,7 @@ Mico.Calls.ViewCalls = function () {
                 
                 // clear form button
                 this.clearFormButton = new Ext.Button({
-                    text:'Clear',
+                    text:Mico.Lang.Calls.ViewCalls.clearFormButton_text,
                     scope:this,
                     handler: function() {
                         // just reload this view
@@ -445,35 +445,35 @@ Mico.Calls.ViewCalls = function () {
             // Build the call HTML
             var callInfoHTML = "";
             // time
-            callInfoHTML += "<b>"+rec.get('date').format(Mico.User.getVarDefault('dateformat','jS M, Y'))+"</b>"+" at "+"<b>"+rec.get('date').format(Mico.User.getVarDefault('timeformat','g:ia'))+"</b>";
+            d = "<b>"+rec.get('date').format(Mico.User.getVarDefault('dateformat','jS M, Y'))+"</b>"
+            t = "<b>"+rec.get('date').format(Mico.User.getVarDefault('timeformat','g:ia'))+"</b>"
+            callInfoHTML += Mico.Lang.Calls.ViewCalls.callInfo_date(d,t);
             // priority
             if (rec.get('status') == 'new') {
-                callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+rec.get('priority')+'</span>';
+                callInfoHTML += ' - <span class="priority-'+rec.get('priority')+'">'+Mico.Lang.Utils.CommonStores.callPriority[rec.get('priority')]+'</span>';
             } else {
-                callInfoHTML += ' - <span class="call-closed">Closed</span>';
+                callInfoHTML += ' - <span class="call-closed">'+Mico.Lang.Calls.ViewCalls.callInfo_closed+'</span>';
             }
             
             // taker
             if (rec.get('taker').id == Mico.User.user_id) {
-                callInfoHTML += "<br />Call taken by you";
+                callInfoHTML += "<br />"+Mico.Lang.Calls.ViewCalls.callInfo_callTakerSelf;
             } else {
-                callInfoHTML += "<br />Call taken by "+rec.get('taker').name;
+                callInfoHTML += "<br />"+Mico.Lang.Calls.ViewCalls.callInfo_callTakerOther(rec.get('taker').name);
             }
             
             // caller name
+            n = Mico.Lang.Calls.ViewCalls.callInfo_callerUnkown;
+            
+            // Check if we actually have a caller name
             if (rec.get('caller').length) {
-                callInfoHTML += "<br /><br />"+rec.get('caller');
-            } else {
-                callInfoHTML += "<br /><br />Someone"
+                n = rec.get('caller');
             }
             
-            // company name
-            if (rec.get('company').length) {
-                callInfoHTML += " from "+rec.get('company');
-            }
+            // Get the caller line
+            callInfoHTML += "<br /><br />"+Mico.Lang.Calls.ViewCalls.callInfo_callerLine(n, rec.get('company'));
             
             // recipients
-            callInfoHTML += " called for";
             if (rec.get('users').length>1) {
                 callInfoHTML += ":"
                 // get the users
@@ -481,14 +481,14 @@ Mico.Calls.ViewCalls = function () {
                 
                 for (var i = 0; i < users.length; i++) {
                     if (users[i].id == Mico.User.user_id) {
-                        callInfoHTML += "<br /> - <b>You</b>";
+                        callInfoHTML += "<br /> - <b>"+Mico.Lang.Calls.ViewCalls.callInfo_selfRecipient+"</b>";
                     } else {
                         callInfoHTML += "<br /> - "+users[i].name;
                     }
                 }
             } else {
                 if (rec.get('users')[0].id == Mico.User.user_id) {
-                    callInfoHTML += " <b>You</b>";
+                    callInfoHTML += " <b>"+Mico.Lang.Calls.ViewCalls.callInfo_selfRecipient+"</b>";
                 } else {
                     callInfoHTML += " "+rec.get('users')[0].name;
                 }
@@ -496,30 +496,30 @@ Mico.Calls.ViewCalls = function () {
             
             // message
             if (rec.get('message').length) {
-                callInfoHTML += "<br /><br /><b>Message:</b><br />"+String(rec.get('message')).split("\n").join("<br />");
+                callInfoHTML += "<br /><br /><b>"+Mico.Lang.Calls.ViewCalls.callInfo_messageLabel+":</b><br />"+String(rec.get('message')).split("\n").join("<br />");
             } else {
-                callInfoHTML += "<br /><br /><b>No message was left.</b>";
+                callInfoHTML += "<br /><br /><b>"+Mico.Lang.Calls.ViewCalls.callInfo_noMessage+"</b>";
             }
             
             callInfoHTML += "<hr />";
             
             // contact details
             if (rec.get('contact').length>1) {
-                callInfoHTML += "Contact them via:";
+                callInfoHTML += Mico.Lang.Calls.ViewCalls.callInfo_contactLabelMulti+":";
                 
                 var contact = rec.get('contact');
                 for (var i = 0; i < contact.length; i++) {
                     callInfoHTML += "<br /> - "+contact[i];
                 }
             } else if (rec.get('contact').length == 1) {
-                callInfoHTML += "Contact them via <b>"+rec.get('contact')[0]+"</b>";
+                callInfoHTML += Mico.Lang.Calls.ViewCalls.callInfo_contactLabelSingle("<b>"+rec.get('contact')[0]+"</b>");
             } else {
-                callInfoHTML += "<b>No contact details were left.</b>";
+                callInfoHTML += "<b>"+Mico.Lang.Calls.ViewCalls.callInfo_contactNone+"</b>";
             }
             
             // action
             if (rec.get('action').length) {
-                callInfoHTML += "<br /><br />Action required: <b>"+rec.get('action')+"</b>";
+                callInfoHTML += "<br /><br />"+Mico.Lang.Calls.ViewCalls.callInfo_actionRequired+": <b>"+rec.get('action')+"</b>";
             }
             
             this.callInfoPanel.update(callInfoHTML);
@@ -617,11 +617,11 @@ Mico.Calls.ViewCalls = function () {
                     // get the day
                     var day = '';
                     if (date.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                        day = 'Today';
+                        day = Mico.Lang.Calls.ViewCalls.showComments_today;
                     } else if (date.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                                (today.getDayOfYear() == 0 && (date.format('m-d') == '12-31' && // check if we're on the border of a year
                                                              (parseInt(date.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                        day = 'Yesterday';
+                        day = Mico.Lang.Calls.ViewCalls.showComments_yesterday;
                     } else {
                         // just show the date
                         day = date.format(Mico.User.getVarDefault('dateformat','jS M, Y'));
@@ -630,7 +630,12 @@ Mico.Calls.ViewCalls = function () {
                     commentHTML += '<td style="vertical-align:top;text-align:right;">'+day+'</td><tr/>';
                     
                     // add the action
-                    commentHTML += '<tr><td colspan="2"><b>'+comment.action+'</b> by <b>'+(comment.user_id == Mico.User.user_id?'You':comment.commenter)+'</b></td></tr>';
+                    a = '<b>'+comment.action+'</b>';
+                    u = '<b>'+(comment.user_id == Mico.User.user_id?
+                                    Mico.Lang.Calls.ViewCalls.showComments_selfComment:
+                                    comment.commenter)+'</b>';
+                    
+                    commentHTML += '<tr><td colspan="2">'+Mico.Lang.Calls.ViewCalls.showComments_commentHeader(a,b)+'</td></tr>';
                     
                     // and add the comment (if there is one)
                     if (comment.comment.length) {
@@ -653,7 +658,7 @@ Mico.Calls.ViewCalls = function () {
                 }
             } else {
                 // no comments
-                this.callCommentPanel.add({html:'<i>No comments</i>'});
+                this.callCommentPanel.add({html:'<i>'+Mico.Lang.Calls.ViewCalls.comment_blank+'</i>'});
             }
             
             // make sure the panel is displayed properly
@@ -670,17 +675,21 @@ Mico.Calls.ViewCalls = function () {
             var today = new Date();
             
             if (val.getDayOfYear() == today.getDayOfYear()) { // check if the call was taken today
-                value = val.format(Mico.User.getVarDefault('timeformat','g:ia'));
+                value = Mico.Lang.Calls.ViewCalls.renderDate_today(val.format(Mico.User.getVarDefault('timeformat','g:ia')));
             } else if (val.getDayOfYear() == (today.getDayOfYear()-1) || // check if the call was taken yesterday
                        (today.getDayOfYear() == 0 && (val.format('m-d') == '12-31' && // check if we're on the border of a year
                                                      (parseInt(val.format('Y'))==(parseInt(today.format('Y'))-1))))) { // and that the years are consecutive
-                value = val.format(Mico.User.getVarDefault('timeformat','g:ia'))+' Yesterday';
+                value = Mico.Lang.Calls.ViewCalls.renderDate_yesterday(val.format(Mico.User.getVarDefault('timeformat','g:ia')));
             } else {
                 // just show the date
-                value = ' ' + val.format(Mico.User.getVarDefault('dateformat','jS M, Y'));
+                value = ' ' + Mico.Lang.Calls.ViewCalls.renderDate_other(val.format(Mico.User.getVarDefault('dateformat','jS M, Y')));
             }
             
-            meta.attr = 'ext:qtip="'+val.format(Mico.User.getVarDefault('dateformat','jS M, Y'))+' at '+val.format(Mico.User.getVarDefault('timeformat','g:ia'))+'"';
+            // render the tooltip/quicktip
+            d = val.format(Mico.User.getVarDefault('dateformat','jS M, Y'));
+            t = val.format(Mico.User.getVarDefault('timeformat','g:ia'));
+            
+            meta.attr = 'ext:qtip="'+Mico.Lang.Calls.ViewCalls.renderDate_quicktip(d,t)+'"';
         } else {
             value = val;
         }
@@ -751,7 +760,7 @@ Mico.Calls.ViewCalls = function () {
         meta.css = 'call-'+rec.get('status');
         
         // add the class
-        value = '<span class="priority-'+val+'">'+val+'</span>';
+        value = '<span class="priority-'+val+'">'+Mico.Lang.Utils.CommonStores.callPriority[val]+'</span>';
         
         return value;
     }
@@ -761,9 +770,9 @@ Mico.Calls.ViewCalls = function () {
         var value = '';
         
         if (rec.get('status')=='new') {
-            value = '<a href="#" onclick="Mico.Calls.updateCall('+rec.get('id')+',{status:\'closed\'})">Close call</a>';
+            value = '<a href="#" onclick="Mico.Calls.updateCall('+rec.get('id')+',{status:\'closed\'})">'+Mico.Lang.Calls.ViewCalls.renderClose_open+'</a>';
         } else {
-            value = 'Call closed';
+            value = Mico.Lang.Calls.ViewCalls.renderClose_closed;
         }
         
         // set the CSS class

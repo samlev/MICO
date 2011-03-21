@@ -194,7 +194,7 @@ Mico.Lang = function () {
                     return line + " called for";
                 },
                 callInfo_selfRecipient: "You",
-                callInfo_messageLable: "Message",
+                callInfo_messageLabel: "Message",
                 callInfo_noMessage: "No message was left.",
                 callInfo_contactLabelMulti: "Contact them via",
                 callInfo_contactLabelSingle: function (contact) { return "Contact them via "+contact; },
@@ -203,8 +203,8 @@ Mico.Lang = function () {
                 // Show Comments function
                 showComments_today: "Today",
                 showComments_yesterday: "Yesterday",
-                showComments_commentHeader: function (action, name) { return action+" by "+name; },
                 showComments_selfComment: "You",
+                showComments_commentHeader: function (action, name) { return action+" by "+name; },
                 // grid renderers
                 renderDate_today: function (time) { return time; },
                 renderDate_yesterday: function (time) { return time+" Yesterday";},
