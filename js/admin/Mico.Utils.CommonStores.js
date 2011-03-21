@@ -24,15 +24,27 @@
 Mico.Utils.CommonStores = function () {
     return {
         // search options for calls; admin users can see all calls in the system
-        callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened'],['All calls','all']],
+        callsSearchFilter:[[Mico.Lang.Utils.CommonStores.callsSearchFilter.assigned,'assigned'],
+                           [Mico.Lang.Utils.CommonStores.callsSearchFilter.opened,'opened'],
+                           [Mico.Lang.Utils.CommonStores.callsSearchFilter.all,'all']],
         // order options for calls
-        callsOrderFilter:[['Most recent','recent'],['Most urgent','urgent']],
+        callsOrderFilter:[[Mico.Lang.Utils.CommonStores.callsOrderFilter.recent,'recent'],
+                          [Mico.Lang.Utils.CommonStores.callsOrderFilter.urgent,'urgent']],
         // call priority
-        callPriority:[['critical','Critical'],['urgent','Urgent'],['moderate','Moderate'],['minor','Minor'],['negligible','Negligible']],
+        callPriority:[['critical',Mico.Lang.Utils.CommonStores.callPriority.critical],
+                      ['urgent',Mico.Lang.Utils.CommonStores.callPriority.urgent],
+                      ['moderate',Mico.Lang.Utils.CommonStores.callPriority.moderate],
+                      ['minor',Mico.Lang.Utils.CommonStores.callPriority.minor],
+                      ['negligible',Mico.Lang.Utils.CommonStores.callPriority.negligible]],
         /** USER MANAGEMENT **/
         // user types for adding users; admin users can set all user types
-        userTypesActive:[['Administrator','admin'],['Manager','manager'],['Standard User','user']],
+        userTypesActive:[[Mico.Lang.Utils.CommonStores.userTypes.admin,'admin'],
+                         [Mico.Lang.Utils.CommonStores.userTypes.manager,'manager'],
+                         [Mico.Lang.Utils.CommonStores.userTypes.user,'user']],
         // user types for editing users; amdin users can set all user types
-        userTypesAll:[['Administrator','admin'],['Manager','manager'],['Standard User','user'],['Disabled','disabled']]
+        userTypesAll:[[Mico.Lang.Utils.CommonStores.userTypes.admin,'admin'],
+                      [Mico.Lang.Utils.CommonStores.userTypes.manager,'manager'],
+                      [Mico.Lang.Utils.CommonStores.userTypes.user,'user'],
+                      [Mico.Lang.Utils.CommonStores.userTypes.disabled,'disabled']]
     };
 } ();

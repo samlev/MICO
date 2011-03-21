@@ -231,6 +231,13 @@ Mico.Lang = function () {
                     recent: "Most recent",
                     urgent: "Most urgent"
                 },
+                callPriority: {
+                    critical: "Critical",
+                    urgent:'Urgent',
+                    moderate:'Moderate',
+                    minor:'Minor',
+                    negligible:'Negligible'
+                },
                 userTypes: {
                     admin: "Administrator",
                     manager: "Manager",
