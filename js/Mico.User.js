@@ -118,7 +118,7 @@ Mico.User = function () {
         },
         /** Logs out the active user */
         logout: function () {
-            Ext.Msg.wait('Log out','Logging you out',{
+            Ext.Msg.wait(Mico.Lang.User.logoutWait_title,Mico.Lang.User.logoutWait_text,{
                 closable:false,
                 modal:true
             });
@@ -135,7 +135,7 @@ Mico.User = function () {
                     var res = Ext.decode(response.responseText);
                     if (success && res.success) {
                         // notify the user that the action was successful
-                        Ext.Msg.updateProgress(1,'Logged Out','You have been logged out. Please wait while you are redirected.')
+                        Ext.Msg.updateProgress(1,Mico.Lang.User.logoutConfirmation_title,Mico.Lang.User.logoutConfirmation_text);
                         
                         // reload the interface
                         window.location.reload(true);
