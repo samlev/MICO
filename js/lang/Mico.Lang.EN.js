@@ -151,7 +151,9 @@ Mico.Lang = function () {
             },
             // Language for Mico.Calls.SearchBar.js
             SearchBar: {
-                
+                filterField_label: "Show",
+                orderField_label: "ordered by",
+                showClosedField_label: "Show closed?"
             },
             // Language for Mico.Calls.ViewCalls.js
             ViewCalls: {
