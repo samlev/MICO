@@ -217,6 +217,27 @@ Mico.Lang = function () {
                 renderClose_open: "Close call",
                 renderClose_closed: "Call closed"
             }
+        },
+        // Language for Mico.Utils.js
+        Utils: {
+            // Language for Mico.Utils.CommonStores.js
+            CommonStores: {
+                callsSearchFilter: {
+                    assigned: "Calls assigned to me",
+                    opened: "Calls opened by me",
+                    all: "All calls"
+                },
+                callsOrderFilter: {
+                    recent: "Most recent",
+                    urgent: "Most urgent"
+                },
+                userTypes: {
+                    admin: "Administrator",
+                    manager: "Manager",
+                    user: "Standard User",
+                    disabled: "Disabled"
+                }
+            }
         }
     };
 } ();
