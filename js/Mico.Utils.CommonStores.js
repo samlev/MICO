@@ -24,10 +24,16 @@
 Mico.Utils.CommonStores = function () {
     return {
         // search options for calls; standard users can only see calls opened by or assigned to them
-        callsSearchFilter:[['Calls assigned to me','assigned'],['Calls opened by me','opened']],
+        callsSearchFilter:[[Mico.Lang.Utils.CommonStores.callsSearchFilter.assigned,'assigned'],
+                           [Mico.Lang.Utils.CommonStores.callsSearchFilter.opened,'opened']],
         // order options for calls
-        callsOrderFilter:[['Most recent','recent'],['Most urgent','urgent']],
+        callsOrderFilter:[[Mico.Lang.Utils.CommonStores.callsOrderFilter.recent,'recent'],
+                          [Mico.Lang.Utils.CommonStores.callsOrderFilter.urgent,'urgent']],
         // call priority
-        callPriority:[['critical','Critical'],['urgent','Urgent'],['moderate','Moderate'],['minor','Minor'],['negligible','Negligible']]
+        callPriority:[['critical',Mico.Lang.Utils.CommonStores.callPriority.critical],
+                      ['urgent',Mico.Lang.Utils.CommonStores.callPriority.urgent],
+                      ['moderate',Mico.Lang.Utils.CommonStores.callPriority.moderate],
+                      ['minor',Mico.Lang.Utils.CommonStores.callPriority.minor],
+                      ['negligible',Mico.Lang.Utils.CommonStores.callPriority.negligible]]
     };
 } ();
