@@ -88,12 +88,12 @@ Mico.Calls.SearchBar = function () {
                 // and build the toolbar
                 this.toolbar = new Ext.Toolbar ({
                     items: [
-                        'Show: ',
+                        Mico.Lang.Calls.SearchBar.filterField_label+': ',
                         this.filterField,
-                        ' ordered by: ',
+                        ' '+Mico.Lang.Calls.SearchBar.orderField_label+': ',
                         this.orderField,
                         '-',
-                        ' Show closed? ',
+                        ' '+Mico.Lang.Calls.SearchBar.showClosedField_label+' ',
                         this.showClosedField
                     ]
                 });
