@@ -266,7 +266,7 @@ Mico.Lang = function () {
             Preferences: {
                 menu_text: "My Preferences",
                 // User Settings and Preferences
-                settingsPanel: "Settings and Preferences",
+                settingsPanel_title: "Settings and Preferences",
                 saveSettingsButton_text: "Save Settings",
                 saveSettingsButtonWait_title: "Save Settings",
                 saveSettingsButtonWait_text: "Saving your settings",
@@ -327,6 +327,7 @@ Mico.Lang = function () {
                 passwordChangeButtonWait_text: "Changing your password",
                 passwordChangeButtonConfirmation_title: "Password Changed",
                 passwordChangeButtonConfirmation_text: "Your password has successfully been changed",
+                clearPasswordFormButton_text: "Clear",
                 // Notification settings
                 notificationsForm_title: "Notification Settings",
                 notificationsForm_description: 'This section allows you to manage '+
@@ -335,15 +336,15 @@ Mico.Lang = function () {
                 notificationFieldset_title: "Email notification options",
                 sendNotificationsField_fieldLabel: "Send me email notifications",
                 criticalNotifyTime_label: "For <b>CRITICAL</B> calls, notify me",
-                criticalNotifyreason_label: "when they are",
+                criticalNotifyReason_label: "when they are",
                 urgentNotifyTime_label: "For <b>URGENT</B> calls, notify me",
-                urgentNotifyreason_label: "when they are",
+                urgentNotifyReason_label: "when they are",
                 moderateNotifyTime_label: "For <b>MODERATE</B> calls, notify me",
-                moderateNotifyreason_label: "when they are",
+                moderateNotifyReason_label: "when they are",
                 minorNotifyTime_label: "For <b>MINOR</B> calls, notify me",
-                minorNotifyreason_label: "when they are",
+                minorNotifyReason_label: "when they are",
                 negligibleNotifyTime_label: "For <b>NEGLIGIBLE</B> calls, notify me",
-                negligibleNotifyreason_label: "when they are",
+                negligibleNotifyReason_label: "when they are",
                 saveNotificationsButton_text: "Save Settings",
                 saveNotificationsButtonWait_title: "Save Settings",
                 saveNotificationsButtonWait_text: "Saving your notification settings",

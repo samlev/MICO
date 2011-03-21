@@ -331,20 +331,20 @@ Mico.User.Preferences = function () {
                 
                 // The old password
                 this.oldPasswordField = new Ext.form.TextField ({
-                    fieldLabel: "Current Password", 
+                    fieldLabel: Mico.Lang.User.Preferences.oldPasswordField_fieldLabel, 
                     inputType: "password", 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your current password"
+                    blankText: Mico.Lang.User.Preferences.oldPasswordField_blankText
                 });
                 
                 // set password form 'password' field
                 this.passwordField = new Ext.form.TextField ({
-                    fieldLabel: "New Password", 
+                    fieldLabel: Mico.Lang.User.Preferences.passwordField_fieldLabel, 
                     inputType: "password", 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter a new password",
+                    blankText: Mico.Lang.User.Preferences.passwordField_blankText,
                     enableKeyEvents: true
                 });
                 
@@ -354,17 +354,17 @@ Mico.User.Preferences = function () {
                     var points = Mico.Utils.passwordStrength(pass);
                     
                     // password strength
-                    var text = 'Weak';
+                    var text = Mico.Lang.User.Preferences.passwordStrength_weak;
                     
                     // test the strength
                     if (points == 0) {
-                        text = 'Enter password';
+                        text = Mico.Lang.User.Preferences.passwordStrength_blank;
                     } else if (points > 35) {
-                        text = 'Very Strong';
+                        text = Mico.Lang.User.Preferences.passwordStrength_verystrong;
                     } else if (points > 25) {
-                        text = 'Strong';
+                        text = Mico.Lang.User.Preferences.passwordStrength_strong;
                     } else if (points > 10) {
-                        text = 'Medium';
+                        text = Mico.Lang.User.Preferences.passwordStrength_medium;
                     }
                     
                     // update the inidcator
@@ -373,24 +373,24 @@ Mico.User.Preferences = function () {
                 
                 // Simple password strength indicator
                 this.passwordStrengthIndicator = new Ext.ProgressBar({
-                    fieldLabel: 'Strength',
-                    text: 'Enter password',
+                    fieldLabel: Mico.Lang.User.Preferences.passwordStrengthIndicator_fieldLabel,
+                    text: Mico.Lang.User.Preferences.passwordStrength_blank,
                     value: 0,
                     width:135
                 })
                 
                 // reset password form 'password confirmation' field
                 this.passwordConfirmField = new Ext.form.TextField ({
-                    fieldLabel: "Confirm New Password", 
+                    fieldLabel: Mico.Lang.User.Preferences.passwordConfirmField_fieldLabel, 
                     inputType: "password", 
                     width: 135, 
                     allowBlank: false, 
-                    blankText: "You must enter your password"
+                    blankText: Mico.Lang.User.Preferences.passwordConfirmField_blankText
                 });
                 
                 // passowrd fieldset
                 this.passwordFieldset = new Ext.form.FieldSet({
-                    title: 'Change your password',
+                    title: Mico.Lang.User.Preferences.passwordFieldset_title,
                     items: [
                         this.oldPasswordField,
                         this.passwordField,
@@ -401,9 +401,9 @@ Mico.User.Preferences = function () {
                 
                 // The button for changing the user's password
                 this.passwordChangeButton = new Ext.Button({
-                    text: "Change Password", 
+                    text: Mico.Lang.User.Preferences.passwordChangeButton_text, 
                     handler: function () {
-                        Ext.Msg.wait('Change Password','Changing your password',{
+                        Ext.Msg.wait(Mico.Lang.User.Preferences.passwordChangeButtonWait_title,Mico.Lang.User.Preferences.passwordChangeButtonWait_text,{
                             closable:false,
                             modal:true
                         });
@@ -425,10 +425,10 @@ Mico.User.Preferences = function () {
                                     // hide the wait message
                                     Ext.Msg.hide();
                                     // notify the user that it was successful
-                                    Ext.Msg.alert("Password Changed", "Your password has successfully been changed");
+                                    Ext.Msg.alert(Mico.Lang.User.Preferences.passwordChangeButtonConfirmation_title, Mico.Lang.User.Preferences.passwordChangeButtonConfirmation_text);
                                     // clear the form
                                     this.changePasswordForm.getForm().reset();
-                                    this.passwordStrengthIndicator.updateProgress(0,'Enter password',false);
+                                    this.passwordStrengthIndicator.updateProgress(0,Mico.Lang.User.Preferences.passwordStrength_blank,false);
                                 } else {
                                     Ext.Msg.hide();
                                     var msg = "Unknown system error";
@@ -446,11 +446,11 @@ Mico.User.Preferences = function () {
                 
                 // the button for clearing the password change form
                 this.clearPasswordFormButton = new Ext.Button({
-                    text: "Clear", 
+                    text: Mico.Lang.User.Preferences.clearPasswordFormButton_text, 
                     handler: function () {
                         // clear the form
                         this.changePasswordForm.getForm().reset();
-                        this.passwordStrengthIndicator.updateProgress(0,'Enter password',false);
+                        this.passwordStrengthIndicator.updateProgress(0,Mico.Lang.User.Preferences.passwordStrength_blank,false);
                     }, 
                     scope: this
                 });
@@ -458,12 +458,12 @@ Mico.User.Preferences = function () {
                 // set up form
                 this.changePasswordForm = new Ext.form.FormPanel({
                     id: "Mico.User.Preferences.changePasswordForm",
-                    title:'Change Password',
+                    title:Mico.Lang.User.Preferences.changePasswordForm_title,
                     labelWidth:140,
                     layout:'form',
                     items: [
                         {
-                            html: 'There are no restrictions on your password, but a medium-strong password is advised',
+                            html: Mico.Lang.User.Preferences.changePasswordForm_description,
                             bodyStyle:'padding-bottom:8px;'
                         },
                         this.passwordFieldset,
@@ -482,7 +482,7 @@ Mico.User.Preferences = function () {
                 
                 // Send notifications field
                 this.sendNotificationsField = new Ext.form.Checkbox({
-                    fieldLabel:'Send me email notifications',
+                    fieldLabel:Mico.Lang.User.Preferences.sendNotificationsField_fieldLabel,
                     checked: Mico.User.getVar('sendnotifications')
                 });
                 
@@ -520,9 +520,9 @@ Mico.User.Preferences = function () {
                 var criticalForm = {
                     layout:'hbox',
                     items:[
-                        {html:'For <b>CRITICAL</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        {html:Mico.Lang.User.Preferences.criticalNotifyTime_label,bodyStyle:'padding-top:5px;', width:190},
                         this.criticalNotifyTime,
-                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        {html:'&nbsp;'+Mico.Lang.User.Preferences.criticalNotifyReason_label+'&nbsp;',bodyStyle:'padding-top:5px;'},
                         this.criticalNotifyReason
                     ],
                     bodyStyle:'padding-top:2px;'
@@ -562,9 +562,9 @@ Mico.User.Preferences = function () {
                 var urgentForm = {
                     layout:'hbox',
                     items:[
-                        {html:'For <b>URGENT</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        {html:Mico.Lang.User.Preferences.urgentNotifyTime_label,bodyStyle:'padding-top:5px;', width:190},
                         this.urgentNotifyTime,
-                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        {html:'&nbsp;'+Mico.Lang.User.Preferences.urgentNotifyReason_label+'&nbsp;',bodyStyle:'padding-top:5px;'},
                         this.urgentNotifyReason
                     ],
                     bodyStyle:'padding-top:2px;'
@@ -604,9 +604,9 @@ Mico.User.Preferences = function () {
                 var moderateForm = {
                     layout:'hbox',
                     items:[
-                        {html:'For <b>MODERATE</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        {html:Mico.Lang.User.Preferences.moderateNotifyTime_label,bodyStyle:'padding-top:5px;', width:190},
                         this.moderateNotifyTime,
-                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        {html:'&nbsp;'+Mico.Lang.User.Preferences.moderateNotifyReason_label+'&nbsp;',bodyStyle:'padding-top:5px;'},
                         this.moderateNotifyReason
                     ],
                     bodyStyle:'padding-top:2px;'
@@ -646,9 +646,9 @@ Mico.User.Preferences = function () {
                 var minorForm = {
                     layout:'hbox',
                     items:[
-                        {html:'For <b>MINOR</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        {html:Mico.Lang.User.Preferences.minorNotifyTime_label,bodyStyle:'padding-top:5px;', width:190},
                         this.minorNotifyTime,
-                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        {html:'&nbsp;'+Mico.Lang.User.Preferences.minorNotifyReason_label+'&nbsp;',bodyStyle:'padding-top:5px;'},
                         this.minorNotifyReason
                     ],
                     bodyStyle:'padding-top:2px;'
@@ -688,9 +688,9 @@ Mico.User.Preferences = function () {
                 var negligibleForm = {
                     layout:'hbox',
                     items:[
-                        {html:'For <b>NEGLIGIBLE</B> calls, notify me',bodyStyle:'padding-top:5px;', width:190},
+                        {html:Mico.Lang.User.Preferences.negligibleNotifyTime_label,bodyStyle:'padding-top:5px;', width:190},
                         this.negligibleNotifyTime,
-                        {html:'&nbsp;when they are&nbsp;',bodyStyle:'padding-top:5px;'},
+                        {html:'&nbsp;'+Mico.Lang.User.Preferences.negligibleNotifyReason_label+'&nbsp;',bodyStyle:'padding-top:5px;'},
                         this.negligibleNotifyReason
                     ],
                     bodyStyle:'padding-top:2px;'
@@ -698,7 +698,7 @@ Mico.User.Preferences = function () {
                 
                 // notification settings fieldset
                 this.notificationFieldset = new Ext.form.FieldSet({
-                    title: 'Email notification options',
+                    title: Mico.Lang.User.Preferences.notificationFieldset_title,
                     items: [
                         this.sendNotificationsField,
                         criticalForm,
@@ -711,11 +711,11 @@ Mico.User.Preferences = function () {
                 
                 // The button for saving notification settings
                 this.saveNotificationsButton = new Ext.Button({
-                    text: "Save Settings", 
+                    text: Mico.Lang.User.Preferences.saveNotificationsButton_text, 
                     handler: function () {
                         if (this.notificationsForm.getForm().isValid()) {
                             // notify the user that we're saving their settings
-                            Ext.Msg.wait('Save Settings','Saving your notification settings',{
+                            Ext.Msg.wait(Mico.Lang.User.Preferences.saveNotificationsButtonWait_title,Mico.Lang.User.Preferences.saveNotificationsButtonWait_text,{
                                 closable:false,
                                 modal:true
                             });
@@ -755,7 +755,7 @@ Mico.User.Preferences = function () {
                 
                 // the button for clearing the password change form
                 this.resetNotificationsButton = new Ext.Button({
-                    text: "Reset", 
+                    text: Mico.Lang.User.Preferences.resetNotificationsButton_text, 
                     handler: function () {
                         // reset all the variables from the user object
                         this.sendNotificationsField.setValue(Mico.User.getVar('sendnotifications'));
@@ -776,13 +776,12 @@ Mico.User.Preferences = function () {
                 // notifications panel
                 this.notificationsForm = new Ext.form.FormPanel({
                     id: "Mico.User.Preferences.notificationsForm",
-                    title:'Notification Settings',
+                    title: Mico.Lang.User.Preferences.notificationsForm_title,
                     labelWidth:160,
                     layout:'form',
                     items: [
                         {
-                            html: 'This section allows you to manage your email notification settings. '+
-                                  'Notifications are only sent to you about calls that are assigned to you.',
+                            html: Mico.Lang.User.Preferences.notificationsForm_description,
                             bodyStyle:'padding-bottom:8px;'
                         },
                         this.notificationFieldset,
