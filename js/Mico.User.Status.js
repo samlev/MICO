@@ -33,7 +33,7 @@ Mico.User.Status = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mico.SystemMenu.addItem('Set Status', 'Mico.User.Status.show()','system',true);
+                this.menuId = Mico.SystemMenu.addItem(Mico.Lang.User.Status.menu_text, 'Mico.User.Status.show()','system',true);
             }
         },
         /** Shows the panel */
@@ -51,10 +51,10 @@ Mico.User.Status = function () {
                     store: new Ext.data.ArrayStore ({
                         fields:['status','name'],
                         data: [
-                            ['available','Available'],
-                            ['away','Away'],
-                            ['busy','Busy'],
-                            ['offline','Appear Offline']
+                            ['available',Mico.Lang.User.Status.statusField_data.available],
+                            ['away',Mico.Lang.User.Status.statusField_data.away],
+                            ['busy',Mico.Lang.User.Status.statusField_data.busy],
+                            ['offline',Mico.Lang.User.Status.statusField_data.offline]
                         ]
                     }),
                     displayField:'name',
@@ -70,7 +70,7 @@ Mico.User.Status = function () {
                             
                             // if appear offline, don't give the user an option for the status text
                             if (this.statusField.getValue() == "offline") {
-                                this.statusTextField.setValue('Offline');
+                                this.statusTextField.setValue(Mico.Lang.User.Status.statusOptions_data.offline);
                                 this.statusTextField.disable();
                             } else {
                                 this.statusTextField.setValue(this.statusTextStore.getAt(0).get('text'));
@@ -78,7 +78,7 @@ Mico.User.Status = function () {
                             }
                         }
                     },
-                    fieldLabel:'Status',
+                    fieldLabel:Mico.Lang.User.Status.statusField_fieldLabel,
                     width:160
                 });
                 
@@ -103,7 +103,7 @@ Mico.User.Status = function () {
                     enableKeyEvents: true,
                     width:160,
                     lazyInit:false,
-                    fieldLabel:'Extra details',
+                    fieldLabel:Mico.Lang.User.Status.statusTextField_fieldLabel,
                     listeners: {
                         scope:this,
                         'focus': function () { this.statusTextField.doQuery('',true); }
@@ -112,7 +112,7 @@ Mico.User.Status = function () {
                 
                 // set status button
                 this.setStatusButton = new Ext.Button({
-                    text:'Set Status',
+                    text:Mico.Lang.User.Status.setStatusButton_text,
                     scope:this,
                     handler: function() {
                         // set the variables in the user
@@ -126,7 +126,7 @@ Mico.User.Status = function () {
                 
                 // cancel button
                 this.cancelButton = new Ext.Button({
-                    text:'Cancel',
+                    text:Mico.Lang.User.Status.cancelButton_text,
                     scope:this,
                     handler: function() {
                         this.panel.hide();
@@ -137,7 +137,7 @@ Mico.User.Status = function () {
                 this.panel = new Ext.Window({
                     id:'Mico.User.Status.panel',
                     layout:'form',
-                    title:'Set Status',
+                    title:Mico.Lang.User.Status.panel_title,
                     modal:true,
                     closable:false,
                     resizable:false,
@@ -160,10 +160,10 @@ Mico.User.Status = function () {
             this.panel.show();
             // set the values
             this.statusField.setValue(Mico.User.getVarDefault('status','available'));
-            this.statusTextField.setValue(Mico.User.getVarDefault('statustext','Available'));
+            this.statusTextField.setValue(Mico.User.getVarDefault('statustext',Mico.Lang.User.Status.statusOptions_data.available));
             // Disable the 'statustext' field if the status is 'offline'
             if (this.statusField.getValue() == "offline") {
-                this.statusTextField.setValue('Offline');
+                this.statusTextField.setValue(Mico.Lang.User.Status.statusOptions_data.offline);
                 this.statusTextField.disable();
             } else {
                 this.statusTextField.enable();
@@ -177,10 +177,12 @@ Mico.User.Status = function () {
             // build the 'status options' object for retrieving templates
             if (this.statusOptions === undefined) {
                 this.statusOptions = {
-                    available:[['Available']],
-                    offline:[['Offline']],
-                    busy:[['Busy'],['On the phone'],['In a meeting']],
-                    away:[['Away'],['Out to lunch'],['Not available']]
+                    // Available and Offline only have single values
+                    available:[[Mico.Lang.User.Status.statusOptions_data.available]],
+                    offline:[[Mico.Lang.User.Status.statusOptions_data.offline]],
+                    // Busy and Away already have arrays
+                    busy:Mico.Lang.User.Status.statusOptions_data.busy,
+                    away:Mico.Lang.User.Status.statusOptions_data.away
                 }
             }
             
