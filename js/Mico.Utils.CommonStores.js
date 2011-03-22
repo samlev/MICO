@@ -45,6 +45,11 @@ Mico.Utils.CommonStores = function () {
                     ['never',Mico.Lang.Utils.CommonStores.notifyTime.never]],
         // Notification reasons
         notifyReason:[['assigned',Mico.Lang.Utils.CommonStores.notifyReason.assigned],
-                      ['updated',Mico.Lang.Utils.CommonStores.notifyReason.updated]]
+                      ['updated',Mico.Lang.Utils.CommonStores.notifyReason.updated]],
+        // Language Options
+        languageOptions:[['EN',Mico.Lang.Utils.CommonStores.languageOptions.DE],
+                         ['ES',Mico.Lang.Utils.CommonStores.languageOptions.ES],
+                         ['RU',Mico.Lang.Utils.CommonStores.languageOptions.RU],
+                         ['DE',Mico.Lang.Utils.CommonStores.languageOptions.DE]]
     };
 } ();

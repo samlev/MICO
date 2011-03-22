@@ -47,6 +47,11 @@ Mico.Utils.CommonStores = function () {
         // Notification reasons
         notifyReason:[['assigned',Mico.Lang.Utils.CommonStores.notifyReason.assigned],
                       ['updated',Mico.Lang.Utils.CommonStores.notifyReason.updated]],
+        // Language Options
+        languageOptions:[['EN',Mico.Lang.Utils.CommonStores.languageOptions.DE],
+                         ['ES',Mico.Lang.Utils.CommonStores.languageOptions.ES],
+                         ['RU',Mico.Lang.Utils.CommonStores.languageOptions.RU],
+                         ['DE',Mico.Lang.Utils.CommonStores.languageOptions.DE]],
         /** USER MANAGEMENT **/
         // user types for adding users; admin users can set all user types
         userTypesActive:[[Mico.Lang.Utils.CommonStores.userTypes.admin,'admin'],

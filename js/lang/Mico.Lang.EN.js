@@ -253,6 +253,12 @@ Mico.Lang = function () {
                 notifyReason:{
                     assigned:'assigned to me',
                     updated:'updated'
+                },
+                languageOptions:{
+                    EN: "English",
+                    ES: "Spanish",
+                    RU: "Russian",
+                    DE: "German"
                 }
             }
         },
