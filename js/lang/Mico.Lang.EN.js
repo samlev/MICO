@@ -356,6 +356,27 @@ Mico.Lang = function () {
                 saveNotificationsButtonWait_title: "Save Settings",
                 saveNotificationsButtonWait_text: "Saving your notification settings",
                 resetNotificationsButton_text: 'Reset'
+            },
+            // Language for Mico.User.Status.js
+            Status: {
+                menu_text: "Set Status",
+                statusField_data: {
+                    available: "Available",
+                    away: "Away",
+                    busy: "Busy",
+                    offline: "Appear Offline"
+                },
+                statusField_fieldLabel: "Status",
+                statusTextField_fieldLabel: "Extra details",
+                statusOptions_data: {
+                    available: "Available",
+                    offline: "Offline",
+                    busy: [['Busy'],['On the phone'],['In a meeting']],
+                    away: [['Away'],['Out to lunch'],['Not available']]
+                },
+                setStatusButton_text: "Set Status",
+                cancelButton_text: "Cancel",
+                panel_title: "Set Status"
             }
         }
     };
