@@ -378,6 +378,46 @@ Mico.Lang = function () {
                 cancelButton_text: "Cancel",
                 panel_title: "Set Status"
             }
+        },
+        // Language for Mico.ManageUsers.js
+        ManageUsers: {
+            menu_text: "Manage Users",
+            // Toolbar
+            userFilterField_label: "View",
+            userFilterField_data: {
+                active:'Active Users',
+                disabled:'Inactive Users',
+                admin:'Administrators',
+                manager:'Managers',
+                user:'Standard Users',
+                all:'All Users' 
+            },
+            addUsersButton_text:"Add Users",
+            // Grid
+            header_username: "Username",
+            header_name: "Name",
+            header_email: "Email",
+            header_role: "Role",
+            header_password: "Reset password",
+            // Reset password function
+            resetPasswordConfirmation_title: "Reset Password",
+            resetPasswordConfirmation_text: "A reset password email has been sent to the user",
+            // Add users form
+            usernameField_fieldLabel: "Username",
+            nameField_fieldLabel: "Name",
+            emailField_fieldLabel: "Email",
+            roleField_fieldLabel: "Role",
+            addUserButton_text: "Add User",
+            addUserButtonConfirmation_title: "User added",
+            addUserButtonConfirmation_text: "The user has been added. An email explaining the process for setting their password has been sent.",
+            clearAddUsersButton_text: "Clear",
+            hideAddUsersButton_text: "Close",
+            addUsersPanel_title: "Add Users",
+            // Grid renderers
+            renderResetPassword: {
+                disabled: "User disabled",
+                active: "Reset Password"
+            }
         }
     };
 } ();
