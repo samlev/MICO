@@ -33,7 +33,7 @@ Mico.ManageUsers = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mico.SystemMenu.addItem('Manage Users', 'Mico.ManageUsers.show()','system');
+                this.menuId = Mico.SystemMenu.addItem(Mico.Lang.ManageUsers.menu_text, 'Mico.ManageUsers.show()','system');
             }
         },
         /** Shows the panel */
@@ -79,12 +79,12 @@ Mico.ManageUsers = function () {
                     store: new Ext.data.ArrayStore ({
                         fields:['type','filter'],
                         data: [
-                            ['Active Users','active'],      // shows all users with roles 'user','manager', or 'admin'
-                            ['Inactive Users','disabled'],
-                            ['Administrators','admin'],
-                            ['Managers','manager'],
-                            ['Standard Users','user'],
-                            ['All Users','all']             // shows all users
+                            [Mico.Lang.ManageUsers.userFilterField_data.active,'active'],      // shows all users with roles 'user','manager', or 'admin'
+                            [Mico.Lang.ManageUsers.userFilterField_data.disabled,'disabled'],
+                            [Mico.Lang.ManageUsers.userFilterField_data.admin,'admin'],
+                            [Mico.Lang.ManageUsers.userFilterField_data.manager,'manager'],
+                            [Mico.Lang.ManageUsers.userFilterField_data.user,'user'],
+                            [Mico.Lang.ManageUsers.userFilterField_data.all,'all']             // shows all users
                         ]
                     }),
                     displayField:'type',
@@ -126,18 +126,18 @@ Mico.ManageUsers = function () {
                     layout:'fit',
                     clicksToEdit:1,
                     cm: new Ext.grid.ColumnModel([
-                        {header: "Username", dataIndex: "username", id: "username", width: 100, renderer: renderGeneric},
-                        {header: "Name", dataIndex: "name", id: "name", width: 140, renderer: renderGeneric, editor:new Ext.form.TextField({
+                        {header: Mico.Lang.ManageUsers.header_username, dataIndex: "username", id: "username", width: 100, renderer: renderGeneric},
+                        {header: Mico.Lang.ManageUsers.header_name, dataIndex: "name", id: "name", width: 140, renderer: renderGeneric, editor:new Ext.form.TextField({
                             name:'email',
                             allowBlank:false,
                             required:true
                         })},
-                        {header: "Email", dataIndex: "email", id: "email", width: 140, renderer: renderGeneric, editor:new Ext.form.TextField({
+                        {header: Mico.Lang.ManageUsers.header_email, dataIndex: "email", id: "email", width: 140, renderer: renderGeneric, editor:new Ext.form.TextField({
                             name:'email',
                             allowBlank:false,
                             required:true
                         })},
-                        {header: "Role", dataIndex: "role", id: "role", width: 100, renderer: renderRole, editor:new Ext.form.ComboBox ({
+                        {header: Mico.Lang.ManageUsers.header_role, dataIndex: "role", id: "role", width: 100, renderer: renderRole, editor:new Ext.form.ComboBox ({
                             allowBlank:false,
                             editable:false,
                             name:'role',
@@ -150,10 +150,10 @@ Mico.ManageUsers = function () {
                             mode:'local',
                             triggerAction:'all'
                         })},
-                        {header: "Reset password", id: "password", width: 100, renderer: renderResetPassword}
+                        {header: Mico.Lang.ManageUsers.header_password, id: "password", width: 100, renderer: renderResetPassword}
                     ]),
                     tbar:[
-                        'View: ',
+                        Mico.Lang.ManageUsers.userFilterField_label+': ',
                         this.userFilterField,
                         '-',
                         this.addUsersButton
@@ -259,7 +259,7 @@ Mico.ManageUsers = function () {
                     var res = Ext.decode(response.responseText);
                     if (success && res.success) {
                         // notify the user that the action was successful
-                        Ext.Msg.alert('Reset Password','A reset password email has been sent to the user');
+                        Ext.Msg.alert(Mico.Lang.ManageUsers.resetPasswordConfirmation_title,Mico.Lang.ManageUsers.resetPasswordConfirmation_text);
                     } else {
                         Ext.Msg.hide();
                         var msg = "Unknown system error";
@@ -277,27 +277,27 @@ Mico.ManageUsers = function () {
             if (this.addUsersPanel === undefined) {
                 // username field
                 this.usernameField = new Ext.form.TextField({
-                    fieldLabel:'Username',
+                    fieldLabel:Mico.Lang.ManageUsers.usernameField_fieldLabel,
                     required:true,
                     allowBlank:false
                 });
                 
                 // name field
                 this.nameField = new Ext.form.TextField({
-                    fieldLabel:'Name',
+                    fieldLabel:Mico.Lang.ManageUsers.nameField_fieldLabel,
                     required:true,
                     allowBlank:false
                 });
                 
                 // email field
                 this.emailField = new Ext.form.TextField({
-                    fieldLabel:'Email',
+                    fieldLabel:Mico.Lang.ManageUsers.emailField_fieldLabel,
                     required:true,
                     allowBlank:false
                 });
                 
                 this.roleField = new Ext.form.ComboBox ({
-                    fieldLabel:'Role',
+                    fieldLabel:Mico.Lang.ManageUsers.roleField_fieldLabel,
                     allowBlank:false,
                     editable:false,
                     required:true,
@@ -315,7 +315,7 @@ Mico.ManageUsers = function () {
                 
                 // buttons
                 this.addUserButton = new Ext.Button({
-                    text:'Add User',
+                    text:Mico.Lang.ManageUsers.addUserButton_text,
                     scope: this,
                     handler: function () {
                         var conn = new Ext.data.Connection();
@@ -333,7 +333,7 @@ Mico.ManageUsers = function () {
                                 var res = Ext.decode(response.responseText);
                                 if (success && res.success) {
                                     // notify the user that the action was successful
-                                    Ext.Msg.alert('User added','The user has been added. An email explaining the process for setting their password has been sent.');
+                                    Ext.Msg.alert(Mico.Lang.ManageUsers.addUserButtonConfirmation_title, Mico.Lang.ManageUsers.addUserButtonConfirmation_text);
                                     
                                     // clear the form
                                     this.usernameField.reset();
@@ -358,7 +358,7 @@ Mico.ManageUsers = function () {
                 });
                 // clear button to reset the fields
                 this.clearAddUsersButton = new Ext.Button({
-                    text:'Clear',
+                    text:Mico.Lang.ManageUsers.clearAddUsersButton_text,
                     scope:this,
                     handler: function () {
                         // clear the fields
@@ -370,7 +370,7 @@ Mico.ManageUsers = function () {
                 });
                 // close/hide button to hide the panel
                 this.hideAddUsersButton = new Ext.Button({
-                    text:'Close',
+                    text:Mico.Lang.ManageUsers.hideAddUsersButton_text,
                     scope:this,
                     handler: function () {
                         // hide the dialog
@@ -383,7 +383,7 @@ Mico.ManageUsers = function () {
                     id:'Mico.ManageUsers.addUsersPanel',
                     closeAction:'hide',
                     layout:'form',
-                    title:'Add Users',
+                    title: Mico.Lang.ManageUsers.addUsersPanel_title,
                     modal:true,
                     items:[
                         this.usernameField,
@@ -418,9 +418,9 @@ Mico.ManageUsers = function () {
         
         // check if the user is disabled or not
         if (rec.get('role')=='disabled') {
-            value = 'User disabled';
+            value = Mico.Lang.ManageUsers.renderResetPassword.disabled;
         } else {
-            value = '<a href="#" onclick="Mico.ManageUsers.resetPassword('+rec.get('id')+')">Reset Password</a>';
+            value = '<a href="#" onclick="Mico.ManageUsers.resetPassword('+rec.get('id')+')">'+Mico.Lang.ManageUsers.renderResetPassword.active+'</a>';
         }
         
         // set the CSS class
@@ -434,21 +434,7 @@ Mico.ManageUsers = function () {
     function renderRole(val, meta, rec, row, col, store) {
         var value = '';
         
-        // check for known role types
-        switch (val) {
-            case 'admin':
-                value = 'Administrator';
-                break;
-            case 'manager':
-                value = 'Manager';
-                break;
-            case 'user':
-                value = 'Standard User';
-                break;
-            case 'disabled':
-                value = 'Disabled';
-                break;
-        }
+        value = Mico.Lang.Utils.CommonStores.userTypes[rec.get('role')];
         
         // set the CSS class
         meta.css = (rec.get('role')=='disabled'?'user-disabled':'');
