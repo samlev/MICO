@@ -231,6 +231,23 @@ Mico.User.Preferences = function () {
                     triggerAction:'all'
                 });
                 
+                // Language field
+                this.languageField = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    required:true,
+                    editable:false,
+                    fieldLabel:Mico.Lang.User.Preferences.languageField_fieldLabel,
+                    store: new Ext.data.ArrayStore ({
+                        fields:['lang','display'],
+                        data: Mico.Utils.CommonStores.languageOptions
+                    }),
+                    displayField:'display',
+                    valueField:'lang',
+                    value:Mico.User.getVarDefault('lang',DEFAULT_LANGUAGE),
+                    mode:'local',
+                    triggerAction:'all'
+                });
+                
                 // preferences fieldset
                 this.preferencesFieldset = new Ext.form.FieldSet({
                     title: Mico.Lang.User.Preferences.preferencesFieldset_title,
@@ -245,7 +262,8 @@ Mico.User.Preferences = function () {
                         this.showCallsField,
                         this.orderCallsField,
                         this.showClosedField,
-                        this.commentOrderField
+                        this.commentOrderField,
+                        this.languageField
                     ]
                 });
                 
@@ -270,6 +288,7 @@ Mico.User.Preferences = function () {
                             var ordercalls = String(this.orderCallsField.getValue()).trim();
                             var showclosed = this.showClosedField.getValue();
                             var commentorder = String(this.commentOrderField.getValue()).trim();
+                            var lang = String(this.languageField.getValue()).trim();
                             
                             // set the values that we can
                             if (name.length) { Mico.User.setVar('name',name); }
@@ -281,6 +300,7 @@ Mico.User.Preferences = function () {
                             Mico.User.setVar('ordercalls',ordercalls);
                             Mico.User.setVar('showclosed',showclosed);
                             Mico.User.setVar('commentorder',commentorder);
+                            Mico.User.setVar('lang',lang);
                             
                             // and commit the changes
                             Mico.User.commit();
@@ -303,6 +323,7 @@ Mico.User.Preferences = function () {
                         this.orderCallsField.setValue(Mico.User.getVarDefault('ordercalls','recent'));
                         this.showClosedField.setValue(Mico.User.getVarDefault('showclosed',false));
                         this.commentOrderField.setValue(Mico.User.getVarDefault('commentorder','newest'));
+                        this.languageField.setValue(Mico.User.getVarDefault('lang',DEFAULT_LANGUAGE));
                     }, 
                     scope: this
                 });

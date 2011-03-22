@@ -29,4 +29,5 @@ var WEB_DOMAIN='<?php echo WEB_DOMAIN?>';
 var WEB_ROOT='<?php echo WEB_ROOT?>';
 var APP_ROOT='<?php echo APP_ROOT?>';
 var MICO_VERSION='<?php echo Settings::get_default('MICO_VERSION','unknown')?>';
+var DEFAULT_LANGUAGE='<?php echo Settings::get_default('LANGUAGE','EN')?>';
 </script>

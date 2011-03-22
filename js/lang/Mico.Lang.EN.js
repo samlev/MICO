@@ -309,6 +309,7 @@ Mico.Lang = function () {
                 orderCallsField_fieldLabel: "Order",
                 showClosedField_fieldLabel: "Show closed calls",
                 commentOrderField_fieldLabel: "Call comment order",
+                languageField_fieldLabel: "Language",
                 // Change Password
                 changePasswordForm_title: "Change Password",
                 changePasswordForm_description: 'There are no restrictions on your password, but a medium-strong password is advised',

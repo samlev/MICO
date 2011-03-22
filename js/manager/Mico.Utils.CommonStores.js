@@ -48,7 +48,7 @@ Mico.Utils.CommonStores = function () {
         notifyReason:[['assigned',Mico.Lang.Utils.CommonStores.notifyReason.assigned],
                       ['updated',Mico.Lang.Utils.CommonStores.notifyReason.updated]],
         // Language Options
-        languageOptions:[['EN',Mico.Lang.Utils.CommonStores.languageOptions.DE],
+        languageOptions:[['EN',Mico.Lang.Utils.CommonStores.languageOptions.EN],
                          ['ES',Mico.Lang.Utils.CommonStores.languageOptions.ES],
                          ['RU',Mico.Lang.Utils.CommonStores.languageOptions.RU],
                          ['DE',Mico.Lang.Utils.CommonStores.languageOptions.DE]],
