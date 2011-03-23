@@ -35,7 +35,7 @@ Mico.Upgrader = function () {
             if (this.panel == undefined) {
                 // The button for saving the user's settings
                 this.upgradeButton = new Ext.Button({
-                    text: "Upgrade", 
+                    text: Mico.Lang.Upgrader.upgradeButton_text, 
                     handler: function () {
                         this.doUpgrade();
                     }, 
@@ -47,15 +47,13 @@ Mico.Upgrader = function () {
                 if (OLD_VERSION == NEW_VERSION) {
                     items = [
                         {
-                            html:'<h1>Mantis Inbound Call Organiser is already up to date.</h1>'
+                            html:'<h1>'+Mico.Lang.Upgrader.version_upToDate+'</h1>'
                         }
                     ]
                 } else {
                     items = [
                         {
-                            html:'<h1>Mantis Inbound Call Organiser needs to be upgraded.</h1>'+
-                                 "<p>Clicking the 'Upgrade' button below will upgrade MICO from "+
-                                 "version "+OLD_VERSION+" to version "+NEW_VERSION+"</p>"
+                            html:Mico.Lang.Upgrader.version_upgrade(OLD_VERSION, NEW_VERSION)
                         },
                         this.upgradeButton
                     ]
@@ -80,7 +78,7 @@ Mico.Upgrader = function () {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {
                 // show that something is happening
-                Ext.Msg.wait('Upgrade','Upgrading MICO',{
+                Ext.Msg.wait(Mico.Lang.Upgrader.doUpgradeWait_title, Mico.Lang.Upgrader.doUpgradeWait_text,{
                     closable:false,
                     modal:true
                 });
@@ -96,8 +94,7 @@ Mico.Upgrader = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             
-                            Ext.Msg.alert("Upgraded", "MICO has now been successfully upgraded.<br /><br />"+
-                                                      "You will now be redirected to the login page.", function () { window.location = '../' });
+                            Ext.Msg.alert(Mico.Lang.Upgrader.doUpgradeConfirmation_title, Mico.Lang.Upgrader.doUpgradeConfirmation_text, function () { window.location = '../' });
                         } else {
                             Ext.Msg.hide();
                             var msg = "Unknown system error";
