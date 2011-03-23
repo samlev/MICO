@@ -39,7 +39,7 @@ try {
     
     // build the return data
     $data = array("success"=>true,
-                  "info"=>"Password has successfully been set");
+                  "info"=>$LANG->get_string('setPassword/Success'));
 } catch (UserNotFoundException $e) {
     // couldn't log in - return the error message
     $error = true;
