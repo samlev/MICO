@@ -76,6 +76,11 @@ if (defined('FS_ROOT')) {
     $config_written = true;
 }
 
+// Check if a language has been chosen
+if (isset($_COOKIE['LANGUAGE'])) {
+    define('LANGUAGE',$_COOKIE['LANGUAGE']);
+}
+
 ?> 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -95,16 +100,32 @@ if (defined('FS_ROOT')) {
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
         
     <script type="text/javascript" src="../js/Mico.Application.js"></script>
+    <script type="text/javascript" src="../js/Mico.Lang.<?php echo (defined('LANGUAGE')?LANGUAGE:'EN') ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Utils.js"></script>
+    <script type="text/javascript" src="../js/admin/Mico.Utils.CommonStores.js"></script>
     <!-- pull in the appropriate installer files -->
     <script type="text/javascript" src="js/Mico.ConfigSetup.js"></script>
     <script type="text/javascript" src="js/Mico.SystemSetup.js"></script>
+    <script type="text/javascript" src="js/Mico.Installed.js"></script>
+    <script type="text/javascript" src="js/Mico.LanguageSelect.js"></script>
     <script type="text/javascript" defer="defer">
     <!--
     <?php
-    if ($config_written) {
+    if (defined('CONFIGURED')) {
+        // the system is configured and installed. Show the 'installed' page
+        ?>
+        setTimeout("Mico.Installed.show()",200);
+        <?php
+    } else if (!defined('LANGUAGE')) {
+        // The user hasn't selected a language
+        ?>
+        var DEFAULT_LANGUAGE = 'EN';
+        setTimeout("Mico.LanguageSelect.show()",200);
+        <?php
+    } else if ($config_written) {
         // display the 'system setup' page
         ?>
+        var LANGUAGE = '<?php echo addslashes(LANGUAGE)?>';
         setTimeout("Mico.SystemSetup.show()",200);
         <?php
     } else {
