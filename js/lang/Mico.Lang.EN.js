@@ -619,6 +619,11 @@ Mico.Lang = function () {
                          "'install' directory and all of its contents.</p>"+
                          "<p>This will help to secure your installation.</p>"+
                          '<p><a href="../">Click here</a> to go to the login page.</p>'
+        },
+        // Common language
+        Common: {
+            unknownError_title: "Error",
+            unknownError_text: "Unknown system error"
         }
     };
 } ();

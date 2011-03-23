@@ -203,11 +203,11 @@ Mico.ManageUsers = function () {
                                 e.record.commit();
                             } else {
                                 Ext.Msg.hide();
-                                var msg = "Unknown system error";
+                                var msg = Mico.Lang.Common.unknownError_text;
                                 if (res.info !== undefined) {
                                     msg = res.info;
                                 }
-                                Ext.Msg.alert("Error", msg);
+                                Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                                 
                                 // roll back the record
                                 e.record.reject();
@@ -262,11 +262,11 @@ Mico.ManageUsers = function () {
                         Ext.Msg.alert(Mico.Lang.ManageUsers.resetPasswordConfirmation_title,Mico.Lang.ManageUsers.resetPasswordConfirmation_text);
                     } else {
                         Ext.Msg.hide();
-                        var msg = "Unknown system error";
+                        var msg = Mico.Lang.Common.unknownError_text;
                         if (res.info !== undefined) {
                             msg = res.info;
                         }
-                        Ext.Msg.alert("Error", msg);
+                        Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                     }
                 },
                 scope: this
@@ -345,11 +345,11 @@ Mico.ManageUsers = function () {
                                     this.userGridStore.reload();
                                 } else {
                                     Ext.Msg.hide();
-                                    var msg = "Unknown system error";
+                                    var msg = Mico.Lang.Common.unknownError_text;
                                     if (res.info !== undefined) {
                                         msg = res.info;
                                     }
-                                    Ext.Msg.alert("Error", msg);
+                                    Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                                 }
                             },
                             scope: this

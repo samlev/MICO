@@ -141,11 +141,11 @@ Mico.LanguageSelect = function () {
                             Ext.Msg.alert("Language Saved", "Your language has been saved. Press 'Continue' to proceed with the installation.", function () { Mico.LanguageSelect.continueButton.enable(); });
                         } else {
                             Ext.Msg.hide();
-                            var msg = "Unknown system error";
+                            var msg = Mico.Lang.Common.unknownError_text;
                             if (res.info !== undefined) {
                                 msg = res.info;
                             }
-                            Ext.Msg.alert("Error", msg);
+                            Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                         }
                     },
                     scope: this

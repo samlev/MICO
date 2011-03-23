@@ -704,11 +704,11 @@ Mico.Calls.AddCall = function () {
                             this.clear();
                             Mico.Calls.ViewCalls.gridStore.reload();
                         } else {
-                            var msg = "Unknown system error";
+                            var msg = Mico.Lang.Common.unknownError_text;
                             if (res.info !== undefined) {
                                 msg = res.info;
                             }
-                            Ext.Msg.alert("Error", msg);
+                            Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                         }
                     },
                     scope: this

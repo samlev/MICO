@@ -294,11 +294,11 @@ Mico.SystemSettings = function () {
                         Ext.Msg.hide();
                     } else {
                         Ext.Msg.hide();
-                        var msg = "Unknown system error";
+                        var msg = Mico.Lang.Common.unknownError_text;
                         if (res.info !== undefined) {
                             msg = res.info;
                         }
-                        Ext.Msg.alert("Error", msg);
+                        Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                     }
                 },
                 scope: this
@@ -337,11 +337,11 @@ Mico.SystemSettings = function () {
                             Ext.Msg.alert(Mico.Lang.SystemSettings.saveSettingsConfirmation_title, Mico.Lang.SystemSettings.saveSettingsConfirmation_text);
                         } else {
                             Ext.Msg.hide();
-                            var msg = "Unknown system error";
+                            var msg = Mico.Lang.Common.unknownError_text;
                             if (res.info !== undefined) {
                                 msg = res.info;
                             }
-                            Ext.Msg.alert("Error", msg);
+                            Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                         }
                     },
                     scope: this

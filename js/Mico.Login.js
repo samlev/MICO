@@ -187,11 +187,11 @@ Mico.Login = function () {
                         window.location.reload(true);
                     },
                     failure: function (form, action) {
-                        var msg = "Unknown system error";
+                        var msg = Mico.Lang.Common.unknownError_text;
                         if (action.result !== undefined) {
                             msg = action.result.info;
                         }
-                        Ext.Msg.alert("Error", msg);
+                        Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                     },
                     scope:this
                 });
@@ -215,11 +215,11 @@ Mico.Login = function () {
                         this.resetPasswordForm.getForm().reset();
                     },
                     failure: function (form, action) {
-                        var msg = "Unknown system error";
+                        var msg = Mico.Lang.Common.unknownError_text;
                         if (action.result !== undefined) {
                             msg = action.result.info;
                         }
-                        Ext.Msg.alert("Error", msg);
+                        Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                     },
                     scope:this
                 });

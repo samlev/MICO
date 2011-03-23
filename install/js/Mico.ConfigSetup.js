@@ -302,22 +302,22 @@ Mico.ConfigSetup = function () {
                                         Ext.Msg.alert(Mico.Lang.ConfigSetup.saveSettingsConfirmation_title, Mico.Lang.ConfigSetup.saveSettingsConfirmation_text, function () { Mico.SystemSetup.show() });
                                     } else {
                                         Ext.Msg.hide();
-                                        var msg = "Unknown system error";
+                                        var msg = Mico.Lang.Common.unknownError_text;
                                         if (res.info !== undefined) {
                                             msg = res.info;
                                         }
-                                        Ext.Msg.alert("Error", msg);
+                                        Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                                     }
                                 },
                                 scope: this
                             });
                         } else {
                             Ext.Msg.hide();
-                            var msg = "Unknown system error";
+                            var msg = Mico.Lang.Common.unknownError_text;
                             if (res.info !== undefined) {
                                 msg = res.info;
                             }
-                            Ext.Msg.alert("Error", msg);
+                            Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                         }
                     },
                     scope: this

@@ -175,11 +175,11 @@ Mico.PasswordSet = function () {
                             Ext.Msg.alert(Mico.Lang.PasswordSet.setPasswordSuccess_title,Mico.Lang.PasswordSet.setPasswordSuccess_text,function () {window.location=APP_ROOT;}, this);
                         },
                         failure: function (form, action) {
-                            var msg = "Unknown system error";
+                            var msg = Mico.Lang.Common.unknownError_text;
                             if (action.result !== undefined) {
                                 msg = action.result.info;
                             }
-                            Ext.Msg.alert("Error", msg);
+                            Ext.Msg.alert(Mico.Lang.Common.unknownError_title, msg);
                         },
                         scope:this
                     });
