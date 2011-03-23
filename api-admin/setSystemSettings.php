@@ -28,6 +28,7 @@ $DEBUG_MODE = boolval($_POST['DEBUG_MODE'],true);
 $MAIL_FROM = trim(remove_linebreaks(html_scrub($_POST['MAIL_FROM'])));
 $SESSION_LENGTH = trim(remove_linebreaks(html_scrub($_POST['SESSION_LENGTH'])));
 $SIMPLE_CRON = boolval($_POST['SIMPLE_CRON'],true);
+$LANGUAGE = trim(remove_linebreaks(html_scrub($_POST['LANGUAGE'])));
 
 // set what we can
 if ($DEBUG_MODE !== null) {
@@ -98,6 +99,24 @@ if ($SIMPLE_CRON !== null) {
     // mark the error
     $error = true;
     $error_message .= "Simple cron must be either true or false.";
+}
+
+// check that 'language' is a valid language option
+if (preg_match('/^[A-Z]{2}$/',$LANGUAGE)) {
+    // if the setting is different, save it
+    if (Settings::get('LANGUAGE')!=$LANGUAGE) {
+        Settings::set('LANGUAGE',$LANGUAGE);
+    }
+} else {
+    // if we have an error already, make multiple lines
+    if ($error) {
+        $error_message .= "<br />";
+    } else {
+        $error_message = "";
+    }
+    // mark the error
+    $error = true;
+    $error_message .= "Language is not valid.";
 }
 
 // no error? respond with success

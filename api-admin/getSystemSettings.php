@@ -28,5 +28,6 @@ $data = array("success"=>true,
               "DEBUG_MODE"=>Settings::get('DEBUG_MODE'),
               "MAIL_FROM"=>Settings::get('MAIL_FROM'),
               "SESSION_LENGTH"=>Settings::get('SESSION_LENGTH'),
-              "SIMPLE_CRON"=>Settings::get('SIMPLE_CRON'));
+              "SIMPLE_CRON"=>Settings::get('SIMPLE_CRON'),
+              "LANGUAGE"=>Settings::get('LANGUAGE'));
 ?>

@@ -460,6 +460,12 @@ Mico.Lang = function () {
                 "<b>"+APP_ROOT+"/notify.php</b> using a command similar to the one below. "+
                 "The notify script should be run at least every 5 minutes to ensure "+
                 "that notification emails are sent out as early as possible.",
+            // L10n settings - language
+            languageFieldset_title: "Default language",
+            languageFieldset_description: "This is the default language used in the "+
+                "system. Users may select their own preferred language, but this "+
+                "will be used on the login and change password forms, and if the "+
+                "user has not yet selected a language.",
             // Save settings
             saveSettingsButton_text: "Save Settings",
             resetSettingsButton_text: "Reset",

@@ -173,6 +173,35 @@ Mico.SystemSettings = function () {
                     ]
                 });
                 
+                // L10n - language
+                this.systemLanguageField = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    editable:false,
+                    required:true,
+                    store: new Ext.data.ArrayStore ({
+                        fields:['lang','display'],
+                        data: Mico.Utils.CommonStores.languageOptions
+                    }),
+                    displayField:'display',
+                    valueField:'data',
+                    mode:'local',
+                    value: "EN",
+                    triggerAction:'all',
+                    disabled: true,
+                    hideLabel: true
+                });
+                
+                // L10n - language fieldset
+                this.languageFieldset = new Ext.form.FieldSet({
+                    title: Mico.Lang.SystemSettings.languageFieldset_title,
+                    items: [
+                        {
+                            html: Mico.Lang.SystemSettings.languageFieldset_description,
+                            bodyStyle:'padding-bottom:3px;'
+                        },
+                        this.systemLanguageField
+                    ]
+                });
                 
                 // The button for saving the user's settings
                 this.saveSettingsButton = new Ext.Button({
@@ -200,6 +229,7 @@ Mico.SystemSettings = function () {
                         this.mailFromFieldset,
                         this.sessionLengthFieldset,
                         this.simpleCronFieldset,
+                        this.languageFieldset,
                         {
                             layout:'hbox',
                             items: [
@@ -227,6 +257,7 @@ Mico.SystemSettings = function () {
             this.mailFromField.disable();
             this.sessionLengthField.disable();
             this.simpleCronField.disable();
+            this.systemLanguageField.disable();
             
             Ext.Msg.wait(Mico.Lang.SystemSettings.loadSettingsWait_title, Mico.Lang.SystemSettings.loadSettingsWait_text,{
                 closable:false,
@@ -250,12 +281,14 @@ Mico.SystemSettings = function () {
                         this.mailFromField.enable();
                         this.sessionLengthField.enable();
                         this.simpleCronField.enable();
+                        this.systemLanguageField.enable();
                         
                         // set the values
                         this.debugModeField.setValue(res.DEBUG_MODE);
                         this.mailFromField.setValue(res.MAIL_FROM);
                         this.sessionLengthField.setValue(res.SESSION_LENGTH);
                         this.simpleCronField.setValue(res.SIMPLE_CRON);
+                        this.systemLanguageField.setValue(res.LANGUAGE);
                         
                         Ext.Msg.hide();
                     } else {
@@ -291,7 +324,8 @@ Mico.SystemSettings = function () {
                         DEBUG_MODE: this.debugModeField.getValue(),
                         MAIL_FROM: this.mailFromField.getValue(),
                         SESSION_LENGTH: this.sessionLengthField.getValue(),
-                        SIMPLE_CRON: this.simpleCronField.getValue()
+                        SIMPLE_CRON: this.simpleCronField.getValue(),
+                        LANGUAGE: this.systemLanguageField.getValue()
                     },
                     callback: function (options, success, response) {
                         var res = Ext.decode(response.responseText);
