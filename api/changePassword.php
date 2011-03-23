@@ -35,7 +35,7 @@ try {
     
     // build the return data
     $data = array("success"=>true,
-                  "info"=>"Password has successfully been changed");
+                  "info"=>$LANG->get_string('changePassword/Success'));
 } catch (UserPasswordException $e) {
     // problem with the password
     $error = true;
