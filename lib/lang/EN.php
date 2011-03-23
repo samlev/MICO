@@ -29,7 +29,10 @@ $language_strings = array(
     "api/UnknownFunction"   => "Unknown function requested",
     "api/APIError"          => "API Error",
     /** PUBLIC API **/
+    // Language for resetPassword.php
     "resetPassword/Success" => "An email was sent to %%EMAIL%% with further isntructions.",
+    // Language for setPassword.php
+    "setPassword/Success"   => "Password has successfully been set.",
     /** USER API **/
     // Language for addCall.php
     "addCall/NoRecipient"   => "Please select a recipient for the call",
