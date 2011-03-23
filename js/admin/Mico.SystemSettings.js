@@ -183,7 +183,7 @@ Mico.SystemSettings = function () {
                         data: Mico.Utils.CommonStores.languageOptions
                     }),
                     displayField:'display',
-                    valueField:'data',
+                    valueField:'lang',
                     mode:'local',
                     value: "EN",
                     triggerAction:'all',
