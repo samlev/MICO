@@ -418,6 +418,59 @@ Mico.Lang = function () {
                 disabled: "User disabled",
                 active: "Reset Password"
             }
+        },
+        // Language for Mico.SystemSettings.js
+        SystemSettings: {
+            menu_text: "System Settings",
+            // Debug mode
+            debugModeField_boxLabel: "Use debug mode",
+            debugModeFieldset_title: "Debug Mode",
+            debugModeFieldset_description: "Debug mode is useful for when you are "+
+                "working on the Mico codebase, or if you are experiencing errors. "+
+                "For best performance, it is advised to leave this option off.",
+            // From email
+            mailFromFieldset_title: "From email",
+            mailFromFieldset_description: "The from email is used to send password "+
+                "set and reset emails, as well as notification emails.",
+            // Session length
+            sessionLengthField_data: {
+                halfhour: '30 minutes',
+                onehour: '1 hour',
+                twohours: '2 hours',
+                oneday: '1 day',
+                threedays: '3 days',
+                oneweek: '1 week',
+                twoweeks: '2 weeks',
+                onemonth: '1 month',
+                oneyear: '1 year'
+            },
+            sessionLengthFieldset_title: "Session length",
+            sessionLengthFieldset_description: "The session length is how long a "+
+                "session persists while a user does not have Mico open. Short "+
+                "sessions are more secure, but long sessions mean that a user will "+
+                "not have to log in every time they open the application.",
+            // Simple cron
+            simpleCronField_boxLabel: "Use simple cron",
+            simpleCronFieldset_title: "Simple cron",
+            simpleCronFieldset_description: "The cron is a recurring task which "+
+                "sends out notification emails.<br /><br />"+
+                "The simple cron should only be used if you do not have access to "+
+                "a proper cron system. It will only run when a user has Mico open.<br /><br />"+
+                "If you have access to proper task scheduler, you can set it to call "+
+                "<b>"+APP_ROOT+"/notify.php</b> using a command similar to the one below. "+
+                "The notify script should be run at least every 5 minutes to ensure "+
+                "that notification emails are sent out as early as possible.",
+            // Save settings
+            saveSettingsButton_text: "Save Settings",
+            resetSettingsButton_text: "Reset",
+            // Load settings
+            loadSettingsWait_title: "Loading",
+            loadSettingsWait_text: "Loading settings from the server",
+            // Save settings
+            saveSettingsWait_title: "Save Settings",
+            saveSettingsWait_text: "Saving system settings",
+            saveSettingsConfirmation_title: "System Settings",
+            saveSettingsConfirmation_text: "The system settings have been updated"
         }
     };
 } ();
