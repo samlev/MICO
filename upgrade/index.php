@@ -46,7 +46,8 @@ include_once(FS_ROOT.'/inc/connect.php');
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
-        
+    
+    <script type="text/javascript" src="../js/ext/src/locale/ext-lang-<?php echo strtolower(Settings::get_default('LANGUAGE','EN')); ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Application.js"></script>
     <script type="text/javascript" src="../js/lang/Mico.Lang.<?php echo Settings::get_default('LANGUAGE','EN'); ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Utils.js"></script>

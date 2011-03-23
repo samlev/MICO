@@ -56,7 +56,8 @@ if (isset($_COOKIE['LANGUAGE'])) {
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
-        
+    
+    <script type="text/javascript" src="../js/ext/src/locale/ext-lang-<?php echo strtolower(defined('LANGUAGE')?LANGUAGE:'EN'); ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Application.js"></script>
     <script type="text/javascript" src="../js/Mico.Lang.<?php echo (defined('LANGUAGE')?LANGUAGE:'EN') ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Utils.js"></script>

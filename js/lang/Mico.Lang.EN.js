@@ -496,6 +496,40 @@ Mico.Lang = function () {
             doUpgradeConfirmation_text:"MICO has now been successfully upgraded.<br /><br />"+
                 "You will now be redirected to the login page."
         },
+        // Language for Mico.ConfigSetup.js
+        ConfigSetup: {
+            instructions: "Step 1: set up the database",
+            // Path settings
+            automaticPathField_boxLabel: "Use automatic path settings (Recommended)",
+            FS_ROOT_Field_fieldLabel: "File System Root Directory",
+            WEB_DOMAIN_Field_fieldLabel: "Web Domain",
+            WEB_ROOT_Field_fieldLabel: "Web Root",
+            APP_ROOT_Field_fieldLabel: "Application Root",
+            pathSettingsFieldset_title: "Filesystem and path settings",
+            pathSettingsFieldset_description: "The following settings define where "+
+                "Mico is on your server, and how you access it over the internet. "+
+                "The advanced settings are only advisable if you know exactly what you are doing.",
+            // Database settings
+            hostField_fieldLabel: "Host name",
+            userField_fieldLabel: "User name",
+            passField_fieldLabel: "Password",
+            nameField_fieldLabel: "Database",
+            prefField_fieldLabel: "Table prefix",
+            databaseSettingsFieldset_title: "Database settings",
+            databaseSettingsFieldset_description: "The following settings are for "+
+                "your MySQL database. The table prefix will keep Mico data separate "+
+                "from other tables if Mico is sharing a database with other applications.",
+            // Buttons
+            saveSettingsButton_text: "Save Settings",
+            resetSettingsButton_text: "Reset",
+            // Save settings function
+            checkSettingsWait_title: "Checking Settings",
+            checkSettingsWait_text: "Checking database settings",
+            saveSettingsWait_title: "Installing",
+            saveSettingsWait_text: "Installing Mico",
+            saveSettingsConfirmation_title: "Installing",
+            saveSettingsConfirmation_text: "Step 1 complete. Next step is to set up system configuration."
+        },
         // Language for Mico.Installed.js
         Installed: {
             placeholder: "<h2>MICO has been isntalled.</h2>"+
