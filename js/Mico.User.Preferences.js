@@ -347,7 +347,8 @@ Mico.User.Preferences = function () {
                         }
                     ],
                     cls: 'main-form-panel',
-                    bodyStyle: "padding:5px;"
+                    bodyStyle: "padding:5px;",
+                    autoScroll:true
                 });
                 
                 // The old password
@@ -498,7 +499,8 @@ Mico.User.Preferences = function () {
                         }
                     ], 
                     cls: 'main-form-panel',
-                    bodyStyle: "padding:5px;"
+                    bodyStyle: "padding:5px;",
+                    autoScroll:true
                 });
                 
                 // Send notifications field
@@ -816,7 +818,8 @@ Mico.User.Preferences = function () {
                         }
                     ], 
                     cls: 'main-form-panel',
-                    bodyStyle: "padding:5px;"
+                    bodyStyle: "padding:5px;",
+                    autoScroll:true
                 });
                 
                 // set up the main panel

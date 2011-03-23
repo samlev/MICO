@@ -240,6 +240,7 @@ Mico.SystemSettings = function () {
                         }
                     ],
                     cls: 'main-form-panel',
+                    autoScroll:true,
                     bodyStyle: "padding:5px;"
                 });
                 
