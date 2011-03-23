@@ -45,7 +45,7 @@ if ($DEBUG_MODE !== null) {
     }
     // mark the error
     $error = true;
-    $error_message .= "Debug mode must be either true or false.";
+    $error_message .= $LANG->get_string('setSystemSettings/Debug');
 }
 
 if (strlen($MAIL_FROM)) {
@@ -62,7 +62,7 @@ if (strlen($MAIL_FROM)) {
     }
     // mark the error
     $error = true;
-    $error_message .= "From email cannot be blank.";
+    $error_message .= $LANG->get_string('setSystemSettings/Mail');
 }
 
 // check that 'session length' is a valid time period
@@ -80,7 +80,7 @@ if (preg_match('/^[1-9][0-9]{0,2} (minute|hour|day|week|month|year)s?$/i',$SESSI
     }
     // mark the error
     $error = true;
-    $error_message .= "Session length must be a valid period of time.";
+    $error_message .= $LANG->get_string('setSystemSettings/Session');
 }
 
 // simple cron
@@ -98,7 +98,7 @@ if ($SIMPLE_CRON !== null) {
     }
     // mark the error
     $error = true;
-    $error_message .= "Simple cron must be either true or false.";
+    $error_message .= $LANG->get_string('setSystemSettings/Cron');
 }
 
 // check that 'language' is a valid language option
@@ -116,7 +116,7 @@ if (preg_match('/^[A-Z]{2}$/',$LANGUAGE)) {
     }
     // mark the error
     $error = true;
-    $error_message .= "Language is not valid.";
+    $error_message .= $LANG->get_string('setSystemSettings/Language');
 }
 
 // no error? respond with success
