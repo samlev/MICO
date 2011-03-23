@@ -32,6 +32,8 @@ $language_strings = array(
     "addCall/NoRecipient"   => "Please select a recipient for the call",
     "addCall/NoCallInfo"    => "Please enter either a caller name, company name, message, or contact details",
     "addCall/RecipientError"=> "There was a problem adding your call. Please check your recipients and try again",
-    "addCall/FieldError"    => "There was a problem adding your call. Please check your fields and try again"
+    "addCall/FieldError"    => "There was a problem adding your call. Please check your fields and try again",
+    // Language for changePassword.php
+    "changePassword/Success"=> "Password has successfully been changed"
 );
 ?>
