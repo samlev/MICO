@@ -36,6 +36,7 @@ if (!defined('CONFIGURED')) {
         $MAIL_FROM = trim(remove_linebreaks(html_scrub($_POST['MAIL_FROM'])));
         $SESSION_LENGTH = trim(remove_linebreaks(html_scrub($_POST['SESSION_LENGTH'])));
         $SIMPLE_CRON = boolval($_POST['SIMPLE_CRON'],true);
+        $LANGUAGE = trim(remove_linebreaks(html_scrub($_POST['LANGUAGE'])));
         
         // get the version
         include_once(FS_ROOT.'/version.php');
@@ -111,6 +112,24 @@ if (!defined('CONFIGURED')) {
             // mark the error
             $success = false;
             $message .= "Simple cron must be either true or false.";
+        }
+        
+        // check that 'language' is a valid language option
+        if (preg_match('/^[A-Z]{2}$/',$LANGUAGE)) {
+            // if the setting is different, save it
+            if (Settings::get_default('LANGUAGE',null)!=$LANGUAGE) {
+                Settings::set('LANGUAGE',$LANGUAGE);
+            }
+        } else {
+            // if we have an error already, make multiple lines
+            if ($success) {
+                $message = "";
+            } else {
+                $message .= "<br />";
+            }
+            // mark the error
+            $success = false;
+            $message .= "Language is not valid.";
         }
         
         // mico version
