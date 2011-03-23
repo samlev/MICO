@@ -27,6 +27,9 @@ include_once ('inc/config.php');
 // Connect to the database, and brings in the standard library
 include_once(FS_ROOT.'/inc/connect.php');
 
+// Set up the Language system
+$LANG = new Lang(Settings::get_default('LANGUAGE','EN'));
+
 $data = false;
 
 // Set the starting values
@@ -40,6 +43,9 @@ $session_expired = false;
 if (isset($_POST['session'])) {
     try {
         $user = User::by_session($_POST['session']);
+        
+        // Update the language file to the user's preference
+        $LANG->set_language($user->get_var_default('lang',''));
     } catch (UserSessionException $e) {
         // error while authenticating off the session
         $error = true;
@@ -66,7 +72,7 @@ if (!$error) {
             require_once ("api/".$_GET ["f"].".php");
         } else {
             $error = true;
-            $error_message = "Unknown function requested";
+            $error_message = $LANG->get_string('api/Unknownfunction');
         }
     } else {
         // we can only check the public API
@@ -75,7 +81,7 @@ if (!$error) {
             require_once ("api-public/".$_GET ["f"].".php");
         } else {
             $error = true;
-            $error_message = "Unknown function requested";
+            $error_message = $LANG->get_string('api/Unknownfunction');
         }
     }
 }
@@ -83,7 +89,7 @@ if (!$error) {
 // check if the API returned a '$data' object
 if (!$error && $data === false) {
     $error = true;
-    $error_message = "API Error";
+    $error_message = $LANG->get_string('api/APIError');
 }
 
 // Were there any errors?

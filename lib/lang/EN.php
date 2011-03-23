@@ -25,6 +25,7 @@
 
 // All language files must define a "$language_strings" variable
 $language_strings = array(
+    // Language for api.php
     "api/UnknownFunction"   => "Unknown function requested",
     "api/APIError"          => "API Error"
 );
