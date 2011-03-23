@@ -39,5 +39,6 @@ include_once(FS_ROOT.'/lib/Settings.class.php'); // system settings class
 include_once(FS_ROOT.'/lib/User.class.php'); // User class
 include_once(FS_ROOT.'/lib/Call.class.php'); // Call class
 include_once(FS_ROOT.'/lib/PasswordReset.class.php'); // password reset class
+include_once(FS_ROOT.'/lib/Lang.class.php'); // Language class
 include_once(FS_ROOT.'/version.php'); // code version
 ?>
