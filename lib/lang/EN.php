@@ -26,28 +26,35 @@
 // All language files must define a "$language_strings" variable
 $language_strings = array(
     // Language for api.php
-    "api/UnknownFunction"   => "Unknown function requested",
-    "api/APIError"          => "API Error",
+    "api/UnknownFunction"       => "Unknown function requested",
+    "api/APIError"              => "API Error",
     /** PUBLIC API **/
     // Language for resetPassword.php
-    "resetPassword/Success" => "An email was sent to %%EMAIL%% with further isntructions.",
+    "resetPassword/Success"     => "An email was sent to %%EMAIL%% with further isntructions.",
     // Language for setPassword.php
-    "setPassword/Success"   => "Password has successfully been set.",
+    "setPassword/Success"       => "Password has successfully been set.",
     /** USER API **/
     // Language for addCall.php
-    "addCall/NoRecipient"   => "Please select a recipient for the call",
-    "addCall/NoCallInfo"    => "Please enter either a caller name, company name, message, or contact details",
-    "addCall/RecipientError"=> "There was a problem adding your call. Please check your recipients and try again",
-    "addCall/FieldError"    => "There was a problem adding your call. Please check your fields and try again",
+    "addCall/NoRecipient"       => "Please select a recipient for the call",
+    "addCall/NoCallInfo"        => "Please enter either a caller name, company name, message, or contact details",
+    "addCall/RecipientError"    => "There was a problem adding your call. Please check your recipients and try again",
+    "addCall/FieldError"        => "There was a problem adding your call. Please check your fields and try again",
     // Language for changePassword.php
-    "changePassword/Success"=> "Password has successfully been changed",
+    "changePassword/Success"    => "Password has successfully been changed",
     /** MANAGER API **/
     // Language for addUser.php
-    "addUser/ErrorAdding"   => "Error adding user",
-    "addUser/AddAdminPerm"  => "You do not have permission to add an administrative user",
-    "addUser/InvalidRole"   => "User's role is not valid",
-    "addUser/NameEmailBlank"=> "User's name and email cannot be blank",
-    "addUser/UsernameInUse" => "Username already in use",
-    "addUser/UsernameChars" => "Username may contain only letters and numbers, optionally separated by a period (.), dash (-), or underscore (_)",
+    "addUser/ErrorAdding"       => "Error adding user",
+    "addUser/AddAdminPermError" => "You do not have permission to add an administrative user",
+    "addUser/InvalidRole"       => "User's role is not valid",
+    "addUser/NameEmailBlank"    => "User's name and email cannot be blank",
+    "addUser/UsernameInUse"     => "Username already in use",
+    "addUser/InvalidUsername"   => "Username may contain only letters and numbers, optionally separated by a period (.), dash (-), or underscore (_)",
+    // Language for updateUser.php
+    "updateUser/BlankField"     => "User's %%FIELD%% cannot be blank",
+    "updateUser/RolePermission" => "You do not have permission to set that role",
+    "updateUser/OwnRole"        => "You may not change your own role",
+    "updateUser/InvalidRole"    => "Not a valid role",
+    "updateUser/UnknownField"   => "Unknown field",
+    "updateUser/PermissionError"=> "You do not have permission to update that user",
 );
 ?>
