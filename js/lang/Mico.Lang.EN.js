@@ -495,6 +495,14 @@ Mico.Lang = function () {
             doUpgradeConfirmation_title:"Upgraded",
             doUpgradeConfirmation_text:"MICO has now been successfully upgraded.<br /><br />"+
                 "You will now be redirected to the login page."
+        },
+        // Language for Mico.Installed.js
+        Installed: {
+            placeholder: "<h2>MICO has been isntalled.</h2>"+
+                         "<p>Mico is installed. It is advisable to delete the "+
+                         "'install' directory and all of its contents.</p>"+
+                         "<p>This will help to secure your installation.</p>"+
+                         '<p><a href="../">Click here</a> to go to the login page.</p>'
         }
     };
 } ();

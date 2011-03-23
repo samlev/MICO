@@ -26,48 +26,6 @@
 // include the configuration file
 @include_once ('../inc/config.php');
 
-// If the system isn't configured, show the 'install' page
-if (defined('CONFIGURED')) {
-    ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>Mico</title>
-    <link rel="SHORTCUT ICON" href="favicon.ico" />
-    <!-- Link to the CSS files -->
-    <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/ext-all.css" />
-    <link type="text/css" rel="stylesheet" href="../skin/static/main.css" />
-    <link type="text/css" rel="stylesheet" href="../skin/custom/skin.css" />
-    <style>
-        html {
-            height:100%;
-        }
-        body {
-            background-color: #f0fff0;
-        }
-    </style>
-  </head>
-  <body>
-    <div id="pageHeader">
-      <img src="../skin/static/mico.png" alt="Mico" id="micoLogo" />
-    </div>
-    <div style="padding:8px;">
-      <h2 style="font-size:16pt;margin-bottom:8px;">Installation</h2>
-      <p style="margin-bottom:8px;">
-        Mico is installed. Please delete the 'install' directory and all of
-        its contents.
-      </p>
-      <p style="margin-bottom:8px;">
-        <a href="<?php echo APP_ROOT?>">Click here</a> to go to the login page.
-      </p>
-    </div>
-  </body>
-</html>
-    <?php
-    exit();
-}
-
 $config_written = false;
 // if 'FS_ROOT' is defined, then the config file has been written
 if (defined('FS_ROOT')) {
@@ -117,9 +75,8 @@ if (isset($_COOKIE['LANGUAGE'])) {
         setTimeout("Mico.Installed.show()",200);
         <?php
     } else if (!defined('LANGUAGE')) {
-        // The user hasn't selected a language
+        // The user hasn't selected a language yet. Show them the 'language select' page
         ?>
-        var DEFAULT_LANGUAGE = 'EN';
         setTimeout("Mico.LanguageSelect.show()",200);
         <?php
     } else if ($config_written) {
