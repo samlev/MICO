@@ -459,7 +459,11 @@ Mico.Lang = function () {
                 "If you have access to proper task scheduler, you can set it to call "+
                 "<b>"+APP_ROOT+"/notify.php</b> using a command similar to the one below. "+
                 "The notify script should be run at least every 5 minutes to ensure "+
-                "that notification emails are sent out as early as possible.",
+                "that notification emails are sent out as early as possible.<br /><br />"+
+                "<i>Please note that the command below may be different depending "+
+                "on how your server is set up. If you encounter any issues, contact "+
+                "your server administrator or hosting provider to ensure that the "+
+                "cron task has been set up correctly.</i>",
             // L10n settings - language
             languageFieldset_title: "Default language",
             languageFieldset_description: "This is the default language used in the "+
@@ -529,6 +533,84 @@ Mico.Lang = function () {
             saveSettingsWait_text: "Installing Mico",
             saveSettingsConfirmation_title: "Installing",
             saveSettingsConfirmation_text: "Step 1 complete. Next step is to set up system configuration."
+        },
+        // Language for Mico.SystemSetup.js
+        SystemSetup: {
+            // Debug mode
+            debugModeField_boxLabel: "Use debug mode",
+            debugModeFieldset_title: "Debug Mode",
+            debugModeFieldset_description: "Debug mode is useful for when you are "+
+                "working on the Mico codebase, or if you are experiencing errors. "+
+                "For best performance, it is advised to leave this option off.",
+            // From email
+            mailFromFieldset_title: "From email",
+            mailFromFieldset_description: "The from email is used to send password "+
+                "set and reset emails, as well as notification emails.",
+            // Session length
+            sessionLengthField_data: {
+                halfhour: '30 minutes',
+                onehour: '1 hour',
+                twohours: '2 hours',
+                oneday: '1 day',
+                threedays: '3 days',
+                oneweek: '1 week',
+                twoweeks: '2 weeks',
+                onemonth: '1 month',
+                oneyear: '1 year'
+            },
+            sessionLengthFieldset_title: "Session length",
+            sessionLengthFieldset_description: "The session length is how long a "+
+                "session persists while a user does not have Mico open. Short "+
+                "sessions are more secure, but long sessions mean that a user will "+
+                "not have to log in every time they open the application.",
+            // Simple cron
+            simpleCronField_boxLabel: "Use simple cron",
+            simpleCronFieldset_title: "Simple cron",
+            simpleCronFieldset_description: "The cron is a recurring task which "+
+                "sends out notification emails.<br /><br />"+
+                "The simple cron should only be used if you do not have access to "+
+                "a proper cron system. It will only run when a user has Mico open.<br /><br />"+
+                'Once the system is installed, the "System Settings" tab will have '+
+                "further instructions on how to set up the cron task.",
+            // L10n settings - language
+            languageFieldset_title: "Default language",
+            languageFieldset_description: "This is the default language used in the "+
+                "system. Users may select their own preferred language, but this "+
+                "will be used on the login and change password forms, and if the "+
+                "user has not yet selected a language.",
+            // First user
+            usernameField_fieldLabel: "Username",
+            usernameField_blankText: "You must enter your username",
+            nameField_fieldLabel: "Name",
+            nameField_blankText: "You must enter your name",
+            emailField_fieldLabel: "Email",
+            emailField_blankText: "You must enter your email",
+            // Password
+            passwordField_fieldLabel: "Password",
+            passwordField_blankText: "You must enter your password",
+            passwordStrengthIndicator_fieldLabel: "Strength",
+            passwordConfirmField_fieldLabel: "Confirm Password",
+            passwordConfirmField_blankText: "You must enter your password",
+            // Password strength
+            passwordStrength_blank: "Enter password",
+            passwordStrength_weak: "Weak",
+            passwordStrength_medium: "Medium",
+            passwordStrength_strong: "Strong",
+            passwordStrength_verystrong: "Very Strong",
+            // Fieldset
+            passwordFieldset_title: "First User",
+            passwordFieldset_description: "Your first user will be an administrator, "+
+                "and can add other users to the system.",
+            // Buttons
+            saveSettingsButton_text: "Save Settings",
+            resetSettingsButton_text: "Reset",
+            // Function
+            saveSettingsWait_title: "Save Settings",
+            saveSettingsWait_text: "Saving system settings",
+            saveSettingsConfirmation_title: "Installed",
+            saveSettingsConfirmation_text: "Mico has now been successfully installed.<br /><br />"+
+                "Please delete the 'install' folder for security.<br /><br />"+
+                "You will now be redirected to the login page."
         },
         // Language for Mico.Installed.js
         Installed: {

@@ -57,17 +57,15 @@ Mico.SystemSetup = function () {
                     checked: false,
                     value: false,
                     hideLabel: true,
-                    boxLabel: 'Use debug mode'
+                    boxLabel: Mico.Lang.SystemSetup.debugModeField_boxLabel
                 });
                 
                 // debug mode fieldset
                 this.debugModeFieldset = new Ext.form.FieldSet({
-                    title: 'Debug Mode',
+                    title: Mico.Lang.SystemSetup.debugModeFieldset_title,
                     items: [
                         {
-                            html: 'Debug mode is useful for when you are working on the Mico codebase, or '+
-                                  'if you are experiencing errors. For best performance, it is advised to leave '+
-                                  'this option off.',
+                            html: Mico.Lang.SystemSetup.debugModeFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.debugModeField
@@ -85,11 +83,10 @@ Mico.SystemSetup = function () {
                 
                 // mail from fieldset
                 this.mailFromFieldset = new Ext.form.FieldSet({
-                    title: 'From email',
+                    title: Mico.Lang.SystemSetup.mailFromFieldset_title,
                     items: [
                         {
-                            html: 'The from email is used to send password set and reset emails, as well as '+
-                                  'notification emails.',
+                            html: Mico.Lang.SystemSetup.mailFromFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.mailFromField
@@ -104,15 +101,15 @@ Mico.SystemSetup = function () {
                     store: new Ext.data.ArrayStore ({
                         fields:['data'],
                         data: [
-                            ['30 minutes'],
-                            ['1 hour'],
-                            ['2 hours'],
-                            ['1 day'],
-                            ['3 days'],
-                            ['1 week'],
-                            ['2 weeks'],
-                            ['1 month'],
-                            ['1 year']
+                            ['30 minutes',Mico.Lang.SystemSetup.sessionLengthField_data.halfhour],
+                            ['1 hour',Mico.Lang.SystemSetup.sessionLengthField_data.onehour],
+                            ['2 hours',Mico.Lang.SystemSetup.sessionLengthField_data.twohours],
+                            ['1 day',Mico.Lang.SystemSetup.sessionLengthField_data.oneday],
+                            ['3 days',Mico.Lang.SystemSetup.sessionLengthField_data.threedays],
+                            ['1 week',Mico.Lang.SystemSetup.sessionLengthField_data.oneweek],
+                            ['2 weeks',Mico.Lang.SystemSetup.sessionLengthField_data.twoweeks],
+                            ['1 month',Mico.Lang.SystemSetup.sessionLengthField_data.onemonth],
+                            ['1 year',Mico.Lang.SystemSetup.sessionLengthField_data.oneyear]
                         ]
                     }),
                     displayField:'data',
@@ -125,13 +122,10 @@ Mico.SystemSetup = function () {
                 
                 // session length field set
                 this.sessionLengthFieldset = new Ext.form.FieldSet({
-                    title: 'Session length',
+                    title: Mico.Lang.SystemSetup.sessionLengthFieldset_title,
                     items: [
                         {
-                            html: 'The session length is how long a session persists for while a user '+
-                                  'does not have Mico open. Short sessions are more secure, but long '+
-                                  'sessions mean that a user will not have to log in every time they '+
-                                  'open the application.',
+                            html: Mico.Lang.SystemSetup.sessionLengthFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.sessionLengthField
@@ -143,60 +137,86 @@ Mico.SystemSetup = function () {
                     checked: false,
                     value: false,
                     hideLabel: true,
-                    boxLabel: 'Use simple cron'
+                    boxLabel: Mico.Lang.SystemSetup.simpleCronField_boxLabel
                 });
                 
-                // debug mode fieldset
+                // simple cron fieldset
                 this.simpleCronFieldset = new Ext.form.FieldSet({
-                    title: 'Simple cron',
+                    title: Mico.Lang.SystemSetup.simpleCronFieldset_title,
                     items: [
                         {
-                            html: 'The cron is a recurring task which sends out notification emails.<br /><br />'+
-                                  'The simple cron should only be used if you do not have access to '+
-                                  'a proper cron system. It will only run when a user has Mico open.<br /><br />'+
-                                  'Once the system is installed, the "System Settings" tab will have '+
-                                  'further instructions on how to set up the cron task.',
+                            html: Mico.Lang.SystemSetup.simpleCronFieldset_description,
                             bodyStyle:'padding-bottom:5px;'
                         },
                         this.simpleCronField
                     ]
                 });
                 
+                // L10n - language
+                this.systemLanguageField = new Ext.form.ComboBox ({
+                    allowBlank:false,
+                    editable:false,
+                    required:true,
+                    store: new Ext.data.ArrayStore ({
+                        fields:['lang','display'],
+                        data: Mico.Utils.CommonStores.languageOptions
+                    }),
+                    displayField:'display',
+                    valueField:'lang',
+                    mode:'local',
+                    value: LANGUAGE,
+                    triggerAction:'all',
+                    disabled: true,
+                    hideLabel: true
+                });
+                
+                // L10n - language fieldset
+                this.languageFieldset = new Ext.form.FieldSet({
+                    title: Mico.Lang.SystemSetup.languageFieldset_title,
+                    items: [
+                        {
+                            html: Mico.Lang.SystemSetup.languageFieldset_description,
+                            bodyStyle:'padding-bottom:3px;'
+                        },
+                        this.systemLanguageField
+                    ]
+                });
+                
                 // now the user settings
                 // the username field
                 this.usernameField = new Ext.form.TextField ({
-                    fieldLabel: "Username", 
+                    fieldLabel: Mico.Lang.SystemSetup.usernameField_fieldLabel, 
                     width: 200, 
                     allowBlank: false,
                     required:true,
-                    blankText: "You must enter your username"
+                    blankText: Mico.Lang.SystemSetup.usernameField_blankText
                 });
                 // the user's name field
                 this.nameField = new Ext.form.TextField ({
-                    fieldLabel: "Name", 
+                    fieldLabel: Mico.Lang.SystemSetup.nameField_fieldLabel, 
                     width: 200, 
                     allowBlank: false, 
                     required:true,
-                    blankText: "You must enter your name"
+                    blankText: Mico.Lang.SystemSetup.nameField_blankText
                 });
                 // the user's email field
                 this.emailField = new Ext.form.TextField ({
-                    fieldLabel: "Email Address", 
+                    fieldLabel: Mico.Lang.SystemSetup.emailField_fieldLabel, 
                     width: 200, 
                     allowBlank: false, 
                     required:true,
-                    blankText: "You must enter your email"
+                    blankText: Mico.Lang.SystemSetup.emailField_blankText
                 });
                 
                 // password field
                 this.passwordField = new Ext.form.TextField ({
                     name: "password1", 
-                    fieldLabel: "Password", 
+                    fieldLabel: Mico.Lang.SystemSetup.passwordField_fieldLabel, 
                     inputType: "password", 
                     width: 200, 
                     allowBlank: false, 
                     required:true,
-                    blankText: "You must enter your password",
+                    blankText: Mico.Lang.SystemSetup.passwordField_blankText,
                     enableKeyEvents: true
                 });
                 
@@ -206,17 +226,17 @@ Mico.SystemSetup = function () {
                     var points = Mico.Utils.passwordStrength(pass);
                     
                     // password strength
-                    var text = 'Weak';
+                    var text = Mico.Lang.SystemSetup.passwordStrength_weak;
                     
                     // test the strength
                     if (points == 0) {
-                        text = 'Enter password';
+                        text = Mico.Lang.SystemSetup.passwordStrength_blank;
                     } else if (points > 35) {
-                        text = 'Very Strong';
+                        text = Mico.Lang.SystemSetup.passwordStrength_verystrong;
                     } else if (points > 25) {
-                        text = 'Strong';
+                        text = Mico.Lang.SystemSetup.passwordStrength_strong;
                     } else if (points > 10) {
-                        text = 'Medium';
+                        text = Mico.Lang.SystemSetup.passwordStrength_medium;
                     }
                     
                     // update the inidcator
@@ -225,8 +245,8 @@ Mico.SystemSetup = function () {
                 
                 // Simple password strength indicator
                 this.passwordStrengthIndicator = new Ext.ProgressBar({
-                    fieldLabel: 'Strength',
-                    text: 'Enter password',
+                    fieldLabel: Mico.Lang.SystemSetup.passwordStrengthIndicator_fieldLabel,
+                    text: Mico.Lang.SystemSetup.passwordStrength_blank,
                     value: 0,
                     width:200
                 })
@@ -234,20 +254,19 @@ Mico.SystemSetup = function () {
                 // reset password form 'password confirmation' field
                 this.passwordConfirmField = new Ext.form.TextField ({
                     name: "password2", 
-                    fieldLabel: "Confirm Password", 
+                    fieldLabel: Mico.Lang.SystemSetup.passwordConfirmField_fieldLabel, 
                     inputType: "password", 
                     width: 200, 
                     allowBlank: false, 
                     required:true,
-                    blankText: "You must enter your password"
+                    blankText: Mico.Lang.SystemSetup.passwordConfirmField_blankText
                 });
                 
                 this.passwordFieldset = new Ext.form.FieldSet({
-                    title: 'First User',
+                    title: Mico.Lang.SystemSetup.passwordFieldset_title,
                     items: [
                         {
-                            html:'Your first user will be an administrator, and can add other '+
-                                 'users to the system.',
+                            html: Mico.Lang.SystemSetup.passwordFieldset_description,
                             bodyStyle:'padding-bottom:5px;'
                         },
                         this.usernameField,
@@ -261,7 +280,7 @@ Mico.SystemSetup = function () {
                 
                 // The button for saving the user's settings
                 this.saveSettingsButton = new Ext.Button({
-                    text: "Save Settings", 
+                    text: Mico.Lang.SystemSetup.saveSettingsButton_text, 
                     handler: function () {
                         this.saveSettings();
                     }, 
@@ -270,7 +289,7 @@ Mico.SystemSetup = function () {
                 
                 // the button for clearing the password change form
                 this.resetSettingsButton = new Ext.Button({
-                    text: "Reset", 
+                    text: Mico.Lang.SystemSetup.resetSettingsButton_text, 
                     handler: function () {
                         // the system settings field
                         this.debugModeField.reset();
@@ -282,7 +301,8 @@ Mico.SystemSetup = function () {
                         this.emailField.getValue();
                         this.passwordField.getValue();
                         this.passwordConfirmField.getValue();
-
+                        // update the inidcator
+                        this.passwordStrengthIndicator.updateProgress(0,Mico.Lang.SystemSetup.passwordStrength_blank,false);
                     }, 
                     scope: this
                 });
@@ -321,7 +341,7 @@ Mico.SystemSetup = function () {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {
                 // show that something is happening
-                Ext.Msg.wait('Save Settings','Saving system settings',{
+                Ext.Msg.wait(Mico.Lang.SystemSetup.saveSettingsWait_title, Mico.Lang.SystemSetup.saveSettingsWait_text,{
                     closable:false,
                     modal:true
                 });
@@ -349,9 +369,7 @@ Mico.SystemSetup = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             // notify the user that the setting shave been updated
-                            Ext.Msg.alert("Installed", "Mico has now been successfully installed.<br /><br />"+
-                                                       "Please delete the 'install' folder for security.<br /><br />"+
-                                                       "You will now be redirected to the login page.", function () { window.location = '../' });
+                            Ext.Msg.alert(Mico.Lang.SystemSetup.saveSettingsConfirmation_title, Mico.Lang.SystemSetup.saveSettingsConfirmation_text, function () { window.location = '../' });
                         } else {
                             Ext.Msg.hide();
                             var msg = "Unknown system error";
