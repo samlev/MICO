@@ -477,6 +477,24 @@ Mico.Lang = function () {
             saveSettingsWait_text: "Saving system settings",
             saveSettingsConfirmation_title: "System Settings",
             saveSettingsConfirmation_text: "The system settings have been updated"
+        },
+        // Language for Mico.Upgrader.js
+        Upgrader: {
+            upgradeButton_text: "Upgrade",
+            version_upToDate: "Mantis Inbound Call Organiser is already up to date.",
+            version_upgrade: function (OLD_VERSION, NEW_VERSION) {
+                message = "<h1>Mantis Inbound Call Organiser needs to be upgraded.</h1>"+
+                          "<p>Clicking the 'Upgrade' button below will upgrade MICO from "+
+                          "version "+OLD_VERSION+" to version "+NEW_VERSION+"</p>";
+                
+                return message;
+            },
+            // Do upgrade
+            doUpgradeWait_title: "Upgrade",
+            doUpgradeWait_text: "Upgrading MICO",
+            doUpgradeConfirmation_title:"Upgraded",
+            doUpgradeConfirmation_text:"MICO has now been successfully upgraded.<br /><br />"+
+                "You will now be redirected to the login page."
         }
     };
 } ();
