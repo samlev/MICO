@@ -28,6 +28,9 @@ $language_strings = array(
     // Language for api.php
     "api/UnknownFunction"   => "Unknown function requested",
     "api/APIError"          => "API Error",
+    /** PUBLIC API **/
+    "resetPassword/Success" => "An email was sent to %%EMAIL%% with further isntructions.",
+    /** USER API **/
     // Language for addCall.php
     "addCall/NoRecipient"   => "Please select a recipient for the call",
     "addCall/NoCallInfo"    => "Please enter either a caller name, company name, message, or contact details",
