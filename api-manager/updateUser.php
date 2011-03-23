@@ -45,7 +45,7 @@ try {
                         $u->set_var($field,$value);
                     } else {
                         $error = true;
-                        $error_message = "User's $field cannot be blank";
+                        $error_message = $LANG->get_string('updateUser/BlankField', array("%%FIELD%%"=>$field));
                     }
                     break;
                 case 'role':
@@ -58,15 +58,15 @@ try {
                                 $u->set_role($value);
                             } else {
                                 $error = true;
-                                $error_message = "You do not have permission to set that role";
+                                $error_message = $LANG->get_string('updateUser/RolePermission');
                             }
                         } else {
                             $error = true;
-                            $error_message = "You may not change your own role";
+                            $error_message = $LANG->get_string('updateUser/OwnRole');
                         }
                     } else {
                         $error = true;
-                        $error_message = "Not a valid role";
+                        $error_message = $LANG->get_string('updateUser/InvalidRole');
                     }
                     break;
             }
@@ -78,11 +78,11 @@ try {
             }
         } else {
             $error = true;
-            $error_message = "Unknown field";
+            $error_message = $LANG->get_string('updateUser/UnknownField');
         }
     } else {
         $error = true;
-        $error_message = "You do not have permission to update that user";
+        $error_message = $LANG->get_string('updateUser/PermissionError');
     }
 } catch (UserNotFoundException $e) {
     // couldn't log in - return the error message
