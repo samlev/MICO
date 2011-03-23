@@ -27,6 +27,11 @@
 $language_strings = array(
     // Language for api.php
     "api/UnknownFunction"   => "Unknown function requested",
-    "api/APIError"          => "API Error"
+    "api/APIError"          => "API Error",
+    // Language for addCall.php
+    "addCall/NoRecipient"   => "Please select a recipient for the call",
+    "addCall/NoCallInfo"    => "Please enter either a caller name, company name, message, or contact details",
+    "addCall/RecipientError"=> "There was a problem adding your call. Please check your recipients and try again",
+    "addCall/FieldError"    => "There was a problem adding your call. Please check your fields and try again"
 );
 ?>
