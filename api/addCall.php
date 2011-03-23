@@ -44,11 +44,11 @@ $action = trim(html_scrub($_POST['action'])); // clear any/all HTML from the act
 if (is_array($users) && count($users) == 0) {
     // make use of the 'error' system - no users passed
     $error = true;
-    $error_message = "Please select a recipient for the call";
+    $error_message = $LANG->get_string('addCall/NoRecipient');
 } else if ($caller == '' && $company == '' && $message == '' && (!is_array($contacts) || count($contacts) == 0)) {
     // we have no call information
     $error = true;
-    $error_message = "Please enter either a caller name, company name, message, or contact details";
+    $error_message = $LANG->get_string('addCall/NoCallInfo');
 } else {
     $date = date('Y-m-d H:i:s');
     
@@ -115,11 +115,11 @@ if (is_array($users) && count($users) == 0) {
             $data = array("success"=>true);
         } else {
             $error = true;
-            $error_message = "There was a problem adding your call. Please check your recipients and try again";
+            $error_message = $LANG->get_string('addCall/RecipientError');
         }
     } else {
         $error = true;
-        $error_message = "There was a problem adding your call. Please check your fields and try again";
+        $error_message = $LANG->get_string('addCall/FieldError');
     }
 }
 
