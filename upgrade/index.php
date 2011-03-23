@@ -48,6 +48,7 @@ include_once(FS_ROOT.'/inc/connect.php');
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
         
     <script type="text/javascript" src="../js/Mico.Application.js"></script>
+    <script type="text/javascript" src="../js/lang/Mico.Lang.<?php echo Settings::get_default('LANGUAGE','EN'); ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Utils.js"></script>
     
     <script type="text/javascript" src="js/Mico.Upgrader.js"></script>
