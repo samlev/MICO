@@ -54,7 +54,7 @@ Mico.ConfigSetup = function () {
                 this.automaticPathField = new Ext.form.Checkbox({
                     checked: true,
                     hideLabel: true,
-                    boxLabel: 'Use automatic path settings (Recommended)',
+                    boxLabel: Mico.Lang.ConfigSetup.automaticPathField_boxLabel,
                     listeners: {
                         scope: this,
                         "check": function () {
@@ -80,7 +80,7 @@ Mico.ConfigSetup = function () {
                     allowBlank: false,
                     required: true,
                     value: FS_ROOT,
-                    fieldLabel: 'File System Root Directory',
+                    fieldLabel: Mico.Lang.ConfigSetup.FS_ROOT_Field_fieldLabel,
                     disabled:true
                 });
                 // WEB_DOMAIN field
@@ -89,7 +89,7 @@ Mico.ConfigSetup = function () {
                     allowBlank: false,
                     required: true,
                     value: WEB_DOMAIN,
-                    fieldLabel: 'Web Domain',
+                    fieldLabel: Mico.Lang.ConfigSetup.WEB_DOMAIN_Field_fieldLabel,
                     disabled:true
                 });
                 // WEB_ROOT field
@@ -98,7 +98,7 @@ Mico.ConfigSetup = function () {
                     allowBlank: false,
                     required: true,
                     value: WEB_ROOT,
-                    fieldLabel: 'Web Root',
+                    fieldLabel: Mico.Lang.ConfigSetup.WEB_ROOT_Field_fieldLabel,
                     disabled:true
                 });
                 // APP_ROOT field
@@ -107,18 +107,16 @@ Mico.ConfigSetup = function () {
                     allowBlank: false,
                     required: true,
                     value: APP_ROOT,
-                    fieldLabel: 'Application Root',
+                    fieldLabel: Mico.Lang.ConfigSetup.APP_ROOT_Field_fieldLabel,
                     disabled:true
                 });
                 
                 // path settings fieldset
                 this.pathSettingsFieldset = new Ext.form.FieldSet({
-                    title:'Filesystem and path settings',
+                    title:Mico.Lang.ConfigSetup.pathSettingsFieldset_title,
                     items: [
                         {
-                            html: 'The following settings define where Mico is on your server, '+
-                                  'and how you access it over the internet. The advanced settings '+
-                                  'are only advisable if you know exactly what you are doing.',
+                            html: Mico.Lang.ConfigSetup.pathSettingsFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.automaticPathField,
@@ -135,26 +133,26 @@ Mico.ConfigSetup = function () {
                     allowBlank: false,
                     required: true,
                     value: 'localhost',
-                    fieldLabel: 'Host name'
+                    fieldLabel: Mico.Lang.ConfigSetup.hostField_fieldLabel
                 });
                 // username field
                 this.userField = new Ext.form.TextField ({
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    fieldLabel: 'User name'
+                    fieldLabel: Mico.Lang.ConfigSetup.userField_fieldLabel
                 });
                 // password field
                 this.passField = new Ext.form.TextField ({
                     width: 200, 
-                    fieldLabel: 'Password'
+                    fieldLabel: Mico.Lang.ConfigSetup.passField_fieldLabel
                 });
                 // database name field
                 this.nameField = new Ext.form.TextField ({
                     width: 200, 
                     allowBlank: false,
                     required: true,
-                    fieldLabel: 'Database'
+                    fieldLabel: Mico.Lang.ConfigSetup.nameField_fieldLabel
                 });
                 // table prefix field field
                 this.prefField = new Ext.form.TextField ({
@@ -162,18 +160,15 @@ Mico.ConfigSetup = function () {
                     allowBlank: true,
                     required: false,
                     value: 'mico_',
-                    fieldLabel: 'Table prefix'
+                    fieldLabel: Mico.Lang.ConfigSetup.prefField_fieldLabel
                 });
                 
                 // path settings fieldset
                 this.databaseSettingsFieldset = new Ext.form.FieldSet({
-                    title:'Database settings',
+                    title:Mico.Lang.ConfigSetup.databaseSettingsFieldset_title,
                     items: [
                         {
-                            html: 'The following settings are for your MySQL database. '+
-                                  'The table prefix will keep Mico data separate from '+
-                                  'other tables if Mico is sharing a database with '+
-                                  'other applications.',
+                            html: Mico.Lang.ConfigSetup.databaseSettingsFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.hostField,
@@ -187,7 +182,7 @@ Mico.ConfigSetup = function () {
                 
                 // The button for saving the user's settings
                 this.saveSettingsButton = new Ext.Button({
-                    text: "Save Settings", 
+                    text: Mico.Lang.ConfigSetup.saveSettingsButton_text, 
                     handler: function () {
                         this.saveSettings();
                     }, 
@@ -196,7 +191,7 @@ Mico.ConfigSetup = function () {
                 
                 // the button for clearing the password change form
                 this.resetSettingsButton = new Ext.Button({
-                    text: "Reset", 
+                    text: Mico.Lang.ConfigSetup.resetSettingsButton_text, 
                     handler: function () {
                         // set the path fields
                         this.automaticPathField.setValue(true);
@@ -224,7 +219,7 @@ Mico.ConfigSetup = function () {
                     id: "Mico.ConfigSetup.panel",
                     items: [
                         {
-                            html:'<h1>Step 1: set up the database</h1>'
+                            html:'<h1>'+Mico.Lang.ConfigSetup.instructions+'</h1>'
                         },
                         this.pathSettingsFieldset,
                         this.databaseSettingsFieldset,
@@ -252,7 +247,7 @@ Mico.ConfigSetup = function () {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {
                 // show that something is happening
-                Ext.Msg.wait('Checking Settings','Checking database settings',{
+                Ext.Msg.wait(Mico.Lang.ConfigSetup.checkSettingsWait_title,Mico.Lang.ConfigSetup.checkSettingsWait_text,{
                     closable:false,
                     modal:true
                 });
@@ -274,7 +269,7 @@ Mico.ConfigSetup = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             // open another wait box
-                            Ext.Msg.wait('Installing','Installing Mico',{
+                            Ext.Msg.wait(Mico.Lang.ConfigSetup.saveSettingsWait_title,Mico.Lang.ConfigSetup.saveSettingsWait_text,{
                                 closable:false,
                                 modal:true
                             });
@@ -304,7 +299,7 @@ Mico.ConfigSetup = function () {
                                         Ext.Msg.hide();
                                         
                                         // next step - configuring the first user
-                                        Ext.Msg.alert('Installing','Step 1 complete. Next step is to set up system configuration.', function () { Mico.SystemSetup.show() });
+                                        Ext.Msg.alert(Mico.Lang.ConfigSetup.saveSettingsConfirmation_title, Mico.Lang.ConfigSetup.saveSettingsConfirmation_text, function () { Mico.SystemSetup.show() });
                                     } else {
                                         Ext.Msg.hide();
                                         var msg = "Unknown system error";
