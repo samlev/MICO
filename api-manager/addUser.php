@@ -66,26 +66,26 @@ if (preg_match('/^([a-z0-9]+[\.\-_]?[a-z0-9]*)+$/',$username)) {
                         $data = array("success"=>true);
                     } else {
                         $error = true;
-                        $error_message = "Error adding user";
+                        $error_message = $LANG->get_string('addUser/ErrorAdding');
                     }
                 } else {
                     $error = true;
-                    $error_message = "You do not have permission to add an administrative user";
+                    $error_message = $LANG->get_string('addUser/AddAdminPerm');
                 }
             } else {
                 $error = true;
-                $error_message = "User's role is not valid";
+                $error_message = $LANG->get_string('addUser/InvalidRole');
             }
         } else {
             $error = true;
-            $error_message = "User's name and email cannot be blank";
+            $error_message = $LANG->get_string('addUser/NameEmailBlank');
         }
     } else {
         $error = true;
-        $error_message = "Username already in use";
+        $error_message = $LANG->get_string('addUser/UsernameInUse');
     }
 } else {
     $error = true;
-    $error_message = "Username may contain only letters and numbers, optionally separated by a period (.), dash (-), or underscore (_)";
+    $error_message = $LANG->get_string('addUser/UsernameChars');
 }
 ?>
