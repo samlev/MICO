@@ -56,5 +56,12 @@ $language_strings = array(
     "updateUser/InvalidRole"    => "Not a valid role",
     "updateUser/UnknownField"   => "Unknown field",
     "updateUser/PermissionError"=> "You do not have permission to update that user",
+    /** ADMINISTRATOR API **/
+    // Language for setSystemSettings.php
+    "setSystemSettings/Debug"   => "Debug mode must be either true or false.",
+    "setSystemSettings/Mail"    => "From email cannot be blank.",
+    "setSystemSettings/Session" => "Session length must be a valid period of time.",
+    "setSystemSettings/Cron"    => "Simple cron must be either true or false.",
+    "setSystemSettings/Language"=> "Language is not valid.",
 );
 ?>
