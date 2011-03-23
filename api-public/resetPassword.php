@@ -36,7 +36,7 @@ try {
     
     // build the return data
     $data = array("success"=>true,
-                  "info"=>"An email was sent to $email with further isntructions.");
+                  "info"=>$LANG->get_string('resetPassword/Success',array("%%EMAIL%%"=>$email)));
 } catch (UserNotFoundException $e) {
     // couldn't find user - return the error message
     $error = true;
