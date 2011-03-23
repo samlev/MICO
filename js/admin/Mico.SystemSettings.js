@@ -47,7 +47,7 @@ Mico.SystemSettings = function () {
         /** Adds the link to the menu */
         init: function () {
             if (this.menuId == undefined) {
-                this.menuId = Mico.SystemMenu.addItem('System Settings', 'Mico.SystemSettings.show()','user');
+                this.menuId = Mico.SystemMenu.addItem(Mico.Lang.SystemSettings.menu_text, 'Mico.SystemSettings.show()','user');
             }
         },
         /** Shows the panel */
@@ -62,17 +62,15 @@ Mico.SystemSettings = function () {
                     checked: false,
                     disabled: true,
                     hideLabel: true,
-                    boxLabel: 'Use debug mode'
+                    boxLabel: Mico.Lang.SystemSettings.debugModeField_boxLabel
                 });
                 
                 // debug mode fieldset
                 this.debugModeFieldset = new Ext.form.FieldSet({
-                    title: 'Debug Mode',
+                    title: Mico.Lang.SystemSettings.debugModeFieldset_title,
                     items: [
                         {
-                            html: 'Debug mode is useful for when you are working on the Mico codebase, or '+
-                                  'if you are experiencing errors. For best performance, it is advised to leave '+
-                                  'this option off.',
+                            html: Mico.Lang.SystemSettings.debugModeFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.debugModeField
@@ -91,11 +89,10 @@ Mico.SystemSettings = function () {
                 
                 // mail from fieldset
                 this.mailFromFieldset = new Ext.form.FieldSet({
-                    title: 'From email',
+                    title: Mico.Lang.SystemSettings.mailFromFieldset_title,
                     items: [
                         {
-                            html: 'The from email is used to send password set and reset emails, as well as '+
-                                  'notification emails.',
+                            html: Mico.Lang.SystemSettings.mailFromFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.mailFromField
@@ -108,20 +105,20 @@ Mico.SystemSettings = function () {
                     editable:false,
                     required:true,
                     store: new Ext.data.ArrayStore ({
-                        fields:['data'],
+                        fields:['data','display'],
                         data: [
-                            ['30 minutes'],
-                            ['1 hour'],
-                            ['2 hours'],
-                            ['1 day'],
-                            ['3 days'],
-                            ['1 week'],
-                            ['2 weeks'],
-                            ['1 month'],
-                            ['1 year']
+                            ['30 minutes',Mico.Lang.SystemSettings.sessionLengthField_data.halfhour],
+                            ['1 hour',Mico.Lang.SystemSettings.sessionLengthField_data.onehour],
+                            ['2 hours',Mico.Lang.SystemSettings.sessionLengthField_data.twohours],
+                            ['1 day',Mico.Lang.SystemSettings.sessionLengthField_data.oneday],
+                            ['3 days',Mico.Lang.SystemSettings.sessionLengthField_data.threedays],
+                            ['1 week',Mico.Lang.SystemSettings.sessionLengthField_data.oneweek],
+                            ['2 weeks',Mico.Lang.SystemSettings.sessionLengthField_data.twoweeks],
+                            ['1 month',Mico.Lang.SystemSettings.sessionLengthField_data.onemonth],
+                            ['1 year',Mico.Lang.SystemSettings.sessionLengthField_data.oneyear]
                         ]
                     }),
-                    displayField:'data',
+                    displayField:'display',
                     valueField:'data',
                     mode:'local',
                     value: "30 minutes",
@@ -132,13 +129,10 @@ Mico.SystemSettings = function () {
                 
                 // session length field set
                 this.sessionLengthFieldset = new Ext.form.FieldSet({
-                    title: 'Session length',
+                    title: Mico.Lang.SystemSettings.sessionLengthFieldset_title,
                     items: [
                         {
-                            html: 'The session length is how long a session persists for while a user '+
-                                  'does not have Mico open. Short sessions are more secure, but long '+
-                                  'sessions mean that a user will not have to log in every time they '+
-                                  'open the application.',
+                            html: Mico.Lang.SystemSettings.sessionLengthFieldset_description,
                             bodyStyle:'padding-bottom:3px;'
                         },
                         this.sessionLengthField
@@ -150,21 +144,15 @@ Mico.SystemSettings = function () {
                     checked: false,
                     disabled: true,
                     hideLabel: true,
-                    boxLabel: 'Use simple cron'
+                    boxLabel: Mico.Lang.SystemSettings.simpleCronField_boxLabel
                 });
                 
                 // debug mode fieldset
                 this.simpleCronFieldset = new Ext.form.FieldSet({
-                    title: 'Simple cron',
+                    title: Mico.Lang.SystemSettings.simpleCronFieldset_title,
                     items: [
                         {
-                            html: 'The cron is a recurring task which sends out notification emails.<br /><br />'+
-                                  'The simple cron should only be used if you do not have access to '+
-                                  'a proper cron system. It will only run when a user has Mico open.<br /><br />'+
-                                  'If you have access to proper task scheduler, you can set it to call '+
-                                  '<b>'+APP_ROOT+'/notify.php</b> using a command similar to the one below. The notify script '+
-                                  'should be run at least every 5 minutes to ensure that notification emails '+
-                                  'are sent out as early as possible.',
+                            html: Mico.Lang.SystemSettings.simpleCronFieldset_description,
                             bodyStyle:'padding-bottom:5px;'
                         },
                         // a simple field to give the 'cron' command
@@ -188,7 +176,7 @@ Mico.SystemSettings = function () {
                 
                 // The button for saving the user's settings
                 this.saveSettingsButton = new Ext.Button({
-                    text: "Save Settings", 
+                    text: Mico.Lang.SystemSettings.saveSettingsButton_text, 
                     handler: function () {
                         this.saveSettings();
                     }, 
@@ -197,7 +185,7 @@ Mico.SystemSettings = function () {
                 
                 // the button for clearing the password change form
                 this.resetSettingsButton = new Ext.Button({
-                    text: "Reset", 
+                    text: Mico.Lang.SystemSettings.resetSettingsButton_text, 
                     handler: function () {
                         this.loadSettings();
                     }, 
@@ -240,7 +228,7 @@ Mico.SystemSettings = function () {
             this.sessionLengthField.disable();
             this.simpleCronField.disable();
             
-            Ext.Msg.wait('Loading','Loading settings from the server',{
+            Ext.Msg.wait(Mico.Lang.SystemSettings.loadSettingsWait_title, Mico.Lang.SystemSettings.loadSettingsWait_text,{
                 closable:false,
                 modal:true
             });
@@ -287,7 +275,7 @@ Mico.SystemSettings = function () {
             // check if the form is valid
             if (this.panel.getForm().isValid()) {
                 // show that something is happening
-                Ext.Msg.wait('Save Settings','Saving system settings',{
+                Ext.Msg.wait(Mico.Lang.SystemSettings.saveSettingsWait_title, Mico.Lang.SystemSettings.saveSettingsWait_text,{
                     closable:false,
                     modal:true
                 });
@@ -311,7 +299,7 @@ Mico.SystemSettings = function () {
                             // hide the 'wait' box
                             Ext.Msg.hide();
                             // notify the user that the setting shave been updated
-                            Ext.Msg.alert("System Settings", "The system settings have been updated");
+                            Ext.Msg.alert(Mico.Lang.SystemSettings.saveSettingsConfirmation_title, Mico.Lang.SystemSettings.saveSettingsConfirmation_text);
                         } else {
                             Ext.Msg.hide();
                             var msg = "Unknown system error";
