@@ -33,7 +33,7 @@ $role = $_POST['role'];
 $user_id = 0;
 
 // first check that the username is valid - we're more strict with this because it can't be changed
-if (preg_match('/^([a-z0-9]+[\.\-_]?[a-z0-9]*)+$/',$username)) {
+if (preg_match('/^[a-z0-9]+([\.\-_][a-z0-9]+)*$/',$username)) {
     // now check that it's not taken
     $query = "SELECT `id` FROM `".DB_PREFIX."users`
               WHERE `username`='".mysql_real_escape_string($username)."'";
