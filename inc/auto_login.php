@@ -36,7 +36,7 @@ if (defined('USER_ID') && defined('SESSION')) {
     var vars = <?php echo json_encode($user->get_vars())?>;
     
     // Keep the user informed (also block their actions)
-    Ext.Msg.wait('You are being logged into the system. Please wait.','Logging in',{
+    Ext.Msg.wait('<?php echo $LANG->get_string('auto_login/waitText'); ?>','<?php echo $LANG->get_string('auto_login/waitTitle'); ?>',{
         buttons:false, 
         closable:false
     });

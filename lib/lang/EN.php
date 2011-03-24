@@ -63,5 +63,9 @@ $language_strings = array(
     "setSystemSettings/Session" => "Session length must be a valid period of time.",
     "setSystemSettings/Cron"    => "Simple cron must be either true or false.",
     "setSystemSettings/Language"=> "Language is not valid.",
+    /** INCLUDES **/
+    // Language for auto_login.php
+    "auto_login/waitText"       => "You are being logged into the system. Please wait.",
+    "auto_login/waitTitle"      => "Logging in",
 );
 ?>

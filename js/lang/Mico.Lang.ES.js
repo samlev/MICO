@@ -1,12 +1,12 @@
 /*******************************************************************************
  *******************************************************************************
- ** Author: Jorge Luis loza <jorge@ciclopesl.com>
+ ** Author: Jorge Luis Loza <jorge@ciclopesl.com>
  ** 
  ** File: js/lang/Mico.Lang.ES.js
  ** 
  ** Description: Spanish Language file
  **
- ** Copyright (c) 2011 Jorge Luis loza
+ ** Copyright (c) 2011 Jorge Luis Loza
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
@@ -25,7 +25,7 @@ Mico.Lang = function () {
     return {
         // Language for Mico.Application.js
         Application: {
-            logout: "Log out"
+            logout: "Salir"
         },
         // Language for Mico.Login.js
         Login: {
@@ -35,7 +35,7 @@ Mico.Lang = function () {
             passwordField_fieldLabel: "Password",
             passwordField_blankText: "Introduce tu password",
             forgottenPasswordLink: "Has olvidado tu password?",
-            loginButton: "Login",
+            loginButton: "Entrar",
             // Reset password form
             resetPasswordUsernameField_fieldLabel: "Usuario",
             resetPasswordUsernameField_blankText: "Introduce tu usuario",
@@ -54,34 +54,34 @@ Mico.Lang = function () {
         // Language for Mico.PasswordSet.js
         PasswordSet: {
             // Password set form
-            usernameField_fieldLabel: "Username",
-            usernameField_blankText: "You must enter your username",
+            usernameField_fieldLabel: "Usuario",
+            usernameField_blankText: "Introduce tu usuario",
             passwordField_fieldLabel: "Password",
-            passwordField_blankText: "You must enter your password",
-            passwordStrengthIndicator_fieldLabel: "Strength",
-            passwordConfirmField_fieldLabel: "Confirm Password",
-            passwordConfirmField_blankText: "You must enter your password",
-            setPasswordButton: "Set Password",
+            passwordField_blankText: "Debes introducir tu Password",
+            passwordStrengthIndicator_fieldLabel: "Fortaleza",
+            passwordConfirmField_fieldLabel: "Confirma tu Password",
+            passwordConfirmField_blankText: "Debes introducir tu Password",
+            setPasswordButton: "Establecer Password",
             // Password strength
-            passwordStrength_blank: "Enter password",
-            passwordStrength_weak: "Weak",
-            passwordStrength_medium: "Medium",
-            passwordStrength_strong: "Strong",
-            passwordStrength_verystrong: "Very Strong",
+            passwordStrength_blank: "Introduce tu Password",
+            passwordStrength_weak: "Baja",
+            passwordStrength_medium: "Media",
+            passwordStrength_strong: "Buena",
+            passwordStrength_verystrong: "Alta",
             // Password set function alerts
             setPasswordInvalid_title: "Error",
-            setPasswordInvalid_text: "Please check the marked fields",
-            setPasswordInvalidMatch_text: "Passwords must match",
-            setPasswordSuccess_title: "Password set",
-            setPasswordSuccess_text: "Your password has been set.<br /><br />You will now be redirected to the login page."
+            setPasswordInvalid_text: "Por favor,Revisa los campos marcados",
+            setPasswordInvalidMatch_text: "Las Passwords deben coincidir",
+            setPasswordSuccess_title: "Password establecidad",
+            setPasswordSuccess_text: "Tu Password ha sido establecida.<br /><br />Te redireccionamos a la p&aacute;gina de acceso."
         },
         // Language for Mico.Footer.js
         Footer: {
-            aboutLink_text: "About Mico",
+            aboutLink_text: "Sobre Mico",
             version_text: function (version) { return "Version: "+version; },
-            aboutWindow_title: "About MICO",
+            aboutWindow_title: "Sobre MICO",
             showAboutBody_html: function (version) {
-                var aboutHTML = '<h1>Mantis Inbound Call Organiser</h1>'; // Title
+                var aboutHTML = '<h1>Mantis Gestor de llamadas</h1>'; // Title
                 // Version
                 aboutHTML += '<p style="font-weight:bold;color:#88BB88;" align="right">Version '+version+'</p>';
                 // Licence
@@ -98,120 +98,120 @@ Mico.Lang = function () {
         },
         // Language for Mico.Calls.js
         Calls: {
-            menu_text: "Calls",
+            menu_text: "LLamadas",
             // Check Updates
-            sessionExpired_title: "Session Expired",
-            sessionExpired_text: "Your session has expired.<br /><br />You will now be redirected to the login page.",
-            loadUpdates_title: "Loading updated calls",
-            loadUpdated_text: "Call updated",
+            sessionExpired_title: "Sesi&oacute;n Exppirada",
+            sessionExpired_text: "Tu sesi&oacute;n ha expirado.<br /><br />Te redireccionamos a la p&aacute;gina de acceso.",
+            loadUpdates_title: "Guardando informaci&oacute;n de llamada",
+            loadUpdated_text: "Llamada actualizada",
             // Language for Mico.Calls.AddCall.js
             AddCall: {
-                title: "Take a call",
+                title: "Atender una llamada",
                 // Caller details
-                callerNameField_emptyText: "Caller's name",
-                callerNameField_hint: "caller",
-                callerCompanyField_emptyText: "Caller's company",
-                callerCompanyField_label: "From",
-                callerCompanyField_hint: "company",
+                callerNameField_emptyText: "Nombre del interlocutor",
+                callerNameField_hint: "interlocutor",
+                callerCompanyField_emptyText: "Empresa del interlocutor",
+                callerCompanyField_label: "Desde",
+                callerCompanyField_hint: "Empresa",
                 // Recipient details
-                userField_emptyText: "Select recipient",
-                userField_label: "Called for",
-                userAddExtraButton_text: "Add",
-                userAddExtraButton_tooltip: "Add another recipient",
-                userFieldExtra_label: "OR",
+                userField_emptyText: "Seleciona receptor",
+                userField_label: "Llamado por",
+                userAddExtraButton_text: "A&amp;adir",
+                userAddExtraButton_tooltip: "A&amp;adir otro receptor",
+                userFieldExtra_label: "O",
                 // Message
-                callerMessageBox_emptyText: "Message for recipient(s)...",
-                callerMessageBox_label: "About",
+                callerMessageBox_emptyText: "Mensaje para el receptor...",
+                callerMessageBox_label: "Sobre",
                 // Contact details
-                callerContactField_emptyText: "Caller's Phone Number/Email",
-                callerContactField_label: "Contact them at",
-                callerContactAddExtraButton_text: "Add",
-                callerContactAddExtraButton_tooltip: "Add another contact method",
-                callerContactFieldExtra_label: "OR",
+                callerContactField_emptyText: "Tel&iacute;fono/Email del interlocutor",
+                callerContactField_label: "Comun&iacute;quese con ellos a",
+                callerContactAddExtraButton_text: "A&amp;adir",
+                callerContactAddExtraButton_tooltip: "A&amp;adir otro m&eacute;todo de contacto",
+                callerContactFieldExtra_label: "O",
                 // Call Priority
-                callPriorityField_label: "This call is",
+                callPriorityField_label: "Esta llamada es",
                 // Call Action
                 callActionField_data:[
-                    ['Call back ASAP'],
-                    ['Call back by Close Of Business'],
-                    ['Call back whenever you can'],
-                    ['Caller will email/call again later'],
-                    ['No need to call back']
+                    ['LLamar inmediatamente'],
+                    ['LLamar al terminar lo que estes haciendo'],
+                    ['Llamar cuado puedas'],
+                    ['Volver&aacute;n a llamar/email'],
+                    ['No necesita que se le llame']
                 ],
-                callActionField_default: "Call back ASAP",
-                callActionField_label: "Action required",
+                callActionField_default: "LLamar inmediatamente",
+                callActionField_label: "Acci&oacute;n requerida",
                 // Buttons
-                addCallButton_text: "Add Call",
-                clearFormButton_text: "Clear",
+                addCallButton_text: "A&ntilde;adir Llamada",
+                clearFormButton_text: "Limpiar",
                 // Functions - add call
                 validateRecipientsError_title: "Error",
-                validateRecipientsError_text: "Please select a recipient for this call",
+                validateRecipientsError_text: "Por favor, selecciona receptor para esta llamada",
                 callerDetailsError_title: "Error",
-                callerDetailsError_text: "Please enter either a caller name, company name, message, or contact details"
+                callerDetailsError_text: "Por favor, introduce nombre del interlocutor, empresa, mensaje, o detalles de contacto"
             },
             // Language for Mico.Calls.SearchBar.js
             SearchBar: {
-                filterField_label: "Show",
-                orderField_label: "ordered by",
-                showClosedField_label: "Show closed?"
+                filterField_label: "Mostrar",
+                orderField_label: "Ordenado por",
+                showClosedField_label: "Filtro cerrado?"
             },
             // Language for Mico.Calls.ViewCalls.js
             ViewCalls: {
                 // Grid headers
-                header_date: "At",
-                header_caller: "Caller",
-                header_company: "From",
-                header_message: "Message",
-                header_contact: "Contact",
-                header_priority: "Priority",
-                header_action: "Action",
-                header_close: "Mark as closed",
+                header_date: "A",
+                header_caller: "Interlocutor",
+                header_company: "Desde",
+                header_message: "Mensaje",
+                header_contact: "Contacto",
+                header_priority: "Prioridad",
+                header_action: "Acci&oacute;n",
+                header_close: "Marcar como cerrada",
                 // Call details - comments
-                comment_blank: "No comments",
-                commentOrder_label: "View Comments",
+                comment_blank: "Sin comentarios",
+                commentOrder_label: "Ver comentarios",
                 // Call details - update
-                closeCallRadio_boxLabel: "Close call",
-                escalateCallRadio_boxLabel: "Escalate call",
-                justCommentRadio_boxLabel: "Just Comment",
-                reopenCallCheck_boxLabel: "Re-open call",
-                userCombo_emptyText: "Escalate to",
-                commentText_emptyText: "Comment",
-                addCallButton_text: "Update Call",
-                clearFormButton_text: "Clear",
+                closeCallRadio_boxLabel: "Cerrar llamada",
+                escalateCallRadio_boxLabel: "Escalar llamada",
+                justCommentRadio_boxLabel: "Comentar",
+                reopenCallCheck_boxLabel: "Reabrir llamada",
+                userCombo_emptyText: "Escalada a",
+                commentText_emptyText: "Commentar",
+                addCallButton_text: "Actualizar llamada",
+                clearFormButton_text: "Limpiar",
                 // Show call detail panel
                 callInfo_date: function (date, time) { return date+" at "+time; },
-                callInfo_closed: "Closed",
-                callInfo_callTakerSelf: "Call taken by you",
-                callInfo_callTakerOther: function (taker) { return "Call taken by "+taker; },
-                callInfo_callerUnkown: "Someone",
+                callInfo_closed: "Cerrada",
+                callInfo_callTakerSelf: "Llamadas registradas por ti",
+                callInfo_callTakerOther: function (taker) { return "Lammadas registradas por "+taker; },
+                callInfo_callerUnkown: "Cualquiera",
                 callInfo_callerLine: function (caller, company) {
                     // Caller's name
                     line = caller;
                     // Caller's company is included only if not empty
                     if (company.length) {
-                        line += " from " + company;
+                        line += " desde " + company;
                     }
-                    return line + " called for";
+                    return line + " llamada para";
                 },
-                callInfo_selfRecipient: "You",
-                callInfo_messageLabel: "Message",
-                callInfo_noMessage: "No message was left.",
-                callInfo_contactLabelMulti: "Contact them via",
-                callInfo_contactLabelSingle: function (contact) { return "Contact them via "+contact; },
-                callInfo_contactNone: "No contact details were left.",
-                callInfo_actionRequired: "Action required",
+                callInfo_selfRecipient: "Tu",
+                callInfo_messageLabel: "Mensaje",
+                callInfo_noMessage: "No se han dejado mensajes.",
+                callInfo_contactLabelMulti: "Cantactarlos por",
+                callInfo_contactLabelSingle: function (contact) { return "Contactarlos por "+contact; },
+                callInfo_contactNone: "No se han dejado mensajes.",
+                callInfo_actionRequired: "Acci&oacute;n requerida",
                 // Show Comments function
-                showComments_today: "Today",
-                showComments_yesterday: "Yesterday",
-                showComments_selfComment: "You",
-                showComments_commentHeader: function (action, name) { return action+" by "+name; },
+                showComments_today: "Hoy",
+                showComments_yesterday: "Ayer",
+                showComments_selfComment: "Tu",
+                showComments_commentHeader: function (action, name) { return action+" por "+name; },
                 // grid renderers
                 renderDate_today: function (time) { return time; },
-                renderDate_yesterday: function (time) { return time+" Yesterday";},
+                renderDate_yesterday: function (time) { return time+" Ayer";},
                 renderDate_other: function (date) { return date;},
-                renderDate_quicktip: function (date, time) { return date+" at "+time; },
-                renderClose_open: "Close call",
-                renderClose_closed: "Call closed"
+                renderDate_quicktip: function (date, time) { return date+" a "+time; },
+                renderClose_open: "Cerrar llamada",
+                renderClose_closed: "Llamada cerrada"
             }
         },
         // Language for Mico.Utils.js
@@ -219,40 +219,40 @@ Mico.Lang = function () {
             // Language for Mico.Utils.CommonStores.js
             CommonStores: {
                 callsSearchFilter: {
-                    assigned: "Calls assigned to me",
-                    opened: "Calls opened by me",
-                    all: "All calls"
+                    assigned: "Llamadas para mi",
+                    opened: "Llamadas registradas por mi",
+                    all: "Todas las llamadas"
                 },
                 callsOrderFilter: {
-                    recent: "Most recent",
-                    urgent: "Most urgent"
+                    recent: "Mas recientes",
+                    urgent: "Mas urgentes"
                 },
                 callPriority: {
-                    critical: "Critical",
-                    urgent:'Urgent',
-                    moderate:'Moderate',
-                    minor:'Minor',
-                    negligible:'Negligible'
+                    critical: "Critica",
+                    urgent:'Urgente',
+                    moderate:'Moderada',
+                    minor:'Menor',
+                    negligible:'Insignificante'
                 },
                 userTypes: {
-                    admin: "Administrator",
-                    manager: "Manager",
-                    user: "Standard User",
-                    disabled: "Disabled"
+                    admin: "Administrador",
+                    manager: "Gestor",
+                    user: "Usuario standar",
+                    disabled: "Desactivado"
                 },
                 commentOrder: {
-                    oldest: "Oldest first",
-                    newest: "Newest first"
+                    oldest: "Mas antiguos primero",
+                    newest: "Mas nuevos primero"
                 },
                 notifyTime: {
-                    immediate:'immediately',
-                    halfhour:'once every half hour',
-                    hour:'once every hour',
-                    never:'never'
+                    immediate:'inmediatamente',
+                    halfhour:'una vez cada media hora',
+                    hour:'una vez cada hora',
+                    never:'nunca'
                 },
                 notifyReason:{
-                    assigned:'assigned to me',
-                    updated:'updated'
+                    assigned:'asignado a mi',
+                    updated:'actualizado'
                 },
                 languageOptions:{
                     EN: "English",
@@ -264,288 +264,288 @@ Mico.Lang = function () {
         },
         // Language for Mico.User.js
         User: {
-            logoutWait_title: "Log out",
-            logoutWait_text: "Logging you out",
-            logoutConfirmation_title: "Logged Out",
-            logoutConfirmation_text: "You have been logged out. Please wait while you are redirected.",
+            logoutWait_title: "Salir",
+            logoutWait_text: "Desconectar",
+            logoutConfirmation_title: "Desconectado",
+            logoutConfirmation_text: "Has sido desconectado. Espera mientras te redirigimos",
             // Language for Mico.User.Preferences.js
             Preferences: {
-                menu_text: "My Preferences",
+                menu_text: "Mis preferencias",
                 // User Settings and Preferences
-                settingsPanel_title: "Settings and Preferences",
-                saveSettingsButton_text: "Save Settings",
-                saveSettingsButtonWait_title: "Save Settings",
-                saveSettingsButtonWait_text: "Saving your settings",
-                resetSettingsButton_text: "Reset",
+                settingsPanel_title: "Configuraci&oacute;n y preferencias",
+                saveSettingsButton_text: "Guardar configuraci&oacute;n",
+                saveSettingsButtonWait_title: "Guardar configuraci&oacute;n",
+                saveSettingsButtonWait_text: "Guardando configuraci&oacute;n",
+                resetSettingsButton_text: "Resetear",
                 // User Settings and Preferences - Your Settings
-                settingsFieldset_title: "Your settings",
-                settingsFieldset_description: 'Your name and email address are '+
-                    'used to notify you of calls assigned to you, and for resetting '+
-                    'your password. Please ensure that they are correct.',
-                nameField_fieldLabel: "Your name",
-                nameField_blankText: "You must enter your name",
-                emailField_fieldLabel: "Your email address",
-                emailField_blankText: "You must enter your email address",
+                settingsFieldset_title: "Tu configuraci&oacute;n",
+                settingsFieldset_description: 'Tu nombre e email son '+
+                    'usadas para notificarte las llamadas que se te asignan y para reseteos de '+
+                    'tu Password. Por favor, revisa que los datos sean correctos.',
+                nameField_fieldLabel: "Tu nombre",
+                nameField_blankText: "Debes introducir tu nombre",
+                emailField_fieldLabel: "Tu direcci&oacute;n de email",
+                emailField_blankText: "Debes de introducir tu direcci&oacute;n de email",
                 // User Settings and Preferences - Display preferences
-                preferencesFieldset_title: "Display preferences",
-                preferencesFieldset_description: 'The date and time format '+
-                    'settings will take affect immediately, but the other '+
-                    'settings may not take affect until the next time you log in.',
-                timeFormatField_fieldLabel: "Time format",
+                preferencesFieldset_title: "Mostrar preferencias",
+                preferencesFieldset_description: 'Formato de fecha y hora '+
+                    'algunas configuraciones tienen efecto inmediota, pero otras '+
+                    'pueden no reflejarse hasta una nueva sesion.',
+                timeFormatField_fieldLabel: "Formato de hora",
                 timeFormatField_display: {
-                    gia:"12 hour with am/pm",
-                    Hi: "24 hour, leading zeros",
-                    Gi: "24 hour, no leading zeros"
+                    gia:"12 horas con am/pm",
+                    Hi: "24 horas, completado con ceros",
+                    Gi: "24 horas, no completado con ceros"
                 },
-                dateFormatField_fieldLabel: "Date format",
+                dateFormatField_fieldLabel: "Formato de fecha",
                 dateFormatField_display: {
                     jSMY:"Textual",
-                    dmY: "UK (Day/Month/Year)",
-                    mdY: "US (Month/Day/Year",
-                    Ymd: "Year-Month-Day"
+                    dmY: "UK (D&iacute;a/Mes/A&ntilde;o)",
+                    mdY: "US (Mes/D&iacute;a/A&ntilde;o)",
+                    Ymd: "A&ntilde;o-Mes-D&iacute;a"
                 },
-                callsPerPageField_fieldLabel: "Calls per page",
-                showCallsField_fieldLabel: "Show",
-                orderCallsField_fieldLabel: "Order",
-                showClosedField_fieldLabel: "Show closed calls",
+                callsPerPageField_fieldLabel: "Llamadas por p&aacute;agina",
+                showCallsField_fieldLabel: "Mostar",
+                orderCallsField_fieldLabel: "Orden",
+                showClosedField_fieldLabel: "Mostrar llamadas cerradas",
                 commentOrderField_fieldLabel: "Call comment order",
-                languageField_fieldLabel: "Language",
+                languageField_fieldLabel: "Languaje",
                 // Change Password
-                changePasswordForm_title: "Change Password",
-                changePasswordForm_description: 'There are no restrictions on your password, but a medium-strong password is advised',
-                passwordFieldset_title: "Change your password",
+                changePasswordForm_title: "Cambiar Password",
+                changePasswordForm_description: 'No hay restricciones en tu Password, pero se recomienda una Password segura',
+                passwordFieldset_title: "Cambia tu Password",
                 // Password fields
-                oldPasswordField_fieldLabel: "Current Password",
-                passwordField_blankText: "You must enter your current password",
-                passwordField_fieldLabel: "New Password",
-                passwordField_blankText: "You must enter a new password",
-                passwordStrengthIndicator_fieldLabel: "Strength",
-                passwordConfirmField_fieldLabel: "Confirm New Password",
-                passwordConfirmField_blankText: "You must enter your password",
+                oldPasswordField_fieldLabel: "Password actual",
+                passwordField_blankText: "Debes de introducir tu password actual",
+                passwordField_fieldLabel: "Nueva Password",
+                passwordField_blankText: "Debes introducir una nueva Password",
+                passwordStrengthIndicator_fieldLabel: "Fortaleza",
+                passwordConfirmField_fieldLabel: "Comfirma la nueva Password",
+                passwordConfirmField_blankText: "Debes de introducir una Password",
                 // Password strength
-                passwordStrength_blank: "Enter password",
-                passwordStrength_weak: "Weak",
-                passwordStrength_medium: "Medium",
-                passwordStrength_strong: "Strong",
-                passwordStrength_verystrong: "Very Strong",
+                passwordStrength_blank: "Introducir Password",
+                passwordStrength_weak: "Baja",
+                passwordStrength_medium: "Media",
+                passwordStrength_strong: "Buena",
+                passwordStrength_verystrong: "Alta",
                 // Saving new password
-                passwordChangeButton_text: "Change Password",
-                passwordChangeButtonWait_title: "Change Password",
-                passwordChangeButtonWait_text: "Changing your password",
-                passwordChangeButtonConfirmation_title: "Password Changed",
-                passwordChangeButtonConfirmation_text: "Your password has successfully been changed",
-                clearPasswordFormButton_text: "Clear",
+                passwordChangeButton_text: "Cambiar Password",
+                passwordChangeButtonWait_title: "Cambiar Password",
+                passwordChangeButtonWait_text: "Cambiando tu password",
+                passwordChangeButtonConfirmation_title: "Password cambiada",
+                passwordChangeButtonConfirmation_text: "Tu Password ha sido cambiada correctamente",
+                clearPasswordFormButton_text: "Limpiar",
                 // Notification settings
-                notificationsForm_title: "Notification Settings",
-                notificationsForm_description: 'This section allows you to manage '+
-                    'your email notification settings. Notifications are only '+
-                    'sent to you about calls that are assigned to you.',
-                notificationFieldset_title: "Email notification options",
-                sendNotificationsField_fieldLabel: "Send me email notifications",
-                criticalNotifyTime_label: "For <b>CRITICAL</B> calls, notify me",
-                criticalNotifyReason_label: "when they are",
-                urgentNotifyTime_label: "For <b>URGENT</B> calls, notify me",
-                urgentNotifyReason_label: "when they are",
-                moderateNotifyTime_label: "For <b>MODERATE</B> calls, notify me",
-                moderateNotifyReason_label: "when they are",
-                minorNotifyTime_label: "For <b>MINOR</B> calls, notify me",
-                minorNotifyReason_label: "when they are",
-                negligibleNotifyTime_label: "For <b>NEGLIGIBLE</B> calls, notify me",
-                negligibleNotifyReason_label: "when they are",
-                saveNotificationsButton_text: "Save Settings",
-                saveNotificationsButtonWait_title: "Save Settings",
-                saveNotificationsButtonWait_text: "Saving your notification settings",
-                resetNotificationsButton_text: 'Reset'
+                notificationsForm_title: "Configuraci&oacute;n de notificaciones",
+                notificationsForm_description: 'Esta secci&oacute;n te permite controlar'+
+                    'la configuraci&oacute;n de las notificaciones por email .Solo las notificaciones'+
+                    'refrentes a lladas de llamadas asigandas a t&iacute; te ser&aacute;n  enviadas.',
+                notificationFieldset_title: "Opciones de notificaci&oacute;n por email",
+                sendNotificationsField_fieldLabel: "Deseo notificaci&oacute;n por email",
+                criticalNotifyTime_label: "Notificar para llamada <b>CRITICA</B>",
+                criticalNotifyReason_label: "Cuando existan",
+                urgentNotifyTime_label: "Notificar para llamada <b>URGENTE</B> ",
+                urgentNotifyReason_label: "Cuando existan",
+                moderateNotifyTime_label: "Notificar para llamada <b>MODERADA</B>",
+                moderateNotifyReason_label: "Cuando existan",
+                minorNotifyTime_label: "Notificar para llamada <b>MENOR</B>",
+                minorNotifyReason_label: "Cuando existan",
+                negligibleNotifyTime_label: "Notificar para llamada <b>INSIGNIFICANTE</B>",
+                negligibleNotifyReason_label: "Cuando existan",
+                saveNotificationsButton_text: "Guardar configuraci&oacute;n",
+                saveNotificationsButtonWait_title: "Guardar configuraci&oacute;n",
+                saveNotificationsButtonWait_text: "Guardando tu configuraci&oacute;n de notificaci&oacute;n",
+                resetNotificationsButton_text: 'Resetear'
             },
             // Language for Mico.User.Status.js
             Status: {
-                menu_text: "Set Status",
+                menu_text: "Establecer estado",
                 statusField_data: {
-                    available: "Available",
-                    away: "Away",
-                    busy: "Busy",
-                    offline: "Appear Offline"
+                    available: "Disponible",
+                    away: "Fuera",
+                    busy: "Ocupado",
+                    offline: "Offline"
                 },
-                statusField_fieldLabel: "Status",
-                statusTextField_fieldLabel: "Extra details",
+                statusField_fieldLabel: "Estado",
+                statusTextField_fieldLabel: "Detalles extra",
                 statusOptions_data: {
-                    available: "Available",
+                    available: "Disponible",
                     offline: "Offline",
-                    busy: [['Busy'],['On the phone'],['In a meeting']],
-                    away: [['Away'],['Out to lunch'],['Not available']]
+                    busy: [['Ocupado'],['Al tel&eacute;fono'],['En una reuni&oacute;n']],
+                    away: [['Fuera'],['Comiendo'],['No disponible']]
                 },
-                setStatusButton_text: "Set Status",
-                cancelButton_text: "Cancel",
-                panel_title: "Set Status"
+                setStatusButton_text: "Establecer estado",
+                cancelButton_text: "Cancelar",
+                panel_title: "Establecer estado"
             }
         },
         // Language for Mico.ManageUsers.js
         ManageUsers: {
-            menu_text: "Manage Users",
+            menu_text: "Gesti&oacute;n de usuarios",
             // Toolbar
-            userFilterField_label: "View",
+            userFilterField_label: "Vista",
             userFilterField_data: {
-                active:'Active Users',
-                disabled:'Inactive Users',
-                admin:'Administrators',
-                manager:'Managers',
-                user:'Standard Users',
-                all:'All Users' 
+                active:'Usuarios activos',
+                disabled:'Usuarios inactivos',
+                admin:'Administradores',
+                manager:'Gestores',
+                user:'Usuarios standar',
+                all:'Todos' 
             },
-            addUsersButton_text:"Add Users",
+            addUsersButton_text:"A&ntilde;adir usuarios",
             // Grid
-            header_username: "Username",
-            header_name: "Name",
+            header_username: "Nombre de usuario",
+            header_name: "Nombre",
             header_email: "Email",
-            header_role: "Role",
-            header_password: "Reset password",
+            header_role: "Rol",
+            header_password: "Resetear Password",
             // Reset password function
-            resetPasswordConfirmation_title: "Reset Password",
-            resetPasswordConfirmation_text: "A reset password email has been sent to the user",
+            resetPasswordConfirmation_title: "Resetear Password",
+            resetPasswordConfirmation_text: "Un email de reseteo de Password le ha sido enviado al usuario",
             // Add users form
-            usernameField_fieldLabel: "Username",
-            nameField_fieldLabel: "Name",
+            usernameField_fieldLabel: "Nombre de usuario",
+            nameField_fieldLabel: "Nombre",
             emailField_fieldLabel: "Email",
-            roleField_fieldLabel: "Role",
-            addUserButton_text: "Add User",
-            addUserButtonConfirmation_title: "User added",
-            addUserButtonConfirmation_text: "The user has been added. An email explaining the process for setting their password has been sent.",
-            clearAddUsersButton_text: "Clear",
-            hideAddUsersButton_text: "Close",
-            addUsersPanel_title: "Add Users",
+            roleField_fieldLabel: "Rol",
+            addUserButton_text: "A&ntilde;adir usuario",
+            addUserButtonConfirmation_title: "Usuario A&ntilde;adido",
+            addUserButtonConfirmation_text: "EL usuario ha sido A&ntilde;adido. Se le ha enviado un email explicando el proceso para establecer su Password.",
+            clearAddUsersButton_text: "Limpiar",
+            hideAddUsersButton_text: "Cerrar",
+            addUsersPanel_title: "A&ntilde;adir usuarios",
             // Grid renderers
             renderResetPassword: {
-                disabled: "User disabled",
-                active: "Reset Password"
+                disabled: "Usuario desactivado",
+                active: "Resetear Password"
             }
         },
         // Language for Mico.SystemSettings.js
         SystemSettings: {
-            menu_text: "System Settings",
+            menu_text: "Cnfiguraci&oacute;n del sistema",
             // Debug mode
-            debugModeField_boxLabel: "Use debug mode",
-            debugModeFieldset_title: "Debug Mode",
-            debugModeFieldset_description: "Debug mode is useful for when you are "+
-                "working on the Mico codebase, or if you are experiencing errors. "+
-                "For best performance, it is advised to leave this option off.",
+            debugModeField_boxLabel: "Usar mode depuraci&iacute;n",
+            debugModeFieldset_title: "Modo depuraci&iacute;n",
+            debugModeFieldset_description: "El modo depuraci&iacute;n es de utilidad si "+
+                "est&aacute;s trabajando en el c&oacute;digo,o si est&aacute;s experimentando errores. "+
+                "PAra una mejor experiencia, se recomienda desactivar esta opci&oacute;n.",
             // From email
-            mailFromFieldset_title: "From email",
-            mailFromFieldset_description: "The from email is used to send password "+
-                "set and reset emails, as well as notification emails.",
+            mailFromFieldset_title: "Email desde",
+            mailFromFieldset_description: "Email desde es el utilizado para enviar Passwords "+
+                "establecer y resetear emails, así como notificaciones por email.",
             // Session length
             sessionLengthField_data: {
-                halfhour: '30 minutes',
-                onehour: '1 hour',
-                twohours: '2 hours',
-                oneday: '1 day',
-                threedays: '3 days',
-                oneweek: '1 week',
-                twoweeks: '2 weeks',
-                onemonth: '1 month',
-                oneyear: '1 year'
+                halfhour: '30 minutos',
+                onehour: '1 hora',
+                twohours: '2 houras',
+                oneday: '1 d&iacute;a',
+                threedays: '3 dias',
+                oneweek: '1 semana',
+                twoweeks: '2 semanas',
+                onemonth: '1 mes',
+                oneyear: '1 a&ntilde;o'
             },
-            sessionLengthFieldset_title: "Session length",
-            sessionLengthFieldset_description: "The session length is how long a "+
-                "session persists while a user does not have Mico open. Short "+
-                "sessions are more secure, but long sessions mean that a user will "+
-                "not have to log in every time they open the application.",
+            sessionLengthFieldset_title: "Duraci&oacute;n de la sesi&oacute;n",
+           sessionLengthFieldset_description: "La duraci&oacute;n de la sesi&oacute;n es el tiempo"+
+                "que la sesi&oacute;n persiste mientras un usuario no tiene abierto MICO. Las sesiones cortas "+
+                "son mas seguras, pero las largas evitan "+
+                "que el usuario tenga que logearse cada vez que entre a la aplicaci&oacute;n.",
             // Simple cron
-            simpleCronField_boxLabel: "Use simple cron",
-            simpleCronFieldset_title: "Simple cron",
-            simpleCronFieldset_description: "The cron is a recurring task which "+
-                "sends out notification emails.<br /><br />"+
-                "The simple cron should only be used if you do not have access to "+
-                "a proper cron system. It will only run when a user has Mico open.<br /><br />"+
-                "If you have access to proper task scheduler, you can set it to call "+
-                "<b>"+APP_ROOT+"/notify.php</b> using a command similar to the one below. "+
-                "The notify script should be run at least every 5 minutes to ensure "+
-                "that notification emails are sent out as early as possible.<br /><br />"+
-                "<i>Please note that the command below may be different depending "+
-                "on how your server is set up. If you encounter any issues, contact "+
-                "your server administrator or hosting provider to ensure that the "+
-                "cron task has been set up correctly.</i>",
+            simpleCronField_boxLabel: "Usa cron simple",
+            simpleCronFieldset_title: "Cron simple",
+            simpleCronFieldset_description: "EL cron es una tarea recurrente que "+
+                "env&iacute;a notificaciones por email.<br /><br />"+
+                "El cron simple debe de usarse solo si no tienes acceso "+
+                "al cron propio del sistema. Solo funciona si un usuario tiene Mico abierto.<br /><br />"+
+                "Si tienes acceso al cron del sistema debes crear la tarea para lanzar "+
+                "<b>"+APP_ROOT+"/notify.php</b> usando un comando similar al ejemplo. "+
+                "Se debe lanzar cada 5 minutos para asegurar "+
+                " que la notificaci&oacute;n sale lo mas pronto posible.<br /><br />"+
+                "<i>Cuidado, ya que su comando puede ser distinto dependiendo "+
+                "en que servidor se programe. Si encuentras problemas, contacta "+
+                "con el administrador del servidor o proveedor de hosting para asegurarte "+
+                "que la tarea en el cron se ha establecido correctamente.</i>",
             // L10n settings - language
-            languageFieldset_title: "Default language",
-            languageFieldset_description: "This is the default language used in the "+
-                "system. Users may select their own preferred language, but this "+
-                "will be used on the login and change password forms, and if the "+
-                "user has not yet selected a language.",
+            languageFieldset_title: "Idioma por defecto",
+            languageFieldset_description: "Este es el idioma usado en el  "+
+                "sistema. Los usuarios pueden elegir su propio lenguaje, pero este "+
+                "ser&aacute; usado en la p&aacute;gina de acceso y en el formulario de cambio de Password, y si el  "+
+                "usuario no ha seleccionado ning&uacute; lenguaje.",
             // Save settings
-            saveSettingsButton_text: "Save Settings",
-            resetSettingsButton_text: "Reset",
+            saveSettingsButton_text: "Guardar configuraci&oacute;n",
+            resetSettingsButton_text: "Resetear",
             // Load settings
-            loadSettingsWait_title: "Loading",
-            loadSettingsWait_text: "Loading settings from the server",
+            loadSettingsWait_title: "Cargando",
+            loadSettingsWait_text: "Cargando configuraciones desde el servidor",
             // Save settings
-            saveSettingsWait_title: "Save Settings",
-            saveSettingsWait_text: "Saving system settings",
-            saveSettingsConfirmation_title: "System Settings",
-            saveSettingsConfirmation_text: "The system settings have been updated"
+            saveSettingsWait_title: "Guardar configuraci&oacute;n",
+            saveSettingsWait_text: "Guardar configuraci&oacute;n del sistema",
+            saveSettingsConfirmation_title: "Configuraci&oacute;n del sistema",
+            saveSettingsConfirmation_text: "La configuraci&oacute;n del sistema ha sido actualizada"
         },
         // Language for Mico.Upgrader.js
         Upgrader: {
-            upgradeButton_text: "Upgrade",
-            version_upToDate: "Mantis Inbound Call Organiser is already up to date.",
+            upgradeButton_text: "Actualizar",
+            version_upToDate: "El gestor de llamadas Mantis est&aacute; actuaizado.",
             version_upgrade: function (OLD_VERSION, NEW_VERSION) {
-                message = "<h1>Mantis Inbound Call Organiser needs to be upgraded.</h1>"+
-                          "<p>Clicking the 'Upgrade' button below will upgrade MICO from "+
-                          "version "+OLD_VERSION+" to version "+NEW_VERSION+"</p>";
+                message = "<h1>El gestor de llamadas Mantis necesita ser actuaizado.</h1>"+
+                          "<p>Clicando el bot&oacute;n 'Actualizar' Actualizar&aacute;s MICO de la "+
+                          "version "+OLD_VERSION+" a la version "+NEW_VERSION+"</p>";
                 
                 return message;
             },
             // Do upgrade
-            doUpgradeWait_title: "Upgrade",
-            doUpgradeWait_text: "Upgrading MICO",
-            doUpgradeConfirmation_title:"Upgraded",
-            doUpgradeConfirmation_text:"MICO has now been successfully upgraded.<br /><br />"+
-                "You will now be redirected to the login page."
+            doUpgradeWait_title: "Actualizar",
+            doUpgradeWait_text: "Actualizar MICO",
+            doUpgradeConfirmation_title:"Actualizar",
+            doUpgradeConfirmation_text:"MICO se ha actualizado correctamente.<br /><br />"+
+                "Ahora ser&aacute;s redireccionado a la página de acceso."
         },
         // Language for Mico.ConfigSetup.js
         ConfigSetup: {
-            instructions: "Step 1: set up the database",
+            instructions: "PAso 1: Establece la base de datos",
             // Path settings
-            automaticPathField_boxLabel: "Use automatic path settings (Recommended)",
-            FS_ROOT_Field_fieldLabel: "File System Root Directory",
-            WEB_DOMAIN_Field_fieldLabel: "Web Domain",
-            WEB_ROOT_Field_fieldLabel: "Web Root",
-            APP_ROOT_Field_fieldLabel: "Application Root",
-            pathSettingsFieldset_title: "Filesystem and path settings",
-            pathSettingsFieldset_description: "The following settings define where "+
-                "Mico is on your server, and how you access it over the internet. "+
-                "The advanced settings are only advisable if you know exactly what you are doing.",
+            automaticPathField_boxLabel: "Usar rutas por defecto (Recomendado)",
+            FS_ROOT_Field_fieldLabel: "Directorio root del sistema de ficheros",
+            WEB_DOMAIN_Field_fieldLabel: "Dominio Web",
+            WEB_ROOT_Field_fieldLabel: "Ra&iacute;z del WEB",
+            APP_ROOT_Field_fieldLabel: "Ra&iacute;z de la aplicaci&oacute;n",
+            pathSettingsFieldset_title: "Configuraci&oacute;n de rutas y sistema de ficheros",
+            pathSettingsFieldset_description: "La siguiente configuraci&oacute; define en donde "+
+                "est&aacute Mico en tu servidor, Y como acceder v&iacute;a de internet. "+
+                "LA configuraci&oacute;n avanzada es solo si sabes exactamente lo que est&aacute;s haciendo",
             // Database settings
-            hostField_fieldLabel: "Host name",
-            userField_fieldLabel: "User name",
+            hostField_fieldLabel: "Nombre del Host",
+            userField_fieldLabel: "Nombre de usuario",
             passField_fieldLabel: "Password",
-            nameField_fieldLabel: "Database",
-            prefField_fieldLabel: "Table prefix",
-            databaseSettingsFieldset_title: "Database settings",
-            databaseSettingsFieldset_description: "The following settings are for "+
-                "your MySQL database. The table prefix will keep Mico data separate "+
-                "from other tables if Mico is sharing a database with other applications.",
+            nameField_fieldLabel: "Base de datos",
+            prefField_fieldLabel: "prefijo de las tablas",
+            databaseSettingsFieldset_title: "Configuraci&oacute;n de la base de datos",
+            databaseSettingsFieldset_description: "LA siguiente configuraci&oacute;n es para "+
+                "tu base de datos MySql. EL prefijo de las tablas permite a Mico separar los datos "+
+                "de datos de otras aplicaciones cuando compartimos base de datos.",
             // Buttons
-            saveSettingsButton_text: "Save Settings",
-            resetSettingsButton_text: "Reset",
+            saveSettingsButton_text: "Guardar configuraci&oacute;n",
+            resetSettingsButton_text: "Resetear",
             // Save settings function
-            checkSettingsWait_title: "Checking Settings",
-            checkSettingsWait_text: "Checking database settings",
-            saveSettingsWait_title: "Installing",
-            saveSettingsWait_text: "Installing Mico",
-            saveSettingsConfirmation_title: "Installing",
-            saveSettingsConfirmation_text: "Step 1 complete. Next step is to set up system configuration."
+            checkSettingsWait_title: "Checkear configuraci&oacute;n",
+            checkSettingsWait_text: "Checkeando la configuraci&oacute;n de la base de datos",
+            saveSettingsWait_title: "Instalando",
+            saveSettingsWait_text: "Instalando Mico",
+            saveSettingsConfirmation_title: "Instalando",
+            saveSettingsConfirmation_text: "Paso 1 completado. El siguiente paso es establecer la configuraci&oacute;n del sistema."
         },
         // Language for Mico.SystemSetup.js
         SystemSetup: {
             // Debug mode
-            debugModeField_boxLabel: "Use debug mode",
-            debugModeFieldset_title: "Debug Mode",
-            debugModeFieldset_description: "Debug mode is useful for when you are "+
-                "working on the Mico codebase, or if you are experiencing errors. "+
-                "For best performance, it is advised to leave this option off.",
+            debugModeField_boxLabel: "Usar modo depuraci&oacute;",
+            debugModeFieldset_title: "Modo depuraci&oacute;n",
+            debugModeFieldset_description: "El modo depuraci&oacute;n es &uacute;til cuando "+
+                "est&aacute;s trabajando en la base de datos de MICO, o si experimentas errores. "+
+                "PAra una mejor experiencia, te aconsejamos desactivar esta opci&oacute;n.",
             // From email
-            mailFromFieldset_title: "From email",
-            mailFromFieldset_description: "The from email is used to send password "+
-                "set and reset emails, as well as notification emails.",
+            mailFromFieldset_title: "Email desde",
+            mailFromFieldset_description: "El email desde se utiliza para enviar las Password "+
+                "Establecer y resetaer Paswords, asi como para las notificaciones por email.",
             // Session length
             sessionLengthField_data: {
                 halfhour: '30 minutes',
@@ -558,72 +558,72 @@ Mico.Lang = function () {
                 onemonth: '1 month',
                 oneyear: '1 year'
             },
-            sessionLengthFieldset_title: "Session length",
-            sessionLengthFieldset_description: "The session length is how long a "+
-                "session persists while a user does not have Mico open. Short "+
-                "sessions are more secure, but long sessions mean that a user will "+
-                "not have to log in every time they open the application.",
+            sessionLengthFieldset_title: "Tiempo de sesi&oacute;n",
+            sessionLengthFieldset_description: "El tiempo de sesi&oacute;n es "+
+                "El tiempo que la sesi&oacute;n persiste mientras el usuario no est&aacute; con MICO abierto. Las sesiones cortas "+
+                "son mas seguras, pero las largas evitan "+
+                "que el usuario tenga que logearse cada vez que abra la aplicaci&oacute;n.",
             // Simple cron
-            simpleCronField_boxLabel: "Use simple cron",
-            simpleCronFieldset_title: "Simple cron",
-            simpleCronFieldset_description: "The cron is a recurring task which "+
-                "sends out notification emails.<br /><br />"+
-                "The simple cron should only be used if you do not have access to "+
-                "a proper cron system. It will only run when a user has Mico open.<br /><br />"+
-                'Once the system is installed, the "System Settings" tab will have '+
-                "further instructions on how to set up the cron task.",
-            // L10n settings - language
-            languageFieldset_title: "Default language",
-            languageFieldset_description: "This is the default language used in the "+
-                "system. Users may select their own preferred language, but this "+
-                "will be used on the login and change password forms, and if the "+
-                "user has not yet selected a language.",
+            simpleCronField_boxLabel: "Usa cron simple",
+            simpleCronFieldset_title: "Cron simple",
+            simpleCronFieldset_description: "El cron es una tarea recurrente que "+
+                "env&iacute;a notificaciones por email.<br /><br />"+
+                "El cron simple debe de usarse solo si no tienes acceso "+
+                "al cron propio del sistema. S&iacute;lo funciona si un usuario tiene Mico abierto.<br /><br />"+
+                'Una vez instalado el sistema, en el apartado "Configuraci&oacute;n del sistema" tendr&aacute;s '+
+                "instrucciones de como establecer la tarea del cron.",
+        // L10n settings - language
+            languageFieldset_title: "Idioma por defecto",
+            languageFieldset_description: "Este es el idioma usado por el "+
+                "sistema. Los usuarios pueden elegir su idioma preferido, pero este"+
+                "ser&aacute; el usado para el acceso al sistema, para el formulario de cambio de Password y si el  "+
+                "usuario no ha elegido idiamo.",
             // First user
-            usernameField_fieldLabel: "Username",
-            usernameField_blankText: "You must enter your username",
-            nameField_fieldLabel: "Name",
-            nameField_blankText: "You must enter your name",
+            usernameField_fieldLabel: "Nombre de usuario",
+            usernameField_blankText: "Debes de introducir tu nombre de usuario",
+            nameField_fieldLabel: "Nombre",
+            nameField_blankText: "Debes de introducir tu nombre",
             emailField_fieldLabel: "Email",
-            emailField_blankText: "You must enter your email",
+            emailField_blankText: "Debes de introducir tu email",
             // Password
             passwordField_fieldLabel: "Password",
-            passwordField_blankText: "You must enter your password",
-            passwordStrengthIndicator_fieldLabel: "Strength",
-            passwordConfirmField_fieldLabel: "Confirm Password",
-            passwordConfirmField_blankText: "You must enter your password",
+            passwordField_blankText: "Debes de introducir tu Password",
+            passwordStrengthIndicator_fieldLabel: "Fortaleza",
+            passwordConfirmField_fieldLabel: "Confirma Password",
+            passwordConfirmField_blankText: "Debes de introducir tu Password",
             // Password strength
-            passwordStrength_blank: "Enter password",
-            passwordStrength_weak: "Weak",
-            passwordStrength_medium: "Medium",
-            passwordStrength_strong: "Strong",
-            passwordStrength_verystrong: "Very Strong",
+            passwordStrength_blank: "Introduce Password",
+            passwordStrength_weak: "Baja",
+            passwordStrength_medium: "Media",
+            passwordStrength_strong: "Buena",
+            passwordStrength_verystrong: "Alta",
             // Fieldset
-            passwordFieldset_title: "First User",
-            passwordFieldset_description: "Your first user will be an administrator, "+
-                "and can add other users to the system.",
+            passwordFieldset_title: "Usuario principal",
+            passwordFieldset_description: "Tu usuario principal ser&aacute; un administrador"+
+                "y puede incluir otros usuarios en el sistema.",
             // Buttons
-            saveSettingsButton_text: "Save Settings",
-            resetSettingsButton_text: "Reset",
+            saveSettingsButton_text: "Guardar configuraci&oacute;n",
+            resetSettingsButton_text: "Resetear",
             // Function
-            saveSettingsWait_title: "Save Settings",
-            saveSettingsWait_text: "Saving system settings",
-            saveSettingsConfirmation_title: "Installed",
-            saveSettingsConfirmation_text: "Mico has now been successfully installed.<br /><br />"+
-                "Please delete the 'install' folder for security.<br /><br />"+
-                "You will now be redirected to the login page."
+            saveSettingsWait_title: "Guardar configuraci&oacute;n",
+            saveSettingsWait_text: "Guardando configuraci&oacute;n del sistema",
+            saveSettingsConfirmation_title: "Instalado",
+            saveSettingsConfirmation_text: "Mico ha sido instalado correctamente.<br /><br />"+
+                "Por seguridad, elimina la carpeta 'install' .<br /><br />"+
+                "Te redireccionamos ahora a la p&aacute;gina de acceso."
         },
         // Language for Mico.Installed.js
         Installed: {
-            placeholder: "<h2>MICO has been isntalled.</h2>"+
-                         "<p>Mico is installed. It is advisable to delete the "+
-                         "'install' directory and all of its contents.</p>"+
-                         "<p>This will help to secure your installation.</p>"+
-                         '<p><a href="../">Click here</a> to go to the login page.</p>'
+            placeholder: "<h2>MICO ha sido instalado.</h2>"+
+                         "<p>Mico est&aacute; instalado. Es importante que borres la carpeta "+
+                         "'install' y todos sus contenidos.</p>"+
+                         "<p>Esto te ayudar&aacute; amantener segura tu instalci&oacute;n.</p>"+
+                         '<p><a href="../">Clicka aqui</a> para ir a la p&aacute;gina de acceso.</p>'
         },
         // Common language
         Common: {
             unknownError_title: "Error",
-            unknownError_text: "Unknown system error"
+            unknownError_text: "Error de systema desconocido"
         }
     };
 } ();
