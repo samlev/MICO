@@ -220,6 +220,9 @@ class Call {
     // other stuff
     /** Loads all values into the object from the database */
     function load() {
+        // Include the Language file
+        global $LANG;
+        
         // clean the user id
         $id = intval($this->id);
         
@@ -286,6 +289,9 @@ class Call {
     
     /** Commits all changes to the object (essentially saves to the database) */
     function commit() {
+        // Include the Language file
+        global $LANG;
+        
         // check that we either have a user or the system updating
         if ($this->can_update) {
             // check that there is SOMETHING to update
@@ -326,28 +332,61 @@ class Call {
                         run_query($query);
                     }
                     
+                    // Comment action should be save with the system language, not the user language
+                    $l = $LANG->get_language(); // Get the current language
+                    $LANG->set_language(Settings::get_default('LANGUAGE','EN'));
+                    
                     // get the comment 'action' for context
                     $comment_text = "";
                     if (isset($this->changes['status']) && $this->changes['status'] == "closed") {
+                        // Call closed
                         $comment_text = $LANG->get_string('Call/commit/CallClosed');
                     } else if (isset($this->changes['status']) && isset($this->changes['priority']) && isset($this->changes['user'])) {
-                        $comment_text = "Call reopened and escalated to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
+                        // Call Reopened and Escalated to new users
+                        if (count($this->changes['user'])==1) {
+                            // Escalated to one user
+                            $comment_text = $LANG->get_string('Call/commit/CallReopenedEscalatedPerson');
+                        } else {
+                            // Escalated to multiple users
+                            $comment_text = $LANG->get_string('Call/commit/CallReopenedEscalatedPeople', array('%%NUM_PEOPLE%%'=>count($this->changes['user'])));
+                        }
                     } else if (isset($this->changes['status']) && isset($this->changes['priority'])) {
-                        $comment_text = "Call reopened and escalated";
+                        // Call Reopened and Escalated
+                        $comment_text = $LANG->get_string('Call/commit/CallReopenedEscalated');
                     } else if (isset($this->changes['status'])) {
-                        $comment_text = "Call reopened";
+                        // Call Reopened
+                        $comment_text = $LANG->get_string('Call/commit/CallReopened');
                     } else if (isset($this->changes['priority']) && isset($this->changes['user'])) {
-                        $comment_text = "Call escalated to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
+                        // Call Escalated to new users
+                        if (count($this->changes['user'])==1) {
+                            // Escalated to one user
+                            $comment_text = $LANG->get_string('Call/commit/CallEscalatedPerson');
+                        } else {
+                            // Escalated to multiple users
+                            $comment_text = $LANG->get_string('Call/commit/CallEscalatedPeople', array('%%NUM_PEOPLE%%'=>count($this->changes['user'])));
+                        }
                     } else if (isset($this->changes['priority'])) {
-                        $comment_text = "Call escalated";
+                        // Call Escalated
+                        $comment_text = $LANG->get_string('Call/commit/CallEscalated');
                     } else if (isset($this->changes['user'])) {
-                        $comment_text = "Call assigned to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
+                        // Call assigned to new users
+                        if (count($this->changes['user'])==1) {
+                            // Assigned to one user
+                            $comment_text = $LANG->get_string('Call/commit/CallAssignedPerson');
+                        } else {
+                            // Assigned to multiple users
+                            $comment_text = $LANG->get_string('Call/commit/CallAssignedPeople', array('%%NUM_PEOPLE%%'=>count($this->changes['user'])));
+                        }
                     } else if (isset($this->changes['comment'])) {
-                        $comment_text = "Comment";
+                        // Just a comment
+                        $comment_text = $LANG->get_string('Call/commit/Comment');
                     } else {
                         // set a blank comment for the query
                         $this->changes['comment'] = '';
                     }
+                    
+                    // Return the language file to it's original language
+                    $LANG->set_language($l);
                     
                     // now add the comment
                     $query = "INSERT INTO `".DB_PREFIX."call_comments` (`call_id`,`user_id`,`date`,`action`,`comment`)
@@ -380,13 +419,13 @@ class Call {
                     // and now that we're done, re-sync with the database
                     $this->load();
                 } else {
-                    throw new CallClosedException('Cannot update call - it has been closed');
+                    throw new CallClosedException($LANG->get_string('Call/commit/CallClosedException'));
                 }
             } else {
-                throw new CallUpdateException('Nothing to update');
+                throw new CallUpdateException($LANG->get_string('Call/commit/CallUpdateException'));
             }
         } else {
-            throw new CallPermissionException('User is not authorized to update call');
+            throw new CallPermissionException($LANG->get_string('Call/commit/CallPermissionException'));
         }
     }
 }
