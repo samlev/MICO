@@ -67,5 +67,22 @@ $language_strings = array(
     // Language for auto_login.php
     "auto_login/waitText"       => "You are being logged into the system. Please wait.",
     "auto_login/waitTitle"      => "Logging in",
+    /** CLASSES AND EXCEPTIONS **/
+    // Language for Call.class.php
+    "Call/load/CallNotFoundException"           => "Cannot find call information",
+    "Call/commit/CallClosed"                    => "Call closed",
+    "Call/commit/CallReopenedEscalatedPerson"   => "Call reopened and escalated to 1 person",
+    "Call/commit/CallReopenedEscalatedPeople"   => "Call reopened and escalated to %%NUM_PEOPLE%% people",
+    "Call/commit/CallReopenedEscalated"         => "Call reopened and escalated",
+    "Call/commit/CallReopened"                  => "Call reopened",
+    "Call/commit/CallEscalatedPerson"           => "Call escalated to 1 person",
+    "Call/commit/CallEscalatedPeople"           => "Call escalated to %%NUM_PEOPLE%% people",
+    "Call/commit/CallEscalated"                 => "Call escalated",
+    "Call/commit/CallAssignedPerson"            => "Call assigned to 1 person",
+    "Call/commit/CallAssignedPeople"            => "Call assigned to %%NUM_PEOPLE%% people",
+    "Call/commit/Comment"                       => "Comment",
+    "Call/commit/CallClosedException"           => "Cannot update call - it has been closed",
+    "Call/commit/CallUpdateException"           => "Nothing to update",
+    "Call/commit/CallPermissionException"       => "User is not authorized to update call",
 );
 ?>

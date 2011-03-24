@@ -280,7 +280,7 @@ class Call {
             $this->changes = array();
             $this->can_update = false;
         } else {
-            throw new CallNotFoundException("Cannot find call information");
+            throw new CallNotFoundException($LANG->get_string('Call/load/CallNotFoundException'));
         }
     }
     
@@ -329,7 +329,7 @@ class Call {
                     // get the comment 'action' for context
                     $comment_text = "";
                     if (isset($this->changes['status']) && $this->changes['status'] == "closed") {
-                        $comment_text = "Call closed";
+                        $comment_text = $LANG->get_string('Call/commit/CallClosed');
                     } else if (isset($this->changes['status']) && isset($this->changes['priority']) && isset($this->changes['user'])) {
                         $comment_text = "Call reopened and escalated to ".count($this->changes['user']).(count($this->changes['user'])==1?' person':' people');
                     } else if (isset($this->changes['status']) && isset($this->changes['priority'])) {
