@@ -143,6 +143,22 @@ $language_strings = array(
     // Language for Settings.class.php
     "Settings/get/SettingsNotFoundException"        => "Cannot find setting",
     "Settings/history/SettingsNotFoundException"    => "Cannot find setting",
+    // Language for User.class.php
+    "User/bySession/UserDisabled"                   => "User disabled",
+    "User/bySession/SessionExpired"                 => "Session expired",
+    "User/bySession/SessionIdNotFound"              => "Session ID not found",
+    "User/bySession/SessionIdInvalid"               => "Session ID is invalid",
+    "User/byId/UserNotFoundException"               => "Cannot find user",
+    "User/byUsername/UserNotFoundException"         => "Cannot find user",
+    "User/login/UserLoginException"                 => "Username or password incorrect",
+    "User/changePassword/OldPassword"               => "Old password is incorrect",
+    "User/changePassword/PasswordConfirmation"      => "Password does not match confirmation",
+    "User/changePassword/PasswordBlank"             => "Password cannot be blank",
+    "User/setPassword/RequestExpired"               => "Password set request does not exist or has expired",
+    "User/setPassword/PasswordConfirmation"         => "Password does not match confirmation",
+    "User/setPassword/PasswordBlank"                => "Password cannot be blank",
+    "User/load/UserNotFoundException"               => "Cannot find user information",
+    "User/commit/UserNotFoundException"             => "Cannot save user information",
     /** COMMON STRINGS **/
     "critical"          => "Critical",
     "urgent"            => "Urgent",
