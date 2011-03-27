@@ -29,6 +29,9 @@ class PasswordReset {
      * @param string $username The user to make the request for
      */
     static function get_request($username) {
+        // Include the language file
+        global $LANG;
+        
         try {
             // get the user
             $user = User::by_username($username);
@@ -54,34 +57,37 @@ class PasswordReset {
                                   '".date('Y-m-d H:i:s', $expiry_time)."')";
                 run_query($query);
                 
+                // Set the language for the user recieving the email
+                $l = $LANG->get_language();
+                $LANG->set_language($user->get_var_default('lang',''));
+                
                 // now finally, email the user - a simple text email
-                $body = "Dear ".$user->get_var('name').",\r\n\r\n";
-                $body .= "This email has been sent to you as part of the 'forgotten password'\r\n";
-                $body .= "process for Mico.\r\n\r\n";
-                $body .= "To change your password, visit the following link:\r\n";
-                $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
-                $body .= "This link will expire in approximately 24 hours, at ".date('h:i A',$expiry_time)."\r\n";
-                $body .= "on ".date('jS M, Y',$expiry_time).", server time*.\r\n\r\n";
-                $body .= "If you did not request this change of password, or have remembered\r\n";
-                $body .= "your password, please delete this message\r\n\r\n";
-                $body .= "Do not reply to this email.\r\n\r\n";
-                $body .= "----------------------------------------------------------------------\r\n\r\n";
-                $body .= "* Please note: The server time may vary from your local time.";
+                $body = $LANG->get_string("PasswordReset/getRequest/Email",array("%%NAME%%"=>$user->get_var('name'),
+                                                                                 "%%APP_ROOT%%"=>APP_ROOT,
+                                                                                 "%%KEY%%"=>$request,
+                                                                                 "%%EXPIRE_TIME%%"=>date($user->get_var_default('timeformat','h:i A'),$expiry_time),
+                                                                                 "%%EXPIRE_DATE%%"=>date($user->get_var_default('dateformat','jS M, Y'),$expiry_time)));
                 
                 // set the 'from' address
                 $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
                 $header .= "From: ".Settings::get('MAIL_FROM') . "\r\n";
                 
+                // Subject
+                $subject = $LANG->get_string("PasswordReset/getRequest/Subject");
+                
+                // Reset the language
+                $LANG->set_language($l);
+                
                 // and send the email
-                if (!mail($email,"Mico - Password Reset Request",$body,$header)) {
+                if (!mail($email,$subject,$body,$header)) {
                     // there was an error sending the email. Clear the reset request
                     PasswordReset::clear_request($request);
                     
                     // and throw an exception
-                    throw new PasswordResetMailErrorException("Mail could not be sent. Please contact an administrator.");
+                    throw new PasswordResetMailErrorException($LANG->get_string("PasswordReset/getRequest/PasswordResetMailErrorException"));
                 }
             } else {
-                throw new PasswordResetUserDisabledException("User is not active");
+                throw new PasswordResetUserDisabledException($LANG->get_string("PasswordReset/getRequest/PasswordResetUserDisabledException"));
             }
         } catch (UserNotFoundException $e) {
             throw $e; // catch and re-throw any 'user not found' exceptions
@@ -94,6 +100,9 @@ class PasswordReset {
      * @param string $username The user to make the request for
      */
     static function new_user_request($username) {
+        // Include the language file
+        global $LANG;
+        
         try {
             // get the user
             $user = User::by_username($username);
@@ -114,36 +123,31 @@ class PasswordReset {
                                   '".date('Y-m-d H:i:s', $expiry_time)."')";
                 run_query($query);
                 
-                // now finally, email the user - a simple text email
-                $body = "Dear ".$user->get_var('name').",\r\n\r\n";
-                $body .= "This email has been sent to you as part of the user registration\r\n";
-                $body .= "process for Mico.\r\n\r\n";
-                $body .= "To set your password for the first time, visit the following link:\r\n";
-                $body .= APP_ROOT."/set_password.php?k=$request\r\n\r\n";
-                $body .= "Your username for Mico is: $username\r\n\r\n";
-                $body .= "This link will expire in approximately 72 hours, at ".date('h:i A',$expiry_time)."\r\n";
-                $body .= "on ".date('jS M, Y',$expiry_time).", server time*.\r\n\r\n";
-                $body .= "If the link expires before you can use it, you can also set your\r\n";
-                $body .= "password with the 'forgotten password' link at\r\n";
-                $body .= APP_ROOT."\r\n\r\n";
-                $body .= "Do not reply to this email.\r\n\r\n";
-                $body .= "----------------------------------------------------------------------\r\n\r\n";
-                $body .= "* Please note: The server time may vary from your local time.";
+                // Mail body
+                $body = $LANG->get_string("PasswordReset/newUser/Email",array("%%NAME%%"=>$user->get_var('name'),
+                                                                              "%%APP_ROOT%%"=>APP_ROOT,
+                                                                              "%%KEY%%"=>$request,
+                                                                              "%%USERNAME%%"=>$username,
+                                                                              "%%EXPIRE_TIME%%"=>date('h:i A',$expiry_time),
+                                                                              "%%EXPIRE_DATE%%"=>date('jS M, Y',$expiry_time)));
                 
                 // set the 'from' address
                 $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
                 $header .= "From: ".Settings::get('MAIL_FROM') . "\r\n";
                 
+                // Subject
+                $subject = $LANG->get_string("PasswordReset/newUser/Subject");
+                
                 // and send the email
-                if (!mail($email,"Mico - User Registration",$body,$header)) {
+                if (!mail($email,$subject,$body,$header)) {
                     // there was an error sending the email. Clear the reset request
                     PasswordReset::clear_request($request);
                     
                     // and throw an exception
-                    throw new PasswordResetMailErrorException("Mail could not be sent. Please contact an administrator.");
+                    throw new PasswordResetMailErrorException($LANG->get_string("PasswordReset/newUser/PasswordResetMailErrorException"));
                 }
             } else {
-                throw new PasswordResetUserDisabledException("User is not active");
+                throw new PasswordResetUserDisabledException($LANG->get_string("PasswordReset/newUser/PasswordResetUserDisabledException"));
             }
         } catch (UserNotFoundException $e) {
             throw $e; // catch and re-throw any 'user not found' exceptions

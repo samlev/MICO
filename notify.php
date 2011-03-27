@@ -27,6 +27,9 @@ include_once ('inc/config.php');
 // Connect to the database, and brings in the standard library
 include_once(FS_ROOT.'/inc/connect.php');
 
+// Set up the Language system
+$LANG = new Lang(Settings::get_default('LANGUAGE','EN'));
+
 // include the notifier class
 include_once(FS_ROOT.'/lib/Notifier.class.php');
 

@@ -128,7 +128,7 @@ $language_strings = array(
             "process for Mico.\r\n\r\n".
             "To set your password for the first time, visit the following link:\r\n".
             "%%APP_ROOT%%/set_password.php?k=%%KEY%%\r\n\r\n".
-            "Your username for Mico is: %%UERNAME%%\r\n\r\n".
+            "Your username for Mico is: %%USERNAME%%\r\n\r\n".
             "This link will expire in approximately 72 hours, at %%EXPIRE_TIME%%\r\n".
             "on %%EXPIRE_DATE%%, server time*.\r\n\r\n".
             "If the link expires before you can use it, you can also set your\r\n".
