@@ -116,11 +116,11 @@ if (Settings::get_default('MICO_VERSION','unknown') != MICO_VERSION) {
       <img src="<?php echo APP_ROOT?>/skin/static/mico.png" alt="Mico" id="micoLogo" />
     </div>
     <div style="padding:8px;">
-      <h2 style="font-size:16pt;margin-bottom:8px;">Upgrade Instructions</h2>
+      <h2 style="font-size:16pt;margin-bottom:8px;"><?php echo $LANG->get_string("index/Upgrade/Title"); ?></h2>
       <p style="margin-bottom:8px;">
-        MICO's code has been upgraded from version <?php echo Settings::get_default('MICO_VERSION','unknown')?>
-        to version <?php echo MICO_VERSION?>. To complete the upgrade process,
-        <a href="<?php echo APP_ROOT?>/upgrade/">click here</a>.
+        <?php echo $LANG->get_string("index/Upgrade/Text",array("%%OLD_VERSION%%"=>Settings::get_default('MICO_VERSION','unknown'),
+                                                                "%%NEW_VERSION%%"=>MICO_VERSION,
+                                                                "%%APP_ROOT%%"=>APP_ROOT)); ?>
       </p>
     </div>
   </body>
