@@ -1,13 +1,13 @@
 <?php
 /*******************************************************************************
  *******************************************************************************
- ** Author: Samuel Levy <sam@samuellevy.com>
+ ** Author: Jorge Luis Loza <jorge@ciclopesl.com>
  ** 
- ** File: lib/lang/EN.php
+ ** File: lib/lang/ES.php
  ** 
- ** Description: Defines basic strings for the English language
+ ** Description: Defines basic strings for the Spanish language
  **
- ** Copyright (c) 2011 Samuel Levy
+ ** Copyright (c) 2011 Jorge Luis Loza
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as

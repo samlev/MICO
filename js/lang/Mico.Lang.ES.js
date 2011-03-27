@@ -337,20 +337,20 @@ Mico.Lang = function () {
                 clearPasswordFormButton_text: "Limpiar",
                 // Notification settings
                 notificationsForm_title: "Configuraci&oacute;n de notificaciones",
-                notificationsForm_description: 'Esta secci&oacute;n te permite controlar'+
-                    'la configuraci&oacute;n de las notificaciones por email .Solo las notificaciones'+
+                notificationsForm_description: 'Esta secci&oacute;n te permite controlar '+
+                    'la configuraci&oacute;n de las notificaciones por email .Solo las notificaciones '+
                     'refrentes a lladas de llamadas asigandas a t&iacute; te ser&aacute;n  enviadas.',
                 notificationFieldset_title: "Opciones de notificaci&oacute;n por email",
                 sendNotificationsField_fieldLabel: "Deseo notificaci&oacute;n por email",
-                criticalNotifyTime_label: "Notificar para llamada <b>CRITICA</B>",
+                criticalNotifyTime_label: "Notificar para llamada <b>CRITICA</b>",
                 criticalNotifyReason_label: "Cuando existan",
-                urgentNotifyTime_label: "Notificar para llamada <b>URGENTE</B> ",
+                urgentNotifyTime_label: "Notificar para llamada <b>URGENTE</b> ",
                 urgentNotifyReason_label: "Cuando existan",
-                moderateNotifyTime_label: "Notificar para llamada <b>MODERADA</B>",
+                moderateNotifyTime_label: "Notificar para llamada <b>MODERADA</b>",
                 moderateNotifyReason_label: "Cuando existan",
-                minorNotifyTime_label: "Notificar para llamada <b>MENOR</B>",
+                minorNotifyTime_label: "Notificar para llamada <b>MENOR</b>",
                 minorNotifyReason_label: "Cuando existan",
-                negligibleNotifyTime_label: "Notificar para llamada <b>INSIGNIFICANTE</B>",
+                negligibleNotifyTime_label: "Notificar para llamada <b>INSIGNIFICANTE</b>",
                 negligibleNotifyReason_label: "Cuando existan",
                 saveNotificationsButton_text: "Guardar configuraci&oacute;n",
                 saveNotificationsButtonWait_title: "Guardar configuraci&oacute;n",
@@ -575,7 +575,7 @@ Mico.Lang = function () {
         // L10n settings - language
             languageFieldset_title: "Idioma por defecto",
             languageFieldset_description: "Este es el idioma usado por el "+
-                "sistema. Los usuarios pueden elegir su idioma preferido, pero este"+
+                "sistema. Los usuarios pueden elegir su idioma preferido, pero este "+
                 "ser&aacute; el usado para el acceso al sistema, para el formulario de cambio de Password y si el  "+
                 "usuario no ha elegido idiamo.",
             // First user
@@ -599,7 +599,7 @@ Mico.Lang = function () {
             passwordStrength_verystrong: "Alta",
             // Fieldset
             passwordFieldset_title: "Usuario principal",
-            passwordFieldset_description: "Tu usuario principal ser&aacute; un administrador"+
+            passwordFieldset_description: "Tu usuario principal ser&aacute; un administrador "+
                 "y puede incluir otros usuarios en el sistema.",
             // Buttons
             saveSettingsButton_text: "Guardar configuraci&oacute;n",
