@@ -28,6 +28,11 @@ $language_strings = array(
     // Language for api.php
     "api/UnknownFunction"       => "Unknown function requested",
     "api/APIError"              => "API Error",
+    // Language for index.php
+    "index/Upgrade/Title"       => "Upgrade Instructions",
+    "index/Upgrade/Text"        => "MICO's code has been upgraded from version ".
+            "%%OLD_VERSION%% to version %%NEW_VERSION%%. To complete the upgrade ".
+            'process, <a href="%%APP_ROOT%%/upgrade/">click here</a>.',
     /** PUBLIC API **/
     // Language for resetPassword.php
     "resetPassword/Success"     => "An email was sent to %%EMAIL%% with further isntructions.",
