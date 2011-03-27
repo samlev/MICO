@@ -107,6 +107,39 @@ $language_strings = array(
     "Notifier/run/SubjectUpdatedCall"           => "Mico notification - 1 updated call",
     "Notifier/run/SubjectNewCalls"              => "Mico notification - %%NUM_CALLS%% new calls",
     "Notifier/run/SubjectUpdatedCalls"          => "Mico notification - %%NUM_CALLS%% updated calls",
+    // Language for PasswordReset.class.php
+    "PasswordReset/getRequest/Email"                                => "Dear %%NAME%%,\r\n\r\n".
+            "This email has been sent to you as part of the 'forgotten password'\r\n".
+            "process for Mico.\r\n\r\n".
+            "To change your password, visit the following link:\r\n".
+            "%%APP_ROOT%%/set_password.php?k=%%KEY%%\r\n\r\n".
+            "This link will expire in approximately 24 hours, at %%EXPIRE_TIME%%\r\n".
+            "on %%EXPIRE_DATE%%, server time*.\r\n\r\n".
+            "If you did not request this change of password, or have remembered\r\n".
+            "your password, please delete this message\r\n\r\n".
+            "Do not reply to this email.\r\n\r\n".
+            "----------------------------------------------------------------------\r\n\r\n".
+            "* Please note: The server time may vary from your local time.",
+    "PasswordReset/getRequest/Subject"                              => "Mico - Password Reset Request",
+    "PasswordReset/getRequest/PasswordResetMailErrorException"      => "Mail could not be sent. Please contact an administrator.",
+    "PasswordReset/getRequest/PasswordResetUserDisabledException"   => "User is not active.",
+    "PasswordReset/newUser/Email"                                   => "Dear %%NAME%%,\r\n\r\n".
+            "This email has been sent to you as part of the user registration\r\n".
+            "process for Mico.\r\n\r\n".
+            "To set your password for the first time, visit the following link:\r\n".
+            "%%APP_ROOT%%/set_password.php?k=%%KEY%%\r\n\r\n".
+            "Your username for Mico is: %%UERNAME%%\r\n\r\n".
+            "This link will expire in approximately 72 hours, at %%EXPIRE_TIME%%\r\n".
+            "on %%EXPIRE_DATE%%, server time*.\r\n\r\n".
+            "If the link expires before you can use it, you can also set your\r\n".
+            "password with the 'forgotten password' link at\r\n".
+            "%%APP_ROOT%%\r\n\r\n".
+            "Do not reply to this email.\r\n\r\n".
+            "----------------------------------------------------------------------\r\n\r\n".
+            "* Please note: The server time may vary from your local time.",
+    "PasswordReset/newUser/Subject"                                 => "Mico - User Registration",
+    "PasswordReset/newUser/PasswordResetMailErrorException"         => "Mail could not be sent. Please contact an administrator.",
+    "PasswordReset/newUser/PasswordResetUserDisabledException"      => "User is not active.",
     /** COMMON STRINGS **/
     "critical"          => "Critical",
     "urgent"            => "Urgent",
