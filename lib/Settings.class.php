@@ -29,6 +29,9 @@ class Settings {
      * @return mixed The value
      */
     static function get($key) {
+        // Include the language file
+        global $LANG;
+        
         $val = null;
         
         // pull the latest entry from the database
@@ -43,7 +46,7 @@ class Settings {
         if ($row = mysql_fetch_assoc($res)) {
             $val = unserialize($row['value']);
         } else {
-            throw new SettingsNotFoundException("Cannot find setting");
+            throw new SettingsNotFoundException($LANG->get_string("Settings/get/SettingsNotFoundException"));
         }
         
         return $val;
@@ -125,6 +128,9 @@ class Settings {
      * @return array The history
      */
     static function history($key,$limit=null) {
+        // Include the language file
+        global $LANG;
+        
         $history = array();
         $l = abs(intval($limit));
         
@@ -143,7 +149,7 @@ class Settings {
                                    'date'=>$row['set']);
             }
         } else {
-            throw new SettingsNotFoundException("Cannot find setting");
+            throw new SettingsNotFoundException($LANG->get_string("Settings/history/SettingsNotFoundException"));
         }
         
         return $history;
