@@ -84,5 +84,19 @@ $language_strings = array(
     "Call/commit/CallClosedException"           => "Cannot update call - it has been closed",
     "Call/commit/CallUpdateException"           => "Nothing to update",
     "Call/commit/CallPermissionException"       => "User is not authorized to update call",
+    // Language for Notifier.class.php
+    "Notifier/run/NewCall"                      => "You have 1 new call",
+    "Notifier/run/NewCalls"                     => "You have %%NUM_CALLS%% new calls",
+    "Notifier/run/UpdatedCall"                  => "You have 1 updated call",
+    "Notifier/run/UpdatedCalls"                 => "You have %%NUM_CALLS%% updated calls",
+    "Notifier/run/NewAndUpdatedCalls"           => "You have %%NUM_CALLS%% new and updated calls",
+    "Notifier/run/CallAssigned"                 => "Call assigned to you by %%ACTOR_NAME%%",
+    "Notifier/run/CallUpdated"                  => "Call updated by %%ACTOR_NAME%%",
+    /** COMMON STRINGS **/
+    "critical"          => "Critical",
+    "urgent"            => "Urgent",
+    "moderate"          => "Moderate",
+    "minor"             => "Minor",
+    "negligible"        => "Negligible"
 );
 ?>

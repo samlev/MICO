@@ -84,6 +84,9 @@ if (!defined('CONFIGURED')) {
 // Connects to the database, and brings in the standard library
 include_once(FS_ROOT.'/inc/connect.php');
 
+// Set up the Language system
+$LANG = new Lang(Settings::get_default('LANGUAGE','EN'));
+
 // Check if we have the latest version of the database
 if (Settings::get_default('MICO_VERSION','unknown') != MICO_VERSION) {
     ?>
@@ -138,6 +141,8 @@ if (isset($_COOKIE['session'])) {
         $loggedin = true;
         define('USER_ID', $user->get_id());
         define('SESSION', $user->get_session());
+        
+        $LANG->set_language($user->get_var('lang'));
     } catch (UserSessionException $e) {
         // get rid of the cookie
         setcookie('session','',time()-3600);
