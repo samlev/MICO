@@ -140,6 +140,9 @@ $language_strings = array(
     "PasswordReset/newUser/Subject"                                 => "Mico - User Registration",
     "PasswordReset/newUser/PasswordResetMailErrorException"         => "Mail could not be sent. Please contact an administrator.",
     "PasswordReset/newUser/PasswordResetUserDisabledException"      => "User is not active.",
+    // Language for Settings.class.php
+    "Settings/get/SettingsNotFoundException"        => "Cannot find setting",
+    "Settings/history/SettingsNotFoundException"    => "Cannot find setting",
     /** COMMON STRINGS **/
     "critical"          => "Critical",
     "urgent"            => "Urgent",
