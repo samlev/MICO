@@ -37,6 +37,9 @@ class User {
      * @return User A User object
      */
     static function by_session($session) {
+        // Include the language file
+        global $LANG;
+        
         $user = null;
         
         // Check that the session ID is actually plausibly valid
@@ -73,7 +76,7 @@ class User {
                         // clean up
                         run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
                         
-                        throw new UserSessionExpiredException("User disabled");
+                        throw new UserSessionExpiredException($LANG->get_string("User/bySession/UserDisabled"));
                     }
                 } else {
                     // clear the session
@@ -81,13 +84,13 @@ class User {
                     // clean up
                     run_query("OPTIMIZE TABLE `".DB_PREFIX."sessions`");
                     
-                    throw new UserSessionExpiredException("Session expired");
+                    throw new UserSessionExpiredException($LANG->get_string("User/bySession/SessionExpired"));
                 }
             } else {
-                throw new UserSessionInvalidException("Session ID not found");
+                throw new UserSessionInvalidException($LANG->get_string("User/bySession/SessionIdNotFound"));
             }
         } else {
-            throw new UserSessionInvalidException("Session ID is invalid");
+            throw new UserSessionInvalidException($LANG->get_string("User/bySession/SessionIdInvalid"));
         }
         
         // return the user object
@@ -99,6 +102,9 @@ class User {
      * @return User A User object
      */
     static function by_id($userid) {
+        // Include the language file
+        global $LANG;
+        
         $user = null;
         
         // clean up the userid
@@ -118,7 +124,7 @@ class User {
             $user->set_id($row['id']);
             $user->load();
         } else {
-            throw new UserNotFoundException("Cannot find user");
+            throw new UserNotFoundException($LANG->get_string("User/byId/UserNotFoundException"));
         }
         
         // return the user object
@@ -130,6 +136,9 @@ class User {
      * @return User A User object
      */
     static function by_username($username) {
+        // Include the language file
+        global $LANG;
+        
         $user = null;
         
         // Get the user by the username
@@ -146,7 +155,7 @@ class User {
             $user->set_id($row['id']);
             $user->load();
         } else {
-            throw new UserNotFoundException("Cannot find user");
+            throw new UserNotFoundException($LANG->get_string("User/byUsername/UserNotFoundException"));
         }
         
         // return the user object
@@ -159,6 +168,9 @@ class User {
      * @return User A User object
      */
     static function login($username, $password) {
+        // Include the language file
+        global $LANG;
+        
         $user = null;
         
         // we hash-reverse-hash the password using two algorithms to make rainbow-tables pretty pointless
@@ -192,7 +204,7 @@ class User {
             // set the cookie
             setcookie('session',$session,strtotime($time.' +'.Settings::get('SESSION_LENGTH')));
         } else {
-            throw new UserLoginException("Username or password incorrect");
+            throw new UserLoginException($LANG->get_string("User/login/UserLoginException"));
         }
         
         // return the user object
@@ -251,6 +263,9 @@ class User {
      * @param string $password2 The new password confirmation
      */
     function change_password($oldpass, $password1, $password2) {
+        // Include the language file
+        global $LANG;
+        
         // ensure that the password isn't blank
         if ($password1 != '') {
             // ensure that both passwords are the same
@@ -271,13 +286,13 @@ class User {
                 
                 // check that something was updated
                 if (mysql_affected_rows() == 0) {
-                    throw new UserPasswordChangeVerificationException("Old password is incorrect");
+                    throw new UserPasswordChangeVerificationException($LANG->get_string("User/changePassword/OldPassword"));
                 }
             } else {
-                throw new UserPasswordConfirmationException("Password does not match confirmation");
+                throw new UserPasswordConfirmationException($LANG->get_string("User/changePassword/PasswordConfirmation"));
             }
         } else {
-            throw new UserPasswordValidationException("Password cannot be blank");
+            throw new UserPasswordValidationException($LANG->get_string("User/changePassword/PasswordBlank"));
         }
     }
     
@@ -287,6 +302,9 @@ class User {
      * @param string $password2 The new password confirmation
      */
     function set_password($confirmation_key, $password1, $password2) {
+        // Include the language file
+        global $LANG;
+        
         // ensure that the password isn't blank
         if ($password1 != '') {
             // ensure that both passwords are the same
@@ -308,19 +326,22 @@ class User {
                     // and clear the request
                     PasswordReset::clear_request($confirmation_key);
                 } else {
-                    throw new UserPasswordChangeVerificationException("Password set request does not exist or has expired");
+                    throw new UserPasswordChangeVerificationException($LANG->get_string("User/setPassword/RequestExpired"));
                 }
             } else {
-                throw new UserPasswordConfirmationException("Password does not match confirmation");
+                throw new UserPasswordConfirmationException($LANG->get_string("User/setPassword/PasswordConfirmation"));
             }
         } else {
-            throw new UserPasswordValidationException("Password cannot be blank");
+            throw new UserPasswordValidationException($LANG->get_string("User/setPassword/PasswordBlank"));
         }
     }
     
     // other stuff
     /** Loads all values into the object from the database */
     function load() {
+        // Include the language file
+        global $LANG;
+        
         // clean the user id
         $u = intval($this->id);
         
@@ -341,7 +362,7 @@ class User {
             // and mark the object as clean
             $this->dirty = false;
         } else {
-            throw new UserNotFoundException("Cannot find user information");
+            throw new UserNotFoundException($LANG->get_string("User/load/UserNotFoundException"));
         }
     }
     
@@ -400,6 +421,9 @@ class User {
     
     /** Commits all changes to the object (essentially saves to the database) */
     function commit() {
+        // Include the language file
+        global $LANG;
+        
         $u = intval($this->id);
         
         // update the database
@@ -415,7 +439,7 @@ class User {
             $this->dirty = false;
         } else if ($this->dirty) {
             // if this object was 'dirty' but we didn't affect any rows, then the user must not have existed.
-            throw new UserNotFoundException("Cannot save user information");
+            throw new UserNotFoundException($LANG->get_string("User/commit/UserNotFoundException"));
         }
     }
     
