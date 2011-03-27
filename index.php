@@ -142,7 +142,7 @@ if (isset($_COOKIE['session'])) {
         define('USER_ID', $user->get_id());
         define('SESSION', $user->get_session());
         
-        $LANG->set_language($user->get_var('lang'));
+        $LANG->set_language($user->get_var_default('lang',''));
     } catch (UserSessionException $e) {
         // get rid of the cookie
         setcookie('session','',time()-3600);

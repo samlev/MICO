@@ -27,6 +27,9 @@
 class Notifier {
     /** Builds and sends all notification emails */
     static function run() {
+        // Pull in the language class
+        global $LANG;
+        
         $tries = 0;
         
         // only try to get the lock 5 times before giving up
@@ -81,20 +84,36 @@ class Notifier {
                     }
                 }
                 
+                
+                $default_lang = $LANG->get_language();
+                
                 // now build and send the actual emails
                 foreach ($users as $u) {
+                    // Select the language for the user
+                    $LANG->set_language($u['user']->get_var_default('lang',''));
+                    
                     // track the IDs that have been notified
                     $notifyids = array();
                     
                     // get the email address and name
                     $to = $u['user']->get_var('email');
                     
-                    // this is simeple helper text for the email body and the subject
-                    $up_text = ($u['newcalls']?'new'.($u['updatedcalls']?' and updated':''):'updated').' call'.(count($u['notifications'])==1?'':'s');
+                    // Update text
+                    if ($u['newcalls'] && $u['updatedcalls']) {
+                        $up_text = $LANG->get_string('Notifier/run/NewAndUpdatedCalls',array("%%NUM_CALLS%%"=>count($u['notifications'])));
+                    } else if ($u['newcalls'] && count($u['notifications'])==1) {
+                        $up_text = $LANG->get_string('Notifier/run/NewCall');
+                    } else if ($u['updatedcalls'] && count($u['notifications'])==1) {
+                        $up_text = $LANG->get_string('Notifier/run/UpdatedCall');
+                    } else if ($u['newcalls']) {
+                        $up_text = $LANG->get_string('Notifier/run/NewCalls',array("%%NUM_CALLS%%"=>count($u['notifications'])));
+                    } else if ($u['updatedcalls']) {
+                        $up_text = $LANG->get_string('Notifier/run/UpdatedCalls',array("%%NUM_CALLS%%"=>count($u['notifications'])));
+                    }
                     
                     // start the body text off
                     $body = $u['user']->get_var('name').','."\r\n";
-                    $body .= 'You have '.count($u['notifications'])." $up_text.\r\n";
+                    $body .= "$up_text.\r\n";
                     
                     $curr_priority = '';
                     foreach ($u['notifications'] as $n) {
@@ -106,7 +125,7 @@ class Notifier {
                             // add a break
                             $body .= "\r\n";
                             // add header
-                            $body .= $n['priority']."\r\n";
+                            $body .= $LANG->get_string($n['priority'])."\r\n";
                             $body .= str_repeat('-',70)."\r\n";
                             // mark the current priority
                             $curr_priority = $n['priority'];
@@ -116,16 +135,31 @@ class Notifier {
                         $d = date($u['user']->get_var_default('timeformat','g:ia'),strtotime($n['action_date']));
                         
                         // build the call information
-                        $body .= $d.' - Call '.($n['type']=='assigned'?'assigned to you':'updated').' by '.$actors[$n['actor_id']]->get_var('name')."\r\n";
-                        $body .= str_repeat(' ',5); // indent
-                        $body .= (strlen($n['caller_name'])?$n['caller_name']:'Someone'); // caller name (or someone)
-                        $body .= (strlen($n['caller_company'])?' from '.$n['caller_name']:''); // caller company
+                        if ($n['type']=='assigned') {
+                            $body .= $d.' - '.$LANG->get_string('Notifier/run/CallAssigned',array("%%ACTOR_NAME%%"=>$actors[$n['actor_id']]->get_var('name')))."\r\n";
+                        } else {
+                            $body .= $d.' - '.$LANG->get_string('Notifier/run/CallUpdated',array("%%ACTOR_NAME%%"=>$actors[$n['actor_id']]->get_var('name')))."\r\n";
+                        }
+                        
+                        // indent
+                        $body .= str_repeat(' ',5);
+                        
+                        // Caller name
+                        $caller = (strlen($n['caller_name'])?$n['caller_name']:$LANG->get_string('Notifier/run/CallerNoName'));
+                        
+                        // Caller company
+                        $company = (strlen($n['caller_company'])?$n['caller_name']:false);
                         
                         // show the caller message if the call has been assigned
                         if ($n['type']=='assigned') {
-                            $body .= ' called, and left ';
                             if (strlen($n['message'])) {
-                                $body .= 'this message:'."\r\n";
+                                // Add the message
+                                if ($company) {
+                                    $body .= $LANG->get_string('Notifier/run/CallAssignedWithCompWithMess',array("%%NAME%%"=>$caller,
+                                                                                                                 "%%COMPANY%%"=>$company))."\r\n";
+                                } else {
+                                    $body .= $LANG->get_string('Notifier/run/CallAssignedNoCompWithMess',array("%%NAME%%"=>$caller))."\r\n";
+                                }
                                 
                                 // as we're sending a plain-text email, decode the entities
                                 $message = html_entity_decode($n['message']);
@@ -139,12 +173,24 @@ class Notifier {
                                     $body .= str_repeat(' ',10).$m."\r\n";
                                 }
                             } else { // simple no message
-                                $body .= 'no message.'."\r\n";
+                                if ($company) {
+                                    $body .= $LANG->get_string('Notifier/run/CallAssignedWithCompNoMess',array("%%NAME%%"=>$caller,
+                                                                                                               "%%COMPANY%%"=>$company))."\r\n";
+                                } else {
+                                    $body .= $LANG->get_string('Notifier/run/CallAssignedNoCompNoMess',array("%%NAME%%"=>$caller))."\r\n";
+                                }
                             }
                         } else { // this is a call update - don't show the message, just the date/time
-                            $body .= ' called on '.date($u['user']->get_var_default('dateformat','jS M, Y'),strtotime($n['call_date']));
-                            $body .= ' at '.date($u['user']->get_var_default('timeformat','g:ia'),strtotime($n['call_date']));
-                            $body .= "\r\n";
+                            if ($company) {
+                                $body .= $LANG->get_string('Notifier/run/CallUpdatedWithComp',array("%%NAME%%"=>$caller,
+                                                                                                    "%%COMPANY%%"=>$company,
+                                                                                                    "%%DATE%%"=>date($u['user']->get_var_default('dateformat','jS M, Y'),strtotime($n['call_date'])),
+                                                                                                    "%%TIME%%"=>date($u['user']->get_var_default('timeformat','g:ia'),strtotime($n['call_date']))))."\r\n";
+                            } else {
+                                $body .= $LANG->get_string('Notifier/run/CallUpdatedNoComp',array("%%NAME%%"=>$caller,
+                                                                                                  "%%DATE%%"=>date($u['user']->get_var_default('dateformat','jS M, Y'),strtotime($n['call_date'])),
+                                                                                                  "%%TIME%%"=>date($u['user']->get_var_default('timeformat','g:ia'),strtotime($n['call_date']))))."\r\n";
+                            }
                         }
                         
                         // add the comment
@@ -153,7 +199,8 @@ class Notifier {
                             $c_user = User::by_id($n['comment_user']);
                             $body .= str_repeat(' ',5); // indent
                             // comment action and user
-                            $body .= $n['comment_action'].' by '.$c_user->get_var('name')."\r\n";
+                            $body .= $LANG->get_string('Notifier/run/CallComment',array("%%ACTION%%"=>$n['comment_action'],
+                                                                                        "%%NAME%%"=>$c_user->get_var('name')))."\r\n";
                             
                             // add the comment text (if it exists)
                             if (strlen($n['comment'])) {
@@ -174,12 +221,22 @@ class Notifier {
                     
                     // add the final section to the email
                     $body .= "\r\n";
-                    $body .= wordwrap("Please go to ".APP_ROOT." to respond to these calls.",70,"\r\n",false);
+                    $body .= wordwrap($LANG->get_string('Notifier/run/LoginLink',array("%%APP_ROOT%%"=>APP_ROOT)),70,"\r\n",false);
                     $body .= "\r\n";
-                    $body .= "You can change your notification settings in the 'Preferences' area.";
+                    $body .= $LANG->get_string('Notifier/run/NotificationMessage');
                     
                     // some other meta fields
-                    $subject = 'Mico notification - '.$up_text;
+                    if ($u['newcalls'] && $u['updatedcalls']) {
+                        $subject = $LANG->get_string('Notifier/run/SubjectNewAndUpdatedCalls',array("%%NUM_CALLS%%"=>count($u['notifications'])));
+                    } else if ($u['newcalls'] && count($u['notifications'])==1) {
+                        $subject = $LANG->get_string('Notifier/run/SubjectNewCall');
+                    } else if ($u['updatedcalls'] && count($u['notifications'])==1) {
+                        $subject = $LANG->get_string('Notifier/run/SubjectUpdatedCall');
+                    } else if ($u['newcalls']) {
+                        $subject = $LANG->get_string('Notifier/run/SubjectNewCalls',array("%%NUM_CALLS%%"=>count($u['notifications'])));
+                    } else if ($u['updatedcalls']) {
+                        $subject = $LANG->get_string('Notifier/run/SubjectUpdatedCalls',array("%%NUM_CALLS%%"=>count($u['notifications'])));
+                    }
                     
                     // and headers
                     $header = 'MIME-Version: 1.0' . "\r\n" . 'Content-type: text/plain; charset=UTF-8' . "\r\n";
@@ -194,6 +251,9 @@ class Notifier {
                         run_query($query);
                     }
                 }
+                
+                // reset language
+                $LANG->set_language($default_lang);
                 
                 // done, so release the lock and get out of the loop
                 Notifier::release_lock();
