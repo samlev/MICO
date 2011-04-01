@@ -316,6 +316,7 @@ Mico.SystemSetup = function () {
                         this.mailFromFieldset,
                         this.sessionLengthFieldset,
                         this.simpleCronFieldset,
+                        this.languageFieldset,
                         this.passwordFieldset,
                         {
                             layout:'hbox',
