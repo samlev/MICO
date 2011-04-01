@@ -166,7 +166,6 @@ Mico.SystemSetup = function () {
                     mode:'local',
                     value: LANGUAGE,
                     triggerAction:'all',
-                    disabled: true,
                     hideLabel: true
                 });
                 
@@ -358,6 +357,7 @@ Mico.SystemSetup = function () {
                         MAIL_FROM: this.mailFromField.getValue(),
                         SESSION_LENGTH: this.sessionLengthField.getValue(),
                         SIMPLE_CRON: this.simpleCronField.getValue(),
+                        LANGUAGE: this.systemLanguageField.getValue(),
                         username: this.usernameField.getValue(),
                         name: this.nameField.getValue(),
                         email: this.emailField.getValue(),
