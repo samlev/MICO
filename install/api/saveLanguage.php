@@ -28,7 +28,7 @@ $message = "Invalid language selection";
 
 if (preg_match('/^[A-Z]{2}$/',$_POST['LANGUAGE'])) {
     // set the cookie to expire in an hour
-    setcookie('LANGUAGE', $_POST['LANGUAGE'], time()+3600);
+    setcookie('LANGUAGE', $_POST['LANGUAGE'], time()+3600, "/");
     $success = true;
 }
 
