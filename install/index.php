@@ -39,7 +39,7 @@ if (isset($_COOKIE['LANGUAGE'])) {
     define('LANGUAGE',$_COOKIE['LANGUAGE']);
 }
 
-?> 
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
@@ -52,14 +52,25 @@ if (isset($_COOKIE['LANGUAGE'])) {
     <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/xtheme-gray.css" />
     <link type="text/css" rel="stylesheet" href="../skin/static/main.css" />
     <link type="text/css" rel="stylesheet" href="../skin/custom/skin.css" />
-   
+    
+    <!-- Set up some basic variables -->
+    <script type="text/javascript">
+    <!--
+    var FS_ROOT = '<?php echo (defined('FS_ROOT')?addslashes(FS_ROOT):'') ?>';
+    var WEB_DOMAIN = '<?php echo (defined('WEB_DOMAIN')?addslashes(WEB_DOMAIN):'') ?>';
+    var WEB_ROOT = '<?php echo (defined('WEB_ROOT')?addslashes(WEB_ROOT):'') ?>';
+    var APP_ROOT = '<?php echo (defined('APP_ROOT')?addslashes(APP_ROOT):'') ?>';
+    var LANGUAGE = '<?php echo (defined('LANGUAGE')?addslashes(LANGUAGE):'') ?>';
+    -->
+    </script>
+    
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="../js/ext/ext-all.js"></script>
     
     <script type="text/javascript" src="../js/ext/src/locale/ext-lang-<?php echo strtolower(defined('LANGUAGE')?LANGUAGE:'EN'); ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Application.js"></script>
-    <script type="text/javascript" src="../js/Mico.Lang.<?php echo (defined('LANGUAGE')?LANGUAGE:'EN') ?>.js"></script>
+    <script type="text/javascript" src="../js/lang/Mico.Lang.<?php echo (defined('LANGUAGE')?LANGUAGE:'EN') ?>.js"></script>
     <script type="text/javascript" src="../js/Mico.Utils.js"></script>
     <script type="text/javascript" src="../js/admin/Mico.Utils.CommonStores.js"></script>
     <!-- pull in the appropriate installer files -->
@@ -81,9 +92,8 @@ if (isset($_COOKIE['LANGUAGE'])) {
         setTimeout("Mico.LanguageSelect.show()",200);
         <?php
     } else if ($config_written) {
-        // display the 'system setup' page
+        // display the 'system setup' page - pass through required variables
         ?>
-        var LANGUAGE = '<?php echo addslashes(LANGUAGE)?>';
         setTimeout("Mico.SystemSetup.show()",200);
         <?php
     } else {
@@ -95,10 +105,10 @@ if (isset($_COOKIE['LANGUAGE'])) {
         
         // add them into the javascript
         ?>
-        var FS_ROOT = '<?php echo addslashes($FS_ROOT)?>';
-        var WEB_DOMAIN = '<?php echo addslashes($WEB_DOMAIN)?>';
-        var WEB_ROOT = '<?php echo addslashes($WEB_ROOT)?>';
-        var APP_ROOT = '<?php echo addslashes($APP_ROOT)?>';
+        FS_ROOT = '<?php echo addslashes($FS_ROOT)?>';
+        WEB_DOMAIN = '<?php echo addslashes($WEB_DOMAIN)?>';
+        WEB_ROOT = '<?php echo addslashes($WEB_ROOT)?>';
+        APP_ROOT = '<?php echo addslashes($APP_ROOT)?>';
         
         setTimeout("Mico.ConfigSetup.show();",200);
         <?php

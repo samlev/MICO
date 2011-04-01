@@ -56,9 +56,9 @@ Mico.LanguageSelect = function () {
                     triggerAction:'all'
                 });
                 
-                // debug mode fieldset
+                // Language select fieldset
                 this.languageFieldset = new Ext.form.FieldSet({
-                    title: Mico.Lang.LanguageSelect.languageFieldset_title,
+                    title: "Language Selection",
                     items: [
                         {
                             html: "Select a language to use while installing MICO. "+
