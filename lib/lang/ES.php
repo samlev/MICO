@@ -26,164 +26,164 @@
 // All language files must define a "$language_strings" variable
 $language_strings = array(
     // Language for api.php
-    "api/UnknownFunction"       => "Unknown function requested",
+    "api/UnknownFunction"       => "Llamada a función desconocida",
     "api/APIError"              => "API Error",
     
     // Language for index.php
-    "index/Upgrade/Title"       => "Upgrade Instructions",
-    "index/Upgrade/Text"        => "MICO's code has been upgraded from version ".
-            "%%OLD_VERSION%% to version %%NEW_VERSION%%. To complete the upgrade ".
-            'process, <a href="%%APP_ROOT%%/upgrade/">click here</a>.',
+    "index/Upgrade/Title"       => "Instrucciones de actualización",
+    "index/Upgrade/Text"        => "EL código de MICO ha sido actualizado desde la versión".
+            "%%OLD_VERSION%% a la versión %%NEW_VERSION%%. Para completar la actualización ".
+            'process, <a href="%%APP_ROOT%%/upgrade/">click aquí</a>.',
     
     /** PUBLIC API **/
     // Language for resetPassword.php
-    "resetPassword/Success"     => "An email was sent to %%EMAIL%% with further isntructions.",
+    "resetPassword/Success"     => "Se te ha enviado un email a %%EMAIL%% con las instrucciones a seguir",
     
     // Language for setPassword.php
-    "setPassword/Success"       => "Password has successfully been set.",
+    "setPassword/Success"       => "La password ha sido establecida.",
     
     /** USER API **/
     // Language for addCall.php
-    "addCall/NoRecipient"       => "Please select a recipient for the call",
-    "addCall/NoCallInfo"        => "Please enter either a caller name, company name, message, or contact details",
-    "addCall/RecipientError"    => "There was a problem adding your call. Please check your recipients and try again",
-    "addCall/FieldError"        => "There was a problem adding your call. Please check your fields and try again",
+    "addCall/NoRecipient"       => "Por favor, selecciona un receptor para la llamadal",
+    "addCall/NoCallInfo"        => "Por favor introduce un nombre de interlocutor, empresa, mensaje, o detalles de contacto",
+    "addCall/RecipientError"    => "Hubo un problema añadiendo la llamada. Por favor, revisa el receptor e inténtalo de nuevo",
+    "addCall/FieldError"        => "Hubo un problema añadiendo la llamada. Por favor, revisa los campos e inténtalo de nuevo",
     
     // Language for changePassword.php
-    "changePassword/Success"    => "Password has successfully been changed",
+    "changePassword/Success"    => "La password ha sido modificada con éxito",
     
     /** MANAGER API **/
     // Language for addUser.php
-    "addUser/ErrorAdding"       => "Error adding user",
-    "addUser/AddAdminPermError" => "You do not have permission to add an administrative user",
-    "addUser/InvalidRole"       => "User's role is not valid",
-    "addUser/NameEmailBlank"    => "User's name and email cannot be blank",
-    "addUser/UsernameInUse"     => "Username already in use",
-    "addUser/InvalidUsername"   => "Username may contain only letters and numbers, optionally separated by a period (.), dash (-), or underscore (_)",
+    "addUser/ErrorAdding"       => "Error añadiendo usuarior",
+    "addUser/AddAdminPermError" => "No tienes permisos para añadir un usuario administrador",
+    "addUser/InvalidRole"       => "El rol de usuario no es válido",
+    "addUser/NameEmailBlank"    => "El nombre de usuario y el email no pueden estar en blanco",
+    "addUser/UsernameInUse"     => "Nombre de usuario ya en uso",
+    "addUser/InvalidUsername"   => "El nombre de usuario puede contener solo letras y números, opcionalmente separado por punto (.), guión (-), o subrayado (_)",
     
     // Language for updateUser.php
-    "updateUser/BlankField"     => "User's %%FIELD%% cannot be blank",
-    "updateUser/RolePermission" => "You do not have permission to set that role",
-    "updateUser/OwnRole"        => "You may not change your own role",
-    "updateUser/InvalidRole"    => "Not a valid role",
-    "updateUser/UnknownField"   => "Unknown field",
-    "updateUser/PermissionError"=> "You do not have permission to update that user",
+    "updateUser/BlankField"     => "El %%FIELD%% de usuario no puede estar en blanco",
+    "updateUser/RolePermission" => "No tienes permisos para establecer ese rol",
+    "updateUser/OwnRole"        => "No puedes cambiar tu propio rol",
+    "updateUser/InvalidRole"    => "Rol no válido",
+    "updateUser/UnknownField"   => "Campo desconocido",
+    "updateUser/PermissionError"=> "No tienes permisos para actualizar este usuarior",
     
     /** ADMINISTRATOR API **/
     // Language for setSystemSettings.php
-    "setSystemSettings/Debug"   => "Debug mode must be either true or false.",
-    "setSystemSettings/Mail"    => "From email cannot be blank.",
-    "setSystemSettings/Session" => "Session length must be a valid period of time.",
-    "setSystemSettings/Cron"    => "Simple cron must be either true or false.",
-    "setSystemSettings/Language"=> "Language is not valid.",
+    "setSystemSettings/Debug"   => "Modo depuración debe estar activo o desactivado.",
+    "setSystemSettings/Mail"    => "Email desde no puede estar en blanco.",
+    "setSystemSettings/Session" => "El tiempo de sesión debe ser un valor válido.",
+    "setSystemSettings/Cron"    => "Cron simple debe estar activo o desactivado.",
+    "setSystemSettings/Language"=> "No es un lenguaje válido.",
     
     /** INCLUDES **/
     // Language for auto_login.php
-    "auto_login/waitText"       => "You are being logged into the system. Please wait.",
-    "auto_login/waitTitle"      => "Logging in",
+    "auto_login/waitText"       => "Estás siendo registrado en el sistema. Espera por favor.",
+    "auto_login/waitTitle"      => "Registrado",
     
     /** CLASSES AND EXCEPTIONS **/
     // Language for Call.class.php
-    "Call/load/CallNotFoundException"           => "Cannot find call information",
-    "Call/commit/CallClosed"                    => "Call closed",
-    "Call/commit/CallReopenedEscalatedPerson"   => "Call reopened and escalated to 1 person",
-    "Call/commit/CallReopenedEscalatedPeople"   => "Call reopened and escalated to %%NUM_PEOPLE%% people",
-    "Call/commit/CallReopenedEscalated"         => "Call reopened and escalated",
-    "Call/commit/CallReopened"                  => "Call reopened",
-    "Call/commit/CallEscalatedPerson"           => "Call escalated to 1 person",
-    "Call/commit/CallEscalatedPeople"           => "Call escalated to %%NUM_PEOPLE%% people",
-    "Call/commit/CallEscalated"                 => "Call escalated",
-    "Call/commit/CallAssignedPerson"            => "Call assigned to 1 person",
-    "Call/commit/CallAssignedPeople"            => "Call assigned to %%NUM_PEOPLE%% people",
-    "Call/commit/Comment"                       => "Comment",
-    "Call/commit/CallClosedException"           => "Cannot update call - it has been closed",
-    "Call/commit/CallUpdateException"           => "Nothing to update",
-    "Call/commit/CallPermissionException"       => "User is not authorized to update call",
+    "Call/load/CallNotFoundException"           => "No se encuentra información de llamadaCannot ",
+    "Call/commit/CallClosed"                    => "Llamada cerrada",
+    "Call/commit/CallReopenedEscalatedPerson"   => "Llamada reabierta y escalada a 1 persona",
+    "Call/commit/CallReopenedEscalatedPeople"   => "Llamada reabierta y escalada a %%NUM_PEOPLE%% personas",
+    "Call/commit/CallReopenedEscalated"         => "Llamada reabierta y escalada",
+    "Call/commit/CallReopened"                  => "Llamada reabierta",
+    "Call/commit/CallEscalatedPerson"           => "Llamada escalada a 1 persona",
+    "Call/commit/CallEscalatedPeople"           => "Llamada escalada a %%NUM_PEOPLE%% personas",
+    "Call/commit/CallEscalated"                 => "Llamada escalada",
+    "Call/commit/CallAssignedPerson"            => "Llamada asignada a 1 persona",
+    "Call/commit/CallAssignedPeople"            => "Llamada asignada a %%NUM_PEOPLE%% personas",
+    "Call/commit/Comment"                       => "Comentario",
+    "Call/commit/CallClosedException"           => "No se puede actualizar la llamada- Está cerrada",
+    "Call/commit/CallUpdateException"           => "Nada para actualizar",
+    "Call/commit/CallPermissionException"       => "usuario no autorizado a actualizar la llamada",
     
     // Language for Notifier.class.php
-    "Notifier/run/NewAndUpdatedCalls"           => "You have %%NUM_CALLS%% new and updated calls",
-    "Notifier/run/NewCall"                      => "You have 1 new call",
-    "Notifier/run/UpdatedCall"                  => "You have 1 updated call",
-    "Notifier/run/NewCalls"                     => "You have %%NUM_CALLS%% new calls",
-    "Notifier/run/UpdatedCalls"                 => "You have %%NUM_CALLS%% updated calls",
-    "Notifier/run/CallAssigned"                 => "Call assigned to you by %%ACTOR_NAME%%",
-    "Notifier/run/CallUpdated"                  => "Call updated by %%ACTOR_NAME%%",
-    "Notifier/run/CallerNoName"                 => "Someone",
-    "Notifier/run/CallAssignedWithCompWithMess" => "%%NAME%% from %%COMPANY%% called, and left this message:",
-    "Notifier/run/CallAssignedNoCompWithMess"   => "%%NAME%% called, and left this message:",
-    "Notifier/run/CallAssignedWithCompNoMess"   => "%%NAME%% from %%COMPANY%% called, and left no message.",
-    "Notifier/run/CallAssignedNoCompNoMess"     => "%%NAME%% called, and left no message.",
-    "Notifier/run/CallUpdatedWithComp"          => "%%NAME%% from %%COMPANY%% called on %%DATE%% at %%TIME%%.",
-    "Notifier/run/CallUpdatedNoComp"            => "%%NAME%% called on %%DATE%% at %%TIME%%.",
-    "Notifier/run/CallComment"                  => "%%ACTION%% by %%NAME%%",
-    "Notifier/run/LoginLink"                    => "Please go to %%APP_ROOT%% to respond to these calls.",
-    "Notifier/run/NotificationMessage"          => "You can change your notification settings in the 'Preferences' area.",
-    "Notifier/run/SubjectNewAndUpdatedCalls"    => "Mico notification - %%NUM_CALLS%% new and updated calls",
-    "Notifier/run/SubjectNewCall"               => "Mico notification - 1 new call",
-    "Notifier/run/SubjectUpdatedCall"           => "Mico notification - 1 updated call",
-    "Notifier/run/SubjectNewCalls"              => "Mico notification - %%NUM_CALLS%% new calls",
-    "Notifier/run/SubjectUpdatedCalls"          => "Mico notification - %%NUM_CALLS%% updated calls",
+    "Notifier/run/NewAndUpdatedCalls"           => "Tienes %%NUM_CALLS%% nuevas o modificadas",
+    "Notifier/run/NewCall"                      => "Tienes 1 nueva llamada",
+    "Notifier/run/UpdatedCall"                  => "Tienes 1 llamada modificada",
+    "Notifier/run/NewCalls"                     => "Tienes %%NUM_CALLS%% llamadas nuevas",
+    "Notifier/run/UpdatedCalls"                 => "Tienes %%NUM_CALLS%% llamadas actualizadass",
+    "Notifier/run/CallAssigned"                 => "Llamada asignada por %%ACTOR_NAME%%",
+    "Notifier/run/CallUpdated"                  => "Llamada actualizada por %%ACTOR_NAME%%",
+    "Notifier/run/CallerNoName"                 => "Alguien",
+    "Notifier/run/CallAssignedWithCompWithMess" => "Llamó %%NAME%% de %%COMPANY%% , y dejó este mensaje:",
+    "Notifier/run/CallAssignedNoCompWithMess"   => "Llamó %%NAME%% y dejó este mensaje:",
+    "Notifier/run/CallAssignedWithCompNoMess"   => "Llamó %%NAME%% de %%COMPANY%%, y no dejó mensajes.",
+    "Notifier/run/CallAssignedNoCompNoMess"     => "Llamó %%NAME%% y no dejó mensajes.",
+    "Notifier/run/CallUpdatedWithComp"          => "Llamó %%NAME%% de %%COMPANY%% el %%DATE%% a las %%TIME%%.",
+    "Notifier/run/CallUpdatedNoComp"            => "Llamó %%NAME%% en %%DATE%% a las %%TIME%%.",
+    "Notifier/run/CallComment"                  => "%%ACTION%% por %%NAME%%",
+    "Notifier/run/LoginLink"                    => "Por favor, ve a  %%APP_ROOT%% para responder estas llamadass.",
+    "Notifier/run/NotificationMessage"          => "Puedes cambiar la configuración de las notificaciones en el área 'Preferencias' ",
+    "Notifier/run/SubjectNewAndUpdatedCalls"    => "Notificación de MICO - %%NUM_CALLS%% llamadas nuevas o actualizadas",
+    "Notifier/run/SubjectNewCall"               => "Notificación de MICO - 1 llamada nueva",
+    "Notifier/run/SubjectUpdatedCall"           => "Notificación de MICO - 1 llamada actualizada",
+    "Notifier/run/SubjectNewCalls"              => "Notificación de MICO - %%NUM_CALLS%% llamadas nuevas",
+    "Notifier/run/SubjectUpdatedCalls"          => "Notificación de MICO - %%NUM_CALLS%% llamadas actualizadas",
     
     // Language for PasswordReset.class.php
-    "PasswordReset/getRequest/Email"                                => "Dear %%NAME%%,\r\n\r\n".
-            "This email has been sent to you as part of the 'forgotten password'\r\n".
-            "process for Mico.\r\n\r\n".
-            "To change your password, visit the following link:\r\n".
+    "PasswordReset/getRequest/Email"                                => "Estimado %%NAME%%,\r\n\r\n".
+            "Este email te ha sido enviado como parte del proceso de 'recuperación de password'\r\n".
+            "de Mico.\r\n\r\n".
+            "Para cambiar tu password, visita el siguiente lik:\r\n".
             "%%APP_ROOT%%/set_password.php?k=%%KEY%%\r\n\r\n".
-            "This link will expire in approximately 24 hours, at %%EXPIRE_TIME%%\r\n".
-            "on %%EXPIRE_DATE%%, server time*.\r\n\r\n".
-            "If you did not request this change of password, or have remembered\r\n".
-            "your password, please delete this message\r\n\r\n".
-            "Do not reply to this email.\r\n\r\n".
+            "Este link expira en aproximadamente 24 horas, a las  %%EXPIRE_TIME%%\r\n".
+            "en %%EXPIRE_DATE%%, hora del servidor*.\r\n\r\n".
+            "Si no respondes a este cambio de password, o has recordado\r\n".
+            "tu password, por favor borra este mensaje\r\n\r\n".
+            "No contestes a este emaill.\r\n\r\n".
             "----------------------------------------------------------------------\r\n\r\n".
-            "* Please note: The server time may vary from your local time.",
-    "PasswordReset/getRequest/Subject"                              => "Mico - Password Reset Request",
-    "PasswordReset/getRequest/PasswordResetMailErrorException"      => "Mail could not be sent. Please contact an administrator.",
-    "PasswordReset/getRequest/PasswordResetUserDisabledException"   => "User is not active.",
-    "PasswordReset/newUser/Email"                                   => "Dear %%NAME%%,\r\n\r\n".
-            "This email has been sent to you as part of the user registration\r\n".
-            "process for Mico.\r\n\r\n".
-            "To set your password for the first time, visit the following link:\r\n".
+            "* Nota: La hora del servidor puede diferir de tu hora local.",
+    "PasswordReset/getRequest/Subject"                              => "Mico - Petición de reseteo de password",
+    "PasswordReset/getRequest/PasswordResetMailErrorException"      => "No se pudo enviar email. Por favor contacta con el administrador.",
+    "PasswordReset/getRequest/PasswordResetUserDisabledException"   => "EL usuario no está activo.",
+    "PasswordReset/newUser/Email"                                   => "Estimado %%NAME%%,\r\n\r\n".
+            "Este email te ha sido enviado como parte del proceso de registro de usuario\r\n".
+            "de Mico.\r\n\r\n".
+            "Para establecer tu password la primera vez, visita el siguiente link:\r\n".
             "%%APP_ROOT%%/set_password.php?k=%%KEY%%\r\n\r\n".
-            "Your username for Mico is: %%USERNAME%%\r\n\r\n".
-            "This link will expire in approximately 72 hours, at %%EXPIRE_TIME%%\r\n".
-            "on %%EXPIRE_DATE%%, server time*.\r\n\r\n".
-            "If the link expires before you can use it, you can also set your\r\n".
-            "password with the 'forgotten password' link at\r\n".
+            "Tu nombre de usuario para Mico es: %%USERNAME%%\r\n\r\n".
+            "Este link experirá aproximadamente en 72 horas, a las  %%EXPIRE_TIME%%\r\n".
+            "en %%EXPIRE_DATE%%, hora del servidor *.\r\n\r\n".
+            "Si el link expira antes de que puedas usarlo, Puedes también establecer tu \r\n".
+            "password con el link de  'recuperación de password' en\r\n".
             "%%APP_ROOT%%\r\n\r\n".
-            "Do not reply to this email.\r\n\r\n".
+            "No contestes a este email.\r\n\r\n".
             "----------------------------------------------------------------------\r\n\r\n".
-            "* Please note: The server time may vary from your local time.",
-    "PasswordReset/newUser/Subject"                                 => "Mico - User Registration",
-    "PasswordReset/newUser/PasswordResetMailErrorException"         => "Mail could not be sent. Please contact an administrator.",
-    "PasswordReset/newUser/PasswordResetUserDisabledException"      => "User is not active.",
+            "* Nota: La hora del servidor puede diferir de tu hora local.",
+    "PasswordReset/newUser/Subject"                                 => "Mico - Registro de usuario",
+    "PasswordReset/newUser/PasswordResetMailErrorException"         => "No se pudo enviar email. Por favor contacta con el administrador.",
+    "PasswordReset/newUser/PasswordResetUserDisabledException"      => "El usuario no está activo.",
     
     // Language for Settings.class.php
-    "Settings/get/SettingsNotFoundException"        => "Cannot find setting",
-    "Settings/history/SettingsNotFoundException"    => "Cannot find setting",
+    "Settings/get/SettingsNotFoundException"        => "No se encuentra configuración",
+    "Settings/history/SettingsNotFoundException"    => "No se encuentra configuración",
     
     // Language for User.class.php
-    "User/bySession/UserDisabled"                   => "User disabled",
-    "User/bySession/SessionExpired"                 => "Session expired",
-    "User/bySession/SessionIdNotFound"              => "Session ID not found",
-    "User/bySession/SessionIdInvalid"               => "Session ID is invalid",
-    "User/byId/UserNotFoundException"               => "Cannot find user",
-    "User/byUsername/UserNotFoundException"         => "Cannot find user",
-    "User/login/UserLoginException"                 => "Username or password incorrect",
-    "User/changePassword/OldPassword"               => "Old password is incorrect",
-    "User/changePassword/PasswordConfirmation"      => "Password does not match confirmation",
-    "User/changePassword/PasswordBlank"             => "Password cannot be blank",
-    "User/setPassword/RequestExpired"               => "Password set request does not exist or has expired",
-    "User/setPassword/PasswordConfirmation"         => "Password does not match confirmation",
-    "User/setPassword/PasswordBlank"                => "Password cannot be blank",
-    "User/load/UserNotFoundException"               => "Cannot find user information",
-    "User/commit/UserNotFoundException"             => "Cannot save user information",
+    "User/bySession/UserDisabled"                   => "Usuario desactivado",
+    "User/bySession/SessionExpired"                 => "Sesión expirada",
+    "User/bySession/SessionIdNotFound"              => "ID de sesión no encontrado",
+    "User/bySession/SessionIdInvalid"               =>  "ID de sesión inválido",
+    "User/byId/UserNotFoundException"               => "No se puede encontrar el usuario",
+    "User/byUsername/UserNotFoundException"         => "No se puede encontrar el usuario",
+    "User/login/UserLoginException"                 => "Nombre de usuario o Password incorrecto",
+    "User/changePassword/OldPassword"               => "Password anterior incorrecto",
+    "User/changePassword/PasswordConfirmation"      => "No coincide la confirmación de Password",
+    "User/changePassword/PasswordBlank"             => "El password no puede estar en blanco",
+    "User/setPassword/RequestExpired"               => "La petición de establecimiento de Password no existe o ha expirado",
+    "User/setPassword/PasswordConfirmation"         => "No coincide la confirmación de Password",
+    "User/setPassword/PasswordBlank"                => "El password no puede estar en blanco",
+    "User/load/UserNotFoundException"               => "No se encuentra información de usuario",
+    "User/commit/UserNotFoundException"             => "No se puede guardar la información del usuario",
     
     /** COMMON STRINGS **/
-    "critical"          => "Critical",
+    "critical"          => "Crítico",
     "urgent"            => "Urgent",
-    "moderate"          => "Moderate",
-    "minor"             => "Minor",
-    "negligible"        => "Negligible"
+    "moderate"          => "Medio",
+    "minor"             => "Menor",
+    "negligible"        => "Insignificante"
 );
 ?>
