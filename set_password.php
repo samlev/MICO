@@ -21,7 +21,7 @@ define ('PASSWORD_RESET',true);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="pragma" content="no-cache" />
     <title>Mico</title>
     <link rel="SHORTCUT ICON" href="favicon.ico" />
