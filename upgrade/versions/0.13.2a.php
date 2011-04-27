@@ -3,11 +3,11 @@
  *******************************************************************************
  ** Author: Samuel Levy <sam@samuellevy.com>
  ** 
- ** File: version.php
+ ** File: upgrade/versions/0.13.2a.php
  ** 
- ** Description: Simple file to define the software version
+ ** Description: DB upgrader for version 0.13.2a
  **
- ** Copyright (c) 2010 Samuel Levy
+ ** Copyright (c) 2011 Samuel Levy
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
@@ -23,6 +23,22 @@
  *******************************************************************************
  ******************************************************************************/
 
-// include the configuration file
-define('MICO_VERSION', '0.13.2a');
+/*******************************************************************************
+ *******************************************************************************
+ ** CHANGELOG
+ **
+ ** - Fix for the upgrader
+ *******************************************************************************
+ ******************************************************************************/
+
+// If we're not accessed in the correct way, die
+if (defined('CONFIGURED')) {
+    // Set the version number
+    $VERSION = '0.13.2a';
+    
+    // Do not change this line - it's what tells the system that the upgrade is complete
+    Settings::set('MICO_VERSION',$VERSION);
+} else {
+    die ("No direct access allowed");
+}
 ?>

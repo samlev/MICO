@@ -35,7 +35,8 @@ $versions = array('0.11.1b',
                   '0.12.4b',
                   '0.12.5b',
                   '0.13.0a',
-                  '0.13.1a');
+                  '0.13.1a',
+                  '0.13.2a');
 
 // get the old and new versions
 $old = Settings::get_default('MICO_VERSION','unknown');

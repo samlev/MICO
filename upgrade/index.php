@@ -42,6 +42,17 @@ include_once(FS_ROOT.'/inc/connect.php');
     <link type="text/css" rel="stylesheet" href="../js/ext/resources/css/xtheme-gray.css" />
     <link type="text/css" rel="stylesheet" href="../skin/static/main.css" />
     <link type="text/css" rel="stylesheet" href="../skin/custom/skin.css" />
+    
+    <!-- Set up some basic variables -->
+    <script type="text/javascript">
+    <!--
+    var FS_ROOT = '<?php echo (defined('FS_ROOT')?addslashes(FS_ROOT):'') ?>';
+    var WEB_DOMAIN = '<?php echo (defined('WEB_DOMAIN')?addslashes(WEB_DOMAIN):'') ?>';
+    var WEB_ROOT = '<?php echo (defined('WEB_ROOT')?addslashes(WEB_ROOT):'') ?>';
+    var APP_ROOT = '<?php echo (defined('APP_ROOT')?addslashes(APP_ROOT):'') ?>';
+    var LANGUAGE = '<?php echo Settings::get_default('LANGUAGE','EN') ?>';
+    -->
+    </script>
    
     <!-- Link to the Javascript library files -->
     <script type="text/javascript" src="../js/ext/adapter/ext/ext-base.js"></script>
