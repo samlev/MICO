@@ -41,8 +41,9 @@ class Notifier {
                 // get calls for the notifier
                 $query = "SELECT un.`id`, un.`user_id`,un.`call_id`,c.`priority`,
                                  c.`caller_name`,c.`company_name`, c.`message`,
-                                 c.`date` AS `call_date`, c.`action` AS `call_action`,
-                                 un.`type`,un.`notify_after`,un.`comment_id`,
+                                 c.`contact`, c.`date` AS `call_date`,
+                                 c.`action` AS `call_action`, un.`type`,
+                                 un.`notify_after`, un.`comment_id`,
                                  cc.`user_id` AS `comment_user`,cc.`date` AS `comment_date`,
                                  cc.`action` AS `comment_action`,cc.`comment`,
                                  COALESCE(cc.`date`,c.`date`) AS `action_date`,
@@ -179,6 +180,25 @@ class Notifier {
                                 } else {
                                     $body .= $LANG->get_string('Notifier/run/CallAssignedNoCompNoMess',array("%%NAME%%"=>$caller))."\r\n";
                                 }
+                            }
+                            
+                            // This call is being assigned, so add the contact details
+                            $contact = unserialize($n['contact']);
+                            
+                            // Indent
+                            $body .= str_repeat(' ',5);
+                            
+                            if (count($contact) == 1) { // single contact method
+                                $body .= $LANG->get_string('Notifier/run/ContactSingle',array("%%CONTACT%%"=>$contact[0]))."\r\n";
+                            } else if (count($contact) > 1) { // multiple contact methods
+                                $body .= $LANG->get_string('Notifier/run/ContactMultiple',array())."\r\n";
+                                
+                                // add the contacts
+                                foreach ($contact as $c) {
+                                    $body .= str_repeat(' ',7).'- '.$c."\r\n";
+                                }
+                            } else { // no contact methods
+                                $body .= $LANG->get_string('Notifier/run/ContactNone',array())."\r\n";
                             }
                         } else { // this is a call update - don't show the message, just the date/time
                             if ($company) {
