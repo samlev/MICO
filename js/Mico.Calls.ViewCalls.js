@@ -635,7 +635,7 @@ Mico.Calls.ViewCalls = function () {
                                     Mico.Lang.Calls.ViewCalls.showComments_selfComment:
                                     comment.commenter)+'</b>';
                     
-                    commentHTML += '<tr><td colspan="2">'+Mico.Lang.Calls.ViewCalls.showComments_commentHeader(a,b)+'</td></tr>';
+                    commentHTML += '<tr><td colspan="2">'+Mico.Lang.Calls.ViewCalls.showComments_commentHeader(a,u)+'</td></tr>';
                     
                     // and add the comment (if there is one)
                     if (comment.comment.length) {
