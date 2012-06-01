@@ -8,7 +8,7 @@
  ** Description: Sets a user's password, either from the initial password link,
  **              or from the 'forgotten password' process
  **
- ** Copyright (c) 2010 Samuel Levy
+ ** Copyright (c) 2012 Samuel Levy
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as

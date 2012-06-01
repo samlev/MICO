@@ -8,7 +8,7 @@
  ** Description: Overrides the default 'get calls' method to allow extra filter
  **              options
  **
- ** Copyright (c) 2010 Samuel Levy
+ ** Copyright (c) 2012 Samuel Levy
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as

@@ -8,7 +8,7 @@
  ** Description: Defines a number of functions and exceptions for the password
  **              reset functionality
  **
- ** Copyright (c) 2010 Samuel Levy
+ ** Copyright (c) 2012 Samuel Levy
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as

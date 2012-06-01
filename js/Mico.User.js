@@ -6,7 +6,7 @@
  ** 
  ** Description: Defines a simple user object
  **
- ** Copyright (c) 2010 Samuel Levy
+ ** Copyright (c) 2012 Samuel Levy
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as

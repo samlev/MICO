@@ -9,7 +9,7 @@
  **              done manually because it cannot be certain that the installer
  **              will have access to the server config. Turning it off in the
  **
- ** Copyright (c) 2010 Samuel Levy
+ ** Copyright (c) 2012 Samuel Levy
  ** 
  ** Mico is free software: you can redistribute it and/or
  ** modify it under the terms of the GNU Lesser General Public License as
