@@ -1,8 +1,8 @@
 /*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
+ * Ext JS Library 3.4.0
+ * Copyright(c) 2006-2011 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
  */
 /**
  * @class Ext.data.JsonReader
@@ -23,7 +23,7 @@ var myReader = new Ext.data.JsonReader({
     // constructor that provides mapping for reading the record data objects
     {@link Ext.data.DataReader#fields fields}: [
         // map Record&#39;s 'firstname' field to data object&#39;s key of same name
-        {name: 'name'},
+        {name: 'name', mapping: 'firstname'},
         // map Record&#39;s 'job' field to data object&#39;s 'occupation' key
         {name: 'job', mapping: 'occupation'}
     ]
@@ -181,8 +181,9 @@ Ext.extend(Ext.data.JsonReader, Ext.data.DataReader, {
             throw new Ext.data.JsonReader.Error('response');
         }
 
-        var root = this.getRoot(o);
-        if (action === Ext.data.Api.actions.create) {
+        var root = this.getRoot(o),
+            success = this.getSuccess(o);
+        if (success && action === Ext.data.Api.actions.create) {
             var def = Ext.isDefined(root);
             if (def && Ext.isEmpty(root)) {
                 throw new Ext.data.JsonReader.Error('root-empty', this.meta.root);
@@ -195,7 +196,7 @@ Ext.extend(Ext.data.JsonReader, Ext.data.DataReader, {
         // instantiate response object
         var res = new Ext.data.Response({
             action: action,
-            success: this.getSuccess(o),
+            success: success,
             data: (root) ? this.extractData(root, false) : [],
             message: this.getMessage(o),
             raw: o

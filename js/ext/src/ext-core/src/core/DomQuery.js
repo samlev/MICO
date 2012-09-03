@@ -1,8 +1,8 @@
 /*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
+ * Ext JS Library 3.4.0
+ * Copyright(c) 2006-2011 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
  */
 /*
  * This is code is also distributed under MIT license for use
@@ -35,7 +35,7 @@ All selectors, attribute filters and pseudos below can be combined infinitely in
     <li> <b>E[foo$=bar]</b> has an attribute "foo" that ends with "bar"</li>
     <li> <b>E[foo*=bar]</b> has an attribute "foo" that contains the substring "bar"</li>
     <li> <b>E[foo%=2]</b> has an attribute "foo" that is evenly divisible by 2</li>
-    <li> <b>E[foo!=bar]</b> has an attribute "foo" that does not equal "bar"</li>
+    <li> <b>E[foo!=bar]</b> attribute "foo" does not equal "bar"</li>
 </ul>
 <h4>Pseudo Classes:</h4>
 <ul class="list">
@@ -78,7 +78,7 @@ Ext.DomQuery = function(){
     	trimRe = /^\s+|\s+$/g,
     	tplRe = /\{(\d+)\}/g,
     	modeRe = /^(\s?[\/>+~]\s?|\s|$)/,
-    	tagTokenRe = /^(#)?([\w-\*]+)/,
+    	tagTokenRe = /^(#)?([\w\-\*]+)/,
     	nthRe = /(\d*)n\+?(\d*)/, 
     	nthRe2 = /\D/,
     	// This is for IE MSXML which does not support expandos.
@@ -286,17 +286,23 @@ Ext.DomQuery = function(){
             ri = -1, 
             useGetStyle = custom == "{",	    
             fn = Ext.DomQuery.operators[op],	    
-            a,	    
-            innerHTML;
+            a,
+            xml,
+            hasXml;
+            
         for(var i = 0, ci; ci = cs[i]; i++){
 	    // skip non-element nodes.
             if(ci.nodeType != 1){
                 continue;
             }
+            // only need to do this for the first node
+            if(!hasXml){
+                xml = Ext.DomQuery.isXml(ci);
+                hasXml = true;
+            }
 	    
-            innerHTML = ci.innerHTML;
             // we only need to change the property names if we're dealing with html nodes, not XML
-            if(innerHTML !== null && innerHTML !== undefined){
+            if(!xml){
                 if(useGetStyle){
                     a = Ext.DomQuery.getStyle(ci, attr);
                 } else if (attr == "class" || attr == "className"){
@@ -436,10 +442,10 @@ Ext.DomQuery = function(){
         compile : function(path, type){
             type = type || "select";
 
-	    // setup fn preamble
+    	    // setup fn preamble
             var fn = ["var f = function(root){\n var mode; ++batch; var n = root || document;\n"],
-		mode,		
-		lastPath,
+        		mode,		
+        		lastPath,
             	matchers = Ext.DomQuery.matchers,
             	matchersLn = matchers.length,
             	modeMatch,
@@ -658,19 +664,19 @@ Ext.DomQuery = function(){
          * statement as specified by their index.
          */
         matchers : [{
-                re: /^\.([\w-]+)/,
+                re: /^\.([\w\-]+)/,
                 select: 'n = byClassName(n, " {1} ");'
             }, {
-                re: /^\:([\w-]+)(?:\(((?:[^\s>\/]*|.*?))\))?/,
+                re: /^\:([\w\-]+)(?:\(((?:[^\s>\/]*|.*?))\))?/,
                 select: 'n = byPseudo(n, "{1}", "{2}");'
             },{
-                re: /^(?:([\[\{])(?:@)?([\w-]+)\s?(?:(=|.=)\s?['"]?(.*?)["']?)?[\]\}])/,
-                select: 'n = byAttribute(n, "{2}", "{4}", "{3}", "{1}");'
+                re: /^(?:([\[\{])(?:@)?([\w\-]+)\s?(?:(=|.=)\s?(["']?)(.*?)\4)?[\]\}])/,
+                select: 'n = byAttribute(n, "{2}", "{5}", "{3}", "{1}");'
             }, {
-                re: /^#([\w-]+)/,
+                re: /^#([\w\-]+)/,
                 select: 'n = byId(n, "{1}");'
             },{
-                re: /^@([\w-]+)/,
+                re: /^@([\w\-]+)/,
                 select: 'return {firstChild:{nodeValue:attrValue(n, "{1}")}};'
             }
         ],
