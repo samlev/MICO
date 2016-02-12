@@ -32,10 +32,10 @@ if (!defined('CONFIGURED')) {
         include_once(FS_ROOT.'/inc/connect.php');
         
         // get the values
-        $DEBUG_MODE = boolval($_POST['DEBUG_MODE'],true);
+        $DEBUG_MODE = anythingToBool($_POST['DEBUG_MODE'],true);
         $MAIL_FROM = trim(remove_linebreaks(html_scrub($_POST['MAIL_FROM'])));
         $SESSION_LENGTH = trim(remove_linebreaks(html_scrub($_POST['SESSION_LENGTH'])));
-        $SIMPLE_CRON = boolval($_POST['SIMPLE_CRON'],true);
+        $SIMPLE_CRON = anythingToBool($_POST['SIMPLE_CRON'],true);
         $LANGUAGE = trim(remove_linebreaks(html_scrub($_POST['LANGUAGE'])));
         
         // get the version

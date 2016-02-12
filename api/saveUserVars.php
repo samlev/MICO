@@ -34,8 +34,8 @@ foreach ($vars as $k=>$v) {
     // check that the variable isn't in the 'nowrite' list
     if (!in_array($k,$nowrite)) {
         // check for a strict boolean true or false
-        if (boolval($v,true)!== null) {
-            $v = boolval($v,true);
+        if (anythingToBool($v,true) !== null) {
+            $v = anythingToBool($v,true);
         } else {
             // remove linebreaks, html, etc.
             $v = trim(remove_linebreaks(html_scrub($v)));

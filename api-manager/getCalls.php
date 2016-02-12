@@ -28,7 +28,7 @@
 $u = intval($user->get_id());
 
 // get ordering/filtering options
-$closed = (isset($_POST['closed'])?boolval($_POST['closed'],true):false);
+$closed = (isset($_POST['closed'])?anythingToBool($_POST['closed'],true):false);
 $filter = (isset($_POST['filter'])?$_POST['filter']:'assigned');
 $order  = (isset($_POST['order'])?$_POST['order']:'recent');
 
